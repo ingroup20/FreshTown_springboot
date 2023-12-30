@@ -1,0 +1,3 @@
+1.第一次整包下載，在C槽建立資料夾FreshTown_springboot，將git檔案全部放在資料夾內
+2.sql帳密要在eclipse中  Java Resourse/resources/application.properties修改
+3.全員下載完，會將git忽略檔設定加入
