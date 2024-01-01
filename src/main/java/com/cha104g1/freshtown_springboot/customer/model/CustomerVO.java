@@ -79,7 +79,7 @@ public class CustomerVO {
 		}
 		
 	    //
-		@OneToMany(mappedBy="CustomerVO", cascade= CascadeType.ALL)
+		@OneToMany(mappedBy="customerVO", cascade= CascadeType.ALL)
 		private Set<OrdersVO> ordersVO;
 
 		public Set<OrdersVO> getOrdersVO() {
@@ -89,7 +89,7 @@ public class CustomerVO {
 			this.ordersVO = ordersVO;
 		}
 		//
-		@OneToMany(mappedBy="CustomerVO", cascade= CascadeType.ALL)
+		@OneToMany(mappedBy="customerVO", cascade= CascadeType.ALL)
 		private Set<ServiceVO> serviceVO;
 
 		public Set<ServiceVO> getServiceVO() {
@@ -99,7 +99,7 @@ public class CustomerVO {
 			this.serviceVO = serviceVO;
 		}
 		//
-		@OneToMany(mappedBy="CustomerVO", cascade= CascadeType.ALL)
+		@OneToMany(mappedBy="customerVO", cascade= CascadeType.ALL)
 		private Set<LikeStoreVO> likeStoreVO;
 
 		public Set<LikeStoreVO> getLikeStoreVO() {

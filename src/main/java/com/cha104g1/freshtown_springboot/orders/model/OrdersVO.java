@@ -6,11 +6,16 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
@@ -21,65 +26,109 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Entity
 @Table(name = "orders")
-public class OrdersVO {
+public class OrdersVO implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "orderId", updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer orderId;
 	
 	@Column(name="orderState")
+	@NotEmpty(message="訂餐狀態: 請勿空白")
+	@Pattern(regexp = "^[(0-5)]$", message = "訂餐狀態: 只能是數字(0未成立 1新訂單待確認 2製作中 3已出餐待取 4結單 5 取消訂單) ")
 	private Integer orderState;
 	
 	@Column(name="orderTime")
+	@NotEmpty(message="下單(預約)時間: 請勿空白")
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Timestamp orderTime;
 	
 	@Column(name="doneTime")
+	@NotEmpty(message="出餐時間: 請勿空白")
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Timestamp doneTime;
 	
 	@Column(name="finishTime")
+	@NotEmpty(message="完成時間: 請勿空白")
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Timestamp finishTime;
 	
 	@Column(name="delayTime")
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	@NotEmpty(message="超時紀錄時間: 請勿空白")
+	
 	private Timestamp delayTime;
 	
 	//
 	@ManyToOne
 	@JoinColumn(name="customerId", referencedColumnName="customerId")
+	@NotEmpty(message="會員流水號: 請勿空白")
 	private CustomerVO customerVO;
 
 	@Column(name="totalPrice")
+	@NotEmpty(message="總金額: 請勿空白")
 	private Integer totalPrice;
 	
 	//
 	@ManyToOne
 	@JoinColumn(name="storeId", referencedColumnName="storeId")
+	@NotEmpty(message="店家流水號: 請勿空白")
 	private StoresVO storesVO;
 	
 	@Column(name="delayDesc")
+	@Size(min=0,max=255,message="超時/取消訂單備註超過字數限制")
 	private String delayDesc;
 	
 	@Column(name="comtVal")
+	@Pattern(regexp = "^[(0-5)]$", message = "評分: 只能是0到5之間")
 	private Integer comtVal;
 	
 	@Column(name="comtCont")
+	@Size(min=0,max=255,message="評論超過字數限制")
 	private String comtCont;
 	
-	@Column(name="comtTime")
+	@Column(name="comtTime")//評論日期
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Timestamp comtTime;
 	
-	@Column(name="remitDate")
+	@Column(name="remitDate")//匯款日期
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Timestamp remitDate;
 	
 	@Column(name="remitState")
+	@NotEmpty(message="匯款狀態: 請勿空白")
+	@Pattern(regexp = "^[(NY)]$", message = "匯款狀態: 只能是英文字母 (N:未匯款 Y:已匯款)")
 	private String remitState;
 	
 	@Column(name="payDate")
+	@NotEmpty(message="線上付款時間: 請勿空白")
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Timestamp payDate;
 	
 	@Column(name="payMethod")
-	private Integer payMethod;
+	@NotEmpty(message="付款方式: 請勿空白")
+	@Pattern(regexp = "^[(1)]$", message = "付款方式: 只能是數字 (1:刷卡 )")
+	private Byte payMethod;
 	
 	@Column(name="payState")
-	private Integer payState;
+	@NotEmpty(message="付款狀態: 請勿空白")
+	@Pattern(regexp = "^[(012)]$", message = "付款狀態: 只能是數字(0未付款 1已付款 2退款)  ")
+	private Byte payState;
 	
 	
 	public Integer getOrderId() {
@@ -166,16 +215,16 @@ public class OrdersVO {
 	public void setPayDate(Timestamp payDate) {
 		this.payDate = payDate;
 	}
-	public Integer getPayMethod() {
+	public Byte getPayMethod() {
 		return payMethod;
 	}
-	public void setPayMethod(Integer payMethod) {
+	public void setPayMethod(Byte payMethod) {
 		this.payMethod = payMethod;
 	}
-	public Integer getPayState() {
+	public Byte getPayState() {
 		return payState;
 	}
-	public void setPayState(Integer payState) {
+	public void setPayState(Byte payState) {
 		this.payState = payState;
 	}
 	

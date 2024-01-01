@@ -4,13 +4,22 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
+@Entity
+@Table(name="sup_order")
 public class SupOrderVO implements java.io.Serializable {
 	
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Integer supId;
 	private Integer purNo;
@@ -21,7 +30,10 @@ public class SupOrderVO implements java.io.Serializable {
 	private String oStatus;
 	private Date deliDate;
 	private String marks;
-	private Integer storeId;
+	
+	@ManyToOne
+	@JoinColumn(name="storeId",referencedColumnName ="storeId")
+    private StoresVO storesVO;
 	
 	public Integer getId() {
 		return id;
@@ -83,11 +95,15 @@ public class SupOrderVO implements java.io.Serializable {
 	public void setMarks(String marks) {
 		this.marks = marks;
 	}
-	public Integer getStoreId() {
-		return storeId;
+	//
+	public StoresVO getStoresVO() {
+		return storesVO;
 	}
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
+	//
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
 	}
+
+	
 
 }

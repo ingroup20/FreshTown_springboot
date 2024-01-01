@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.cha104g1.freshtown_springboot.material.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
@@ -25,14 +26,10 @@ public class PickingVO implements Serializable{
 	@Column(name="pickingNo", updatable= false)
 	private Integer pickingNo;
 	
-	@Column(name="itemNumber")
-	private Integer itemNumber;
 	
-	@Column(name="storeId")
-	private Integer storeId;
-	
-	@Column(name="sEmpId")
-	private Integer sEmpId;
+	@ManyToOne
+	@JoinColumn(name = "sEmpId", referencedColumnName = "sEmpId")
+	private StoreEmpVO storeEmpVO;
 	
 	@Column(name="pickingQuantity")
 	private Integer pickingQuantity;
@@ -58,7 +55,7 @@ public class PickingVO implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "storeId", referencedColumnName = "storeId")
-	private StoresVO stores;
+	private StoresVO storesVO;
 
 	public PickingVO() {
 		super();
@@ -70,30 +67,6 @@ public class PickingVO implements Serializable{
 
 	public void setPickingNo(Integer pickingNo) {
 		this.pickingNo = pickingNo;
-	}
-
-	public Integer getItemNumber() {
-		return itemNumber;
-	}
-
-	public void setItemNumber(Integer itemNumber) {
-		this.itemNumber = itemNumber;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-
-	public Integer getSEmpId() {
-		return sEmpId;
-	}
-
-	public void setSEmpId(Integer sEmpId) {
-		this.sEmpId = sEmpId;
 	}
 
 	public Integer getPickingQuantity() {
@@ -144,21 +117,29 @@ public class PickingVO implements Serializable{
 	public void setMarks(String marks) {
 		this.marks = marks;
 	}
-
+	//
 	public MaterialVO getMaterial() {
 		return material;
 	}
-
+	//
 	public void setMaterial(MaterialVO material) {
 		this.material = material;
 	}
-
-	public StoresVO getStores() {
-		return stores;
+	//
+	public StoresVO getStoresVO() {
+		return storesVO;
 	}
-
-	public void setStores(StoresVO stores) {
-		this.stores = stores;
+	//
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
+	}
+	//
+	public StoreEmpVO getStoreEmpVO() {
+		return storeEmpVO;
+	}
+	//
+	public void setStoreEmpVO(StoreEmpVO storeEmpVO) {
+		this.storeEmpVO = storeEmpVO;
 	}
 	
 	

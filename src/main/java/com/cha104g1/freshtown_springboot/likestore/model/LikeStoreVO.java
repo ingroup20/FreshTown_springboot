@@ -2,33 +2,45 @@ package com.cha104g1.freshtown_springboot.likestore.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
+import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
 
 @Entity
 @Table(name = "like_store")
-public class LikeStoreVO {
+public class LikeStoreVO implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "id", updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer	id;
 	
-//	@JoinColumn(name = "customerId", referencedColumnName="customerId")
-//	private CustomerVO customer;
-		@Column(name="customerId")
-		private Integer	customerId;
-	
+	//
+	@ManyToOne
+	@JoinColumn(name = "customerId", referencedColumnName="customerId")
+	@NotEmpty(message="會員流水號: 請勿空白")
+	private CustomerVO customerVO;
+
+	//
+	@ManyToOne
 	@JoinColumn(name = "storeId", referencedColumnName="storeId")
+	@NotEmpty(message="店家流水號: 請勿空白")
 	private StoresVO storesVO;
-//		@Column(name="storeId")
-//		private Integer	storeId;
-	
-	
+
 	@Column(name="likeUnlike")
+	@NotEmpty(message="收藏/黑名單: 請勿空白")
+	@Pattern(regexp = "^(LU)$",message="收藏/黑名單: 只能英文(L:收藏 U:黑名單)")
 	private String	likeUnlike;
 	
 	public Integer getId() {
@@ -37,18 +49,7 @@ public class LikeStoreVO {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
-//	public Integer getStoreId() {
-//		return storeId;
-//	}
-//	public void setStoreId(Integer storeId) {
-//		this.storeId = storeId;
-//	}
+
 	public String getLikeUnlike() {
 		return likeUnlike;
 	}
@@ -57,12 +58,20 @@ public class LikeStoreVO {
 	}
 	
 	
-	//聯合印設
+	//
 	public StoresVO getStoresVO() {
 		return storesVO;
 	}
 	public void setStoresVO(StoresVO storesVO) {
 		this.storesVO = storesVO;
+	}
+	
+	//
+	public CustomerVO getCustomerVO() {
+		return customerVO;
+	}
+	public void setCustomerVO(CustomerVO customerVO) {
+		this.customerVO = customerVO;
 	}
 	
 	

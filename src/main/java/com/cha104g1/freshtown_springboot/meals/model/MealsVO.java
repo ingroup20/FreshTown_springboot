@@ -8,13 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Entity
 @Table(name = "meals")
 public class MealsVO {
-	@OneToMany(mappedBy = "mealNo")
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mealNo", updatable = false)
@@ -26,14 +30,16 @@ public class MealsVO {
 	@Column(name = "mealPrice")
 	private Integer mealPrice;
 
+	@ManyToOne
 	@JoinColumn(name = "mealTypeNo", referencedColumnName = "mealTypeNo")
-	private Integer mealTypeNo;
+	private MealTypeVO mealTypeVO;
 
 	@Column(name = "mealOnsale")
 	private Integer mealOnsale;
 
+	@ManyToOne
 	@JoinColumn(name = "storeId", referencedColumnName = "storeId")
-	private Integer storeId;
+	private StoresVO storesVO;
 
 	@Column(name = "mealPicture")
 	private byte[] mealPicture;
@@ -69,13 +75,7 @@ public class MealsVO {
 		this.mealPrice = mealPrice;
 	}
 
-	public Integer getMealTypeNo() {
-		return mealTypeNo;
-	}
 
-	public void setMealTypeNo(Integer mealTypeNo) {
-		this.mealTypeNo = mealTypeNo;
-	}
 
 	public Integer getMealOnsale() {
 		return mealOnsale;
@@ -85,13 +85,6 @@ public class MealsVO {
 		this.mealOnsale = mealOnsale;
 	}
 
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
 
 	public byte[] getMealPicture() {
 		return mealPicture;
@@ -108,6 +101,24 @@ public class MealsVO {
 	public void setCookingTime(Time cookingTime) {
 		this.cookingTime = cookingTime;
 	}
+	//
+	public MealTypeVO getMealTypeVO() {
+		return mealTypeVO;
+	}
+	//
+	public void setMealTypeVO(MealTypeVO mealTypeVO) {
+		this.mealTypeVO = mealTypeVO;
+	}
+	//
+	public StoresVO getStoresVO() {
+		return storesVO;
+	}
+	//
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
+	}
+	
+	
 	
 	
 

@@ -1,7 +1,27 @@
 package com.cha104g1.freshtown_springboot.storeemp.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+
+@Entity
+@Table(name="store_emp")
 public class StoreEmpVO {
 	
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer sEmpId;
 	    private String sEmpName;
 	    private Byte invPerm;
@@ -9,7 +29,11 @@ public class StoreEmpVO {
 	    private Byte manuPerm;
 	    private Byte orderPerm;
 	    private Byte modifyPerm;
-	    private Integer storeId;
+
+		@ManyToOne
+		@JoinColumn(name="storeId",referencedColumnName ="storeId")
+	    private StoresVO storesVO;
+		
 	    private String sEmpDeptno;
 	    private String sEmpTitle;
 	    private Byte sEmpState;
@@ -57,12 +81,8 @@ public class StoreEmpVO {
 		public void setModifyPerm(Byte modifyPerm) {
 			this.modifyPerm = modifyPerm;
 		}
-		public Integer getStoreId() {
-			return storeId;
-		}
-		public void setStoreId(Integer storeId) {
-			this.storeId = storeId;
-		}
+
+		
 		public String getsEmpDeptno() {
 			return sEmpDeptno;
 		}
@@ -81,8 +101,26 @@ public class StoreEmpVO {
 		public void setsEmpState(Byte sEmpState) {
 			this.sEmpState = sEmpState;
 		}
+		//
+		public StoresVO getStoresVO() {
+			return storesVO;
+		}
+		//
+		public void setStoresVO(StoresVO storesVO) {
+			this.storesVO = storesVO;
+		}
 	    
-	    
+		//領料表
+		@OneToMany(mappedBy = "storeEmpVO" ,cascade= CascadeType.ALL)
+		private Set<PickingVO> pickingVO;
+		
+		public Set<PickingVO> getPickingVO(){
+			return pickingVO;
+		}
+		
+		public void setPickingVO(Set<PickingVO> pickingVO) {
+			this.pickingVO = pickingVO;
+		}
 		
 	    
 	    

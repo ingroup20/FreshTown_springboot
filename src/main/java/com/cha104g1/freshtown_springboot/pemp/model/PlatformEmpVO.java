@@ -1,7 +1,21 @@
 package com.cha104g1.freshtown_springboot.pemp.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
+import com.cha104g1.freshtown_springboot.service.model.ServiceVO;
+
+@Entity
+@Table(name = "p_emp")
 public class PlatformEmpVO {
 	
+	@Id
 	private Integer pEmpId;
     private String pEmpPw;
     private String pEmpName;
@@ -54,8 +68,17 @@ public class PlatformEmpVO {
 		this.pEmpState = pEmpState;
 	}
     
-    
+    //
 	
+	@OneToMany(mappedBy="custSerNo", cascade= CascadeType.ALL)
+	private Set<ServiceVO> serviceVO;
+
+	public Set<ServiceVO> getServiceVO() {
+		return serviceVO;
+	}
+	public void setServiceVO(Set<ServiceVO> serviceVO) {
+		this.serviceVO = serviceVO;
+	}
     
 
 }
