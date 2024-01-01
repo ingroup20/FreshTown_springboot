@@ -28,12 +28,12 @@ CREATE TABLE stores(
 storeId	INT	PRIMARY KEY AUTO_INCREMENT	NOT NULL,
 storeAccount	VARCHAR(31)	UNIQUE KEY	NOT NULL,
 storePw	VARCHAR(31)		NOT NULL,
-storeLv	TINYINT		NOT NULL ,
+storeLv	TINYINT		NOT NULL DEFAULT "0",
 createDate	DATE	NOT NULL,
 payDate	DATE	NOT NULL,
 photo	LONGBLOB,
 storeDesc	VARCHAR(1000),
-pushUp	TINYINT	NOT NULL,
+pushUp	TINYINT	NOT NULL DEFAULT "0",
 ownerName	VARCHAR(15)	NOT NULL,
 ownerMob	CHAR(10) NOT NULL,
 ownerId	CHAR(10) NOT NULL,
@@ -42,7 +42,7 @@ ownerEmail	VARCHAR(128)	NOT NULL,
 storeName	VARCHAR(15)		NOT NULL,
 storeAddress	VARCHAR(128)	NOT NULL,
 storePhone	CHAR(10)	NOT NULL,
-storeState	TINYINT	NOT NULL ,
+storeState	TINYINT	NOT NULL DEFAULT "0",
 scorePeople	INT	,
 total_score	INT	,
 storeLat	DECIMAL(10,8)	NOT NULL ,
@@ -184,7 +184,7 @@ CREATE TABLE meals (
 -- 中群
 CREATE TABLE orders( 
 orderId	INT	PRIMARY KEY AUTO_INCREMENT	NOT NULL,
-orderState	TINYINT		NOT NULL,
+orderState	TINYINT		NOT NULL DEFAULT "0",
 orderTime	DATETIME		NOT NULL,
 doneTime	DATETIME		,
 finishTime	DATETIME		,
@@ -199,8 +199,8 @@ comtTime	DATETIME		,
 remitDate	DATETIME		,
 remitState	CHAR(1)		NOT NULL DEFAULT "N",
 payDate	DATETIME		NOT NULL,
-payMethod	TINYINT		NOT NULL,
-payState	TINYINT		NOT NULL
+payMethod	TINYINT		NOT NULL DEFAULT "1",
+payState	TINYINT		NOT NULL DEFAULT "0"
 );
    
  -- 中群

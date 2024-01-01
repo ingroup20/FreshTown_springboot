@@ -8,9 +8,16 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
@@ -25,81 +32,123 @@ import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
 
 @Entity
 @Table(name = "stores")
-public class StoresVO {
+public class StoresVO implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "storeId", updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer	storeId;
 	
 	@Column(name = "storeAccount")
+	@NotEmpty(message="店家帳號: 請勿空白")
+	@Pattern(regexp = "^[(a-zA-Z0-9_)]{2,15}$", message = "店家帳號: 只能是英文字母、數字和_ , 且長度必需在2到15之間")
 	private String	storeAccount;
 	
 	@Column(name = "storePw")
+	@NotEmpty(message="店家密碼: 請勿空白")
+	@Pattern(regexp = "^[(a-zA-Z0-9_)]{6,15}$", message = "店家帳號: 只能是中文、英文字母、數字和_ , 且長度必需在6到15之間")
 	private String	storePw;
 	
 	@Column(name = "storeName")
+	@NotEmpty(message="店家名稱: 請勿空白")
+	@Size(min=1,max=8,message="店家名稱: 長度必需在{min}到{max}之間")
 	private String	storeName;
 	
 	@Column(name = "storeGui")
+	@Pattern(regexp = "^[(0-9)]{8}$", message = "店家統一編號: 只能是8位數字")
 	private String	storeGui;
 	
 	@Column(name = "storeAddress")
+	@NotEmpty(message="店家地址: 請勿空白")
+	@Size(min=1,max=128,message="店家地址: 長度必需在1到128之間")
 	private String	storeAddress;
 	
 	@Column(name = "storePhone")
+	@NotEmpty(message="店家電話: 請勿空白")
+	@Pattern(regexp = "^[(0-9)]{7,10}$", message = "店家電話: 只能是數字 , 且長度不符合規定")
 	private String	storePhone;
 	
 	@Column(name = "storeState")
-	private Integer	storeState;
+	@Pattern(regexp = "^[(0-4)]{1}$", message = "店家狀態: 只能是數字(0: 審核中 1: 審核未通過 2:帳號開通 3: 停權 4: 作廢帳號)")
+	private Byte storeState;
 	
 	@Column(name = "storeLv")
-	private Integer	storeLv;
+	@NotEmpty(message="店家等級: 請勿空白")
+	@Pattern(regexp = "^[(01)]$", message = "店家等級: 只能是數字(0:初始-餐點功能, 1:高級-加採購庫存功能)")
+	private Byte storeLv;
 	
-	@Column(name = "createDate")
+	@Column(name = "createDate", updatable = false)
+	@NotEmpty(message="開通時間: 請勿空白")
 	private Date	createDate;
 	
 	@Column(name = "payDate")
+	@NotEmpty(message="付費日期: 請勿空白")
+	@Pattern(regexp = "^[(0-9)]{10}$", message = "付費日期: 只能是日期格式 yyyy/mm/dd")
 	private Date	payDate;
 	
 	@Column(name = "photo", columnDefinition = "longblob")
 	private byte[]	photo;
 	
 	@Column(name = "storeDesc")
+	@Size(min=0,max=1000,message="店家簡介: 長度必需在小於1000")
 	private String	storeDesc;
 	
 	@Column(name = "pushUp")
+	@NotEmpty(message="平台開店: 請勿空白")
+	@Pattern(regexp = "^[(012)]$", message = "平台開店: 只能是數字(0:準備中 1:開店 2: 店休)  DEFAULT 0")
 	private Integer	pushUp;
 	
 	@Column(name = "ownerName")
+	@NotEmpty(message="店家負責人: 請勿空白")
+	@Size(min=1,max=15,message="店家地址: 長度必需在1到15之間")
 	private String	ownerName;
 	
 	@Column(name = "ownerMob")
+	@NotEmpty(message="負責人手機號碼: 請勿空白")
+	@Pattern(regexp = "^[(0-9)]{10}$", message = "負責人手機號碼: 只能是10位數字")
 	private String	ownerMob;
 	
 	@Column(name = "ownerId")
+	@NotEmpty(message="身分證: 請勿空白")
+	@Pattern(regexp = "^[(a-zA-Z)(12)][(0-9)]{8}$", message = "身分證: 輸入有誤格式不符")
 	private String	ownerId;
 	
 	@Column(name = "ownerAddress")
+	@NotEmpty(message="負責人地址: 請勿空白")
+	@Size(min=1,max=128,message="負責人地址: 長度必需在1到128之間")
 	private String	ownerAddress;
 	
 	@Column(name = "ownerEmail")
+	@NotEmpty(message="EMAIL: 請勿空白")
+	@Size(min=1,max=128,message="EMAIL: 長度必需在1到128之間")
 	private String	ownerEmail;
 	
-	@Column(name = "scorePeople")
+	@Column(name = "scorePeople")//評分總人數
 	private Integer	scorePeople;
 	
-	@Column(name = "totalScore")
+	@Column(name = "totalScore")//總評分
 	private Integer	totalScore;
 	
 	@Column(name = "storeLat", columnDefinition = "Decimal")
+	@NotEmpty(message="店家緯度: 請勿空白")
+	@DecimalMin(value = "-90.00000000", message = "店家緯度: 不能小於{value}")
+	@DecimalMax(value = "90.00000000", message = "店家緯度: 不能超過{value}")
 	private BigDecimal	storeLat;
 	
 	@Column(name = "storeLag", columnDefinition = "Decimal")
+	@NotEmpty(message="店家經度: 請勿空白")
+	@DecimalMin(value = "-180.00000000", message = "店家經度: 不能小於{value}")
+	@DecimalMax(value = "180.0000000", message = "店家經度: 不能超過{value}")
 	private BigDecimal	storeLag;
 	
 	@Column(name = "openTime")
+	@Pattern(regexp = "^[(a-zA-Z0-9:,~)]{0,225}$", message = "開店/休息時間點:格式範例11:00~14:00,17:00~19:00")
 	private String	openTime;
 	
 	@Column(name = "restDay")
+	@NotEmpty(message="固定店休日: 請勿空白")
+	@Pattern(regexp = "^[(01)]{7}$", message = "固定店休日: 0:店休 1:正常營業 (星期一 ~ 星期日)EX.六日店休1111100")
 	private String	restDay;
 	
 	
@@ -121,10 +170,10 @@ public class StoresVO {
 	public void setStorePw(String storePw) {
 		this.storePw = storePw;
 	}
-	public Integer getStoreLv() {
+	public Byte getStoreLv() {
 		return storeLv;
 	}
-	public void setStoreLv(Integer storeLv) {
+	public void setStoreLv(Byte storeLv) {
 		this.storeLv = storeLv;
 	}
 	public Date getCreateDate() {
@@ -205,10 +254,10 @@ public class StoresVO {
 	public void setStorePhone(String storePhone) {
 		this.storePhone = storePhone;
 	}
-	public Integer getStoreState() {
+	public Byte getStoreState() {
 		return storeState;
 	}
-	public void setStoreState(Integer storeState) {
+	public void setStoreState(Byte storeState) {
 		this.storeState = storeState;
 	}
 	public Integer getScorePeople() {

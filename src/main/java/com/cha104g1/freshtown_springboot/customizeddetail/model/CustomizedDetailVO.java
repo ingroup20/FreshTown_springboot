@@ -10,7 +10,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "customized_detail")
-public class CustomizedDetailVO {
+public class CustomizedDetailVO implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "custedDtlNo", updatable = false)

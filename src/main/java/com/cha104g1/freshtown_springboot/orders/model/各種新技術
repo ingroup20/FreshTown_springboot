@@ -1,0 +1,1 @@
+在Spring Data JPA中，Specification是一個用於定義動態查詢條件的接口。

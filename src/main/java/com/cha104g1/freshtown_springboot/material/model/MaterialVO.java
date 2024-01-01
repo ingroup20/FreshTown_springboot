@@ -11,12 +11,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
 @Entity
@@ -31,8 +34,9 @@ public class MaterialVO implements Serializable{
 	@Column(name = "itemName")
 	private String itemName;
 	
-	@Column(name = "itemClassId")
-	private Integer itemClassId;
+	@ManyToOne
+	@JoinColumn(name="itemClassId",referencedColumnName ="itemClassId")
+	private ItemsClassVO itemsClassVO;
 	
 	@Column(name = "stockQuantity")
 	private Integer stockQuantity;
@@ -52,8 +56,9 @@ public class MaterialVO implements Serializable{
 	@Column(name = "purDate", nullable = true)
 	private Date purDate;
 	
-	@Column(name = "storeId")
-	private Integer storeId;
+	@ManyToOne
+	@JoinColumn(name="storeId",referencedColumnName ="storeId")
+    private StoresVO storesVO;
 	
 	@OneToMany(mappedBy = "material", cascade= CascadeType.ALL)
 	@OrderBy("pickingNo asc")
@@ -63,7 +68,7 @@ public class MaterialVO implements Serializable{
 //	@OrderBy("id asc")
 //	private Set<SupOrderVO> id;
 	
-	private ItemsClassVO itemsClass;
+
 	
 	public MaterialVO() {
 		super();
@@ -85,13 +90,7 @@ public class MaterialVO implements Serializable{
 		this.itemName = itemName;
 	}
 
-	public Integer getItemClassId() {
-		return itemClassId;
-	}
 
-	public void setItemClassId(Integer itemClassId) {
-		this.itemClassId = itemClassId;
-	}
 
 	public Integer getStockQuantity() {
 		return stockQuantity;
@@ -141,13 +140,6 @@ public class MaterialVO implements Serializable{
 		this.purDate = purDate;
 	}
 
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
 
 	public Set<PickingVO> getPickings() {
 		return pickings;
@@ -173,13 +165,21 @@ public class MaterialVO implements Serializable{
 		MaterialVO other = (MaterialVO) obj;
 		return Objects.equals(itemNumber, other.itemNumber);
 	}
-
+	//
 	public ItemsClassVO getItemsClass() {
-		return itemsClass;
+		return itemsClassVO;
 	}
-
-	public void setItemsClass(ItemsClassVO itemsClass) {
-		this.itemsClass = itemsClass;
+	//
+	public void setItemsClass(ItemsClassVO itemsClassVO) {
+		this.itemsClassVO = itemsClassVO;
+	}
+	//
+	public StoresVO getStoresVO() {
+		return storesVO;
+	}
+	//
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
 	}
 
 //	public Set<SupOrderVO> getId() {
@@ -190,6 +190,7 @@ public class MaterialVO implements Serializable{
 //		this.id = id;
 //	}
        
+	
     
 	
 }

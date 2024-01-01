@@ -11,11 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.cha104g1.freshtown_springboot.material.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
 @Entity
@@ -30,11 +33,12 @@ public class ItemsClassVO implements Serializable{
 	  @Column(name="itemClassName", length=10)
       private String itemClassName;
 	  
-	  @Column(name="storeId")
-      private Integer storeId;
+	  @ManyToOne
+	  @JoinColumn(name="storeId",referencedColumnName ="storeId")
+      private StoresVO storesVO;
 	  
-		@OneToMany(mappedBy = "itemsClass", cascade= CascadeType.ALL)
-		@OrderBy("itemNumber asc")
+	  @OneToMany(mappedBy = "itemsClassVO", cascade= CascadeType.ALL)
+	  @OrderBy("itemNumber asc")
 	  private Set<MaterialVO> materials;
       
 	public ItemsClassVO() {
@@ -57,13 +61,6 @@ public class ItemsClassVO implements Serializable{
 		this.itemClassName = itemClassName;
 	}
 
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
 
 	public Set<MaterialVO> getMaterials() {
 		return materials;
@@ -89,6 +86,16 @@ public class ItemsClassVO implements Serializable{
 		ItemsClassVO other = (ItemsClassVO) obj;
 		return Objects.equals(itemClassId, other.itemClassId);
 	}
+	//
+	public StoresVO getStoresVO() {
+		return storesVO;
+	}
+	//
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
+	}
+	
+	
 	
 	
       

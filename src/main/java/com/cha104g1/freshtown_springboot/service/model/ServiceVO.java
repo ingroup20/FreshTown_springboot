@@ -8,23 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
+import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 @Entity
 @Table(name="service")
 public class ServiceVO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="custSerNo", updatable= false)
 	private Integer custSerNo;
     
-    @Column(name="pEmpId")
-    private Integer pEmpId;
+    @ManyToOne
+    @JoinColumn(name="pEmpId", referencedColumnName="pEmpId")
+    private PlatformEmpVO platformEmpVO;
     
-    @Column(name="storeId", nullable=true)
-    private Integer storeId;
+    @ManyToOne
+    @JoinColumn(name="storeId", referencedColumnName="storeId")
+    private StoresVO storesVO;
     
-    @Column(name="customerId", nullable=true)
-    private Integer customerId;
+    @ManyToOne
+    @JoinColumn(name="customerId", referencedColumnName="customerId")
+    private CustomerVO customerVO;
     
     @Column(name="custMessage", length=255)
     private String custMessage;
@@ -44,29 +55,6 @@ public class ServiceVO implements Serializable{
 		this.custSerNo = custSerNo;
 	}
 
-	public Integer getPEmpId() {
-		return pEmpId;
-	}
-
-	public void setPEmpId(Integer pEmpId) {
-		this.pEmpId = pEmpId;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-
-	public Integer getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
 
 	public String getCustMessage() {
 		return custMessage;
@@ -83,6 +71,33 @@ public class ServiceVO implements Serializable{
 	public void setCustTime(Date custTime) {
 		this.custTime = custTime;
 	}
+
+	//
+	public PlatformEmpVO getPlatformEmpVO() {
+		return platformEmpVO;
+	}
+	//
+	public void setPlatformEmpVO(PlatformEmpVO platformEmpVO) {
+		this.platformEmpVO = platformEmpVO;
+	}
+	//
+	public StoresVO getStoresVO() {
+		return storesVO;
+	}
+	//
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
+	}
+	//
+	public CustomerVO getCustomerVO() {
+		return customerVO;
+	}
+	//
+	public void setCustomerVO(CustomerVO customerVO) {
+		this.customerVO = customerVO;
+	}
+	
+	
 	
     
     

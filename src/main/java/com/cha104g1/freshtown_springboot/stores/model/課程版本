@@ -1,0 +1,5 @@
+	
+	StoresService中有用到
+	@Autowired
+    private SessionFactory sessionFactory;
+    要如何改寫，因為有springboot 應該不用工廠了

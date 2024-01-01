@@ -1,21 +1,29 @@
 package com.cha104g1.freshtown_springboot.customizedorder.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
 import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
 
 
-
+@Entity
 @Table(name="customized_order")
-public class CustomizedOrderVO {
+public class CustomizedOrderVO implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	
 
 	@Id
 	@Column(name="custedOrderNo")
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer custedOrderNo;
 	
 	//
