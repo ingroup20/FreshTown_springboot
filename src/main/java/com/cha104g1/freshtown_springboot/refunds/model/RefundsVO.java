@@ -30,8 +30,8 @@ public class RefundsVO implements java.io.Serializable{
 	//
 	@ManyToOne
 	@JoinColumn(name="orderId", referencedColumnName="orderId")
-	@NotEmpty(message="訂單編號: 請勿空白")
-	@Pattern(regexp = "^(0-9)$", message = "訂單編號: 只能數字")
+//	@NotEmpty(message="訂單編號: 請勿空白")
+//	@Pattern(regexp = "^(0-9)$", message = "訂單編號: 只能數字")
 	private OrdersVO ordersVO;
 	
 	@Column(name="refundState")
@@ -51,6 +51,13 @@ public class RefundsVO implements java.io.Serializable{
 //	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Date refundDate;
 	
+	@Column(name="creationDate")
+	@NotEmpty(message="成立退款單時間: 請勿空白")
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd") 
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	private Date creationDate;
 	
 	public Integer getId() {
 		return id;
@@ -78,6 +85,13 @@ public class RefundsVO implements java.io.Serializable{
 	}
 	public void setRefundDollar(Integer refundDollar) {
 		this.refundDollar = refundDollar;
+	}
+	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 	public Date getRefundDate() {
 		return refundDate;

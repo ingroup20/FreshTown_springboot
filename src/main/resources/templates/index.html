@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="html" lang="en">
+<html  class="html" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
             <ul class="nav">
                 <li class="nav_item "><a class="title" href="#!">店家管理</a></li>
                 <li class="nav_item "><a class="title" href="#!">匯款作業</a></li>
-<!--                 <li class="nav_item "><a class="title" th:href="@{/refunds/refundPage}">退款作業</a></li> -->
+                <li class="nav_item "><a class="title" th:href="@{/haveToLogin/pFunction/refundPage}">退款作業</a></li>
                 <li class="nav_item "><a class="title" href="#!">顧客管理</a></li>
                 <li class="nav_item "><a class="title" href="#!">廣告管理</a></li>
                 <li class="nav_item "><a class="title" href="#!">線上客服</a></li>
@@ -46,8 +46,9 @@
 
     
     <section class="section">
-       <div ><a th:href="@{/haveToLogin/pFunction/refundPage.html}">導向1</a></div>
-       <div ><a th:href="@{/rrr}">導向rrr</a></div>
+       <div ><a th:href="@{/haveToLogin/pFunction/refundPage}">導向1</a></div>
+<!--        <div ><a th:href="@{/haveToLogin/xxx}">導向xxx</a></div> -->
+<!--        <div ><a th:href="@{/rrr}">導向rrr</a></div> -->
     </section>
 
     <main></main>

@@ -11,8 +11,11 @@ public interface RefundsServiceIntf {
 	RefundsVO updateRefundsVO(RefundsVO refundsVO);
 	
 	RefundsVO getRefundsVOById(Integer id);
+//	RefundsVO getRefundsVOByOrderId(Integer orderId);
+//	RefundsVO getRefundsVOByOrderId(String refundState);
 	
-	List<RefundsVO> getAllRefundsVOs(int currentPage);
+	List<RefundsVO> getAllRefundsVO(int currentPage);
+	List<RefundsVO> getAllRefundsVO();
 	
 	int getPageTotal();
 	

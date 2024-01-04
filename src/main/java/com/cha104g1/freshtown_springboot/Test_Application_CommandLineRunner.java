@@ -9,6 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsRepository;
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresRepository;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
 
@@ -17,12 +24,15 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
     //main方法，單獨測區塊功能
 	
 	
+	@Autowired
+	RefundsRepository repository ;
+	
 //	@Autowired
-//	EmpRepository repository ;
+//	StoresRepository repository ;
 //	
-//	public static void main(String[] args) {
-//        SpringApplication.run(Test_Application_CommandLineRunner.class);
-//    }
+	public static void main(String[] args) {
+        SpringApplication.run(Test_Application_CommandLineRunner.class);
+    }
 
     @Override
     public void run(String...args) throws Exception {
@@ -91,5 +101,19 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 //			System.out.println();
 //		}
     
+    	
+//    	List<StoresVO> list = repository.findAll();
+//    	for (StoresVO refunds : list) {
+//			System.out.print(refunds.getOwnerId() + ",");
+//			System.out.print(refunds.getRefundState() + ",");
+//			System.out.print(refunds.getRefundDollar() + ",");
+//			System.out.print(refunds.getRefundDate() + ",");
+
+//    	}
+    	
+    
+    	
+    	
+
     }
 }

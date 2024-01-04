@@ -51,7 +51,7 @@ public class StoreIdController {
 		StoresVO storesVO = storesSvc.getStoresVOByStoreId(Integer.valueOf(storeId));
 		
 		List<StoresVO> list = storesSvc.getAllStoresVO();
-		model.addAttribute("StoresListData", list);     // for select_page.html 第97 109行用
+		model.addAttribute("storesListData", list);     // for select_page.html 第97 109行用
 		
 		if (storesVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
