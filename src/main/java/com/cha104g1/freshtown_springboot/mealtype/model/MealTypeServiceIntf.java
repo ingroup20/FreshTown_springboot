@@ -12,6 +12,7 @@ public interface MealTypeServiceIntf {
 	MealTypeVO getMealTypeVOByMealTypeNo(Integer mealTypeNo);
 	
 	List<MealTypeVO> getAllMealTypeVOs(int currentPage);
+	List<MealTypeVO> getAll();
 	
 	int getPageTotal();
 	

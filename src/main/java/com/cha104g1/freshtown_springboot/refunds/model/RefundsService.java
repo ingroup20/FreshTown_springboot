@@ -17,14 +17,14 @@ public class RefundsService implements RefundsServiceIntf{
 	@Autowired
 	RefundsRepository repository;
 	
-//	  @Autowired
-	    public RefundsService(RefundsRepository repository) {
-	        this.repository = repository;//
-	    }
+	@Autowired
+	public RefundsService(RefundsRepository repository) {
+	       this.repository = repository;//
+	}
 	  
-	    @Autowired
-		public RefundsService() {
-		}//多加的試試
+//	@Autowired
+//	public RefundsService() {
+//	}//多加的試試
 		
 	//不開sessionFactory用Spring boot 的EntityManager試拿session
 //	private final EntityManager entityManager;
@@ -56,9 +56,9 @@ public class RefundsService implements RefundsServiceIntf{
 	}
 
 	@Override
-	public List<RefundsVO> getAllRefundsVO() {
+	public List<RefundsVO> getAll() {
 
-		return null;//回傳就500 :repository.findAll()???
+		return repository.findAll();//回傳就500 :repository.findAll()???
 	}
 
 	@Override

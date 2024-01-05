@@ -52,21 +52,46 @@
 		<table id="dataTable" class="display">
 			<thead>
 				<tr>
-					<th>訂單編號</th>
-					<th>退款金額</th>
-					<th>退款進度</th>
-					<th>退款時間</th>
-					<th>訂單明細</th>
+					<th>店家流水號</th>
+					<th>店家帳號</th>
+					<th>店家名稱</th>
+					<th>統一編號</th>
+					<th>店家地址</th>
+					<th>店家電話</th>
+					<th>店家狀態</th>
+					<th>等級</th>
+					<th>開通時間</th>
+					<th>付費日期</th>
+					<th>店家負責人</th>
+					<th>負責人手機電話</th>
+					<th>身分證</th>
+					<th>負責人地址</th>
+					<th>EMAIL</th>
+					<th>評分總人數</th>
+					<th>評論總分數</th>
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="refundsVO : ${refundsListData}">
+				<th:block th:each="storesVO : ${storesListData}">
 					<tr>
-						<td th:text="${refundsVO.ordersVO.orderId}">訂單編號</td>
-						<td th:text="${refundsVO.refundDollar}"></td>
-						<td th:text="${refundsVO.refundState}"></td>
-						<td th:text="${refundsVO.refundDate}"></td>
-						<td th:text="${refundsVO.ordersVO.customerVO.customerMob}">會員編號</td>
+						<td th:text="${storesVO.storeId}">店家流水號</td>
+						<td th:text="${storesVO.storeAccount}">店家帳號</td>
+						<td th:text="${storesVO.storeName}">店家名稱</td>
+						<td th:text="${storesVO.storeGui}">統一編號</td>
+						<td th:text="${storesVO.storeAddress}">店家地址</td>
+						<td th:text="${storesVO.storePhone}">店家電話</td>
+						<td th:text="${storesVO.storeState}">店家狀態</td>
+						<td th:text="${storesVO.storeLv}">等級</td>
+						<td th:text="${storesVO.createDate}">開通時間</td>
+						<td th:text="${storesVO.payDate}">付費日期</td>
+						<td th:text="${storesVO.ownerName}">店家負責人</td>
+						<td th:text="${storesVO.ownerMob}">負責人手機電話</td>
+						<td th:text="${storesVO.ownerId}">身分證</td>
+						<td th:text="${storesVO.ownerAddress}">負責人地址</td>
+						<td th:text="${storesVO.ownerEmail}">EMAIL</td>
+						<td th:text="${storesVO.scorePeople}">評分總人數</td>
+						<td th:text="${storesVO.totalScore}">評論總分數</td>
+
 					</tr>
 				</th:block>
 			</tbody>

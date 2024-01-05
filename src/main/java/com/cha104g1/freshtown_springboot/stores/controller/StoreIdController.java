@@ -16,12 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
@@ -50,7 +52,7 @@ public class StoreIdController {
 //		StoresService StoresSvc = new StoresService();
 		StoresVO storesVO = storesSvc.getStoresVOByStoreId(Integer.valueOf(storeId));
 		
-		List<StoresVO> list = storesSvc.getAllStoresVO();
+		List<StoresVO> list = storesSvc.getAll();
 		model.addAttribute("storesListData", list);     // for select_page.html 第97 109行用
 		
 		if (storesVO == null) {
@@ -75,11 +77,20 @@ public class StoreIdController {
 	          strBuilder.append(violation.getMessage() + "<br>");
 	    }
 	    //==== 以下第92~96行是當前面第77行返回 /src/main/resources/tStoreslates/back-end/Stores/select_page.html用的 ====   
-		List<StoresVO> list = storesSvc.getAllStoresVO();
+		List<StoresVO> list = storesSvc.getAll();
 		model.addAttribute("StoresListData", list);     // for select_page.html 第97 109行用
 		
 		String message = strBuilder.toString();
 	    return new ModelAndView("back-end/Stores/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
 	}
+	
+	//全資料一覽
+    @ModelAttribute("storesListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected List<StoresVO> referenceListData(Model model) {
+		
+    	List<StoresVO> list = storesSvc.getAll();
+		return list;
+	}
+	
 	
 }

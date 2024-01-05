@@ -68,7 +68,7 @@ public class StoresService implements StoresServiceIntf{
 		return repository.findAll();
 	}
 	
-	public List<StoresVO> getAllStoresVO() {
+	public List<StoresVO> getAll() {
 		return repository.findAll();
 	}
 

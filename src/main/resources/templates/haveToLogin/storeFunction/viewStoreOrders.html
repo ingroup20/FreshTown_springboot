@@ -53,20 +53,46 @@
 			<thead>
 				<tr>
 					<th>訂單編號</th>
-					<th>退款金額</th>
-					<th>退款進度</th>
-					<th>退款時間</th>
-					<th>訂單明細</th>
+					<th>訂餐狀態</th>
+					<th>下單(預約)時間</th>
+					<th>出餐時間</th>
+					<th>完成時間</th>
+					<th>超時紀錄時間</th>
+					<th>會員流水號</th>
+					<th>總金額</th>
+					<th>店家流水號</th>
+					<th>超時/取消訂單備註</th>
+					<th>評分</th>
+					<th>評論</th>
+					<th>評論日期</th>
+					<th>匯款日期</th>
+					<th>匯款狀態</th>
+					<th>線上付款時間</th>
+					<th>付款方式</th>
+					<th>付款狀態</th>										
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="refundsVO : ${refundsListData}">
+				<th:block th:each="OrdersVO : ${ordersListData}">
 					<tr>
-						<td th:text="${refundsVO.ordersVO.orderId}">訂單編號</td>
-						<td th:text="${refundsVO.refundDollar}"></td>
-						<td th:text="${refundsVO.refundState}"></td>
-						<td th:text="${refundsVO.refundDate}"></td>
-						<td th:text="${refundsVO.ordersVO.customerVO.customerMob}">會員編號</td>
+						<td th:text="${orderVO.orderId}">訂單編號</td>
+						<td th:text="${orderVO.orderState}">訂餐狀態</td>
+						<td th:text="${orderVO.orderTime}">下單(預約)時間</td>
+						<td th:text="${orderVO.doneTime}">出餐時間</td>
+						<td th:text="${orderVO.finishTime}">完成時間</td>
+						<td th:text="${orderVO.delayTime}">超時紀錄時間</td>
+						<td th:text="${orderVO.customerId}">會員流水號</td>
+						<td th:text="${orderVO.totalPrice}">總金額</td>
+						<td th:text="${orderVO.storeId}">店家流水號</td>
+						<td th:text="${orderVO.delayDesc}">超時/取消訂單備註</td>
+						<td th:text="${orderVO.comtVal}">評分</td>
+						<td th:text="${orderVO.comtCont}">評論</td>
+						<td th:text="${orderVO.comtTime}">評論日期</td>
+						<td th:text="${orderVO.remitDate}">匯款日期</td>
+						<td th:text="${orderVO.remitState}">匯款狀態</td>
+						<td th:text="${orderVO.payDate}">線上付款時間</td>
+						<td th:text="${orderVO.payMethod}">付款方式</td>
+						<td th:text="${orderVO.payState}">付款狀態</td>
 					</tr>
 				</th:block>
 			</tbody>

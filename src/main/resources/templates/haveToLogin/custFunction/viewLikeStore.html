@@ -52,21 +52,20 @@
 		<table id="dataTable" class="display">
 			<thead>
 				<tr>
-					<th>訂單編號</th>
-					<th>退款金額</th>
-					<th>退款進度</th>
-					<th>退款時間</th>
-					<th>訂單明細</th>
+					<th>項次</th>
+					<th>店家流水號</th>
+					<th>收藏</th>
+					<th>黑名單</th>			
+
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="refundsVO : ${refundsListData}">
+				<th:block th:each="likeStoreVO : ${likeStoreListData}">
 					<tr>
-						<td th:text="${refundsVO.ordersVO.orderId}">訂單編號</td>
-						<td th:text="${refundsVO.refundDollar}"></td>
-						<td th:text="${refundsVO.refundState}"></td>
-						<td th:text="${refundsVO.refundDate}"></td>
-						<td th:text="${refundsVO.ordersVO.customerVO.customerMob}">會員編號</td>
+						<td th:text="${likeStoreVO.count">自動count項次</td>
+						<td th:text="${likeStoreVO.customerId}">會員流水號</td>
+						<td th:text="${likeStoreVO.likeUnlike}">收藏</td>
+						<td th:text="${likeStoreVO.likeUnlike}">黑名單</td>
 					</tr>
 				</th:block>
 			</tbody>
@@ -74,7 +73,26 @@
 
 	</section>
 
-	<main></main>
+	<main>
+			<table id="dataTable" class="display">
+			<thead>
+				<tr>
+					<th>收藏</th>
+					<th>黑名單</th>			
+
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="likeStoreVO : ${LikeStoreList}">
+					<tr>
+						<td th:text="${likeStoreVO.likeUnlike}">收藏</td>
+						<td th:text="${likeStoreVO.likeUnlike}">黑名單</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	
+	</main>
 
 	<footer class="footer">
 		<div>

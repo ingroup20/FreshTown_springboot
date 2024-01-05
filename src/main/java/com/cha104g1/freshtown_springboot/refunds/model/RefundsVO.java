@@ -1,6 +1,7 @@
 package com.cha104g1.freshtown_springboot.refunds.model;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +50,7 @@ public class RefundsVO implements java.io.Serializable{
 //	@Past(message="日期必須是在今日(含)之前")
 //	@DateTimeFormat(pattern="yyyy-MM-dd") 
 //	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
-	private Date refundDate;
+	private Timestamp refundDate;
 	
 	@Column(name="creationDate")
 	@NotEmpty(message="成立退款單時間: 請勿空白")
@@ -57,7 +58,7 @@ public class RefundsVO implements java.io.Serializable{
 //	@Past(message="日期必須是在今日(含)之前")
 //	@DateTimeFormat(pattern="yyyy-MM-dd") 
 //	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
-	private Date creationDate;
+	private Timestamp creationDate;
 	
 	public Integer getId() {
 		return id;
@@ -87,16 +88,16 @@ public class RefundsVO implements java.io.Serializable{
 		this.refundDollar = refundDollar;
 	}
 	
-	public Date getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
-	public Date getRefundDate() {
+	public Timestamp getRefundDate() {
 		return refundDate;
 	}
-	public void setRefundDate(Date refundDate) {
+	public void setRefundDate(Timestamp refundDate) {
 		this.refundDate = refundDate;
 	}
 	

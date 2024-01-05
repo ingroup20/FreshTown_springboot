@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
+import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
@@ -67,21 +68,28 @@ public class IndexController_inSpringBoot {
 		return "haveToLogin/pFunction/refundPage";
 	}
     
-//    @GetMapping("/haveToLogin/xxx")
-//	public String xxx(Model model) {
-//		return "haveToLogin/xxx";
-//	}
-//    
-//    @GetMapping("/rrr")
-//	public String rrr(Model model) {
-//		return "rrr";
-//	}
+    @GetMapping("/haveToLogin/custFunction/viewLikeStore")
+	public String viewLikeStore(Model model) {
+		return "haveToLogin/custFunction/viewLikeStore";
+	}
+    
+    @GetMapping("/haveToLogin/pFunction/viewOrder")
+	public String viewOrder(Model model) {
+		return "haveToLogin/pFunction/viewOrder";
+	}
     
     @ModelAttribute("refundsListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
 	protected List<RefundsVO> referenceListData(Model model) {
 		
-    	List<RefundsVO> list = refundsSvc.getAllRefundsVO();
+    	List<RefundsVO> list = refundsSvc.getAll();
 		return list;
 	}
+    
+//    @ModelAttribute("ordersListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+//	protected List<OrdersVO> referenceListData(Model model) {
+//		
+//    	List<OrdersVO> list = refundsSvc.getAll();
+//		return list;
+//	}
 
 }

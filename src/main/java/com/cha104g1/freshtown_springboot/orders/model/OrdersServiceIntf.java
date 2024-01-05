@@ -13,6 +13,7 @@ public interface OrdersServiceIntf {
 	OrdersVO getOrdersVOByOrderId(Integer orderId);
 	
 	List<OrdersVO> getAllOrdersVO(int currentPage);
+	List<OrdersVO> getAll();
 	
 	int getPageTotal();
 	
