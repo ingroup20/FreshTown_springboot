@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS cha104g1; 
+-- CREATE DATABASE IF NOT EXISTS cha104g1; 
 USE cha104g1;
 
 DROP TABLE IF EXISTS service;
@@ -28,12 +28,12 @@ CREATE TABLE stores(
 storeId	INT	PRIMARY KEY AUTO_INCREMENT	NOT NULL,
 storeAccount	VARCHAR(31)	UNIQUE KEY	NOT NULL,
 storePw	VARCHAR(31)		NOT NULL,
-storeLv	TINYINT		NOT NULL DEFAULT "0",
+storeLv	TINYINT		NOT NULL ,
 createDate	DATE	NOT NULL,
 payDate	DATE	NOT NULL,
 photo	LONGBLOB,
 storeDesc	VARCHAR(1000),
-pushUp	TINYINT	NOT NULL DEFAULT "0",
+pushUp	TINYINT	NOT NULL,
 ownerName	VARCHAR(15)	NOT NULL,
 ownerMob	CHAR(10) NOT NULL,
 ownerId	CHAR(10) NOT NULL,
@@ -42,14 +42,14 @@ ownerEmail	VARCHAR(128)	NOT NULL,
 storeName	VARCHAR(15)		NOT NULL,
 storeAddress	VARCHAR(128)	NOT NULL,
 storePhone	CHAR(10)	NOT NULL,
-storeState	TINYINT	NOT NULL DEFAULT "0",
+storeState	TINYINT	NOT NULL ,
 scorePeople	INT	,
-total_score	INT	,
+totalScore	INT	,
 storeLat	DECIMAL(10,8)	NOT NULL ,
 storeLag	DECIMAL(11,8)	NOT NULL ,
 openTime	VARCHAR(225),
 restDay	CHAR(7)	,
-store_gui	VARCHAR(8)		
+storeGui	VARCHAR(8)		
 );
 
 -- 逸晉
@@ -72,7 +72,7 @@ CREATE TABLE customer (
     customerEmail VARCHAR(31) NOT NULL,
     customerNic VARCHAR(15) NOT NULL,
     customerAddress VARCHAR(127) NOT NULL,
-    custtomerState TINYINT NOT NULL CHECK (custtomerState IN (0, 1, 2))
+    customerState TINYINT NOT NULL CHECK (customerState IN (0, 1, 2))
 );
 
 -- 旭東
@@ -184,7 +184,7 @@ CREATE TABLE meals (
 -- 中群
 CREATE TABLE orders( 
 orderId	INT	PRIMARY KEY AUTO_INCREMENT	NOT NULL,
-orderState	TINYINT		NOT NULL DEFAULT "0",
+orderState	TINYINT		NOT NULL,
 orderTime	DATETIME		NOT NULL,
 doneTime	DATETIME		,
 finishTime	DATETIME		,
@@ -199,8 +199,8 @@ comtTime	DATETIME		,
 remitDate	DATETIME		,
 remitState	CHAR(1)		NOT NULL DEFAULT "N",
 payDate	DATETIME		NOT NULL,
-payMethod	TINYINT		NOT NULL DEFAULT "1",
-payState	TINYINT		NOT NULL DEFAULT "0"
+payMethod	TINYINT		NOT NULL,
+payState	TINYINT		NOT NULL
 );
    
  -- 中群
@@ -209,7 +209,8 @@ id  INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 orderId INT NOT NULL ,
 refundState CHAR(1) NOT NULL DEFAULT 'N' ,
 refundDollar INT NOT NULL,
-refundDate DATETIME NOT NULL
+creationDate DATETIME NOT NULL,
+refundDate DATETIME 
 );
 
  

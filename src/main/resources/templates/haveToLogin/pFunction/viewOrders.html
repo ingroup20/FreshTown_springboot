@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="html" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Homepage - 鮮城 FreshTown</title>
+<link rel="stylesheet" th:href="@{/css/refundPage/refund.css}">
+<!--載入dataTable-->
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<!--    本機位置 <link rel="stylesheet" th:href="@{/css/refundPage/DataTables/datatables.min.css}"> -->
+
+<style type="text/css"></style>
+
+</head>
+
+<body class="body">
+	<nav class="nav ">
+		<div class="nav ">
+			<a class="logo title " href="#!">鮮城 FreshTown</a>
+			<button class="phone-btn">行動版導覽按鈕</button>
+			<ul class="nav">
+				<li class="nav_item "><a class="title" href="#!">店家管理</a></li>
+				<li class="nav_item "><a class="title" href="#!">匯款作業</a></li>
+				<li class="nav_item "><a class="title"
+					th:href="@{/haveToLogin/pFunction/refundPage}">退款作業</a></li>
+				<li class="nav_item "><a class="title" href="#!">顧客管理</a></li>
+				<li class="nav_item "><a class="title" href="#!">廣告管理</a></li>
+				<li class="nav_item "><a class="title" href="#!">線上客服</a></li>
+			</ul>
+
+			<form class="search_block" action="">
+				<label for="search_store">搜尋 </label>
+				<!-- <input class="search_store" type="text"> -->
+
+			</form>
+
+
+			<!-- 帳號登出 -->
+			<form class="buy_car">
+				<button class="buy_car" type="submit">平台帳號登出</button>
+			</form>
+
+
+		</div>
+		<div class="nav_footer"></div>
+
+	</nav>
+
+
+	<section class="section">
+		<table id="dataTable" class="display">
+			<thead>
+				<tr>
+					<th>訂單編號</th>
+					<th>訂餐狀態</th>
+					<th>下單(預約)時間</th>
+					<th>出餐時間</th>
+					<th>完成時間</th>
+					<th>超時紀錄時間</th>
+					<th>會員流水號</th>
+					<th>總金額</th>
+					<th>店家流水號</th>
+					<th>超時/取消訂單備註</th>
+					<th>評分</th>
+					<th>評論</th>
+					<th>評論日期</th>
+					<th>匯款日期</th>
+					<th>匯款狀態</th>
+					<th>線上付款時間</th>
+					<th>付款方式</th>
+					<th>付款狀態</th>										
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="OrdersVO : ${ordersListData}">
+					<tr>
+						<td th:text="${orderVO.orderId}">訂單編號</td>
+						<td th:text="${orderVO.orderState}">訂餐狀態</td>
+						<td th:text="${orderVO.orderTime}">下單(預約)時間</td>
+						<td th:text="${orderVO.doneTime}">出餐時間</td>
+						<td th:text="${orderVO.finishTime}">完成時間</td>
+						<td th:text="${orderVO.delayTime}">超時紀錄時間</td>
+						<td th:text="${orderVO.customerId}">會員流水號</td>
+						<td th:text="${orderVO.totalPrice}">總金額</td>
+						<td th:text="${orderVO.storeId}">店家流水號</td>
+						<td th:text="${orderVO.delayDesc}">超時/取消訂單備註</td>
+						<td th:text="${orderVO.comtVal}">評分</td>
+						<td th:text="${orderVO.comtCont}">評論</td>
+						<td th:text="${orderVO.comtTime}">評論日期</td>
+						<td th:text="${orderVO.remitDate}">匯款日期</td>
+						<td th:text="${orderVO.remitState}">匯款狀態</td>
+						<td th:text="${orderVO.payDate}">線上付款時間</td>
+						<td th:text="${orderVO.payMethod}">付款方式</td>
+						<td th:text="${orderVO.payState}">付款狀態</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+
+	</section>
+
+	<main></main>
+
+	<footer class="footer">
+		<div>
+			<p class="footer">鮮城 &copy; Your Website 2023</p>
+		</div>
+	</footer>
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- 載入 Font Awesome -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+	<!--     不能開	<script th: src="@{/js/allBase.js}"></script> -->
+	<!--載入dataTable-->
+	<script
+		src="https://cdn.datatables.net/v/dt/dt-1.13.8/b-2.4.2/b-html5-2.4.2/date-1.5.1/fh-3.4.0/r-2.5.0/rr-1.4.1/sp-2.2.0/sr-1.3.0/datatables.min.js"></script>
+
+	<script>
+		        let table = new DataTable('#dataTable');
+	</script>
+	
+
+</body>
+</html>

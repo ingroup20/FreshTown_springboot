@@ -1,6 +1,7 @@
 package com.cha104g1.freshtown_springboot.refunds.model;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,8 +31,8 @@ public class RefundsVO implements java.io.Serializable{
 	//
 	@ManyToOne
 	@JoinColumn(name="orderId", referencedColumnName="orderId")
-	@NotEmpty(message="訂單編號: 請勿空白")
-	@Pattern(regexp = "^(0-9)$", message = "訂單編號: 只能數字")
+//	@NotEmpty(message="訂單編號: 請勿空白")
+//	@Pattern(regexp = "^(0-9)$", message = "訂單編號: 只能數字")
 	private OrdersVO ordersVO;
 	
 	@Column(name="refundState")
@@ -49,8 +50,15 @@ public class RefundsVO implements java.io.Serializable{
 //	@Past(message="日期必須是在今日(含)之前")
 //	@DateTimeFormat(pattern="yyyy-MM-dd") 
 //	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
-	private Date refundDate;
+	private Timestamp refundDate;
 	
+	@Column(name="creationDate")
+	@NotEmpty(message="成立退款單時間: 請勿空白")
+//	@Future(message="日期必須是在今日(不含)之後")
+//	@Past(message="日期必須是在今日(含)之前")
+//	@DateTimeFormat(pattern="yyyy-MM-dd") 
+//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	private Timestamp creationDate;
 	
 	public Integer getId() {
 		return id;
@@ -79,10 +87,17 @@ public class RefundsVO implements java.io.Serializable{
 	public void setRefundDollar(Integer refundDollar) {
 		this.refundDollar = refundDollar;
 	}
-	public Date getRefundDate() {
+	
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Timestamp creationDate) {
+		this.creationDate = creationDate;
+	}
+	public Timestamp getRefundDate() {
 		return refundDate;
 	}
-	public void setRefundDate(Date refundDate) {
+	public void setRefundDate(Timestamp refundDate) {
 		this.refundDate = refundDate;
 	}
 	

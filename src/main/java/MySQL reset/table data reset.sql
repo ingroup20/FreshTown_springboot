@@ -1,5 +1,5 @@
 -- 中群
-INSERT   INTO stores	(	storeId	,	storeAccount	,	storePw	,	storeLv	,	createDate	,	payDate	,	photo	,	storeDesc	,	pushUp	,	ownerName	,	ownerMob	,	ownerId	,	ownerAddress	,	ownerEmail	,	storeName	,	storeAddress	,	storePhone	,	storeState	,	scorePeople	,	total_score	,	storeLat	,	storeLag	,	openTime	,	restDay	,	store_gui	)
+INSERT   INTO stores	(	storeId	,	storeAccount	,	storePw	,	storeLv	,	createDate	,	payDate	,	photo	,	storeDesc	,	pushUp	,	ownerName	,	ownerMob	,	ownerId	,	ownerAddress	,	ownerEmail	,	storeName	,	storeAddress	,	storePhone	,	storeState	,	scorePeople	,	totalScore	,	storeLat	,	storeLag	,	openTime	,	restDay	,	storeGui	)
 VALUES 	(	1	,	"A001"	,	"A001"	,	1	,	"2023-12-13"	,	"2023-12-13"	,	NULL	,	"快來快來快來快來快來快來快來快來快來快來快來快來快來快來"	,	1	,	"王某"	,	"0912345678"	,	"K133543945"	,	"中壢市中央路"	,	"W@gmail.com"	,	"三商巧福"	,	"中壢市中央路"	,	"02-5575304"	,	1	,	2	,	6	,	12.46396364	,	124.58402857	,	"11:00-14:00,17:00-19:00"	,	"1111111"	,	73549374	),
 	(	2	,	"W9898"	,	"7878"	,	1	,	"2023-12-13"	,	"2023-12-13"	,	NULL	,	"好吃的都在這"	,	1	,	"陳某"	,	"0954224532"	,	"O219575642",	"中壢市民權路"	,	"chen@gmail.com"	,	"梅亭"	,	"中壢市民權路"	,	"02-5535736"	,	1	,	1	,	4	,	5.49375649	,	111.96749386	,	"11:00-14:00,17:00-19:00"	,	"0111110"	,	null	),
 	(	3	,	"A123"	,	"123"	,	1	,	"2023-12-13"	,	"2023-12-13"	,	NULL	,	"便宜又大碗"	,	1	,	"徐某"	,	"0987576342"	,	"J128674926"	,	"中壢市中正路"	,	"shu@gmail.com"	,	"米諾早餐店"	,	"中壢市中正路"	,	"02-5596327"	,	1	,	0	,	0	,	84.75937284	,	87.857224	,	"11:00-14:00,17:00-19:00"	,	"0111111"	,	null	);
@@ -20,17 +20,17 @@ VALUES
 ;
 
 -- 逸晉
-INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, custtomerState)
+INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
 VALUES
 (CONCAT('pw_', FLOOR(RAND() * 1000)), LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
 ;
 -- 逸晉
-INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, custtomerState)
+INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
 VALUES
 (CONCAT('pw_', FLOOR(RAND() * 1000)), LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
 ;
 -- 逸晉
-INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, custtomerState)
+INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
 VALUES
 (CONCAT('pw_', FLOOR(RAND() * 1000)), LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
 ;
@@ -105,10 +105,10 @@ VALUES 	(	1	,	1	,	"2023-12-13 09:00:00"	,	"2023-12-13 09:10:00"	,	"2023-12-13 09
 	(	3	,	2	,	"2023-12-13 09:00:00"	,	"2023-12-13 09:20:00"	,	"2023-12-13 09:29:00"	,	NULL	,	3	,	1500	,	2	,	NULL	,	4	,	"推薦"	,	"2023-12-13 12:09:00"	,	NULL	,	"N"	,	"2023-12-13 09:00:00"	,	1	,	1	);
 
 -- 中群
-INSERT   INTO refunds	(	id	,	orderId	,	refundState	,	refundDollar	,	refundDate	)
-VALUES 	(	1	,	1	,	"N"	,	500	,	"2023-12-13"	) ,
-	(	2	,	2	,	"N"	,	1000	,	"2023-12-13"	),
-	(	3	,	3	,	"N"	,	1500	,	"2023-12-13"	) ;
+INSERT   INTO refunds	(	id	,	orderId	,	refundState	,	refundDollar	,creationDate ,	refundDate	)
+VALUES 	(	1	,	1	,	"N"	,	500	,	"2023-12-13",	"2023-12-13"	) ,
+	(	2	,	2	,	"N"	,	1000	,	"2023-12-13",	"2023-12-13"	),
+	(	3	,	3	,	"N"	,	1500	,	"2023-12-13",	"2023-12-13"	) ;
 
 -- 承運
 INSERT INTO order_detail (mealNo, mealQty, orderId, priceBought) VALUES

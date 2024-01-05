@@ -12,10 +12,10 @@ import java.util.Set;
 import javax.persistence.criteria.Predicate;
 
 @Service
-public class OrdersService {
+public class OrdersService implements OrdersServiceIntf{
 
     @Autowired
-    private OrdersRepository OrdersRepository;
+    private OrdersRepository repository;
 
     public List<OrdersVO> getAllC(Map<String, String[]> map) {
         List<OrdersVO> list;
@@ -42,10 +42,57 @@ public class OrdersService {
             };
 
             // 使用 Spring Data JPA 的接口方法进行查询
-            list = OrdersRepository.findAll(finalSpecification);
+            list = repository.findAll(finalSpecification);
         } catch (RuntimeException ex) {
             throw ex;
         }
         return list;
     }
+
+	@Override
+	public OrdersVO addOrdersVO(OrdersVO OrdersVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdersVO updateOrdersVO(OrdersVO OrdersVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdersVO getOrdersVOByOrderId(Integer orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> getAllOrdersVO(int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+	@Override
+	public List<OrdersVO> getAll() {
+		// TODO Auto-generated method stub
+		return repository.findAll();
+	}
+
+	@Override
+	public int getPageTotal() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<OrdersVO> getOrdersVOsByCompositeQuery(Map<String, String[]> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+    
+    
 }
