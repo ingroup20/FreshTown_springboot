@@ -27,7 +27,7 @@ public class SupOrderVO implements java.io.Serializable {
 	private Integer unitPrice;
 	private Date purDate;
 	private Date preDate;
-	private String oStatus;
+	private Integer oStatus;
 	private Date deliDate;
 	private String marks;
 	
@@ -77,10 +77,10 @@ public class SupOrderVO implements java.io.Serializable {
 	public void setPreDate(Date preDate) {
 		this.preDate = preDate;
 	}
-	public String getoStatus() {
+	public Integer getoStatus() {
 		return oStatus;
 	}
-	public void setoStatus(String oStatus) {
+	public void setoStatus(Integer oStatus) {
 		this.oStatus = oStatus;
 	}
 	public Date getDeliDate() {

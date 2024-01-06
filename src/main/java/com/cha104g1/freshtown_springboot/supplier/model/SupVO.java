@@ -1,12 +1,28 @@
 package com.cha104g1.freshtown_springboot.supplier.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+
+@Entity
+@Table(name="supplier")
 public class SupVO implements java.io.Serializable {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer supId;
 	private String supplierName;
 	private String supplierContact;
 	private String supplierPhone;
-	private Integer storeId;
+	@ManyToOne
+	@JoinColumn(name="storeId",referencedColumnName ="storeId")
+	private StoresVO storesVO;
 	private Integer supplierState;
 
 	public Integer getSupId() {
@@ -41,12 +57,12 @@ public class SupVO implements java.io.Serializable {
 		this.supplierPhone = supplierPhone;
 	}
 
-	public Integer getStoreId() {
-		return storeId;
+	public StoresVO getStoresVO() {
+		return storesVO;
 	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
+	//
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
 	}
 
 	public Integer getSupplierState() {
