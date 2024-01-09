@@ -1,18 +1,23 @@
 package com.cha104g1.freshtown_springboot;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.ManyToOne;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsRepository;
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresRepository;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
@@ -102,18 +107,31 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 //		}
     
     	
-//    	List<StoresVO> list = repository.findAll();
-//    	for (StoresVO refunds : list) {
-//			System.out.print(refunds.getOwnerId() + ",");
+//    	List<RefundsVO> list = repository.findAll();
+//    	for (RefundsVO refunds : list) {
+//			System.out.print(refunds.getOrdersVO().getOrderId() + ",");
 //			System.out.print(refunds.getRefundState() + ",");
 //			System.out.print(refunds.getRefundDollar() + ",");
 //			System.out.print(refunds.getRefundDate() + ",");
+//    	}
+    	
 
+    }
+//         RefundsService refundsSvc;
+//    
+//    	public String listAllEmp(HttpServletRequest req, Model model) {
+//    		Map<String, String[]> map = req.getParameterMap();
+//    		List<RefundsVO> list = refundsSvc.getAll(map);
+//    		model.addAttribute("${refundsListData}", list); 
+//    		for (RefundsVO refunds : list) {
+//    			System.out.print(list);
+//    		}
+//    		return "pFunction/refunds/list";
 //    	}
     	
     
     	
     	
 
-    }
+    
 }

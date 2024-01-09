@@ -17,6 +17,6 @@ public interface OrdersServiceIntf {
 	
 	int getPageTotal();
 	
-	List<OrdersVO> getOrdersVOsByCompositeQuery(Map<String, String[]> map);
+	List<OrdersVO> getAll(Map<String, String[]> map);
 
 }

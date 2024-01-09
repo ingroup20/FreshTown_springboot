@@ -13,13 +13,10 @@ public interface LikeStoreServiceIntf {
 	LikeStoreVO getLikeStoreVOById(Integer id);
 	
 	List<LikeStoreVO> getAllLikeStoreVO(int currentPage);
-	 Optional<LikeStoreVO> getCustomerAll(int customerId);
-	 List<LikeStoreVO> getAll(int customerId);
-	 List<LikeStoreVO> getAll();
 	
-	int getPageTotal();
-	
-	List<LikeStoreVO> getLikeStoreVOsByCompositeQuery(Map<String, String[]> map);
+	List<LikeStoreVO> getAll();
+	List<LikeStoreVO> getAll(int customerId);
+//	List<LikeStoreVO> getAll(Map<String, String[]> map);
 
 	
 
