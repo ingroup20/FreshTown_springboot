@@ -2,12 +2,13 @@ package com.cha104g1.freshtown_springboot.mealtype.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("mealTypeService")
-public class MealTypeService implements MealTypeServiceIntf{
+public class MealTypeService {
 
 	@Autowired
 	MealTypeRepository repository;
@@ -17,47 +18,31 @@ public class MealTypeService implements MealTypeServiceIntf{
 		this.repository=repository;
 	}
 	
-	@Override
-	public MealTypeVO addMealTypeVO(MealTypeVO mealTypeVO) {
+	
+	public MealTypeVO addMealType(MealTypeVO mealTypeVO) {
 		repository.save(mealTypeVO);
 		return mealTypeVO;
 	}
 
-	@Override
-	public MealTypeVO updateMealTypeVO(MealTypeVO mealTypeVO) {
+	
+	public MealTypeVO updateMealType(MealTypeVO mealTypeVO) {
 		repository.save(mealTypeVO);
 		return mealTypeVO;
 	}
 
-	@Override
-	public MealTypeVO getMealTypeVOByMealTypeNo(Integer mealTypeNo) {
-		
-		return null;
+	
+	public MealTypeVO getOneMealType(Integer mealTypeNo) {
+		Optional<MealTypeVO> optional = repository.findById(mealTypeNo);
+		return optional.orElse(null);
 	}
+	
 
-	@Override
-	public List<MealTypeVO> getAllMealTypeVOs(int currentPage) {
-
-		return null;
-	}
-
-	@Override
 	public List<MealTypeVO> getAll() {
-
 		return repository.findAll();
 	}
 
-	@Override
-	public int getPageTotal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public List<MealTypeVO> getMealTypeVOsByCompositeQuery(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 }

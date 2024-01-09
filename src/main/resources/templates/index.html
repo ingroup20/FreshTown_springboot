@@ -1,65 +1,19 @@
+
+
+
+
 <!DOCTYPE html>
-<html  class="html" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index - 鮮城 FreshTown</title>
-    <link rel="stylesheet" th:href="@{/css/index.css}">
-
-	<style type="text/css"></style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>index.html - Spring Boot - Maven - Spring MVC - Thymeleaf Demo</title>
 </head>
-
-<body class="body">
-    <nav class="nav ">
-        <div  class="nav ">
-            <a class="logo title " href="#!">鮮城 FreshTown</a>
-            <button class="phone-btn">行動版導覽按鈕</button>
-            <ul class="nav">
-                <li class="nav_item "><a class="title" href="#!">店家管理</a></li>
-                <li class="nav_item "><a class="title" href="#!">匯款作業</a></li>
-                <li class="nav_item "><a class="title" th:href="@{/haveToLogin/pFunction/refundPage}">退款作業</a></li>
-                <li class="nav_item "><a class="title" href="#!">顧客管理</a></li>
-                <li class="nav_item "><a class="title" href="#!">廣告管理</a></li>
-                <li class="nav_item "><a class="title" href="#!">線上客服</a></li>
-            </ul>
-                    
-            <form class="search_block"  action="">
-                <label for="search_store">搜尋 </label>
-                <!-- <input class="search_store" type="text"> -->
-                
-            </form>
-
-            
-            <!-- 帳號登出 -->
-            <form class="buy_car">
-                <button class="buy_car" type="submit">
-                    平台帳號登出
-                </button>
-            </form>
-           
-
-        </div>
-        <div class="nav_footer"></div>
-        
-    </nav>
-
-    
-    <section class="section">
-       <div ><a th:href="@{/haveToLogin/pFunction/refundPage}">導向退款作業</a></div>
-       <div ><a th:href="@{/haveToLogin/custFunction/viewLikeStore}">導向會員收藏/黑名單</a></div>
-       <div ><a th:href="@{/haveToLogin/pFunction/viewOrder}">導向訂單</a></div>
-    </section>
-
-    <main></main>
-
-    <footer class="footer">
-        <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
-    </footer>
-
-   <!--載入線上版jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- 	<script th:src="@{/static/js/allBase.js}"/> -->
-	
+<body>
+INDEX
+	<h3><a th:href="@{/refunds/select_page}" >GO TO REFUNDS</a></h3>
+	<h3><a th:href="@{/mealtype/select_page}" >GO TO MealType</a></h3>
+	<h3><a th:href="@{/orders/select_page}" >GO TO orders</a></h3>
+	<h3><a th:href="@{/stores/select_page}" >GO TO stores</a></h3>
 </body>
 </html>

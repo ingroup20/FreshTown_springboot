@@ -1,0 +1,61 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>員工資料 - listOneEmp.html</title>
+
+<head ></head>
+<style type="text/css">
+	
+    span {
+		display: inline-block;
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>訂單資料 - listOneEmp.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/orders/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+</nav>
+
+	<div align="center" th:fragment="listOneOrders-div"> <!-- 此div被select_page.html第128行insert用 -->
+		<h3><span>查詢結果 :</span></h3>
+			<span>店家流水號:</span><span th:text="${ordersVO.storesVO.storeId}+${ordersVO.storesVO.storeName}"></span><br/>
+			<span>訂單編號:</span><span th:text="${ordersVO.orderId}"></span><br/>
+			<span>訂餐狀態:</span><span th:text="${ordersVO.orderState}"></span><br/>
+			<span>下單時間:</span><span th:text="${ordersVO.orderTime}"></span><br/>
+			<span>出餐時間:</span><span th:text="${ordersVO.doneTime}"></span><br/>
+			<span>完成時間:</span><span th:text="${ordersVO.finishTime}"></span><br/>
+			<span>超時紀錄時間:</span><span th:text="${ordersVO.delayTime}"></span><br/>
+			<span>超時/取消訂單備註:</span><span th:text="${ordersVO.delayDesc}"></span><br/>
+			<span>評分:</span><span th:text="${ordersVO.comtVal}"></span><br/>
+			<span>評論:</span><span th:text="${ordersVO.comtCont}"></span><br/>
+			<span>評論日期:</span><span th:text="${ordersVO.comtTime}"></span><br/>
+		
+			<span>線上付款時間:</span><span th:text="${ordersVO.payDate}"></span><br/>
+			<span>付款方式:</span><span th:text="${ordersVO.payMethod}"></span><br/>
+			<span>付款狀態:</span><span th:text="${ordersVO.payState}" ></span><br/>
+			<span>會員流水號:</span><span th:text="${ordersVO.customerVO.customerId}"></span><br/>
+			<span>總金額:</span><span th:text="${ordersVO.totalPrice}"></span><br/>
+			<span>匯款狀態:</span><span th:text="${ordersVO.remitState}"></span><br/>
+			<span>匯款日期:</span><span th:text="${ordersVO.remitDate}"></span><br/>
+
+	</div>
+
+
+</body>
+</html>

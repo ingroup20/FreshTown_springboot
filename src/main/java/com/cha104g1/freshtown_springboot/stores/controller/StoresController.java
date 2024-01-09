@@ -36,54 +36,64 @@ public class StoresController {
 	/*
 	 * This method will serve as addStores.html handler.
 	 */
-	@GetMapping("addNewStoresVO")
-	public String addNewStoresVO(ModelMap model) {
+	@GetMapping("addStores")
+	public String addStores(ModelMap model) {
 		StoresVO storesVO = new StoresVO();
-		model.addAttribute("StoresVO", storesVO);
-		return "會員申請成功待審核通知頁面";
+		model.addAttribute("storesVO", storesVO);
+		return "pFunction/stores/addStores";
 	}
 
 	/*
 	 * This method will be called on addStores.html form submission, handling POST request It also validates the user input
 	 */
 	@PostMapping("insert")
-	public String insert(@Valid StoresVO StoresVO, BindingResult result, ModelMap model,
-			@RequestParam("upFiles") MultipartFile[] parts) throws IOException {
+	public String insert(@Valid StoresVO storesVO, BindingResult result, ModelMap model,
+			@RequestParam("photo") MultipartFile[] parts) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		// 去除BindingResult中upFiles欄位的FieldError紀錄 --> 見第172行
-		result = removeFieldError(StoresVO, result, "upFiles");
+		result = removeFieldError(storesVO, result, "photo");
 
 		if (parts[0].isEmpty()) { // 使用者未選擇要上傳的圖片時
 			model.addAttribute("errorMessage", "店家照片: 請上傳照片");
 		} else {
 			for (MultipartFile multipartFile : parts) {
 				byte[] buf = multipartFile.getBytes();
-				StoresVO.setPhoto(buf);
+				storesVO.setPhoto(buf);
 			}
 		}
 		if (result.hasErrors() || parts[0].isEmpty()) {
-			return "會員申請頁面";
+			  // 迭代每個字段的錯誤
+		    for (FieldError error : result.getFieldErrors()) {
+		        String fieldName = error.getField();
+		        String errorMessage = error.getDefaultMessage();
+		        
+		        System.out.println("Field: " + fieldName + ", Error: " + errorMessage);
+		    }
+		    
+			return "pFunction/stores/addStores";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
-		storesSvc.addStoresVO(StoresVO);
+		storesSvc.addStores(storesVO);
 		/*************************** 3.新增完成,準備轉交(Send the Success view) **************/
+		List<StoresVO> list = storesSvc.getAll();
+		model.addAttribute("storesListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:/Stores/listAllStores"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/Stores/listAllStores")
+		return "redirect:/stores/listAllStores"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 
 	/*
 	 * This method will be called on listAllStores.html form submission, handling POST request
 	 */
-	@PostMapping("updatePartStoresVO")
-	public String updatePartStoresVO(@RequestParam("storeId") String storeId, ModelMap model) {
+	@PostMapping("getOne_For_Update")
+	public String getOne_For_Update(@RequestParam("storeId") String storeId, ModelMap model) {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		/*************************** 2.開始查詢資料 *****************************************/
-		StoresVO StoresVO = storesSvc.getStoresVOByStoreId(Integer.valueOf(storeId));
+		StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
 
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
-		model.addAttribute("StoresVO", StoresVO);
-		return "會員空間頁面"; // 查詢完成後轉交update_Stores_input.html
+		model.addAttribute("storesVO", storesVO);
+		return "pFunction/stores/update_stores_input"; // 查詢完成後轉交update_Stores_input.html
 	}
 
 	/*
@@ -91,33 +101,44 @@ public class StoresController {
 	 */
 	@PostMapping("update")
 	public String update(@Valid StoresVO storesVO, BindingResult result, ModelMap model,
-			@RequestParam("upFiles") MultipartFile[] parts) throws IOException {
+			@RequestParam("photo") MultipartFile[] parts) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		// 去除BindingResult中upFiles欄位的FieldError紀錄 --> 見第172行
-		result = removeFieldError(storesVO, result, "upFiles");
+		result = removeFieldError(storesVO, result, "photo");
 
 		if (parts[0].isEmpty()) { // 使用者未選擇要上傳的新圖片時
-			byte[] upFiles = storesSvc.getStoresVOByStoreId(storesVO.getStoreId()).getPhoto();
-			storesVO.setPhoto(upFiles);
+			byte[] photo = storesSvc.getOneStores(storesVO.getStoreId()).getPhoto();
+			storesVO.setPhoto(photo);
 		} else {
 			for (MultipartFile multipartFile : parts) {
-				byte[] upFiles = multipartFile.getBytes();
-				storesVO.setPhoto(upFiles);
+				byte[] photo = multipartFile.getBytes();
+				storesVO.setPhoto(photo);
 			}
 		}
 		if (result.hasErrors()) {
-			return "back-end/Stores/update_Stores_input";
+			System.out.println("資料不全");
+			
+		    // 迭代每個字段的錯誤
+		    for (FieldError error : result.getFieldErrors()) {
+		        String fieldName = error.getField();
+		        String errorMessage = error.getDefaultMessage();
+		        
+		        System.out.println("Field: " + fieldName + ", Error: " + errorMessage);
+		    }
+		    
+			return "pFunction/stores/update_stores_input";
 		}
 		/*************************** 2.開始修改資料 *****************************************/
 		// StoresService StoresSvc = new StoresService();
-		storesSvc.updateStoresVO(storesVO);
-
+		storesSvc.updateStores(storesVO);
+		System.out.println("修改成功2");
 		/*************************** 3.修改完成,準備轉交(Send the Success view) **************/
 		model.addAttribute("success", "- (修改成功)");
-		storesVO = storesSvc.getStoresVOByStoreId(Integer.valueOf(storesVO.getStoreId()));
+		storesVO = storesSvc.getOneStores(Integer.valueOf(storesVO.getStoreId()));
 		model.addAttribute("storesVO", storesVO);
-		return "back-end/Stores/listOneStores"; // 修改成功後轉交listOneStores.html
+		System.out.println("修改差轉跳");
+		return "pFunction/stores/listOneStores"; // 修改成功後轉交listOneStores.html
 	}
 
 
@@ -133,11 +154,11 @@ public class StoresController {
 	}
 
 	// 去除BindingResult中某個欄位的FieldError紀錄
-	public BindingResult removeFieldError(StoresVO StoresVO, BindingResult result, String removedFieldname) {
+	public BindingResult removeFieldError(StoresVO storesVO, BindingResult result, String removedFieldname) {
 		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
 				.filter(fieldname -> !fieldname.getField().equals(removedFieldname))
 				.collect(Collectors.toList());
-		result = new BeanPropertyBindingResult(StoresVO, "StoresVO");
+		result = new BeanPropertyBindingResult(storesVO, "storesVO");
 		for (FieldError fieldError : errorsListToKeep) {
 			result.addError(fieldError);
 		}
@@ -151,11 +172,10 @@ public class StoresController {
 	@PostMapping("listStores_ByCompositeQuery")
 	public String listAllStores(HttpServletRequest req, Model model) {
 		Map<String, String[]> map = req.getParameterMap();
-		List<StoresVO> list = storesSvc.getStoresVOByCompositeQuery(map);
-		model.addAttribute("storesListData", list); // for listAllStores.html 第85行用
-		return "back-end/Stores/listAllStores";
+		List<StoresVO> list = storesSvc.getAll(map);
+		model.addAttribute("storesListData", list); 
+		return "pFunction/stores/listAllStores";
 	}
-	
 	
 	
 

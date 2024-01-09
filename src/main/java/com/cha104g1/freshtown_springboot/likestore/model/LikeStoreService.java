@@ -1,7 +1,6 @@
 package com.cha104g1.freshtown_springboot.likestore.model;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ public class LikeStoreService implements LikeStoreServiceIntf{
 
 	@Autowired
 	LikeStoreRepository repository ;
-	
+	    
 	public LikeStoreService(LikeStoreRepository repository) {
 		this.repository = repository;
 	}
@@ -43,33 +42,14 @@ public class LikeStoreService implements LikeStoreServiceIntf{
 	}
 
 	@Override
-	public Optional<LikeStoreVO> getCustomerAll(int customerId) {
-		// 試試看
-		return repository.findById(customerId);
-	}
-	
-	@Override
-	public List<LikeStoreVO> getAll(int customerId) {
-		// 試試看
-		return repository.findByCustomerId(customerId);
-	}
-
-	@Override
 	public List<LikeStoreVO> getAll() {
 		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
 
 	@Override
-	public int getPageTotal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<LikeStoreVO> getLikeStoreVOsByCompositeQuery(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LikeStoreVO> getAll(int customerId) {
+		return repository.findByCustomerId(customerId);
 	}
 	
 	

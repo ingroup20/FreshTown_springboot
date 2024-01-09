@@ -8,46 +8,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
+import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 import java.util.*;
 
 
-
-//@PropertySource("classpath:application.properties") // 於https://start.spring.io建立Spring Boot專案時, application.properties文件預設已經放在我們的src/main/resources 目錄中，它會被自動檢測到
 @Controller
 public class IndexController_inSpringBoot {
-	
-	@Autowired
-	StoresService storesSvc;
-	
+
 	@Autowired
 	RefundsService refundsSvc;
-	
-	@Autowired
-	LikeStoreService likeStoresSvc;
 	
 	@Autowired
 	OrdersService ordersSvc;
 	
 	@Autowired
+	StoresService storesSvc;
+	
+	@Autowired
 	MealTypeService mealTypeSvc;
 	
-    // inject(注入資料) via application.properties
     @Value("${welcome.message}")
     private String message;
 	
-   
+    private List<String> myList = Arrays.asList("refunds 官網 ", "mealtype 官網", "likestore 官網", "orders 官網", "stores 官網");
     @GetMapping("/")
     public String index(Model model) {
     	model.addAttribute("message", message);
-
+        model.addAttribute("myList", myList);
         return "index"; //view
     }
     
@@ -59,37 +54,77 @@ public class IndexController_inSpringBoot {
         return "index"; //view
     }
     
-    
-    
-    //
-    //=========== 以下第57~62行是提供給 /src/main/resources/templates/haveToLogin/pFunction/refundPage.html  要使用的資料 ===================   
-    @GetMapping("/haveToLogin/pFunction/refundPage")
-	public String refundPage(Model model) {
-		return "haveToLogin/pFunction/refundPage";
+  
+    //=========== refunds ===================   
+    @GetMapping("/refunds/select_page")
+	public String select_page1(Model model) {
+		return "pFunction/refunds/select_page";
 	}
     
-    @GetMapping("/haveToLogin/custFunction/viewLikeStore")
-	public String viewLikeStore(Model model) {
-		return "haveToLogin/custFunction/viewLikeStore";
+    @GetMapping("/refunds/listAllRefunds")
+	public String listAllRefunds(Model model) {
+		return "pFunction/refunds/listAllRefunds";
 	}
     
-    @GetMapping("/haveToLogin/pFunction/viewOrder")
-	public String viewOrder(Model model) {
-		return "haveToLogin/pFunction/viewOrder";
-	}
-    
-    @ModelAttribute("refundsListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
-	protected List<RefundsVO> referenceListData(Model model) {
+    @ModelAttribute("refundsListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第85行用
+	protected List<RefundsVO> referenceListData_Refunds(Model model) {
 		
     	List<RefundsVO> list = refundsSvc.getAll();
 		return list;
 	}
     
-//    @ModelAttribute("ordersListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
-//	protected List<OrdersVO> referenceListData(Model model) {
-//		
-//    	List<OrdersVO> list = refundsSvc.getAll();
-//		return list;
-//	}
+
+	
+    //=========== mealtype  要使用的資料 ===================   
+    @GetMapping("/mealtype/select_page")
+	public String select_page2(Model model) {
+		return "pFunction/mealtype/select_page";
+	}
+    
+    @GetMapping("/mealtype/listAllMealType")
+	public String listAllMealtype(Model model) {
+		return "pFunction/mealtype/listAllMealType";
+	}
+    
+    @ModelAttribute("mealTypeListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第85行用
+	protected List<MealTypeVO> referenceListData_MealType(Model model) {
+		
+    	List<MealTypeVO> list = mealTypeSvc.getAll();
+		return list;
+	}
+    
+    //=========== orders  要使用的資料 ===================   
+    @GetMapping("/orders/select_page")
+	public String select_page3(Model model) {
+		return "pFunction/orders/select_page";
+	}
+    
+    @GetMapping("/orders/listAllOrders")
+	public String listAllOrders(Model model) {
+		return "pFunction/orders/listAllOrders";
+	}
+    
+	@ModelAttribute("ordersListData") // for select_page.html 第135行用
+	protected List<OrdersVO> referenceListData_Orders(Model model) {
+		List<OrdersVO> list = ordersSvc.getAll();
+		return list;
+	}
+
+    //=========== stores  要使用的資料 ===================   
+    @GetMapping("/stores/select_page")
+	public String select_page4(Model model) {
+		return "pFunction/stores/select_page";
+	}
+    
+    @GetMapping("/stores/listAllStores")
+	public String listAllStores(Model model) {
+		return "pFunction/stores/listAllStores";
+	}
+    
+	@ModelAttribute("storesListData") // for select_page.html 第135行用
+	protected List<StoresVO> referenceListData_Stores(Model model) {
+		List<StoresVO> list = storesSvc.getAll();
+		return list;
+	}
 
 }

@@ -1,0 +1,63 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>員工資料 - listOneEmp.html</title>
+
+<head ></head>
+<style type="text/css">
+	
+    span {
+		display: inline-block;
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>退款單資料 - listOneRefunds.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/stores/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+</nav>
+
+	<div align="center" th:fragment="listOneStores-div"> <!-- 此div被select_page.html第128行insert用 -->
+		<h3><span>查詢結果 :</span></h3>
+		<span>訂單編號:</span><span th:text="${storesVO.storeId}"></span><br/>
+		<span>店家帳號</span><span th:text="${storesVO.storeAccount}"></span><br/>
+		<span>店家名稱</span><span th:text="${storesVO.storeName}"></span><br/>
+		<span>店家統一編號</span><span th:text="${storesVO.storeGui}"></span><br/>
+		<span>店家地址</span><span th:text="${storesVO.storeAddress}"></span><br/>
+		<span>店家電話</span><span th:text="${storesVO.storePhone}"></span><br/>
+		<span>店家狀態</span><span th:text="${storesVO.storeState}"></span><br/>
+		<span>店家等級</span><span th:text="${storesVO.storeLv}"></span><br/>
+		<span>開通時間</span><span th:text="${storesVO.createDate}"></span><br/>
+		<span>付費日期</span><span th:text="${storesVO.payDate}"></span><br/>
+		<span>平台開店</span><span th:text="${storesVO.pushUp}"></span><br/>
+		<span>店家負責人</span><span th:text="${storesVO.ownerName}"></span><br/>
+		<span>負責人手機號碼</span><span th:text="${storesVO.ownerMob}"></span><br/>
+		<span>身分證</span><span th:text="${storesVO.ownerId}"></span><br/>
+		<span>負責人地址</span><span th:text="${storesVO.ownerAddress}"></span><br/>
+		<span>EMAIL</span><span th:text="${storesVO.ownerEmail}"></span><br/>
+		<span>評分人數</span><span th:text="${storesVO.scorePeople}"></span><br/>
+		<span>總評分</span><span th:text="${storesVO.totalScore}"></span><br/>
+		<span>平均評分</span><span th:text="(${storesVO.totalScore})/(${storesVO.scorePeople})"></span><br/>
+<!-- 		<span>照片:</span><span><img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"></span><br/> -->
+		<span>店家簡介</span><span th:text="${storesVO.storeDesc}"></span><br/>
+
+	</div>
+
+
+</body>
+</html>

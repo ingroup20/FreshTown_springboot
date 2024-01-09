@@ -15,10 +15,10 @@ public interface RefundsServiceIntf {
 //	RefundsVO getRefundsVOByOrderId(String refundState);
 	
 	List<RefundsVO> getAllRefundsVO(int currentPage);
-	List<RefundsVO> getAll();
-	
+
 	int getPageTotal();
 	
-	List<RefundsVO> getRefundsVOsByCompositeQuery(Map<String, String[]> map);
+	List<RefundsVO> getAll();
+	List<RefundsVO> getAll(Map<String, String[]> map);
 
 }

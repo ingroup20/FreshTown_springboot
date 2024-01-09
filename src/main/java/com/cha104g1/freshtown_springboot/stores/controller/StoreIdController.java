@@ -42,29 +42,29 @@ public class StoreIdController {
 	 * This method will be called on select_page.html form submission, handling POST
 	 * request It also validates the user input
 	 */
-	@PostMapping("getOneDisplay")
-	public String getOneDisplay(
+	@PostMapping("getOne_For_Display")
+	public String getOne_For_Display(
 		/***************************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-
-		@RequestParam("StoreId") String storeId, ModelMap model) {
+//		@NotEmpty(message="店家編號: 請勿空白")
+		@RequestParam("storeId") String storeId,
+		ModelMap model) {
 		
 		/***************************2.開始查詢資料*********************************************/
-//		StoresService StoresSvc = new StoresService();
-		StoresVO storesVO = storesSvc.getStoresVOByStoreId(Integer.valueOf(storeId));
+		StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
 		
 		List<StoresVO> list = storesSvc.getAll();
 		model.addAttribute("storesListData", list);     // for select_page.html 第97 109行用
 		
 		if (storesVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
-			return "back-end/Stores/select_page";
+			return "pFunction/stores/select_page";
 		}
 		
 		/***************************3.查詢完成,準備轉交(Send the Success view)*****************/
 		model.addAttribute("storesVO", storesVO);
-		model.addAttribute("getOneDisplay", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
+		model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
 		
-		return "back-end/Stores/select_page"; // 查詢完成後轉交select_page.html由其第158行insert listOneStores.html內的th:fragment="listOneStores-div
+		return "pFunction/stores/select_page"; // 查詢完成後轉交select_page.html由其第158行insert listOneStores.html內的th:fragment="listOneStores-div
 	}
 
 	//錯誤訊息顯示
@@ -78,19 +78,12 @@ public class StoreIdController {
 	    }
 	    //==== 以下第92~96行是當前面第77行返回 /src/main/resources/tStoreslates/back-end/Stores/select_page.html用的 ====   
 		List<StoresVO> list = storesSvc.getAll();
-		model.addAttribute("StoresListData", list);     // for select_page.html 第97 109行用
+		model.addAttribute("storesListData", list);     // for select_page.html 第97 109行用
 		
 		String message = strBuilder.toString();
-	    return new ModelAndView("back-end/Stores/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
+	    return new ModelAndView("pFunction/stores/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
 	}
 	
-	//全資料一覽
-    @ModelAttribute("storesListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
-	protected List<StoresVO> referenceListData(Model model) {
-		
-    	List<StoresVO> list = storesSvc.getAll();
-		return list;
-	}
 	
 	
 }
