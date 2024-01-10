@@ -24,19 +24,49 @@ public class SupController {
 	//供應商名稱
 	@PostMapping("getOneSupplierName")
 	public String getOneSupplierName(@RequestParam("supplierName") String supplierName, ModelMap model) {
+		SupService supSvc = new SupService();
 		SupVO supVO = supSvc.getOneSupplierName(supplierName);
+		
 		if(supVO == null) {
-			model.addAttribute("errorMessage","查無資料");
-			return "back-page";
+			List<SupVO> list = supSvc.getAll();
+			model.addAttribute("nameListData", list);
 		}
-		return supplierName;
+		
+		model.addAttribute("supVO", supVO);
+		model.addAttribute("getOneSupplierName", "true");
+		return "back";
 	}
 	
 	//聯絡人名稱
 	@PostMapping("getOneSupplierContact")
 	public String getOneSupplierContact(@RequestParam("supplierContact") String supplierContact,ModelMap model) {
-		return supplierContact;
+		SupService supSvc = new SupService();
+		SupVO supVO = supSvc.getOneSupplierContact(supplierContact);
 		
+		if(supVO == null) {
+			List<SupVO> list = supSvc.getAll();
+			model.addAttribute("conListData", list);
+		}
+		
+		model.addAttribute("supVO", supVO);
+		model.addAttribute("getOneSupplierContact", "true");
+		return "back";
+	}
+	
+	//狀態
+	@PostMapping("getOneSupplierStatus")
+	public String getOneSupplierStatus(@RequestParam("supplierState") String supplierState,ModelMap model) {
+		SupService supSvc = new SupService();
+		SupVO supVO = supSvc.getOneSupplierStatus(Integer.valueOf(supplierState));
+		
+		if(supVO == null) {
+			List<SupVO> list = supSvc.getAll();
+			model.addAttribute("conListData", list);
+		}
+		
+		model.addAttribute("supVO", supVO);
+		model.addAttribute("getOneSupplierStatus", "true");
+		return "back";
 	}
 	
 	//全都要
