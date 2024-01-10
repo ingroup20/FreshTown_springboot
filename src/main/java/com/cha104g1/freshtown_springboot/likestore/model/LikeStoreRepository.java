@@ -12,6 +12,6 @@ public interface LikeStoreRepository  extends JpaRepository<LikeStoreVO, Integer
 	@Transactional
 	@Modifying
 	@Query(value = "Select from like_store where customerId =?1", nativeQuery = true)
-	List findByCustomerId(int customerId);
+	List<LikeStoreVO> findByCustomerId(int customerId);
 	
 }
