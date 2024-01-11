@@ -27,9 +27,9 @@ public class PlatformEmpService implements PlatformEmpServiceIntf{
 	}
 
 	@Override
-	public PlatformEmpVO updatePlatformEmpVO(PlatformEmpVO platformEmp) {
-	    repository.save(platformEmp);
-	    return platformEmp;
+	public PlatformEmpVO updatePlatformEmpVO(PlatformEmpVO platformEmpVO) {
+	    repository.save(platformEmpVO);
+	    return platformEmpVO;
 	}
     
 	@Override
