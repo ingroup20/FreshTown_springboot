@@ -127,10 +127,6 @@ public class IndexController_inSpringBoot {
 		return list;
 	}
 	
-//    //=========== stores  要使用的資料 ===================   
-//    @GetMapping("/cFunction/stores/addStoresC")
-//	public String select_page5(Model model) {
-//		return "cFunction/stores/addStores";
-//	}
+
 
 }
