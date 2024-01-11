@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/loginP")
 public class PLogin {
 
 	private static final long serialVersionUID = 1L;
@@ -24,37 +24,27 @@ public class PLogin {
 	      return false;
 	  }
 	  
-	    // http://......../hello?name=peter1
 	    @GetMapping
 	    public String loginPage( HttpServletRequest req,Model model) {
 
-	        return "/login"; //view
+	        return "/loginP"; //view
 	    }
 	    
 	    
-	  @PostMapping("loginhandler")  // Assuming your login form uses POST method
+	    @PostMapping("/loginhandler")  // Assuming your login form uses POST method
 	    public String handleLogin(String account, String password ,HttpServletRequest req, HttpServletResponse res) {
-
-		  if (allowUser(account, password)) {
-
+	    	String url = "/loginP";
+	    	if (allowUser(account, password)) {
 	            HttpSession session = req.getSession();
-	            try {
-//	                String location = (String) session.getAttribute("location");//
-	                String location = (String) session.getAttribute("location");//
-	                if (location != null) {
-	                    session.removeAttribute("location");
-	                    System.out.println(location+"帳密正確");
-	                    return  "redirect:"+ location ;
-	                }
-	            } catch (Exception ignored) {
-
-	            }
-	            System.out.println("帳密正確無導向");
-	            return "redirect:/login_success";
-	        } else {
-	        	System.out.println("帳密正確無導向");
-	            return "redirect:/login";
-	        }
-	    
+	            
+                String location = (String) session.getAttribute("location");//
+                if (location != null) {
+                    session.removeAttribute("location");
+                    System.out.println(location+"帳密正確");
+                    session.setAttribute("account", account);
+                    url = location;
+                } 
+	        } 
+		  	return "redirect:" + url;
 	    }
 }

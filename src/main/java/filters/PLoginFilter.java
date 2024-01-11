@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginFilter implements Filter{
+public class PLoginFilter implements Filter{
 
 	private FilterConfig config;
 	
@@ -39,8 +39,8 @@ public class LoginFilter implements Filter{
 		if (account == null) {
 //			session.setAttribute("location", req.getRequestURI());
 			session.setAttribute("location", req.getServletPath());
-			
-			res.sendRedirect(req.getContextPath() + "/login");
+			System.out.println(req.getContextPath());
+			res.sendRedirect(req.getContextPath() + "/loginP");
 			return;
 		} else {
 			chain.doFilter(request, response);
