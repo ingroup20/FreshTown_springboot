@@ -25,7 +25,7 @@ import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 
 @Controller
 @Validated
-@RequestMapping("/custFunction/likestore")
+@RequestMapping("/cFunction/likestore")
 public class LikeStoreController {
 
 	@Autowired

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="loginP/loginhandler" method="post">
+		<table border=1>
+			<tr>
+				<td colspan=2>
+					<p align=center>
+						輸入(測試登入):<br> 
+						帳號:tomcat<br> 
+						密碼:tomcat<br>
+				</td>
+			</tr>
+			<tr>
+				<td><p align=right>account:</td>
+				<td><p><input type=text name="account" value="" size=15></td>
+			</tr>
+			<tr>
+				<td><p align=right>password:</td>
+				<td><p><input type=password name="password" value="" size=15></td>
+			</tr>
+			<tr>
+				<td colspan=2 align=center><input type=submit value="  ok   "></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>

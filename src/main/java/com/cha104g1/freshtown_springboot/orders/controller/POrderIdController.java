@@ -24,7 +24,7 @@ import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 
 @Controller
 @Validated
-@RequestMapping("/orders")
+@RequestMapping("/pFunction/orders")
 public class POrderIdController {
 	
 	@Autowired

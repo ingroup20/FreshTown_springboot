@@ -23,7 +23,7 @@ import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 
 @Controller
-@RequestMapping("/refunds")
+@RequestMapping("pFunction/refunds")
 public class RefundsController {
 
 	@Autowired

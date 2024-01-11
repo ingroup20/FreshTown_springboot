@@ -1,8 +1,10 @@
 package com.cha104g1.freshtown_springboot.storeemp.model;
 
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,16 +14,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+<<<<<<< HEAD
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.picking.model.model.PickingVO;
+=======
+import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+>>>>>>> refs/heads/master
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Entity
 @Table(name="store_emp")
 public class StoreEmpVO {
 	
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer sEmpId;
 	    private String sEmpName;
 	    private Byte invPerm;
@@ -38,43 +42,57 @@ public class StoreEmpVO {
 	    private String sEmpTitle;
 	    private Byte sEmpState;
 	    
-	    
+	    @Id
+	    @Column(name = "sEmpId")
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 		public Integer getsEmpId() {
 			return sEmpId;
 		}
 		public void setsEmpId(Integer sEmpId) {
 			this.sEmpId = sEmpId;
 		}
+		
+		@Column(name = "sEmpName")
 		public String getsEmpName() {
 			return sEmpName;
 		}
 		public void setsEmpName(String sEmpName) {
 			this.sEmpName = sEmpName;
 		}
+		
+		@Column(name = "invPerm")
 		public Byte getInvPerm() {
 			return invPerm;
 		}
 		public void setInvPerm(Byte invPerm) {
 			this.invPerm = invPerm;
 		}
+		
+		@Column(name = "purPerm")
 		public Byte getPurPerm() {
 			return purPerm;
 		}
 		public void setPurPerm(Byte purPerm) {
 			this.purPerm = purPerm;
 		}
+		
+		@Column(name = "manuPerm")
 		public Byte getManuPerm() {
 			return manuPerm;
 		}
 		public void setManuPerm(Byte manuPerm) {
 			this.manuPerm = manuPerm;
 		}
+		
+		@Column(name = "orderPerm")
 		public Byte getOrderPerm() {
 			return orderPerm;
 		}
 		public void setOrderPerm(Byte orderPerm) {
 			this.orderPerm = orderPerm;
 		}
+		
+		@Column(name = "modifyPerm")
 		public Byte getModifyPerm() {
 			return modifyPerm;
 		}
@@ -111,9 +129,9 @@ public class StoreEmpVO {
 		}
 	    
 		//領料表
-		@OneToMany(mappedBy = "storeEmpVO" ,cascade= CascadeType.ALL)
 		private Set<PickingVO> pickingVO;
 		
+		@OneToMany(mappedBy = "storeEmpVO" ,cascade= CascadeType.ALL)
 		public Set<PickingVO> getPickingVO(){
 			return pickingVO;
 		}
