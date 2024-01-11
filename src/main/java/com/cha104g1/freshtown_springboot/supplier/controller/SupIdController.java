@@ -2,13 +2,16 @@ package com.cha104g1.freshtown_springboot.supplier.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +29,8 @@ public class SupIdController {
 	@Autowired
 	SupService supSvc;
 
-	@GetMapping("addEmp")
-	public String addEmp(ModelMap model) {
+	@GetMapping("addSup")
+	public String addSup(ModelMap model) {
 		SupVO supVO = new SupVO();
 		model.addAttribute("supVO", supVO);
 		return "supplier/supplierAdd";
@@ -47,59 +50,33 @@ public class SupIdController {
 		model.addAttribute("success", "- (新增成功)");
 		return "supplier/supList";
 	}
-
-	/*
-	 * This method will be called on listAllEmp.html form submission, handling POST request
-	 */
+	
 	@PostMapping("getOne_For_Update")
-	public String getOne_For_Update(@RequestParam("supID") String supID, ModelMap model) {
-		SupVO supVO = supSvc.getOneEmp(Integer.valueOf(supID));
+	public String getOne_For_Update(@RequestParam("supID") String supId, ModelMap model) {
+		SupVO supVO = supSvc.getOneSup(Integer.valueOf(supId));
 
 		model.addAttribute("supVO", supVO);
-		return "back-end/emp/update_emp_input"; // 查詢完成後轉交update_emp_input.html
+		return "supplier/update_sup_input";
 	}
-
-	/*
-	 * This method will be called on update_emp_input.html form submission, handling POST request It also validates the user input
-	 */
+	
 	@PostMapping("update")
-	public String update(@Valid EmpVO empVO, BindingResult result, ModelMap model,
-			@RequestParam("upFiles") MultipartFile[] parts) throws IOException {
-
-		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
-		// 去除BindingResult中upFiles欄位的FieldError紀錄 --> 見第172行
-		result = removeFieldError(empVO, result, "upFiles");
-
-		if (parts[0].isEmpty()) { // 使用者未選擇要上傳的新圖片時
-			// EmpService empSvc = new EmpService();
-			byte[] upFiles = empSvc.getOneEmp(empVO.getEmpno()).getUpFiles();
-			empVO.setUpFiles(upFiles);
-		} else {
-			for (MultipartFile multipartFile : parts) {
-				byte[] upFiles = multipartFile.getBytes();
-				empVO.setUpFiles(upFiles);
-			}
-		}
+	public String update(@Valid SupVO supVO, BindingResult result, ModelMap model, @RequestParam("upSup") MultipartFile[] parts) throws IOException {
 		if (result.hasErrors()) {
-			return "back-end/emp/update_emp_input";
+			return "sup/update_sup_input";
 		}
-		/*************************** 2.開始修改資料 *****************************************/
-		// EmpService empSvc = new EmpService();
-		empSvc.updateEmp(empVO);
-
-		/*************************** 3.修改完成,準備轉交(Send the Success view) **************/
+		supSvc.updateSupVO(supVO);
 		model.addAttribute("success", "- (修改成功)");
-		empVO = empSvc.getOneEmp(Integer.valueOf(empVO.getEmpno()));
-		model.addAttribute("empVO", empVO);
-		return "back-end/emp/listOneEmp"; // 修改成功後轉交listOneEmp.html
+		supVO = supSvc.getOneSup(Integer.valueOf(supVO.getSupId()));
+		model.addAttribute("supVO", supVO);
+		return "sup/listOneSup";
 	}
 
-	// 去除BindingResult中某個欄位的FieldError紀錄
-	public BindingResult removeFieldError(EmpVO empVO, BindingResult result, String removedFieldname) {
+
+	public BindingResult removeFieldError(SupVO supVO, BindingResult result, String removedFieldname) {
 		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
 				.filter(fieldname -> !fieldname.getField().equals(removedFieldname))
 				.collect(Collectors.toList());
-		result = new BeanPropertyBindingResult(empVO, "empVO");
+		result = new BeanPropertyBindingResult(supVO, "supVO");
 		for (FieldError fieldError : errorsListToKeep) {
 			result.addError(fieldError);
 		}

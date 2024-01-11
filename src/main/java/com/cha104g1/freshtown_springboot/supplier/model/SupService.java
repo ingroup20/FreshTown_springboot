@@ -35,6 +35,11 @@ public class SupService {
 		return optional.orElseGet(null);
 	}
 	
+	public SupVO getOneSup(Integer supId) {
+		Optional<SupVO> optional = repository.findById(supId);
+		return optional.orElse(null);
+	}
+	
 	public List<SupVO> getAll(){
 		return repository.findAll();
 	}

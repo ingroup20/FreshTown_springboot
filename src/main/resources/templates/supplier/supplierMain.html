@@ -101,7 +101,23 @@
 			</form><br>
 		</li>
       </ul>
-    
+      <li>   
+    <form method="post" th:action="@{listRefunds_ByCompositeQuery}">
+        <font color=blue>萬用複合查詢:</font><br>
+        
+        請輸入供應商名稱: 
+        <input type="text" name="supplierName" value=""><br>
+        
+         請輸入供應商的聯絡人: 
+        <input type="text" name="supplierContact" value=""><br>
+           
+        選擇供應商是否有在使用狀態: 
+		<select name="supplierState">
+		     <option value="0">不使用</option>
+  			 <option value="1">正在使用</option>
+	    </select>
+     </form>
+  </li>
 
 	
 	
