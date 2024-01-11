@@ -2,27 +2,45 @@ package com.cha104g1.freshtown_springboot.customized.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.cha104g1.freshtown_springboot.customized.model.CustomizedVO.CompositeDetail;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
+import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 
 
 
 @Entity
 @Table(name = "customized")
 @IdClass(CompositeDetail.class)
-public class CustomizedVO {
-	@Id
-	@JoinColumn(name = "mealNo", referencedColumnName = "mealNo")
-	private Integer mealNo;
+public class CustomizedVO implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	@Id
+//	@ManyToOne
+	@JoinColumn(name = "mealNo", referencedColumnName = "mealNo")
+	private Integer mealNo;
+//	private MealsVO mealsVO;
+	
+	@Id
+//	@ManyToOne
 	@JoinColumn(name = "custedItemsNo", referencedColumnName = "custedItemsNo")
 	private Integer custedItemsNo;
+//	private CustomizedItemsVO customizedItemsVO;
+	
+	@Column(name = "custedStatus")
+	@NotNull(message="客製選項狀態: 請勿空白")
+	@Pattern(regexp = "^[(01)]$", message = "客製選項狀態: 只能是數字(0無此客製選項 1有此客製選項) ")
+	private Integer custedStatus;
 	
 	public CustomizedVO() {
 		super();
@@ -52,7 +70,31 @@ public class CustomizedVO {
 	public void setCustedItemsNo(Integer custedItemsNo) {
 		this.custedItemsNo = custedItemsNo;
 	}
-	
+
+//	public MealsVO getMealsVO() {
+//		return mealsVO;
+//	}
+//
+//	public void setMealsVO(MealsVO mealsVO) {
+//		this.mealsVO = mealsVO;
+//	}
+//
+//	public CustomizedItemsVO getCustomizedItemsVO() {
+//		return customizedItemsVO;
+//	}
+//
+//	public void setCustomizedItemsVO(CustomizedItemsVO customizedItemsVO) {
+//		this.customizedItemsVO = customizedItemsVO;
+//	}
+
+	public Integer getCustedStatus() {
+		return custedStatus;
+	}
+
+	public void setCustedStatus(Integer custedStatus) {
+		this.custedStatus = custedStatus;
+	}
+
 	static class CompositeDetail implements Serializable {
 		private static final long serialVersionUID = 1L;
 
