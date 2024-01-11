@@ -11,6 +11,7 @@ import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO
 
 public interface CustomizedDetailRepository extends JpaRepository<CustomizedDetailVO, Integer>{
 
+	
 //	@Transactional
 //	@Modifying
 //	@Query(value = " from customized_detail where custedItemsNo =?1", nativeQuery = true)

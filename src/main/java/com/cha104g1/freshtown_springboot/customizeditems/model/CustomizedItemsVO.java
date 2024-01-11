@@ -55,6 +55,5 @@ public class CustomizedItemsVO implements java.io.Serializable{
 //	public void setCustomizedDetailVO(CustomizedDetailVO customizedDetailVO) {
 //		this.customizedDetailVO = customizedDetailVO;
 //	}
-//	
-	
+		
 }

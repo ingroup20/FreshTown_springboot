@@ -33,4 +33,5 @@ public interface MealsRepository extends JpaRepository<MealsVO, Integer>{
 //	@Query(value = " from meals where storeId =?1", nativeQuery = true)
 //	Optional<MealsVO> findByStoresId(StoresVO storesVO);//自訂除了Pk外的查詢方法
 
+	
 }

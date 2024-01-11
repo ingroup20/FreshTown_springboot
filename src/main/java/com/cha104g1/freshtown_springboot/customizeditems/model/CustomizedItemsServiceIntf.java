@@ -17,4 +17,5 @@ public interface CustomizedItemsServiceIntf {
 	int getPageTotal();
 	
 	List<CustomizedItemsVO> getCustomizedItemsVOByCompositeQuery(Map<String, String[]> map);
+	
 }

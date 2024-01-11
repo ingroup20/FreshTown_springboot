@@ -7,6 +7,7 @@ import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO
 
 public interface CustomizedDetailServiceIntf {
 
+	
 	CustomizedDetailVO addCustomizedDetailVO(CustomizedDetailVO customizedDetailVO);
 	CustomizedDetailVO updateCustomizedDetailVO(CustomizedDetailVO customizedDetailVO);
 	

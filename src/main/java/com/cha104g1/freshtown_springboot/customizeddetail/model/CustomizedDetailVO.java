@@ -64,6 +64,5 @@ public class CustomizedDetailVO implements java.io.Serializable{
 	public void setCustedDtlName(String custedDtlName) {
 		this.custedDtlName = custedDtlName;
 	}
-	
-	
+		
 }

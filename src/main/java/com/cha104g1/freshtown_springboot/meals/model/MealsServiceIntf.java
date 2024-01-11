@@ -23,4 +23,5 @@ public interface MealsServiceIntf {
 	int getPageTotal();
 	
 	List<MealsVO> getMealsVOByCompositeQuery(Map<String, String[]> map);
+	
 }

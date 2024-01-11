@@ -131,8 +131,7 @@ public class MealsVO implements java.io.Serializable{
 	public void setStoresVO(StoresVO storesVO) {
 		this.storesVO = storesVO;
 	}
-	
-	
+		
 	
 	
 

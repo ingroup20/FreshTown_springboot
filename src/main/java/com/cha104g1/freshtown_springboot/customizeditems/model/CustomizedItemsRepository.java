@@ -14,4 +14,5 @@ public interface CustomizedItemsRepository extends JpaRepository<CustomizedItems
 	@Query(value = " from customized_items where custedName =?1", nativeQuery = true)
 	Optional<CustomizedItemsVO> findByCustedName(String custedName);//自訂除了Pk外的查詢方法
 
+	
 }
