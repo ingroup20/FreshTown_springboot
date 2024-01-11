@@ -26,7 +26,7 @@ import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 
 @Controller
-@RequestMapping("/mealtype")
+@RequestMapping("/pFunction/mealtype")
 public class MealTypeController {
 
 	@Autowired
@@ -56,7 +56,7 @@ public class MealTypeController {
 		List<MealTypeVO> list = mealTypeSvc.getAll();
 		model.addAttribute("mealTypeListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:/mealtype/listAllMealType"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:pFunction/mealtype/listAllMealType"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 
 	
