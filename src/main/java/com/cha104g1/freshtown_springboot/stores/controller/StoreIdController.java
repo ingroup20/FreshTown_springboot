@@ -32,7 +32,7 @@ import java.util.*;
 
 @Controller
 @Validated
-@RequestMapping("/stores")
+@RequestMapping("/pFunction/stores")
 public class StoreIdController {
 	
 	@Autowired

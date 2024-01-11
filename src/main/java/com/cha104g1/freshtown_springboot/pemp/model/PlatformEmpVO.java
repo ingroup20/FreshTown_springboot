@@ -87,9 +87,10 @@ public class PlatformEmpVO {
     
     //
 	
-	@OneToMany(mappedBy="custSerNo", cascade= CascadeType.ALL)
+
 	private Set<ServiceVO> serviceVO;
 
+	@OneToMany(mappedBy="custSerNo", cascade= CascadeType.ALL)
 	public Set<ServiceVO> getServiceVO() {
 		return serviceVO;
 	}
