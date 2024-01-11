@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>物料資料新增 - addMaterial.html</title>
+<title>物料資料修改 - update_material_input.html</title>
 
 <head></head>
 <style type="text/css">
@@ -46,17 +46,20 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>員工資料新增 - addEmp.html</h2>
+<nav class="navbar navbar-expand-md navbar-darK fixed-top justify-content-center">
+		 <div align="center"> <h2>物料資料修改 - update_material_input.html</h2>
 		 <h3><a class="navbar-brand" th:href="@{/material/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
 </nav>
 
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{insert}" method="post" th:object="${materialVO}" enctype="multipart/form-data">
+		<form th:action="@{update}" method="post" th:object="${materialVO}" enctype="multipart/form-data">
+			<div>
+			<label>物料編號:</label>
+			<input type="text" th:field="*{itemNumber}" style="border:0px ; font-weight: bold;" readonly /><br/>
+
+			</div>
 			
-			
-					
 			<div>
 			<label>物料名稱:</label>
 			<input type="text" th:field="*{itemName}" onclick="hideContent('itemName.errors');" /><br/>
@@ -74,7 +77,7 @@
 			<input type="text" th:field="*{stockQuantity}" onclick="hideContent('stockQuantity.errors');" /><br/>
 			<span  th:if="${#fields.hasErrors('stockQuantity')}" th:errors="*{stockQuantity}" class="error" id="stockQuantity.errors"></span>
 			</div>
-			
+
 			<div>
 			<label>未入庫數量:</label>
 			<input type="text" th:field="*{quantityNot}" onclick="hideContent('quantityNot.errors');" /><br/>
@@ -104,7 +107,7 @@
 			<input type="date" th:field="*{purDate}" onclick="hideContent('purDate.errors');" /><br/>
 			<span  th:if="${#fields.hasErrors('purDate')}" th:errors="*{purDate}" class="error" id="purDate.errors"></span>
 			</div>
-
+			
 			<div>
 			<label>店家流水號:</label>
 			<input type="text" th:field="*{storesVO.storeId}" onclick="hideContent('storesVO.storeId.errors');" /><br/>
@@ -113,10 +116,11 @@
 			
 			<div>
 				<div></div>
-				<div><button type="submit" id="submit"> 送出新增 </button></div>
+				<div><button type="submit" id="submit"> 送出修改 </button></div>
 				<div></div>
 			</div>		
 		</form>
+	
 	</div>
 
 

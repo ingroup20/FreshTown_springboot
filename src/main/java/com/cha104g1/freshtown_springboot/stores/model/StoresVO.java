@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
-import com.cha104g1.freshtown_springboot.material.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.picking.model.model.PickingVO;

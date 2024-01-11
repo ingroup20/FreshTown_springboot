@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassRepository;
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
@@ -34,6 +37,10 @@ public class IndexController_inSpringBoot {
 	
 	@Autowired
 	MealTypeService mealTypeSvc;
+	
+	@Autowired
+	MaterialService materialSvc;
+	
 	
     @Value("${welcome.message}")
     private String message;
@@ -126,5 +133,21 @@ public class IndexController_inSpringBoot {
 		List<StoresVO> list = storesSvc.getAll();
 		return list;
 	}
-
+	
+	//=========== material  要使用的資料 =================== 
+    @GetMapping("/material/select_page")
+	public String select_page(Model model) {
+		return "material/select_page";
+	}
+    
+    @GetMapping("/material/listAllMaterial")
+	public String listAllMaterial(Model model) {
+		return "material/listAllMaterial";
+	}
+    
+	@ModelAttribute("materialListData") // for select_page.html 第135行用
+	protected List<MaterialVO> referenceListData_Material(Model model) {
+		List<MaterialVO> list = materialSvc.getAll();
+		return list;
+	}
 }

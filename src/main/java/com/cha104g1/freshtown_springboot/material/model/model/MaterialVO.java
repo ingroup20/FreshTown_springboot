@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
@@ -45,11 +46,11 @@ public class MaterialVO implements Serializable{
 	private ItemsClassVO itemsClassVO;
 	
 	@Column(name = "stockQuantity")
-	@NotEmpty(message="庫存數量: 請勿空白")
+	@NotNull(message="庫存數量: 請勿空白")
 	private Integer stockQuantity;
 	
 	@Column(name = "quantityNot")
-	@NotEmpty(message="未入庫數量: 請勿空白")
+	@NotNull(message="未入庫數量: 請勿空白")
 	private Integer quantityNot;
 	
 	@Column(name = "itemUnit", length=3)
@@ -57,11 +58,11 @@ public class MaterialVO implements Serializable{
 	private String itemUnit;
 	
 	@Column(name = "safetyStock")
-	@NotEmpty(message="安全庫存: 請勿空白")
+	@NotNull(message="安全庫存: 請勿空白")
 	private Integer safetyStock;
 	
 	@Column(name = "itemStatus")
-	@NotEmpty(message="物料狀態: 請勿空白")
+	@NotNull(message="物料狀態: 請勿空白")
 	private Integer itemStatus;
 	
 	@Column(name = "purDate", nullable = true)
