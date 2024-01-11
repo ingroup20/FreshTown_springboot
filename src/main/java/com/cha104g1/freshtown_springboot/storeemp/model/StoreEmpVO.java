@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
-import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+import com.cha104g1.freshtown_springboot.picking.model.model.PickingVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Entity

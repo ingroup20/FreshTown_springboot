@@ -1,13 +1,13 @@
-package com.cha104g1.freshtown_springboot.material.model;
+package com.cha104g1.freshtown_springboot.material.model.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,15 +16,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
-import com.cha104g1.freshtown_springboot.itemsclass.model.ItemsClassVO;
-import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
+import com.cha104g1.freshtown_springboot.picking.model.model.PickingVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
 @Entity
 @Table(name="material")
 public class MaterialVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,25 +35,33 @@ public class MaterialVO implements Serializable{
 	private Integer itemNumber;
 	
 	@Column(name = "itemName")
+	@NotEmpty(message="物料名稱: 請勿空白")
+	@Pattern(regexp = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$", message = "物料名稱: 只能是中、英文字母、數字和_ , 且長度必需在1到10之間")
 	private String itemName;
 	
 	@ManyToOne
 	@JoinColumn(name="itemClassId",referencedColumnName ="itemClassId")
+	@NotEmpty(message="物料類別分類: 請勿空白")
 	private ItemsClassVO itemsClassVO;
 	
 	@Column(name = "stockQuantity")
+	@NotEmpty(message="庫存數量: 請勿空白")
 	private Integer stockQuantity;
 	
 	@Column(name = "quantityNot")
+	@NotEmpty(message="未入庫數量: 請勿空白")
 	private Integer quantityNot;
 	
 	@Column(name = "itemUnit", length=3)
+	@NotEmpty(message="物料單位: 請勿空白")
 	private String itemUnit;
 	
 	@Column(name = "safetyStock")
+	@NotEmpty(message="安全庫存: 請勿空白")
 	private Integer safetyStock;
 	
 	@Column(name = "itemStatus")
+	@NotEmpty(message="物料狀態: 請勿空白")
 	private Integer itemStatus;
 	
 	@Column(name = "purDate", nullable = true)
@@ -58,16 +69,11 @@ public class MaterialVO implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="storeId",referencedColumnName ="storeId")
-    private StoresVO storesVO;
+	private StoresVO storesVO;
 	
-	@OneToMany(mappedBy = "material", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy = "materialVO", fetch=FetchType.EAGER,cascade= CascadeType.ALL)
 	@OrderBy("pickingNo asc")
-	private Set<PickingVO> pickings;
-	
-//	@OneToMany(mappedBy = "material")
-//	@OrderBy("id asc")
-//	private Set<SupOrderVO> id;
-	
+	private Set<PickingVO> pickingVO;
 
 	
 	public MaterialVO() {
@@ -89,7 +95,6 @@ public class MaterialVO implements Serializable{
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-
 
 
 	public Integer getStockQuantity() {
@@ -140,57 +145,28 @@ public class MaterialVO implements Serializable{
 		this.purDate = purDate;
 	}
 
-
-	public Set<PickingVO> getPickings() {
-		return pickings;
+	public Set<PickingVO> getPickingVO() {
+		return pickingVO;
 	}
 
-	public void setPickings(Set<PickingVO> pickings) {
-		this.pickings = pickings;
+	public void setPickingVO(Set<PickingVO> pickingVO) {
+		this.pickingVO = pickingVO;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(itemNumber);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MaterialVO other = (MaterialVO) obj;
-		return Objects.equals(itemNumber, other.itemNumber);
-	}
-	//
 	public ItemsClassVO getItemsClass() {
 		return itemsClassVO;
 	}
-	//
+	
 	public void setItemsClass(ItemsClassVO itemsClassVO) {
 		this.itemsClassVO = itemsClassVO;
 	}
-	//
+	
 	public StoresVO getStoresVO() {
 		return storesVO;
 	}
-	//
+	
 	public void setStoresVO(StoresVO storesVO) {
 		this.storesVO = storesVO;
 	}
 
-//	public Set<SupOrderVO> getId() {
-//		return id;
-//	}
-//
-//	public void setId(Set<SupOrderVO> id) {
-//		this.id = id;
-//	}
-       
-	
-    
-	
 }

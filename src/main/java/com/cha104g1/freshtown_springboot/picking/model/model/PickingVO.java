@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.picking.model;
+package com.cha104g1.freshtown_springboot.picking.model.model;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -11,8 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
-import com.cha104g1.freshtown_springboot.material.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
@@ -20,6 +21,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 @Entity
 @Table(name="picking")
 public class PickingVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,19 +30,27 @@ public class PickingVO implements Serializable{
 	
 	
 	@ManyToOne
+	@JoinColumn(name = "storeId", referencedColumnName = "storeId")
+	private StoresVO storesVO;
+	
+	@ManyToOne
 	@JoinColumn(name = "sEmpId", referencedColumnName = "sEmpId")
 	private StoreEmpVO storeEmpVO;
 	
 	@Column(name="pickingQuantity")
+	@NotEmpty(message = "領料數量: 請勿空白")
 	private Integer pickingQuantity;
 	
 	@Column(name="pickingUnit", nullable=true, length=3)
+	@NotEmpty(message = "領料單位: 請勿空白")
 	private String pickingUnit;
 	
 	@Column(name="pickingStatus")
+	@NotEmpty(message="領料狀態: 請勿空白")
 	private Integer pickingStatus;
 	
 	@Column(name="pickingClass")
+	@NotEmpty(message="領料類型: 請勿空白")
 	private Integer pickingClass;
 	
 	@Column(name="pickingDate")
@@ -51,11 +61,8 @@ public class PickingVO implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "itemNumber", referencedColumnName = "itemNumber")
-	private MaterialVO material;
+	private MaterialVO materialVO;
 	
-	@ManyToOne
-	@JoinColumn(name = "storeId", referencedColumnName = "storeId")
-	private StoresVO storesVO;
 
 	public PickingVO() {
 		super();
@@ -117,23 +124,23 @@ public class PickingVO implements Serializable{
 	public void setMarks(String marks) {
 		this.marks = marks;
 	}
-	//
-	public MaterialVO getMaterial() {
-		return material;
+	
+	public MaterialVO getMaterialVO() {
+		return materialVO;
 	}
-	//
-	public void setMaterial(MaterialVO material) {
-		this.material = material;
+	
+	public void setMaterial(MaterialVO materialVO) {
+		this.materialVO = materialVO;
 	}
-	//
+	
 	public StoresVO getStoresVO() {
 		return storesVO;
 	}
-	//
+	
 	public void setStoresVO(StoresVO storesVO) {
 		this.storesVO = storesVO;
 	}
-	//
+	
 	public StoreEmpVO getStoreEmpVO() {
 		return storeEmpVO;
 	}
@@ -142,7 +149,4 @@ public class PickingVO implements Serializable{
 		this.storeEmpVO = storeEmpVO;
 	}
 	
-	
-	
-
 }

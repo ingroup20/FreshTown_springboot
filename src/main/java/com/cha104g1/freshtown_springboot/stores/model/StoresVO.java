@@ -22,13 +22,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.cha104g1.freshtown_springboot.itemsclass.model.ItemsClassVO;
+import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.material.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
-import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
-import com.cha104g1.freshtown_springboot.service.model.ServiceVO;
+import com.cha104g1.freshtown_springboot.picking.model.model.PickingVO;
+import com.cha104g1.freshtown_springboot.service.model.model.ServiceVO;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
 

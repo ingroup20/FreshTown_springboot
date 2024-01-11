@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
-import com.cha104g1.freshtown_springboot.service.model.ServiceVO;
+import com.cha104g1.freshtown_springboot.service.model.model.ServiceVO;
 
 @Entity
 @Table(name = "p_emp")
