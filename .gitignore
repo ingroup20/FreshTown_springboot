@@ -42,4 +42,4 @@ target/
 .idea
 *.iml
 
-
+application.properties
