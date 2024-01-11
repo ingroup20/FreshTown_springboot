@@ -46,7 +46,7 @@ public class CustomizedItemsVO implements java.io.Serializable{
 	}
 
 	//
-//	@OneToMany(mappedBy="custedItemsNo" ,cascade=CascadeType.ALL)
+//	@OneToMany(mappedBy="custedItemsNo", cascade=CascadeType.ALL)
 //	private CustomizedDetailVO customizedDetailVO;
 //
 //	public CustomizedDetailVO getCustomizedDetailVO() {
