@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 
 @Controller
-@RequestMapping("/stores")
+@RequestMapping("/pFunction/stores")
 public class StoresController {
 
 	@Autowired
@@ -79,7 +79,7 @@ public class StoresController {
 		List<StoresVO> list = storesSvc.getAll();
 		model.addAttribute("storesListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:/stores/listAllStores"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:pFunction/stores/listAllStores"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 
 	/*

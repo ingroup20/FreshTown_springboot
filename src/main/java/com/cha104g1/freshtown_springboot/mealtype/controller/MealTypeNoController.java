@@ -24,7 +24,7 @@ import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 
 @Controller
 @Validated
-@RequestMapping("/mealtype")
+@RequestMapping("/pFunction/mealtype")
 public class MealTypeNoController {
 	
 	@Autowired

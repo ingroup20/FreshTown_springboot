@@ -25,7 +25,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 
 @Controller
 @Validated
-@RequestMapping("/orders")
+@RequestMapping("/pFunction/orders")
 public class POrdersController {
 
 	@Autowired

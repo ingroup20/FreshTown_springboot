@@ -56,12 +56,12 @@ public class IndexController_inSpringBoot {
     
   
     //=========== refunds ===================   
-    @GetMapping("/refunds/select_page")
+    @GetMapping("/pFunction/refunds/select_page")
 	public String select_page1(Model model) {
 		return "pFunction/refunds/select_page";
 	}
     
-    @GetMapping("/refunds/listAllRefunds")
+    @GetMapping("/pFunction/refunds/listAllRefunds")
 	public String listAllRefunds(Model model) {
 		return "pFunction/refunds/listAllRefunds";
 	}
@@ -76,12 +76,12 @@ public class IndexController_inSpringBoot {
 
 	
     //=========== mealtype  要使用的資料 ===================   
-    @GetMapping("/mealtype/select_page")
+    @GetMapping("/pFunction/mealtype/select_page")
 	public String select_page2(Model model) {
 		return "pFunction/mealtype/select_page";
 	}
     
-    @GetMapping("/mealtype/listAllMealType")
+    @GetMapping("/pFunction/mealtype/listAllMealType")
 	public String listAllMealtype(Model model) {
 		return "pFunction/mealtype/listAllMealType";
 	}
@@ -94,12 +94,12 @@ public class IndexController_inSpringBoot {
 	}
     
     //=========== orders  要使用的資料 ===================   
-    @GetMapping("/orders/select_page")
+    @GetMapping("/pFunction/orders/select_page")
 	public String select_page3(Model model) {
 		return "pFunction/orders/select_page";
 	}
     
-    @GetMapping("/orders/listAllOrders")
+    @GetMapping("/pFunction/orders/listAllOrders")
 	public String listAllOrders(Model model) {
 		return "pFunction/orders/listAllOrders";
 	}
@@ -111,12 +111,12 @@ public class IndexController_inSpringBoot {
 	}
 
     //=========== stores  要使用的資料 ===================   
-    @GetMapping("/stores/select_page")
+    @GetMapping("/pFunction/stores/select_page")
 	public String select_page4(Model model) {
 		return "pFunction/stores/select_page";
 	}
     
-    @GetMapping("/stores/listAllStores")
+    @GetMapping("/pFunction/stores/listAllStores")
 	public String listAllStores(Model model) {
 		return "pFunction/stores/listAllStores";
 	}
@@ -126,5 +126,11 @@ public class IndexController_inSpringBoot {
 		List<StoresVO> list = storesSvc.getAll();
 		return list;
 	}
+	
+//    //=========== stores  要使用的資料 ===================   
+//    @GetMapping("/cFunction/stores/addStoresC")
+//	public String select_page5(Model model) {
+//		return "cFunction/stores/addStores";
+//	}
 
 }
