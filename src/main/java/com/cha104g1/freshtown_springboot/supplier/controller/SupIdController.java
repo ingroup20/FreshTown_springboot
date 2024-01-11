@@ -52,10 +52,10 @@ public class SupIdController {
 	 * This method will be called on listAllEmp.html form submission, handling POST request
 	 */
 	@PostMapping("getOne_For_Update")
-	public String getOne_For_Update(@RequestParam("empno") String empno, ModelMap model) {
-		EmpVO empVO = empSvc.getOneEmp(Integer.valueOf(empno));
+	public String getOne_For_Update(@RequestParam("supID") String supID, ModelMap model) {
+		SupVO supVO = supSvc.getOneEmp(Integer.valueOf(supID));
 
-		model.addAttribute("empVO", empVO);
+		model.addAttribute("supVO", supVO);
 		return "back-end/emp/update_emp_input"; // 查詢完成後轉交update_emp_input.html
 	}
 

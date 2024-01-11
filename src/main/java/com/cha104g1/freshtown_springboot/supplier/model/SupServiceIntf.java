@@ -6,6 +6,7 @@ public interface SupServiceIntf {
 	
 	SupVO addSup(SupVO supVO);
 	SupVO updateSupVO(SupVO supVO);
+    SupVO findByPrimaryKey(Integer supId);
 	SupVO getOneSupplierName(String supplierName);
 	SupVO getOneSupplierContact(String supplierContact);
 	SupVO getOneSupplierStatus(Integer supplierState);
