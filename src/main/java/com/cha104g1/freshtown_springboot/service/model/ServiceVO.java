@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
-import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpVO;
+import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 @Entity
 @Table(name="service")
