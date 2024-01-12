@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.pemp.model;
+package com.cha104g1.freshtown_springboot.platformemp.model;
 
 import java.util.Set;
 
