@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.pemp.model;
+package com.cha104g1.freshtown_springboot.platformemp.model;
 
 import java.util.List;
 import java.util.Map;
@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreRepository;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 
@@ -61,6 +62,11 @@ public class PlatformEmpService implements PlatformEmpServiceIntf{
 	public List<PlatformEmpVO> getPlatformEmpVOsByCompositeQuery(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public PlatformEmpVO getOnePlatformEmp(Integer id) {
+		Optional<PlatformEmpVO> optional = repository.findById(id);
+		return optional.orElse(null); 
 	}
 	
 

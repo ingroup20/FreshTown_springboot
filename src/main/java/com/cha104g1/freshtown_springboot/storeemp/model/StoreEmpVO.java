@@ -28,11 +28,7 @@ public class StoreEmpVO {
 	    private Byte manuPerm;
 	    private Byte orderPerm;
 	    private Byte modifyPerm;
-
-		@ManyToOne
-		@JoinColumn(name="storeId",referencedColumnName ="storeId")
-	    private StoresVO storesVO;
-		
+	    private StoresVO storesVO;	
 	    private String sEmpDeptno;
 	    private String sEmpTitle;
 	    private Byte sEmpState;
@@ -115,6 +111,8 @@ public class StoreEmpVO {
 			this.sEmpState = sEmpState;
 		}
 		//
+		@ManyToOne
+		@JoinColumn(name="storeId",referencedColumnName ="storeId")
 		public StoresVO getStoresVO() {
 			return storesVO;
 		}
