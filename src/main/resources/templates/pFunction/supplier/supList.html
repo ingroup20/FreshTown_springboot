@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>所有供應商資料</title>
-<script th:src="@{/js/jquery-1.11.3.min.js}"></script> <!-- 左側jquery為table分頁用 -->
-<head th:insert="~{/back-end/emp/included-fragment}"></head>
 <style type="text/css">
 
     table {
@@ -98,7 +96,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>所有供應商資料</h2>
-		 <h3><a class="navbar-brand" th:href="@{/supplier/supplierMain}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/supplier/supplierMain}">回查詢頁<label th:text="${success}"></label></a></h3></div>
 </nav>
 
 <div align="center">
@@ -120,9 +118,12 @@
 				<td th:text="${supVO.supplierName}"></td>
 				<td th:text="${supVO.supplierContact}"></td>
 				<td th:text="${supVO.supplierPhone}"></td>
-				<td th:text="${supVO.supplierState}"></td>
+				<td>
+	                <span th:if="${supVO.supplierState == 0}">非使用中</span>
+	                <span th:if="${supVO.supplierState == 1}">使用中</span>
+	            </td>
 			<td>
-			  <form method="post" th:action="@{/supplier/getOne_For_Update}" style="margin-bottom: 0px;">
+			  <form method="post" th:action="@{/pFunction/supplier/getOne_For_Update}" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="supId" th:value="${supVO.supId}"></form>
 			</td>

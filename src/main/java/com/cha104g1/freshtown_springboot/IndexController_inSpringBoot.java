@@ -16,6 +16,8 @@ import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+import com.cha104g1.freshtown_springboot.supplier.model.SupService;
+import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 import java.util.*;
 
@@ -34,6 +36,9 @@ public class IndexController_inSpringBoot {
 	
 	@Autowired
 	MealTypeService mealTypeSvc;
+	
+	@Autowired
+	SupService supSvc;
 	
     @Value("${welcome.message}")
     private String message;
@@ -122,8 +127,25 @@ public class IndexController_inSpringBoot {
 	}
     
 	@ModelAttribute("storesListData") // for select_page.html 第135行用
-	protected List<StoresVO> referenceListData_Stores(Model model) {
+	protected List<StoresVO> referenceListData_Supplier(Model model) {
 		List<StoresVO> list = storesSvc.getAll();
+		return list;
+	}
+	
+    //=========== supplier  要使用的資料 ===================   
+    @GetMapping("/pFunction/supplier/supplierMain")
+	public String supplierMain(Model model) {
+		return "pFunction/supplier/supplierMain";
+	}
+    
+    @GetMapping("/pFunction/supplier/supList")
+	public String supList(Model model) {
+		return "pFunction/supplier/supList";
+	}
+    
+	@ModelAttribute("supListData") // for select_page.html 第135行用
+	protected List<SupVO> referenceListData_Stores(Model model) {
+		List<SupVO> list = supSvc.getAll();
 		return list;
 	}
 	

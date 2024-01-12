@@ -20,26 +20,15 @@ public class SupService {
 		repository.save(supVO);
 	}
 	
-	public SupVO getOneSupplierName(String supplierName) {
-		Optional<SupVO> optional = repository.findBySupplierName(supplierName);
-		return optional.orElseGet(null);
-	}
-	
-	public SupVO getOneSupplierContact(String supplierContact) {
-		Optional<SupVO> optional = repository.findBySupplierContact(supplierContact);
-		return optional.orElseGet(null);
-	}
-	
-	public SupVO getOneSupplierStatus(Integer supplierState) {
-		Optional<SupVO> optional = repository.findById(supplierState);
-		return optional.orElseGet(null);
-	}
-	
 	public SupVO getOneSup(Integer supId) {
 		Optional<SupVO> optional = repository.findById(supId);
 		return optional.orElse(null);
 	}
 	
+    public List<SupVO> listSupByCompositeQuery(String supplierName, String supplierContact, Integer supplierState) {
+        return repository.findSupplierByCompositeQuery(supplierName, supplierContact, supplierState);
+    }
+    
 	public List<SupVO> getAll(){
 		return repository.findAll();
 	}

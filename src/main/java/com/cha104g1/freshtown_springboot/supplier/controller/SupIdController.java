@@ -33,7 +33,7 @@ public class SupIdController {
 	public String addSup(ModelMap model) {
 		SupVO supVO = new SupVO();
 		model.addAttribute("supVO", supVO);
-		return "supplier/supplierAdd";
+		return "pFunction/supplier/supplierAdd";
 	}
 
 
@@ -41,14 +41,13 @@ public class SupIdController {
 	public String insert(@Valid SupVO supVO, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
-			return "supplier/supplierAdd";
+			return "pFunction/supplier/supplierAdd";
 		}
-		SupService supSvc = new SupService();
 		supSvc.addSup(supVO);
 		List<SupVO> list = supSvc.getAll();
 		model.addAttribute("supListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "supplier/supList";
+		return "pFunction/supplier/supList";
 	}
 	
 	@PostMapping("getOne_For_Update")
@@ -56,19 +55,19 @@ public class SupIdController {
 		SupVO supVO = supSvc.getOneSup(Integer.valueOf(supId));
 
 		model.addAttribute("supVO", supVO);
-		return "supplier/update_sup_input";
+		return "pFunction/supplier/update_sup_input";
 	}
 	
 	@PostMapping("update")
 	public String update(@Valid SupVO supVO, BindingResult result, ModelMap model, @RequestParam("upSup") MultipartFile[] parts) throws IOException {
 		if (result.hasErrors()) {
-			return "sup/update_sup_input";
+			return "pFunction/supplier/update_sup_input";
 		}
 		supSvc.updateSupVO(supVO);
 		model.addAttribute("success", "- (修改成功)");
 		supVO = supSvc.getOneSup(Integer.valueOf(supVO.getSupId()));
 		model.addAttribute("supVO", supVO);
-		return "sup/listOneSup";
+		return "pFunction/supplier/listOneSup";
 	}
 
 
