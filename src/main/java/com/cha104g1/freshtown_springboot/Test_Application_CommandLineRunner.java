@@ -16,6 +16,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cha104g1.freshtown_springboot.login.model.IdentityVO;
+import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpRepository;
+import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpVO;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsRepository;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
@@ -30,7 +33,7 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 	
 	
 	@Autowired
-	RefundsRepository repository ;
+	PlatformEmpRepository repository;
 	
 //	@Autowired
 //	StoresRepository repository ;
@@ -115,23 +118,41 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 //			System.out.print(refunds.getRefundDate() + ",");
 //    	}
     	
+    	String pEmpAccount = "dog";
+    	
+    	PlatformEmpVO platformEmpVO= repository.findByPEmpAccount(pEmpAccount);
+    	System.out.println("000000000000000000000000000");
+        // 这里根据实际情况，创建并返回IdentityVO对象
+        IdentityVO identityVO = new IdentityVO();
+        identityVO.setId(platformEmpVO.getpEmpId());
+        identityVO.setName(platformEmpVO.getpEmpName());
+        identityVO.setPersonal(platformEmpVO.getpEmpPw());
+        identityVO.setPermissions(String.valueOf(platformEmpVO.getpEmpPerm()));
 
-    }
-//         RefundsService refundsSvc;
-//    
-//    	public String listAllEmp(HttpServletRequest req, Model model) {
-//    		Map<String, String[]> map = req.getParameterMap();
-//    		List<RefundsVO> list = refundsSvc.getAll(map);
-//    		model.addAttribute("${refundsListData}", list); 
-//    		for (RefundsVO refunds : list) {
-//    			System.out.print(list);
-//    		}
-//    		return "pFunction/refunds/list";
-//    	}
-    	
-    
-    	
-    	
+ 		System.out.println("111111111111111111111111");
+ 		System.out.println(identityVO);
+ 		System.out.println("22222222222222222222222");
+
+
+   }
+
+	public IdentityVO findByPEmpAccount(String pEmpAccount) {
+		
+  		 // 调用Repository中的方法来查询数据库
+  		PlatformEmpVO platformEmpVO= repository.findByPEmpAccount(pEmpAccount);
+
+         // 这里根据实际情况，创建并返回IdentityVO对象
+         IdentityVO identityVO = new IdentityVO();
+         identityVO.setId(platformEmpVO.getpEmpId());
+         identityVO.setName(platformEmpVO.getpEmpName());
+         identityVO.setPersonal(platformEmpVO.getpEmpPw());
+         identityVO.setPermissions(String.valueOf(platformEmpVO.getpEmpPerm()));
+
+  		System.out.println("111111111111111111111111");
+  		System.out.println(identityVO);
+  		System.out.println("22222222222222222222222");
+         return identityVO;
+  	}
 
     
 }

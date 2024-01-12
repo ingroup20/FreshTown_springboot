@@ -19,6 +19,9 @@ VALUES
     (CONCAT('PW', LPAD(FLOOR(RAND() * 1000), 3, '0')), CONCAT('Name', FLOOR(RAND() * 10)), CONCAT('emp', FLOOR(RAND() * 1000), '@example.com'), CONCAT('Acc', FLOOR(RAND() * 10)), FLOOR(RAND() * 3), FLOOR(RAND() * 3))
 ;
 
+INSERT  p_emp (pEmpPw, pEmpName, pEmpEmail, pEmpAccount, pEmpPerm, pEmpState)
+VALUES  (	"dog"	, "狗哥" , "dog@mail", "dog",2,1 );
+
 -- 逸晉
 INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
 VALUES

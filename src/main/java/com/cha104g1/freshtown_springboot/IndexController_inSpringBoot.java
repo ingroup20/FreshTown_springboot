@@ -12,6 +12,8 @@ import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpService;
+import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpVO;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
@@ -34,6 +36,11 @@ public class IndexController_inSpringBoot {
 	
 	@Autowired
 	MealTypeService mealTypeSvc;
+	
+	
+	@Autowired
+	PlatformEmpService platformEmpSvc;
+	
 	
     @Value("${welcome.message}")
     private String message;
@@ -128,5 +135,22 @@ public class IndexController_inSpringBoot {
 	}
 	
 
+    //=========== pEmp料 ===================   
+    @GetMapping("/pEmp/select_page")
+	public String select_page5(Model model) {
+		return "/pEmp/select_page";
+	}
+    
+    @GetMapping("/pEmp/listAllPEmp")
+	public String listAllPEmp(Model model) {
+    	System.out.println("準備轉了");
+		return "pEmp/listAllPEmp";
+	}
 
+	@ModelAttribute("pEmpListData") // for select_page.html 第135行用
+	protected List<PlatformEmpVO> referenceListData_PEmp(Model model) {
+		List<PlatformEmpVO> list = platformEmpSvc.getAll();
+		return list;
+	}
+	
 }

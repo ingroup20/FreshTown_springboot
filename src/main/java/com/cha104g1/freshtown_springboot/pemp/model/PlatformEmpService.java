@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreRepository;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
+import com.cha104g1.freshtown_springboot.login.model.IdentityVO;
 
 @Service("platformEmpService")
 public class PlatformEmpService implements PlatformEmpServiceIntf{
@@ -62,6 +63,24 @@ public class PlatformEmpService implements PlatformEmpServiceIntf{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	
+	public IdentityVO findByPEmpAccount(String pEmpAccount) {
+		
+		 // 调用Repository中的方法来查询数据库
+		PlatformEmpVO platformEmpVO= repository.findByPEmpAccount(pEmpAccount);
+
+        // 这里根据实际情况，创建并返回IdentityVO对象
+        IdentityVO identityVO = new IdentityVO();
+        identityVO.setId(platformEmpVO.getpEmpId());
+        identityVO.setName(platformEmpVO.getpEmpName());
+        identityVO.setPersonal(platformEmpVO.getpEmpPw());
+        identityVO.setPermissions(String.valueOf(platformEmpVO.getpEmpPerm()));
+
+        return identityVO;
+	}
+	
 	
 
 }
