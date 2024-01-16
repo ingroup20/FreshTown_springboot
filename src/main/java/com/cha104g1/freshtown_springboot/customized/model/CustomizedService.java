@@ -32,17 +32,17 @@ public class CustomizedService implements CustomizedServiceIntf{
 		return customizedVO;
 	}
 
-//	@Override
-//	public CustomizedVO getCustomizedVOByCompositeKey(MealsVO mealsVO, CustomizedItemsVO customizedItemsVO) {
-//		Optional<CustomizedVO> optional = repository.findByCompositeKey(mealsVO, customizedItemsVO);
-//		return optional.orElse(null);
-//	}
-//
-//	@Override
-//	public CustomizedVO getCustomizedVOByCustedStatus(Integer custedStatus) {
-//		Optional<CustomizedVO> optional = repository.findByCustedStatus(custedStatus);
-//		return optional.orElse(null);
-//	}
+	@Override
+	public CustomizedVO getCustomizedVOByCompositeKey(Integer mealNo, Integer custedItemsNo) {
+		Optional<CustomizedVO> optional = repository.findByCompositeKey(mealNo, custedItemsNo);
+		return optional.orElse(null);
+	}
+
+	@Override
+	public CustomizedVO getCustomizedVOByCustedStatus(Integer custedStatus) {
+		Optional<CustomizedVO> optional = repository.findByCustedStatus(custedStatus);
+		return optional.orElse(null);
+	}
 
 	@Override
 	public List<CustomizedVO> getAllCustomizedVO(int currentPage) {
