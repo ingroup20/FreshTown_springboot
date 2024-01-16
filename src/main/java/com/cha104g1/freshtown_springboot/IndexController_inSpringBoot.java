@@ -51,6 +51,7 @@ public class IndexController_inSpringBoot {
 	@Autowired
 	SupService supSvc;
 
+	@Autowired
 	MaterialService materialSvc;
 	
 	@Autowired
