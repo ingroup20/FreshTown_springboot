@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.service.model;
+package com.cha104g1.freshtown_springboot.service.model.model;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -96,10 +96,6 @@ public class ServiceVO implements Serializable{
 	public void setCustomerVO(CustomerVO customerVO) {
 		this.customerVO = customerVO;
 	}
-	
-	
-	
-    
     
 }
 
