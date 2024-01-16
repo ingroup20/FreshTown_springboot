@@ -31,10 +31,14 @@ public class StoreEmpVO {
 	    private Byte manuPerm;
 	    private Byte orderPerm;
 	    private Byte modifyPerm;
+<<<<<<< HEAD
 
 		
 	    private StoresVO storesVO;
 		
+=======
+	    private StoresVO storesVO;	
+>>>>>>> refs/heads/master
 	    private String sEmpDeptno;
 	    private String sEmpTitle;
 	    private Byte sEmpState;
@@ -116,6 +120,10 @@ public class StoreEmpVO {
 		public void setsEmpState(Byte sEmpState) {
 			this.sEmpState = sEmpState;
 		}
+<<<<<<< HEAD
+=======
+		//
+>>>>>>> refs/heads/master
 		@ManyToOne
 		@JoinColumn(name="storeId",referencedColumnName ="storeId")
 		public StoresVO getStoresVO() {
