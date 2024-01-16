@@ -12,8 +12,8 @@ public interface CustomizedServiceIntf {
 	
 	CustomizedVO updateCustomizedVO(CustomizedVO customizedVO);
 	
-//	CustomizedVO getCustomizedVOByCompositeKey(MealsVO mealsVO, CustomizedItemsVO customizedItemsVO);
-//	CustomizedVO getCustomizedVOByCustedStatus(Integer custedStatus);
+	CustomizedVO getCustomizedVOByCompositeKey(Integer mealNo, Integer custedItemsNo);
+	CustomizedVO getCustomizedVOByCustedStatus(Integer custedStatus);
 	
 	List<CustomizedVO> getAllCustomizedVO(int currentPage);
 	List<CustomizedVO> getAll();

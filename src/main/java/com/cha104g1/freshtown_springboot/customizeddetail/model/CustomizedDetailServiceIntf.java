@@ -11,7 +11,7 @@ public interface CustomizedDetailServiceIntf {
 	CustomizedDetailVO addCustomizedDetailVO(CustomizedDetailVO customizedDetailVO);
 	CustomizedDetailVO updateCustomizedDetailVO(CustomizedDetailVO customizedDetailVO);
 	
-//	CustomizedDetailVO getCustomizedDetailVOByCustedDtlNo(Integer custedDtlNo);
+	CustomizedDetailVO getCustomizedDetailVOByCustedDtlNo(Integer custedDtlNo);
 //	CustomizedDetailVO getCustomizedDetailVOByCustedItemsNo(CustomizedItemsVO customizedItemsVO);
 //	CustomizedDetailVO getCustomizedDetailVOByCustedDtlName(String custedDtlName);
 

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassRepository;
 import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassService;
@@ -55,6 +57,9 @@ public class IndexController_inSpringBoot {
 	
 	@Autowired
 	SvcService svcSvc;
+	
+	@Autowired
+	CustomizedDetailService customizedDetailSvc;
 	
     @Value("${welcome.message}")
     private String message;
@@ -217,4 +222,20 @@ public class IndexController_inSpringBoot {
 		return list;
 	}
 	
+	//=========== CustomizedDetail  要使用的資料 ===================   
+    @GetMapping("/sFunction/customizeddetail/select_page")
+	public String select_page9(Model model) {
+		return "/sFunction/customizeddetail/select_page";
+	}
+    
+    @GetMapping("/sFunction/customizeddetail/listAllCustomizedDetail")
+	public String listAllCustomizedDetail(Model model) {
+		return "/sFunction/customizeddetail/listAllCustomizedDetail";
+	}
+    
+	@ModelAttribute("customizedDetailListData") // for select_page.html 第135行用
+	protected List<CustomizedDetailVO> referenceListData_CustomizedDetail(Model model) {
+		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
+		return list;
+	}
 }
