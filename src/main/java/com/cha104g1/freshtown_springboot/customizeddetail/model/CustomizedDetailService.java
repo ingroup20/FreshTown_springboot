@@ -31,12 +31,12 @@ public class CustomizedDetailService implements CustomizedDetailServiceIntf{
 		return customizedDetailVO;
 	}
 
-//	@Override
-//	public CustomizedDetailVO getCustomizedDetailVOByCustedDtlNo(Integer custedDtlNo) {
-//		Optional<CustomizedDetailVO> optional = repository.findById(custedDtlNo);
-//		return optional.orElse(null);
-//	}
-//
+	@Override
+	public CustomizedDetailVO getCustomizedDetailVOByCustedDtlNo(Integer custedDtlNo) {
+		Optional<CustomizedDetailVO> optional = repository.findById(custedDtlNo);
+		return optional.orElse(null);
+	}
+
 //	@Override
 //	public CustomizedDetailVO getCustomizedDetailVOByCustedItemsNo(CustomizedItemsVO customizedItemsVO) {
 //		Optional<CustomizedDetailVO> optional = repository.findByCustedItemsNo(customizedItemsVO);

@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpVO;
+
 
 
 @Service("StoreEmpService")
@@ -26,9 +28,9 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 	}
 
 	@Override
-	public StoreEmpVO updateStoreEmpVO(StoreEmpVO StoreEmpVO) {
-	    repository.save(StoreEmpVO);
-	    return StoreEmpVO;
+	public StoreEmpVO updateStoreEmpVO(StoreEmpVO storeEmpVO) {
+	    repository.save(storeEmpVO);
+	    return storeEmpVO;
 	}
     
 	@Override
@@ -60,6 +62,11 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 	public List<StoreEmpVO> getStoreEmpVOsByCompositeQuery(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public StoreEmpVO getOneStoreEmp(Integer id) {
+		Optional<StoreEmpVO> optional = repository.findById(id);
+		return optional.orElse(null); 
 	}
 
 }

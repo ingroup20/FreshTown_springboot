@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
+
 
 @Service("CustomerService")
 public class CustomerService implements CustomerServiceIntf{
@@ -59,6 +61,11 @@ public class CustomerService implements CustomerServiceIntf{
 	public List<CustomerVO> getCustomerVOsByCompositeQuery(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public CustomerVO getOneCustomer(Integer id) {
+		Optional<CustomerVO> optional = repository.findById(id);
+		return optional.orElse(null); 
 	}
 	
 

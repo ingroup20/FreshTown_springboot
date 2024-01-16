@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>線上諮詢紀錄資料 - listOneService.html</title>
+<head></head>
+<style type="text/css">
+span {
+	display: inline-block;
+	width: 150px;
+	text-align: left;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		<div align="center">
+			<h2>線上諮詢紀錄資料 - listOneService.html</h2>
+			<h3>
+				<a class="navbar-brand"
+					th:href="@{/sFunction/service/select_page}"><img
+					th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a>
+			</h3>
+		</div>
+	</nav>
+	<div align="center" th:fragment="listOneService-div">
+		<!-- 此div被select_page.html第128行insert用 -->
+		<h3>
+			<span>查詢結果 :</span>
+		</h3>
+		<span>諮詢紀錄編號:</span><span th:text="${serviceVO.custSerNo}"></span><br />
+		<span>平台員工編號:</span><span th:text="${serviceVO.platformEmpVO.pEmpId}"></span><br />
+		<span>店家流水編號:</span><span th:text="${serviceVO.storesVO.storeId}"></span><br />
+<!-- 		<span>會員流水號:</span><span th:text="${serviceVO.customerVO.customerId}"></span><br /> -->
+		<span>諮詢記錄:</span><span th:text="${serviceVO.custMessage}"></span><br />
+		<span>諮詢日期:</span><span th:text="${serviceVO.custTime}"></span><br />
+	</div>	
+</body>
+</html>
