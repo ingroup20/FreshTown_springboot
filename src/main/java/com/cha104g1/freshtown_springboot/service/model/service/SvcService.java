@@ -10,17 +10,17 @@ import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.service.model.model.ServiceVO;
 import com.cha104g1.freshtown_springboot.service.model.service.ServiceRepository;
 
-@Service("servService")
-public class ServService {
+@Service("svcService")
+public class SvcService {
      
 	@Autowired
 	ServiceRepository repository;
 	
-	public void Service(ServiceVO serviceVO) {
+	public void addService(ServiceVO serviceVO) {
 		repository.save(serviceVO);
 	}
 
-	public void updateServiceVO(ServiceVO serviceVO) {
+	public void updateService(ServiceVO serviceVO) {
 		repository.save(serviceVO);
 	}
 	
@@ -32,5 +32,7 @@ public class ServService {
 	public List<ServiceVO> getAll() {
 		return repository.findAll();
 	}
+	
+	
 	
 }

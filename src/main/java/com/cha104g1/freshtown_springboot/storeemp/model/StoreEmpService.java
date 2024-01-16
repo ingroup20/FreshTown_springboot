@@ -26,9 +26,9 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 	}
 
 	@Override
-	public StoreEmpVO updateStoreEmpVO(StoreEmpVO StoreEmpVO) {
-	    repository.save(StoreEmpVO);
-	    return StoreEmpVO;
+	public StoreEmpVO updateStoreEmpVO(StoreEmpVO storeEmpVO) {
+	    repository.save(storeEmpVO);
+	    return storeEmpVO;
 	}
     
 	@Override

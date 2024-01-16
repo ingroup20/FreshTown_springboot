@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.picking.model.service;
+package com.cha104g1.freshtown_springboot.picking.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cha104g1.freshtown_springboot.picking.model.model.PickingVO;
+import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
 
 
 @Service("pickingService")

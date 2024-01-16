@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.picking.model.model;
+package com.cha104g1.freshtown_springboot.picking.model;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -28,6 +28,9 @@ public class PickingVO implements Serializable{
 	@Column(name="pickingNo", updatable= false)
 	private Integer pickingNo;
 	
+	@ManyToOne
+	@JoinColumn(name = "itemNumber", referencedColumnName = "itemNumber")
+	private MaterialVO materialVO;
 	
 	@ManyToOne
 	@JoinColumn(name = "storeId", referencedColumnName = "storeId")
@@ -59,9 +62,6 @@ public class PickingVO implements Serializable{
 	@Column(name="marks", length=128)
 	private String marks;
 	
-	@ManyToOne
-	@JoinColumn(name = "itemNumber", referencedColumnName = "itemNumber")
-	private MaterialVO materialVO;
 	
 
 	public PickingVO() {
@@ -129,7 +129,7 @@ public class PickingVO implements Serializable{
 		return materialVO;
 	}
 	
-	public void setMaterial(MaterialVO materialVO) {
+	public void setMaterialVO(MaterialVO materialVO) {
 		this.materialVO = materialVO;
 	}
 	

@@ -14,15 +14,15 @@ public class ItemsClassService {
 	@Autowired
 	ItemsClassRepository repository;
            
-         public void addItemsclass(ItemsClassVO itemsClassVO) {
+         public void addItemsClass(ItemsClassVO itemsClassVO) {
          	repository.save(itemsClassVO);
          }
          
-         public void updateItemsclass(ItemsClassVO itemsClassVO) {
+         public void updateItemsClass(ItemsClassVO itemsClassVO) {
         	repository.save(itemsClassVO);
           }
          
-         public ItemsClassVO getOneItemsclass(Integer itemClassId) {
+         public ItemsClassVO getOneItemsClass(Integer itemClassId) {
      		Optional<ItemsClassVO> optional = repository.findById(itemClassId);
     		return optional.orElse(null);
          }

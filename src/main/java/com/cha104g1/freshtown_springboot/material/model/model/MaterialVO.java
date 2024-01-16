@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
-import com.cha104g1.freshtown_springboot.picking.model.model.PickingVO;
+import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
@@ -42,7 +42,6 @@ public class MaterialVO implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="itemClassId",referencedColumnName ="itemClassId")
-	@NotEmpty(message="物料類別分類: 請勿空白")
 	private ItemsClassVO itemsClassVO;
 	
 	@Column(name = "stockQuantity")

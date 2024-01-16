@@ -18,7 +18,7 @@ public class MaterialService {
 		repository.save(materialVO);
 	}
 
-	public void updateMaterialVO(MaterialVO materialVO) {
+	public void updateMaterial(MaterialVO materialVO) {
 		repository.save(materialVO);
 	}
 

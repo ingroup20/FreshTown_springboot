@@ -96,10 +96,6 @@ public class ServiceVO implements Serializable{
 	public void setCustomerVO(CustomerVO customerVO) {
 		this.customerVO = customerVO;
 	}
-	
-	
-	
-    
     
 }
 
