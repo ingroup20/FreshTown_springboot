@@ -132,7 +132,6 @@ public class IndexController_inSpringBoot {
 		return list;
 	}
 	
-<<<<<<< HEAD
     //=========== supplier  要使用的資料 ===================   
     @GetMapping("/pFunction/supplier/supplierMain")
 	public String supplierMain(Model model) {
@@ -155,8 +154,5 @@ public class IndexController_inSpringBoot {
 //	public String select_page5(Model model) {
 //		return "cFunction/stores/addStores";
 //	}
-=======
-
->>>>>>> refs/heads/master
 
 }

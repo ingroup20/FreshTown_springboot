@@ -22,7 +22,7 @@ import com.cha104g1.freshtown_springboot.supplier.model.SupService;
 import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 @Controller
-@RequestMapping("/supplier")
+@RequestMapping("/pFunction/supplier")
 public class SupIdController {
 
 	
@@ -37,37 +37,37 @@ public class SupIdController {
 	}
 
 
-	@PostMapping("insert")
-	public String insert(@Valid SupVO supVO, BindingResult result, ModelMap model) {
-
-		if (result.hasErrors()) {
-			return "pFunction/supplier/supplierAdd";
-		}
-		supSvc.addSup(supVO);
-		List<SupVO> list = supSvc.getAll();
-		model.addAttribute("supListData", list);
-		model.addAttribute("success", "- (新增成功)");
-		return "pFunction/supplier/supList";
-	}
+	 @PostMapping("/insert")
+	    public String insert(@Valid SupVO supVO, BindingResult result, ModelMap model) {
+	        if (result.hasErrors()) {
+	            return "pFunction/supplier/supplierAdd";
+	        }
+	        supSvc.addSup(supVO);
+	        List<SupVO> list = supSvc.getAll();
+	        model.addAttribute("supListData", list);
+	        model.addAttribute("success", "- (新增成功)");
+	        return "pFunction/supplier/supList";
+	    }
 	
 	@PostMapping("getOne_For_Update")
-	public String getOne_For_Update(@RequestParam("supID") String supId, ModelMap model) {
+	public String getOne_For_Update(@RequestParam("supId") String supId, ModelMap model) {
 		SupVO supVO = supSvc.getOneSup(Integer.valueOf(supId));
-
+		System.out.println("test");
 		model.addAttribute("supVO", supVO);
-		return "pFunction/supplier/update_sup_input";
+		return "pFunction/supplier/updateSup";
 	}
 	
 	@PostMapping("update")
-	public String update(@Valid SupVO supVO, BindingResult result, ModelMap model, @RequestParam("upSup") MultipartFile[] parts) throws IOException {
+	public String update(@Valid SupVO supVO, BindingResult result, ModelMap model, @RequestParam("supId") String supId) throws IOException {
 		if (result.hasErrors()) {
-			return "pFunction/supplier/update_sup_input";
+			return "pFunction/supplier/updateSup";
 		}
+		supVO.setSupId(Integer.valueOf(supId));
 		supSvc.updateSupVO(supVO);
 		model.addAttribute("success", "- (修改成功)");
 		supVO = supSvc.getOneSup(Integer.valueOf(supVO.getSupId()));
 		model.addAttribute("supVO", supVO);
-		return "pFunction/supplier/listOneSup";
+		return "pFunction/supplier/supOne";
 	}
 
 

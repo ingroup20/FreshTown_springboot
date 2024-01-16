@@ -1,6 +1,7 @@
 package com.cha104g1.freshtown_springboot.supplier.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 import com.cha104g1.freshtown_springboot.supplier.model.SupService;
 import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 @Controller
-@RequestMapping("/supplier")
+@RequestMapping("/pFunction/supplier/")
 public class SupController {
 	
 	
@@ -31,23 +33,30 @@ public class SupController {
 	SupService supSvc;
 
 	//複合查詢
-    @PostMapping("listSupplier_ByCompositeQuery")
-    public String listSupplierByCompositeQuery(
-            @RequestParam(name = "supplierName", required = false) String supplierName,
-            @RequestParam(name = "supplierContact", required = false) String supplierContact,
-            @RequestParam(name = "supplierState", required = false) Integer supplierState,
-            Model model) {
-
-        List<SupVO> result = supSvc.listSupByCompositeQuery(supplierName, supplierContact, supplierState);
-        model.addAttribute("result", result);
-
-        return "resultPage";
-    }
+//    @PostMapping("listSupplier_ByCompositeQuery")
+//    public String listSupplierByCompositeQuery(
+//            @RequestParam(name = "supplierName", required = false) String supplierName,
+//            @RequestParam(name = "supplierContact", required = false) String supplierContact,
+//            @RequestParam(name = "supplierState", required = false) Integer supplierState,
+//            Model model) {
+//    	System.out.println("test");
+//        List<SupVO> supVO = supSvc.listSupByCompositeQuery(supplierName, supplierContact, supplierState);
+//        model.addAttribute("listSupplier_ByCompositeQuery", supVO);
+//		model.addAttribute("listSupplier_ByCompositeQuery", "true"); 
+//        return "pFunction/supplier/supOne";
+//    }
+	
+	@PostMapping("listSupplier_ByCompositeQuery")
+	public String listAllSupplier(HttpServletRequest req, Model model) {
+		Map<String, String[]> map = req.getParameterMap();
+		List<SupVO> list = supSvc.getAll(map);
+		model.addAttribute("supListData", list); 
+		return "pFunction/supplier/supList";
+	}
 	
 	//全都要
 	@ModelAttribute("supListData")
 	protected List<SupVO> referenceListData() {
-		SupService supSvc = new SupService();
 		List<SupVO> list = supSvc.getAll();
 		return list;
 	}

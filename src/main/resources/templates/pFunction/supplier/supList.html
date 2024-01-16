@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>所有供應商資料</title>
+<title>所有供應商資料1</title>
 <style type="text/css">
 
     table {
@@ -102,22 +102,25 @@
 <div align="center">
   <b><font color=red>第<label id="currentPage">1</label>/<label id="pageNumber"></label>頁</font></b>
 
-<b>● 符 合 查 詢 條 件 如 下 所 示 : 共 <font color=red th:text="${supListData.size}"></font> 筆</b></div>
+<b>● 符 合 查 詢 條 件 如 下 所 示 : 共 <font color=red th:text="${#lists.size(supListData)}"></font> 筆</b></div>
 	<div style="padding: 5px; width:1115px; height:35px; background-color:#CCCCFF; margin-top:5px; margin-bottom:5px; margin-left:auto; margin-right:auto; border: 1px solid #000000;">
 			<span style="padding: 15px;">供應商名稱</span>
 			<span style="padding: 20px;">聯絡人姓名</span>
 			<span style="padding: 25px;">電話</span>
 			<span style="padding: 25px;">供應商狀態</span>
 			<span style="padding: 15px;">修改</span>
+			<span style="padding: 15px;">TEST</span>
 		</div>
 	
 	<table class="center">
 		<th:block th:each="supVO : ${supListData}">
 			<tr>
 				<td th:text="${supVOStat.count}"></td>
+				<td th:text="${supVO.supId}"></td>
 				<td th:text="${supVO.supplierName}"></td>
 				<td th:text="${supVO.supplierContact}"></td>
 				<td th:text="${supVO.supplierPhone}"></td>
+				<td th:text="${supVO.storeId}"></td>
 				<td>
 	                <span th:if="${supVO.supplierState == 0}">非使用中</span>
 	                <span th:if="${supVO.supplierState == 1}">使用中</span>
