@@ -22,33 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
+import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpVO;
+
+import redis.clients.jedis.Jedis;
 
 @Controller
 @Validated
 @RequestMapping("/cFunction/likestore")
 public class LikeStoreController {
 
-	@Autowired
-	LikeStoreService refundsSvc;
-	
-	//依會員id查全部
-//	@ModelAttribute("customerListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
-//	protected List<LikeStoreVO> customerListData(@RequestParam("customerId") int customerId, Model model){
-//		List<LikeStoreVO> list = refundsSvc.getAll(customerId);
-//		return list;
-//	}
-//	
-	//平台查全部
-	@ModelAttribute("allList")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
-	protected List<LikeStoreVO> allList(Model model) {
-		List<LikeStoreVO> list = refundsSvc.getAll();
-		return list;
-	}
-	
-	//下層連結
-	@GetMapping("/list")
-	public String refundPage(Model model) {
-		return "custFunction/likestore/list";
-	}
 	
 }

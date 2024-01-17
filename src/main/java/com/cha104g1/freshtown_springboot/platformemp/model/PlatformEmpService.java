@@ -69,5 +69,10 @@ public class PlatformEmpService implements PlatformEmpServiceIntf{
 		return optional.orElse(null); 
 	}
 	
-
+	//取得SQL身分帳密(中群)
+	public PlatformEmpVO getByPEmpAccount( String pEmpAccount) {
+		PlatformEmpVO  platformEmpLogin =repository.findByPEmpAccount(pEmpAccount);
+		return platformEmpLogin; 
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.cha104g1.freshtown_springboot;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,19 +9,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
-import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassRepository;
 import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassService;
 import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
+
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+
+import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpService;
+
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
 import com.cha104g1.freshtown_springboot.picking.service.PickingService;
+
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.service.model.model.ServiceVO;
@@ -48,6 +54,12 @@ public class IndexController_inSpringBoot {
 	@Autowired
 	MealTypeService mealTypeSvc;
 	
+
+	
+	@Autowired
+	PlatformEmpService platformEmpSvc;
+	
+
 	@Autowired
 	SupService supSvc;
 
@@ -65,6 +77,7 @@ public class IndexController_inSpringBoot {
 	
 	@Autowired
 	CustomizedDetailService customizedDetailSvc;
+
 	
     @Value("${welcome.message}")
     private String message;
@@ -140,6 +153,11 @@ public class IndexController_inSpringBoot {
 		List<OrdersVO> list = ordersSvc.getAll();
 		return list;
 	}
+	
+    @GetMapping("/sFunction/orders/select_page")
+	public String select_pageS(Model model) {
+		return "sFunction/orders/select_page";
+	}
 
     //=========== stores  要使用的資料 ===================   
     @GetMapping("/pFunction/stores/select_page")
@@ -158,6 +176,16 @@ public class IndexController_inSpringBoot {
 		return list;
 	}
 	
+
+	//=================================
+	@GetMapping("/cEntranceStores")
+	public String goCEntrance(Model model) {
+		return "cEntrance";
+	}
+	
+	
+	
+
 
     //=========== supplier  要使用的資料 ===================   
     @GetMapping("/pFunction/supplier/supplierMain")
@@ -268,4 +296,5 @@ public class IndexController_inSpringBoot {
 		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
 		return list;
 	}
+
 }

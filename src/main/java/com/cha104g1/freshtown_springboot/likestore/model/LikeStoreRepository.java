@@ -9,9 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface LikeStoreRepository  extends JpaRepository<LikeStoreVO, Integer> {
 
-	@Transactional
-	@Modifying
-	@Query(value = "Select from like_store where customerId =?1", nativeQuery = true)
-	List<LikeStoreVO> findByCustomerId(int customerId);
+//	@Transactional
+//	@Query(value = "from likeStoreVO where customerId =?1")
+//	List<LikeStoreVO> findByCustomerId(int customerId);
 	
 }
