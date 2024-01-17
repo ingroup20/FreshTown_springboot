@@ -14,8 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+
 
 @Entity
 @Table(name="store_emp")
@@ -28,7 +31,9 @@ public class StoreEmpVO {
 	    private Byte manuPerm;
 	    private Byte orderPerm;
 	    private Byte modifyPerm;
-	    private StoresVO storesVO;	
+	
+	    private StoresVO storesVO;
+
 	    private String sEmpDeptno;
 	    private String sEmpTitle;
 	    private Byte sEmpState;
@@ -110,7 +115,7 @@ public class StoreEmpVO {
 		public void setsEmpState(Byte sEmpState) {
 			this.sEmpState = sEmpState;
 		}
-		//
+
 		@ManyToOne
 		@JoinColumn(name="storeId",referencedColumnName ="storeId")
 		public StoresVO getStoresVO() {
