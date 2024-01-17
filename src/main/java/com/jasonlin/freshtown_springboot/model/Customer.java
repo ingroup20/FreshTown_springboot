@@ -5,14 +5,13 @@ import java.util.Date;
 public class Customer {
     private Integer customerId;
     private String customerPw;
-    private Integer customerMob;
+    private String customerMob;
     private Integer mobChecked;
     private String customerEmail;
     private String customerNic;
     private String customerAddress;
     private String customerState;
-    private Date createdDate;
-    private Date lastModifiedDate;
+
 
     public Integer getCustomerId() {
         return customerId;
@@ -30,11 +29,11 @@ public class Customer {
         this.customerPw = customerPw;
     }
 
-    public Integer getCustomerMob() {
+    public String getCustomerMob() {
         return customerMob;
     }
 
-    public void setCustomerMob(Integer customerMob) {
+    public void setCustomerMob(String customerMob) {
         this.customerMob = customerMob;
     }
 
@@ -78,19 +77,5 @@ public class Customer {
         this.customerState = customerState;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
 }
