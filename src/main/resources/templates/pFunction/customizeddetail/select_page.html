@@ -78,7 +78,7 @@
 	<div class="errorblock" th:utext="${errorMessage}">${errorMessage}</div><br>
 	<div class="a">
 	  <ul>
-		<li><h5><a href='listAllOrders'>List</a> all CustomizedDetails. <br><br></h5></li>
+		<li><h5><a href='listAllCustomizedDetail'>List</a> all CustomizedDetails. <br><br></h5></li>
 
 		<li>
 			<form method="post" th:action="@{getOne_For_Display}">
@@ -167,7 +167,7 @@
     <!-- 旗標getOne_For_Display見EmpnoController.java的第74行 -->
     <div class="b" th:if="${getOne_For_Display}">
         <!--使用listOneEmp.html網頁的listOneEmp-div片段--> <!-- 見listOneEmp.html的第35行的th:fragment="listOneEmp-div" --> <!-- 使用th:replace也可 -->
-        <div th:insert="~{/sFunction/customizeddetail/listOneCustomizedDetail :: listOneCustomizedDetail-div}"></div>
+        <div th:insert="~{/pFunction/customizeddetail/listOneCustomizedDetail :: listOneCustomizedDetail-div}"></div>
     </div>
 
 </body>

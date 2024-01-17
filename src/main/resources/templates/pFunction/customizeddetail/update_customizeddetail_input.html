@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>分類狀態修改 - update_customizeddetail_input.html</title>
+<title>客製項目選項資料修改 - update_customizeddetail_input.html</title>
 
 <head ></head>
 <style type="text/css">
@@ -48,12 +48,12 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>客製項目選項資料修改 - update_customizeddetail_input.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/sFunction/customizeddetail/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/customizeddetail/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
 </nav>
 
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{update}" method="post" th:object="${mealTypeVO}" enctype="multipart/form-data">
+		<form th:action="@{update}" method="post" th:object="${customizedDetailVO}" enctype="multipart/form-data">
 			
 			<div>
 			<label>項目選項流水號:</label>
@@ -62,7 +62,10 @@
 			
 			<div>
 			<label>客製項目:</label>
-			<input type="text" th:field="*{{customizedDetailVO.customizedItemsVO.custedItemsNo}+${customizedDetailVO.customizedItemsVO.custedName}}" style="border:0px ; font-weight: bold;" readonly />
+			<select th:field="*{customizedItemsVO.custedItemsNo}">
+				<option th:each="customizedItemsVO : ${customizedItemsListData}" th:value="${customizedItemsVO.custedItemsNo}" th:text="${customizedItemsVO.custedName}" />
+			</select>
+			<span th:if="${#fields.hasErrors('customizedItemsVO.custedItemsNo')}" th:errors="*{customizedItemsVO.custedItemsNo}" class="error" id="customizedItemsVO.custedItemsNo.errors"></span>
 			</div>
 			
 			<div>
