@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpVO;
+
 
 @Service("CustomerService")
 public class CustomerService implements CustomerServiceIntf{
@@ -61,6 +63,11 @@ public class CustomerService implements CustomerServiceIntf{
 		return null;
 	}
 	
+	//取得SQL身分帳密(中群)
+	public CustomerVO getByCustomerAddress( String customerAddress) {
+		CustomerVO  customerLogin =repository.findByCustomerAddress(customerAddress);
+		return customerLogin; 
+	}
 
 
 }

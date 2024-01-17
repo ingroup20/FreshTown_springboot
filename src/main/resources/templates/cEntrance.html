@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Homepage - 鮮城 FreshTown</title>
+    <link rel="stylesheet" href="./cFunction/css/allBase.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlHoUB7fxl9z1I7kF7dJ1lFqIiiPmM1I2j9c5n9d" crossorigin="anonymous">
+</head>
+<body class="body">
+    <nav class="nav ">
+        <div  class="nav ">
+        	<span><a href="#!"><img id="logo" src="./cFunction/images/LOGO.png"></a></span>
+            <span><a class="title logo" href="#!">鮮城 FreshTown</a></span>
+            <button class="phone-btn">行動版導覽按鈕</button>
+            <ul class="nav">
+                <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>
+                <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li>
+                <li class="nav_item ">
+                    <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">註冊專區</a>
+                    <ul class="dropdown_menu -none">
+                        <li><a class="dropdown_item title" href="#!">訂餐會員註冊</a></li>
+                        <li><hr class="dropdown_divider" /></li>
+                        <li><a class="dropdown_item title" href="#!">合作店家申請</a></li>
+                    </ul>
+                </li>
+                <li class="nav_item "><a class="title" th:href="@{/loginP}">會員登入</a></li>
+            </ul>
+                    
+            <!--購物車-->
+            <form class="buy_car">
+                <button class="buy_car" type="submit">
+                    <img></img>
+                    Cart
+                    <!--購物車數量-->
+                    <span>0</span>
+                </button>
+            </form>
+            <div class="nav_footer"></div>
+
+        </div>
+        
+    </nav>
+
+    <header class="header">
+        <div class="header">
+            <h1 class="header ">美食饗宴  盡在鮮城</h1>
+            <p class="header">最公正的餐廳推薦平台，立即加入會員訂餐吧!</p>
+  
+        </div>
+  
+    </header>
+
+    <section class="section">
+        <div class="section">
+            <!-- 店家-->
+            <th:block th:each="storesVO : ${storesListData}">
+	            <div class="section_item">
+	                <div class="card">
+	                    <!-- 圖片-->
+<!-- 	                    <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
+	                    <!-- 資訊-->
+	                    <div class="card_body">
+	                        <!--固定資訊-->
+	                        <div class="card_info">
+	                            <h3 th:text="${storesVO.storeName}">店家名稱</h3>
+								<!-- 評等-->
+		                            <div class="star_area">
+		                                  	<span class="star" data-star="1"><i class="fas fa-star"></i></span>
+									        <span class="star" data-star="2"><i class="fas fa-star"></i></span>
+									        <span class="star" data-star="3"><i class="fas fa-star"></i></span>
+									        <span class="star" data-star="4"><i class="fas fa-star"></i></span>
+									        <span class="star" data-star="5"><i class="fas fa-star"></i></span>
+		                            </div>
+								<p th:text="${storesVO.storeAddress}">店家地址</p>
+	                        </div>
+	                        
+	                    </div>
+	
+	                </div>
+	                <!-- 控制項-->
+	                <div class="card_footer title">
+	                    <a id="entrance" href="#">看菜單</a>
+	                </div>
+	            </div>
+           </th:block>
+        </div>
+    </section>
+
+    <main></main>
+
+    <footer class="footer">
+        <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	
+	</script>
+
+
+</body>
+</html>

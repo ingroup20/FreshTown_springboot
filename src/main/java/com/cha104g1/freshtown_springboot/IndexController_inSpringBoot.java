@@ -1,5 +1,7 @@
 package com.cha104g1.freshtown_springboot;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,16 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
+import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
-import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpService;
-import com.cha104g1.freshtown_springboot.pemp.model.PlatformEmpVO;
+import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpService;
+import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpVO;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+
+import redis.clients.jedis.Jedis;
 
 import java.util.*;
 
@@ -116,6 +122,11 @@ public class IndexController_inSpringBoot {
 		List<OrdersVO> list = ordersSvc.getAll();
 		return list;
 	}
+	
+    @GetMapping("/sFunction/orders/select_page")
+	public String select_pageS(Model model) {
+		return "sFunction/orders/select_page";
+	}
 
     //=========== stores  要使用的資料 ===================   
     @GetMapping("/pFunction/stores/select_page")
@@ -134,23 +145,12 @@ public class IndexController_inSpringBoot {
 		return list;
 	}
 	
-
-    //=========== pEmp料 ===================   
-    @GetMapping("/pEmp/select_page")
-	public String select_page5(Model model) {
-		return "/pEmp/select_page";
+	//=================================
+	@GetMapping("/cEntranceStores")
+	public String goCEntrance(Model model) {
+		return "cEntrance";
 	}
-    
-    @GetMapping("/pEmp/listAllPEmp")
-	public String listAllPEmp(Model model) {
-    	System.out.println("準備轉了");
-		return "pEmp/listAllPEmp";
-	}
-
-	@ModelAttribute("pEmpListData") // for select_page.html 第135行用
-	protected List<PlatformEmpVO> referenceListData_PEmp(Model model) {
-		List<PlatformEmpVO> list = platformEmpSvc.getAll();
-		return list;
-	}
+	
+	
 	
 }

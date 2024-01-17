@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("likeStoreService")
-public class LikeStoreService implements LikeStoreServiceIntf{
+public class LikeStoreService {
 
 	@Autowired
 	LikeStoreRepository repository ;
@@ -17,40 +17,40 @@ public class LikeStoreService implements LikeStoreServiceIntf{
 	}
 	
 	
-	@Override
+
 	public LikeStoreVO addLikeStoreVO(LikeStoreVO likeStoreVO) {
 		repository.save(likeStoreVO);
 		return likeStoreVO;
 	}
 
-	@Override
+	
 	public LikeStoreVO updateLikeStoreVO(LikeStoreVO likeStoreVO) {
 		repository.save(likeStoreVO);
 		return likeStoreVO;
 	}
 
-	@Override
+	
 	public LikeStoreVO getLikeStoreVOById(Integer id) {
 		Optional<LikeStoreVO> optional = repository.findById(id);
 		return optional.orElse(null);
 	}
 
-	@Override
+
 	public List<LikeStoreVO> getAllLikeStoreVO(int currentPage) {
 		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
 
-	@Override
+	
 	public List<LikeStoreVO> getAll() {
 		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
 
-	@Override
-	public List<LikeStoreVO> getAll(int customerId) {
-		return repository.findByCustomerId(customerId);
-	}
+	
+//	public List<LikeStoreVO> getAll(int customerId) {
+//		return repository.findByCustomerId(customerId);
+//	}
 	
 	
 

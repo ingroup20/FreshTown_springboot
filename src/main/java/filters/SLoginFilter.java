@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class PLoginFilter implements Filter{
+public class SLoginFilter implements Filter{
 
 	private FilterConfig config;
 	
@@ -35,12 +35,12 @@ public class PLoginFilter implements Filter{
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("platformEmpLogin");
+		Object account = session.getAttribute("storeEmpLogin");
 		if (account == null) {
 //			session.setAttribute("location", req.getRequestURI());
 			session.setAttribute("location", req.getServletPath());
 			System.out.println(req.getContextPath());
-			res.sendRedirect(req.getContextPath() + "/loginP");
+			res.sendRedirect(req.getContextPath() + "/loginS");
 			return;
 		} else {
 			chain.doFilter(request, response);

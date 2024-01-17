@@ -69,4 +69,9 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 		return optional.orElse(null); 
 	}
 
+	//取得SQL身分帳密(中群)
+	public StoreEmpVO getBySEmpId( String sEmpId) {
+		StoreEmpVO  storeEmpLogin =repository.findBySEmpId(sEmpId);
+		return storeEmpLogin; 
+	}
 }

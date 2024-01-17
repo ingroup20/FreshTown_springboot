@@ -38,6 +38,9 @@ VALUES
 (CONCAT('pw_', FLOOR(RAND() * 1000)), LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
 ;
 
+INSERT  Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
+VALUES  ("cat", LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), "cat", FLOOR(RAND() * 3));
+
 -- 旭東
 INSERT INTO meal_type VALUES (1,'飯');
 INSERT INTO meal_type VALUES (2,'麵');
@@ -68,6 +71,9 @@ INSERT INTO supplier VALUES (3,'Me','阿格麗','034506333',3,1);
  VALUES
      (CONCAT('Name', FLOOR(RAND() * 10)), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
 
+ INSERT INTO store_emp (sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
+ VALUES
+     ("虎爸", FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
 
 
 
