@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassService;
@@ -77,6 +79,9 @@ public class IndexController_inSpringBoot {
 	
 	@Autowired
 	CustomizedDetailService customizedDetailSvc;
+	
+	@Autowired
+	CustomizedItemsService customizedItemsSvc;
 
 	
     @Value("${welcome.message}")
@@ -281,19 +286,36 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== CustomizedDetail  要使用的資料 ===================   
-    @GetMapping("/sFunction/customizeddetail/select_page")
+    @GetMapping("/pFunction/customizeddetail/select_page")
 	public String select_page9(Model model) {
-		return "/sFunction/customizeddetail/select_page";
+		return "/pFunction/customizeddetail/select_page";
 	}
     
-    @GetMapping("/sFunction/customizeddetail/listAllCustomizedDetail")
+    @GetMapping("/pFunction/customizeddetail/listAllCustomizedDetail")
 	public String listAllCustomizedDetail(Model model) {
-		return "/sFunction/customizeddetail/listAllCustomizedDetail";
+		return "/pFunction/customizeddetail/listAllCustomizedDetail";
 	}
     
 	@ModelAttribute("customizedDetailListData") // for select_page.html 第135行用
 	protected List<CustomizedDetailVO> referenceListData_CustomizedDetail(Model model) {
 		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
+		return list;
+	}
+	
+	//=========== CustomizedItems  要使用的資料 ===================   
+	@GetMapping("/pFunction/customizeditems/select_page")
+	public String select_page10(Model model) {
+		return "/pFunction/customizeditems/select_page";
+	}
+	
+	@GetMapping("/pFunction/customizeditems/listAllCustomizedItems")
+	public String listAllCustomizedItems(Model model) {
+		return "/pFunction/customizeditems/listAllCustomizedItems";
+	}
+	
+	@ModelAttribute("customizedItemsListData") // for select_page.html 第135行用
+	protected List<CustomizedItemsVO> referenceListData_CustomizedItems(Model model) {
+		List<CustomizedItemsVO> list = customizedItemsSvc.getAll();
 		return list;
 	}
 
