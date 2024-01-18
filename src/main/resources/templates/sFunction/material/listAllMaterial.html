@@ -138,7 +138,7 @@ th, td {
 
 				<td th:text="${materialVO.itemNumber}"></td>
 				<td th:text="${materialVO.itemName}"></td>
-				<td th:text="${materialVO.itemsClass.itemClassId}"></td>
+				<td th:text="${materialVO.itemsClass.itemClassId} + '-[' + ${materialVO.itemsClass.itemClassName} + ']'"></td>
 				<td th:text="${materialVO.stockQuantity}"></td>
 				<td th:text="${materialVO.quantityNot}"></td>
 				<td th:text="${materialVO.itemUnit}"></td>
