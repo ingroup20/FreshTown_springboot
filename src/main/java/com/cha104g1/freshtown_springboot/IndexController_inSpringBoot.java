@@ -40,6 +40,8 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 import com.cha104g1.freshtown_springboot.supplier.model.SupService;
 import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
 
 import java.util.*;
 
@@ -67,6 +69,9 @@ public class IndexController_inSpringBoot {
 
 	@Autowired
 	SupService supSvc;
+	
+	@Autowired
+	SupOrderService supOrderSvc;
 
 	@Autowired
 	MaterialService materialSvc;
@@ -215,6 +220,23 @@ public class IndexController_inSpringBoot {
 	@ModelAttribute("supListData") // for select_page.html 第135行用
 	protected List<SupVO> referenceListData_Stores(Model model) {
 		List<SupVO> list = supSvc.getAll();
+		return list;
+	}
+	
+	//=========== suporder  要使用的資料 ===================   
+	@GetMapping("/sFunction/suporder/supOrderMain")
+	public String supOrderMain(Model model) {
+		return "sFunction/suporder/supOrderMain";
+	}
+	
+	@GetMapping("/sFunction/suporder/supOrderList")
+	public String supOrderList(Model model) {
+		return "sFunction/suporder/supOrderList";
+	}
+	
+	@ModelAttribute("supOrderListData") // for select_page.html 第135行用
+	protected List<SupOrderVO> referenceListData_SupOrder(Model model) {
+		List<SupOrderVO> list = supOrderSvc.getAll();
 		return list;
 	}
 	

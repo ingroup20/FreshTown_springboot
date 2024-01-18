@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>採購單查詢</title>
+
+<style type="text/css">
+
+	button {
+		padding: 5px;
+	}
+	form {
+		display: table;
+	}
+	form div {
+		display: table-row;
+	}
+	label, input, span, select {
+		display: table-cell;
+		margin: 2px;
+		text-align: left;		
+	}
+
+	form div div {
+		display: table-cell;
+	}
+	.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    span {
+		display: inline-block;
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+	div.a {
+        display: inline-block;
+        width: 50%;
+        height: auto;
+        padding: 5px;
+        border: 0px solid blue;    
+        background-color: white; 
+    }
+    div.b {
+        display: inline-block;
+        width: 45%;
+        height: auto;
+        padding: 5px;
+        border: 1px solid blue;    
+        background-color: white;
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>採購單查詢</h2>
+		  <h3><a class="navbar-brand" th:href="@{/}">>回index.html</a></h3></div>
+</nav>
+
+	<h4><span>資料查詢:</span></h4>
+
+	<div class="a">
+	  <ul>
+		<li><h5><a href='supOrderList'>全部</a> 採購單. <br><br></h5></li>
+
+		
+	      <li>   
+		    <form method="post" th:action="@{listSupOrder_ByCompositeQuery}">
+		        <font color=blue>萬用複合查詢:</font><br>
+		        
+		        請輸入採購單編號: 
+		        <input type="number" name="id" value=""><br>
+		        
+		        請輸入供應商編號: 
+		        <input type="number" name="supId" value=""><br>
+		           
+			    請輸入物料編號: 
+		        <input type="number" name="purNo" value=""><br>
+		        
+		        請輸入數量: 
+		        <input type="number" name="amount" value=""><br>
+		        
+		        請輸入單價: 
+		        <input type="number" name="unitPrice" value=""><br>
+		        
+		        請輸入採購日期: 
+		        <input type="date" name="purDate" value=""><br>
+		        
+		        請輸入預計交期: 
+		        <input type="date" name="preDate" value=""><br>
+		        
+		        選擇採購單狀態: 
+				<select name="oStatus">
+				     <option value="1">審核中</option>
+		  			 <option value="2">已確認訂單並與供應商接洽</option>
+		  			 <option value="3">貨品檢驗</option>
+		  			 <option value="4">審核未通過</option>
+		  			 <option value="5">驗收未通過</option>
+		  			 <option value="6">作廢</option>
+		  			 <option value="7">結單</option>
+			    </select>
+			    
+		        請輸入到貨日期: 
+		        <input type="date" name="deliDate" value=""><br>
+		        
+		        請輸入備註: 
+		        <input type="text" name="marks" value=""><br>
+			    
+	            <input type="submit" value="送出">
+		     </form>
+		  </li>
+      </ul>
+
+
+      <h4><span>更新供應商</span></h4>
+	  <ul>
+		  <li><h5><a href='addSupOrder'>新增</a> 供應商.</h5></li>
+	  </ul>
+	</div>
+    
+<!-- 
+    <div class="b" th:if="${getOne_For_Display}">
+        <div th:insert="~{/pFunction/supplier/supOne :: listOnesup}"></div>
+    </div>
+-->
+</body>
+</html>

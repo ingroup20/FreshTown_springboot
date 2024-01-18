@@ -24,7 +24,7 @@ public class HibernateUtil_CompositeQuery_SupOrder {
 		
 		if ("id".equals(columnName)||"pushUp".equals(columnName)) // 用於Integer
 			predicate = builder.equal(root.get(columnName), Integer.valueOf(value));
-		else if ("supId".equals(columnName)||"purNo".equals(columnName)||"amount".equals(columnName)||"unitPrice".equals(columnName)||"purDate".equals(columnName)||"preDate".equals(columnName)||"deliDate".equals(columnName)||"marks".equals(columnName)||"storeId".equals(columnName))
+		else if ("supId".equals(columnName)||"purNo".equals(columnName)||"amount".equals(columnName)||"unitPrice".equals(columnName)||"purDate".equals(columnName)||"preDate".equals(columnName)||"deliDate".equals(columnName)||"marks".equals(columnName))
 			predicate = builder.like(root.get(columnName), "%" + value + "%");
 		else if ("oStatus".equals(columnName)) {
 		    predicate = builder.equal(root.get(columnName), Integer.valueOf(value));

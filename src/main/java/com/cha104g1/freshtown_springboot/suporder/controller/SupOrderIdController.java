@@ -22,52 +22,52 @@ import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
 
 @Controller
-@RequestMapping("/sFunction/supOrder")
+@RequestMapping("/sFunction/suporder")
 public class SupOrderIdController {
 
 	
 	@Autowired
 	SupOrderService suporderSvc;
 
-	@GetMapping("addSup")
-	public String addSup(ModelMap model) {
+	@GetMapping("addSupOrder")
+	public String addSupOrder(ModelMap model) {
 		SupOrderVO suporderVO = new SupOrderVO();
-		model.addAttribute("suporderVO", suporderVO);
-		return "sFunction/supplier/supplierAdd";
+		model.addAttribute("supOrderVO", suporderVO);
+		return "sFunction/suporder/supOrderAdd";
 	}
 
 
 	 @PostMapping("/insert")
 	    public String insert(@Valid SupOrderVO suporderVO, BindingResult result, ModelMap model) {
 	        if (result.hasErrors()) {
-	            return "sFunction/supplier/supplierAdd";
+	            return "sFunction/suporder/supOrderAdd";
 	        }
 	        suporderSvc.addSupOrder(suporderVO);
 	        List<SupOrderVO> list = suporderSvc.getAll();
-	        model.addAttribute("supListData", list);
+	        model.addAttribute("supOrderListData", list);
 	        model.addAttribute("success", "- (新增成功)");
-	        return "sFunction/supplier/supList";
+	        return "sFunction/suporder/supOrderList";
 	    }
 	
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("id") String Id, ModelMap model) {
-		SupOrderVO supVO = suporderSvc.getOneSupOrder(Integer.valueOf(Id));
+		SupOrderVO supOrderVO = suporderSvc.getOneSupOrder(Integer.valueOf(Id));
 		System.out.println("test");
-		model.addAttribute("supVO", supVO);
-		return "sFunction/supplier/updateSup";
+		model.addAttribute("supOrderVO", supOrderVO);
+		return "sFunction/suporder/updateSupOrder";
 	}
 	
 	@PostMapping("update")
 	public String update(@Valid SupOrderVO suporderVO, BindingResult result, ModelMap model, @RequestParam("id") String id) throws IOException {
 		if (result.hasErrors()) {
-			return "pFunction/supplier/updateSup";
+			return "pFunction/suporder/updateSupOrder";
 		}
-		suporderVO.setSupId(Integer.valueOf(id));
+		suporderVO.setId(Integer.valueOf(id));
 		suporderSvc.updateSupOrderVO(suporderVO);
 		model.addAttribute("success", "- (修改成功)");
 		suporderVO = suporderSvc.getOneSupOrder(Integer.valueOf(suporderVO.getId()));
-		model.addAttribute("suporderVO", suporderVO);
-		return "sFunction/supplier/supOne";
+		model.addAttribute("supOrderVO", suporderVO);
+		return "sFunction/suporder/supOrderOne";
 	}
 
 
@@ -75,7 +75,7 @@ public class SupOrderIdController {
 		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
 				.filter(fieldname -> !fieldname.getField().equals(removedFieldname))
 				.collect(Collectors.toList());
-		result = new BeanPropertyBindingResult(suporderVO, "suporderVO");
+		result = new BeanPropertyBindingResult(suporderVO, "supOrderVO");
 		for (FieldError fieldError : errorsListToKeep) {
 			result.addError(fieldError);
 		}

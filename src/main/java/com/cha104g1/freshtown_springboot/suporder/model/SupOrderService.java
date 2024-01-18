@@ -7,7 +7,9 @@ import java.util.Optional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+
 
 
 @Service("supOrderService")
@@ -32,49 +34,8 @@ public class SupOrderService {
 		return optional.orElseGet(null);
 	}
 	
-	public SupOrderVO getOneSupId(Integer supId) {
-		Optional<SupOrderVO> optional = repository.findById(supId);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getOnePurNo(Integer purNo) {
-		Optional<SupOrderVO> optional = repository.findById(purNo);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getOneOStatus(Integer oStatus) {
-		Optional<SupOrderVO> optional = repository.findById(oStatus);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getOnePurDate(Date purDate) {
-		Optional<SupOrderVO> optional = repository.findByPurDate(purDate);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getOnePreDate(Date preDate) {
-		Optional<SupOrderVO> optional = repository.findByPreDate(preDate);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getOneDeliDate(Date deliDate) {
-		Optional<SupOrderVO> optional = repository.findByDeliDate(deliDate);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getByHybridPurDate(Date startpurDate, Date endpurDate) {
-		Optional<SupOrderVO> optional = repository.findByHybridPurDate(startpurDate, endpurDate);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getByHybridPreDate(Date startpreDate,Date endpreDate) {
-		Optional<SupOrderVO> optional = repository.findByHybridPreDate(startpreDate, endpreDate);
-		return optional.orElseGet(null);
-	}
-	
-	public SupOrderVO getByHybridDeliDate(Date startdeliDate,Date enddeliDate) {
-		Optional<SupOrderVO> optional = repository.findByHybridDeliDate(startdeliDate, enddeliDate);
-		return optional.orElseGet(null);
+	public List<SupOrderVO> findSupOrderByCompositeQuery(Integer id, Integer supId, Integer purNo, Integer amount, Integer unitPrice, Date purDate, Date preDate, Integer oStatus, Date deliDate, String marks) {
+        return repository.findSupOrderByCompositeQuery(id, supId, purNo, amount, unitPrice, purDate, preDate, oStatus, deliDate, marks);
 	}
 	
 	public List<SupOrderVO> getAll() {
