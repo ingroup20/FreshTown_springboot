@@ -61,7 +61,7 @@ body {
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>所有客製項目資料 - listAllCustomizedItems.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/pFunction/customizeditems/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+		 <h3><a class="navbar-brand" th:href="@{/sFunction/customizeditems/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
 </nav>
 
 <table id="example" class="display" style="width: 100%">
@@ -81,7 +81,7 @@ body {
 				<td th:text="${customizedItemsVO.custedItemsNo}"></td>
 				<td th:text="${customizedItemsVO.custedName}"></td>
 				<td>
-				  <form method="post" th:action="@{/pFunction/customizeditems/getOne_For_Update}" style="margin-bottom: 0px;">
+				  <form method="post" th:action="@{/sFunction/customizeditems/getOne_For_Update}" style="margin-bottom: 0px;">
 				     <input type="submit" value="修改">
 				     <input type="hidden" name="custedItemsNo" th:value="${customizedItemsVO.custedItemsNo}">
 				  </form>			

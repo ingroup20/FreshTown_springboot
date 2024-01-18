@@ -61,7 +61,7 @@ body {
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>所有客製項目選項資料 - listAllCustomizeddetail.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/pFunction/customizeddetail/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+		 <h3><a class="navbar-brand" th:href="@{/sFunction/customizeddetail/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
 </nav>
 
 <table id="example" class="display" style="width: 100%">
@@ -83,7 +83,7 @@ body {
 				<td th:text="${customizedDetailVO.customizedItemsVO.custedItemsNo}+${customizedDetailVO.customizedItemsVO.custedName}"></td>
 				<td th:text="${customizedDetailVO.custedDtlName}"></td>
 				<td>
-				  <form method="post" th:action="@{/pFunction/customizeddetail/getOne_For_Update}" style="margin-bottom: 0px;">
+				  <form method="post" th:action="@{/sFunction/customizeddetail/getOne_For_Update}" style="margin-bottom: 0px;">
 				     <input type="submit" value="修改">
 				     <input type="hidden" name="custedDtlNo" th:value="${customizedDetailVO.custedDtlNo}">
 				  </form>			

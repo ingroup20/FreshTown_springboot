@@ -28,7 +28,7 @@ import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 
 @Controller
 @Validated
-@RequestMapping("/pFunction/customized")
+@RequestMapping("/sFunction/customized")
 public class CustomizedNoController {
 	
 	@Autowired
@@ -62,7 +62,7 @@ public class CustomizedNoController {
     	
 		if (customizedVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
-			return "pFunction/customized/select_page";
+			return "sFunction/customized/select_page";
 		}
 		
 		/***************************3.查詢完成,準備轉交(Send the Success view)*****************/
@@ -70,7 +70,7 @@ public class CustomizedNoController {
 		model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
 		
 //		return "back-end/emp/listOneEmp";  // 查詢完成後轉交listOneEmp.html
-		return "pFunction/customized/select_page"; // 查詢完成後轉交select_page.html由其第158行insert listOneEmp.html內的th:fragment="listOneEmp-div
+		return "sFunction/customized/select_page"; // 查詢完成後轉交select_page.html由其第158行insert listOneEmp.html內的th:fragment="listOneEmp-div
 	}
 
 	
@@ -94,6 +94,6 @@ public class CustomizedNoController {
     	List<CustomizedItemsVO> list3 = customizedItemsSvc.getAll();
     	model.addAttribute("customizedItemsListData",list3);    // for select_page.html 第135行用
 		String message = strBuilder.toString();
-	    return new ModelAndView("pFunction/customized/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
+	    return new ModelAndView("sFunction/customized/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
 	}
 }

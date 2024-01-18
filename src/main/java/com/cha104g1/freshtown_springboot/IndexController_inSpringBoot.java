@@ -295,14 +295,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== CustomizedDetail  要使用的資料 ===================   
-    @GetMapping("/pFunction/customizeddetail/select_page")
+    @GetMapping("/sFunction/customizeddetail/select_page")
 	public String select_page9(Model model) {
-		return "/pFunction/customizeddetail/select_page";
+		return "/sFunction/customizeddetail/select_page";
 	}
     
-    @GetMapping("/pFunction/customizeddetail/listAllCustomizedDetail")
+    @GetMapping("/sFunction/customizeddetail/listAllCustomizedDetail")
 	public String listAllCustomizedDetail(Model model) {
-		return "/pFunction/customizeddetail/listAllCustomizedDetail";
+		return "/sFunction/customizeddetail/listAllCustomizedDetail";
 	}
     
 	@ModelAttribute("customizedDetailListData") // for select_page.html 第135行用
@@ -312,14 +312,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== CustomizedItems  要使用的資料 ===================   
-	@GetMapping("/pFunction/customizeditems/select_page")
+	@GetMapping("/sFunction/customizeditems/select_page")
 	public String select_page10(Model model) {
-		return "/pFunction/customizeditems/select_page";
+		return "/sFunction/customizeditems/select_page";
 	}
 	
-	@GetMapping("/pFunction/customizeditems/listAllCustomizedItems")
+	@GetMapping("/sFunction/customizeditems/listAllCustomizedItems")
 	public String listAllCustomizedItems(Model model) {
-		return "/pFunction/customizeditems/listAllCustomizedItems";
+		return "/sFunction/customizeditems/listAllCustomizedItems";
 	}
 	
 	@ModelAttribute("customizedItemsListData") // for select_page.html 第135行用
@@ -329,14 +329,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== Meals  要使用的資料 ===================   
-	@GetMapping("/pFunction/meals/select_page")
+	@GetMapping("/sFunction/meals/select_page")
 	public String select_page11(Model model) {
-		return "/pFunction/meals/select_page";
+		return "/sFunction/meals/select_page";
 	}
 	
-	@GetMapping("/pFunction/meals/listAllMeals")
+	@GetMapping("/sFunction/meals/listAllMeals")
 	public String listAllMeals(Model model) {
-		return "/pFunction/meals/listAllMeals";
+		return "/sFunction/meals/listAllMeals";
 	}
 	
 	@ModelAttribute("mealsListData") // for select_page.html 第135行用
@@ -346,14 +346,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== Customized  要使用的資料 ===================   
-	@GetMapping("/pFunction/customized/select_page")
+	@GetMapping("/sFunction/customized/select_page")
 	public String select_page12(Model model) {
-		return "/pFunction/customized/select_page";
+		return "/sFunction/customized/select_page";
 	}
 	
-	@GetMapping("/pFunction/customized/listAllCustomized")
+	@GetMapping("/sFunction/customized/listAllCustomized")
 	public String listAllCustomized(Model model) {
-		return "/pFunction/customized/listAllCustomized";
+		return "/sFunction/customized/listAllCustomized";
 	}
 	
 	@ModelAttribute("customizedListData") // for select_page.html 第135行用
