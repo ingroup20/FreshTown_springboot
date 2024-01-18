@@ -188,14 +188,14 @@ public class IndexController_inSpringBoot {
 
 
     //=========== supplier  要使用的資料 ===================   
-    @GetMapping("/pFunction/supplier/supplierMain")
+    @GetMapping("/sFunction/supplier/supplierMain")
 	public String supplierMain(Model model) {
-		return "pFunction/supplier/supplierMain";
+		return "sFunction/supplier/supplierMain";
 	}
     
-    @GetMapping("/pFunction/supplier/supList")
+    @GetMapping("/sFunction/supplier/supList")
 	public String supList(Model model) {
-		return "pFunction/supplier/supList";
+		return "sFunction/supplier/supList";
 	}
     
 	@ModelAttribute("supListData") // for select_page.html 第135行用

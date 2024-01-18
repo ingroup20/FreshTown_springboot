@@ -31,10 +31,16 @@ public class SupOrderVO implements java.io.Serializable {
 	private Date deliDate;
 	private String marks;
 	
-	@ManyToOne
-	@JoinColumn(name="storeId",referencedColumnName ="storeId")
-    private StoresVO storesVO;
+//	@ManyToOne
+//	@JoinColumn(name="storeId",referencedColumnName ="storeId")
+    private Integer storeId;
 	
+	public Integer getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -96,13 +102,13 @@ public class SupOrderVO implements java.io.Serializable {
 		this.marks = marks;
 	}
 	//
-	public StoresVO getStoresVO() {
-		return storesVO;
-	}
-	//
-	public void setStoresVO(StoresVO storesVO) {
-		this.storesVO = storesVO;
-	}
+//	public StoresVO getStoresVO() {
+//		return storesVO;
+//	}
+//	//
+//	public void setStoresVO(StoresVO storesVO) {
+//		this.storesVO = storesVO;
+//	}
 
 	
 

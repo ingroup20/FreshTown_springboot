@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.supplier.controller;
+package com.cha104g1.freshtown_springboot.suporder.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -21,16 +21,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
-import com.cha104g1.freshtown_springboot.supplier.model.SupService;
-import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
 
 @Controller
-@RequestMapping("/sFunction/supplier/")
-public class SupController {
+@RequestMapping("/sFunction/supOrder/")
+public class SupOrderController {
 	
 	
 	@Autowired
-	SupService supSvc;
+	SupOrderService supOrderSvc;
 
 	//複合查詢
 //    @PostMapping("listSupplier_ByCompositeQuery")
@@ -46,18 +46,18 @@ public class SupController {
 //        return "pFunction/supplier/supOne";
 //    }
 	
-	@PostMapping("listSupplier_ByCompositeQuery")
+	@PostMapping("listSupOrder_ByCompositeQuery")
 	public String listAllSupplier(HttpServletRequest req, Model model) {
 		Map<String, String[]> map = req.getParameterMap();
-		List<SupVO> list = supSvc.getAll(map);
+		List<SupOrderVO> list = supOrderSvc.getAll(map);
 		model.addAttribute("supListData", list); 
-		return "sFunction/supplier/supList";
+		return "sFunction/supOrder/supList";
 	}
 	
 	//全都要
 	@ModelAttribute("supListData")
-	protected List<SupVO> referenceListData() {
-		List<SupVO> list = supSvc.getAll();
+	protected List<SupOrderVO> referenceListData() {
+		List<SupOrderVO> list = supOrderSvc.getAll();
 		return list;
 	}
 	
@@ -68,11 +68,11 @@ public class SupController {
 	    for (ConstraintViolation<?> violation : violations ) {
 	          strBuilder.append(violation.getMessage() + "<br>");
 	    }
-		List<SupVO> list = supSvc.getAll();
+		List<SupOrderVO> list = supOrderSvc.getAll();
 		model.addAttribute("supListData", list);
 		
 		String message = strBuilder.toString();
-	    return new ModelAndView("sFunction/supplier/supplierMain", "errorMessage", "請修正以下錯誤:<br>"+message);
+	    return new ModelAndView("sFunction/supOrder/supplierMain", "errorMessage", "請修正以下錯誤:<br>"+message);
 	}
 	
 }
