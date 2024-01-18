@@ -57,16 +57,7 @@ public class PLoginController {
 		  }
 		  return false;
 		}
-		  
-	//驗證身分，S店家
-	  protected boolean allowUserS(String account, String password) {
-		  if(account!=null && !account.equals("")) {
-			  storeEmpLogin = storeEmpSvc.getBySEmpId(account);
-			  if ( storeEmpLogin != null && account.equals(storeEmpLogin.getsEmpId()) && password.equals(storeEmpLogin.getsEmpId())  )
-				  return true;
-		  }
-		  return false;
-		}
+	
 	  
 	  //登入畫面
 	    @GetMapping
