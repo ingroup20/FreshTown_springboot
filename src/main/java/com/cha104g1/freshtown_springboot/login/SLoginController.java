@@ -32,8 +32,8 @@ public class SLoginController {
 	//驗證身分，S店家
 	  protected boolean allowUserS(String account, String password) {
 		  if(account!=null && !account.equals("")) {
-			  storeEmpLogin = storeEmpSvc.getBySEmpId(account);
-			  if ( storeEmpLogin != null && account.equals(String.valueOf( storeEmpLogin.getsEmpId()) ) && password.equals(String.valueOf( storeEmpLogin.getsEmpId()) ) )
+			  storeEmpLogin = storeEmpSvc.getBySEmpId(Integer.valueOf(account));
+			  if ( storeEmpLogin != null && storeEmpLogin.getsEmpId().equals(Integer.valueOf(account ) ) && storeEmpLogin.getsEmpId().equals(Integer.valueOf( password) ) )
 				  return true;
 		  }
 		  return false;

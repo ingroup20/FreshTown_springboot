@@ -85,7 +85,7 @@ body {
   </thead>
 	
   <tbody>
-		<th:block th:each="ordersVO : ${ordersListData}">
+		<th:block th:each="ordersVO : ${ordersListDataS}">
 			<tr>
 				<td th:text="${ordersVOStat.count}">計數</td>
 				<td th:text="${ordersVO.storesVO.storeId}+${ordersVO.storesVO.storeName}">店家名稱</td>
