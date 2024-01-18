@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
 
 @Controller
 @RequestMapping("/pFunction/customizeddetail")
@@ -25,6 +27,9 @@ public class CustomizedDetailController {
 	
 	@Autowired
 	CustomizedDetailService customizedDetailSvc;
+	
+	@Autowired
+	CustomizedItemsService customizedItemsSvc;
 
 	@GetMapping("addCustomizedDetail")
 	public String addCustomizedDetail(ModelMap model) {
@@ -85,6 +90,13 @@ public class CustomizedDetailController {
 	protected List<CustomizedDetailVO> referenceListData(Model model) {
 
 		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
+		return list;
+	}
+	
+	@ModelAttribute("customizedItemsListData") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected List<CustomizedItemsVO> referenceListData1(Model model) {
+		
+		List<CustomizedItemsVO> list = customizedItemsSvc.getAll();
 		return list;
 	}
 }
