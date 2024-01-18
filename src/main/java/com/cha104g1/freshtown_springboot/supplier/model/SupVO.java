@@ -20,9 +20,9 @@ public class SupVO implements java.io.Serializable {
 	private String supplierName;
 	private String supplierContact;
 	private String supplierPhone;
-//	@ManyToOne
-//	@JoinColumn(name="storeId",referencedColumnName ="storeId")
-	private Integer storeId;
+	@ManyToOne
+	@JoinColumn(name="storeId",referencedColumnName ="storeId")
+	private StoresVO storeId;
 	private Integer supplierState;
 
 	public Integer getSupId() {
@@ -57,13 +57,13 @@ public class SupVO implements java.io.Serializable {
 		this.supplierPhone = supplierPhone;
 	}
 
-//	public StoresVO getStoresVO() {
-//		return storesVO;
-//	}
-//	//
-//	public void setStoresVO(StoresVO storesVO) {
-//		this.storesVO = storesVO;
-//	}
+	public StoresVO getStoresVO() {
+		return storeId;
+	}
+	//
+	public void setStoresVO(StoresVO storeId) {
+		this.storeId = storeId;
+	}
 
 	public Integer getSupplierState() {
 		return supplierState;
@@ -73,12 +73,12 @@ public class SupVO implements java.io.Serializable {
 		this.supplierState = supplierState;
 	}
 
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
+//	public Integer getStoreId() {
+//		return storeId;
+//	}
+//
+//	public void setStoreId(Integer storeId) {
+//		this.storeId = storeId;
+//	}
 
 }

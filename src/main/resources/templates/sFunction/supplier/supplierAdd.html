@@ -69,8 +69,8 @@
 			
 			<div>
 			<label>店家帳號:</label>
-			<input type="number" th:field="*{storeId}" onclick="hideContent('storeId.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('storeId')}" th:errors="*{storeId}" class="error" id="storeId.errors"></span>
+			<input type="number" th:field="*{StoresVO.storeId}" onclick="hideContent('StoresVO.storeId.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
 			</div>
 			
 			<div>
