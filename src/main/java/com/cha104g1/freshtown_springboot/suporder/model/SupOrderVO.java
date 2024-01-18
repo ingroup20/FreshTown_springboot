@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+
 @Entity
 @Table(name="sup_order")
 public class SupOrderVO implements java.io.Serializable {
@@ -29,14 +31,14 @@ public class SupOrderVO implements java.io.Serializable {
 	private Date deliDate;
 	private String marks;
 	
-//	@ManyToOne
-//	@JoinColumn(name="storeId",referencedColumnName ="storeId")
-    private Integer storeId;
+	@ManyToOne
+	@JoinColumn(name="storeId",referencedColumnName ="storeId")
+    private StoresVO storeId;
 	
-	public Integer getStoreId() {
+	public StoresVO getStoresVO() {
 		return storeId;
 	}
-	public void setStoreId(Integer storeId) {
+	public void setStoresVO(StoresVO storeId) {
 		this.storeId = storeId;
 	}
 	public Integer getId() {
