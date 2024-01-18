@@ -25,7 +25,7 @@ import com.cha104g1.freshtown_springboot.supplier.model.SupService;
 import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 @Controller
-@RequestMapping("/pFunction/supplier/")
+@RequestMapping("/sFunction/supplier/")
 public class SupController {
 	
 	
@@ -51,7 +51,7 @@ public class SupController {
 		Map<String, String[]> map = req.getParameterMap();
 		List<SupVO> list = supSvc.getAll(map);
 		model.addAttribute("supListData", list); 
-		return "pFunction/supplier/supList";
+		return "sFunction/supplier/supList";
 	}
 	
 	//全都要
@@ -72,7 +72,7 @@ public class SupController {
 		model.addAttribute("supListData", list);
 		
 		String message = strBuilder.toString();
-	    return new ModelAndView("pFunction/supplier/supplierMain", "errorMessage", "請修正以下錯誤:<br>"+message);
+	    return new ModelAndView("sFunction/supplier/supplierMain", "errorMessage", "請修正以下錯誤:<br>"+message);
 	}
 	
 }
