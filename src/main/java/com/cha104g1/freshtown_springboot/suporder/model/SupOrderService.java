@@ -23,7 +23,7 @@ public class SupOrderService {
 		repository.save(supOrderVO);
 	}
 	
-	public void updateSupOrder(SupOrderVO supOrderVO) {
+	public void updateSupOrderVO(SupOrderVO supOrderVO) {
 		repository.save(supOrderVO);
 	}
 	

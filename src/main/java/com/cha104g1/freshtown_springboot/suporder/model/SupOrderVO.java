@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
-
 @Entity
 @Table(name="sup_order")
 public class SupOrderVO implements java.io.Serializable {
@@ -100,16 +98,6 @@ public class SupOrderVO implements java.io.Serializable {
 	}
 	public void setMarks(String marks) {
 		this.marks = marks;
-	}
-	//
-//	public StoresVO getStoresVO() {
-//		return storesVO;
-//	}
-//	//
-//	public void setStoresVO(StoresVO storesVO) {
-//		this.storesVO = storesVO;
-//	}
-
-	
+	}	
 
 }

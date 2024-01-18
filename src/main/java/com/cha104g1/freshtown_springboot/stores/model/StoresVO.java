@@ -399,18 +399,18 @@ public class StoresVO implements java.io.Serializable{
 		this.pickingVO = pickingVO;
 	}
 	
-	//採購單
-	@OneToMany(mappedBy = "storesVO" ,cascade= CascadeType.ALL)
-	private Set<SupOrderVO> supOrderVO;
-	
-	public Set<SupOrderVO> getSupOrderVO(){
-		return supOrderVO;
-	}
-	
-	public void setSupOrderVO(Set<SupOrderVO> supOrderVO) {
-		this.supOrderVO = supOrderVO;
-	}
-	
+//	//採購單
+//	@OneToMany(mappedBy = "storesVO" ,cascade= CascadeType.ALL)
+//	private Set<SupOrderVO> supOrderVO;
+//	
+//	public Set<SupOrderVO> getSupOrderVO(){
+//		return supOrderVO;
+//	}
+//	
+//	public void setSupOrderVO(Set<SupOrderVO> supOrderVO) {
+//		this.supOrderVO = supOrderVO;
+//	}
+//	
 	//供應商
 //	@OneToMany(mappedBy = "storesVO" ,cascade= CascadeType.ALL)
 //	private Set<SupplierVO> supplierVO;
