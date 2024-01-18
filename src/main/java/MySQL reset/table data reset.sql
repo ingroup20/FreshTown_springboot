@@ -61,19 +61,19 @@ INSERT INTO supplier VALUES (2,'Ba','handsome','0227120589',2,1);
 INSERT INTO supplier VALUES (3,'Me','阿格麗','034506333',3,1);
 
 -- 逸晉
- INSERT INTO store_emp (sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
+ INSERT INTO store_emp (sEmpPw, sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
  VALUES
-     (CONCAT('Name', FLOOR(RAND() * 10)), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
- INSERT INTO store_emp (sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
+     (CONCAT('PW', LPAD(FLOOR(RAND() * 1000), 3, '0')), CONCAT('Name', FLOOR(RAND() * 10)), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
+ INSERT INTO store_emp (sEmpPw, sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
  VALUES
-     (CONCAT('Name', FLOOR(RAND() * 10)), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
- INSERT INTO store_emp (sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
+     (CONCAT('PW', LPAD(FLOOR(RAND() * 1000), 3, '0')), CONCAT('Name', FLOOR(RAND() * 10)), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
+ INSERT INTO store_emp (sEmpPw, sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
  VALUES
-     (CONCAT('Name', FLOOR(RAND() * 10)), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
+     (CONCAT('PW', LPAD(FLOOR(RAND() * 1000), 3, '0')), CONCAT('Name', FLOOR(RAND() * 10)), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
 
- INSERT INTO store_emp (sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
+ INSERT INTO store_emp (sEmpPw, sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
  VALUES
-     ("虎爸", FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
+     (CONCAT('PW', LPAD(FLOOR(RAND() * 1000), 3, '0')), "虎爸", FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), FLOOR(RAND() * 2), 1, CONCAT('Dept', FLOOR(RAND() * 10)), CONCAT('Title', FLOOR(RAND() * 10)), FLOOR(RAND() * 3));
 
 
 

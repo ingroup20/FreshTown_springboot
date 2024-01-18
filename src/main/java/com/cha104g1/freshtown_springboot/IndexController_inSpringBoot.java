@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedVO;
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassService;
 import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
-
+import com.cha104g1.freshtown_springboot.meals.model.MealsService;
+import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
@@ -77,7 +82,15 @@ public class IndexController_inSpringBoot {
 	
 	@Autowired
 	CustomizedDetailService customizedDetailSvc;
+	
+	@Autowired
+	CustomizedItemsService customizedItemsSvc;
 
+	@Autowired
+	MealsService mealsSvc;
+	
+	@Autowired
+	CustomizedService customizedSvc;
 	
     @Value("${welcome.message}")
     private String message;
@@ -282,19 +295,70 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== CustomizedDetail  要使用的資料 ===================   
-    @GetMapping("/sFunction/customizeddetail/select_page")
+    @GetMapping("/pFunction/customizeddetail/select_page")
 	public String select_page9(Model model) {
-		return "/sFunction/customizeddetail/select_page";
+		return "/pFunction/customizeddetail/select_page";
 	}
     
-    @GetMapping("/sFunction/customizeddetail/listAllCustomizedDetail")
+    @GetMapping("/pFunction/customizeddetail/listAllCustomizedDetail")
 	public String listAllCustomizedDetail(Model model) {
-		return "/sFunction/customizeddetail/listAllCustomizedDetail";
+		return "/pFunction/customizeddetail/listAllCustomizedDetail";
 	}
     
 	@ModelAttribute("customizedDetailListData") // for select_page.html 第135行用
 	protected List<CustomizedDetailVO> referenceListData_CustomizedDetail(Model model) {
 		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
+		return list;
+	}
+	
+	//=========== CustomizedItems  要使用的資料 ===================   
+	@GetMapping("/pFunction/customizeditems/select_page")
+	public String select_page10(Model model) {
+		return "/pFunction/customizeditems/select_page";
+	}
+	
+	@GetMapping("/pFunction/customizeditems/listAllCustomizedItems")
+	public String listAllCustomizedItems(Model model) {
+		return "/pFunction/customizeditems/listAllCustomizedItems";
+	}
+	
+	@ModelAttribute("customizedItemsListData") // for select_page.html 第135行用
+	protected List<CustomizedItemsVO> referenceListData_CustomizedItems(Model model) {
+		List<CustomizedItemsVO> list = customizedItemsSvc.getAll();
+		return list;
+	}
+	
+	//=========== Meals  要使用的資料 ===================   
+	@GetMapping("/pFunction/meals/select_page")
+	public String select_page11(Model model) {
+		return "/pFunction/meals/select_page";
+	}
+	
+	@GetMapping("/pFunction/meals/listAllMeals")
+	public String listAllMeals(Model model) {
+		return "/pFunction/meals/listAllMeals";
+	}
+	
+	@ModelAttribute("mealsListData") // for select_page.html 第135行用
+	protected List<MealsVO> referenceListData_Meals(Model model) {
+		List<MealsVO> list = mealsSvc.getAll();
+		return list;
+	}
+	
+	//=========== Customized  要使用的資料 ===================   
+	@GetMapping("/pFunction/customized/select_page")
+	public String select_page12(Model model) {
+		return "/pFunction/customized/select_page";
+	}
+	
+	@GetMapping("/pFunction/customized/listAllCustomized")
+	public String listAllCustomized(Model model) {
+		return "/pFunction/customized/listAllCustomized";
+	}
+	
+	@ModelAttribute("customizedListData") // for select_page.html 第135行用
+	protected List<CustomizedVO> referenceListData_Customized(Model model) {
+		List<CustomizedVO> list = customizedSvc.getAll();
 		return list;
 	}
 

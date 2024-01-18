@@ -25,6 +25,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 public class StoreEmpVO {
 	
 	    private Integer sEmpId;
+	    private String sEmpPw;
 	    private String sEmpName;
 	    private Byte invPerm;
 	    private Byte purPerm;
@@ -46,6 +47,14 @@ public class StoreEmpVO {
 		}
 		public void setsEmpId(Integer sEmpId) {
 			this.sEmpId = sEmpId;
+		}
+		
+		@Column(name = "sEmpPw")
+		public String getpEmpPw() {
+			return sEmpPw;
+		}
+		public void setpEmpPw(String pEmpPw) {
+			this.sEmpPw = pEmpPw;
 		}
 		
 		@Column(name = "sEmpName")

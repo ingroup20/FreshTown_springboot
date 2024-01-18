@@ -110,6 +110,7 @@ CREATE TABLE supplier (
  -- 逸晉
 CREATE TABLE  store_emp (
     sEmpId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    sEmpPw VARCHAR(15) NOT NULL,
     sEmpName VARCHAR(15) NOT NULL,
     invPerm TINYINT NOT NULL CHECK (invPerm IN (0, 1)),
     purPerm TINYINT NOT NULL CHECK (purPerm IN (0, 1)),
