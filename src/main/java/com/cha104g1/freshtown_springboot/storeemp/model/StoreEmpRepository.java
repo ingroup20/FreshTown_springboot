@@ -9,9 +9,5 @@ public interface StoreEmpRepository extends JpaRepository<StoreEmpVO, Integer>{
 	//登入身分驗證用
 	@Transactional
 	@Query(value = "from StoreEmpVO where sEmpId =?1")
-<<<<<<< HEAD
-	StoreEmpVO findBySEmpId( Integer sEmpId);
-=======
 	StoreEmpVO findBySEmpId(Integer sEmpId);
->>>>>>> refs/heads/master
 }
