@@ -172,6 +172,7 @@ public class IndexController_inSpringBoot {
 		return "sFunction/orders/select_page";
 	}
 
+
     //=========== stores  要使用的資料 ===================   
     @GetMapping("/pFunction/stores/select_page")
 	public String select_page4(Model model) {

@@ -1,10 +1,12 @@
 package com.cha104g1.freshtown_springboot.orders.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
 @Validated
@@ -79,7 +83,33 @@ public class SOrdersController {
 		return "sFunction/orders/listAllOrders";
 	}
 
+	//==========================================
+
+    
+	@ModelAttribute("ordersListDataS") // for select_page.html 第135行用
+	protected List<OrdersVO> getListData_OrdersS(HttpServletRequest req,Model model) {
+		HttpSession session = req.getSession();
+		Object object =session.getAttribute("storeEmpLogin");
+		System.out.println(object);
+		 // 检查类型
+	    if (object instanceof StoreEmpVO) {
+	        // 强制转换为StoresVO类型
+	    	StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+	        
+	        // 使用storesVO进行操作
+	        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+	        System.out.println(list.size());
+	        return list;
+	    } else {
+	        // 如果类型不匹配，你可以选择采取适当的措施，例如返回空列表或者抛出异常
+	       System.out.println("xxx");
+	    	return Collections.emptyList();
+	    }
+	}
 	
-	
+    @GetMapping("/listAllOrders")
+	public String listAllOrders(Model model) {
+		return "sFunction/orders/listAllOrders";
+	}
 	
 }

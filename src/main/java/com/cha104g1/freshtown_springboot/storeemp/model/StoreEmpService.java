@@ -70,7 +70,7 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 	}
 
 	//取得SQL身分帳密(中群)
-	public StoreEmpVO getBySEmpId( String sEmpId) {
+	public StoreEmpVO getBySEmpId( Integer sEmpId) {
 		StoreEmpVO  storeEmpLogin =repository.findBySEmpId(sEmpId);
 		return storeEmpLogin; 
 	}
