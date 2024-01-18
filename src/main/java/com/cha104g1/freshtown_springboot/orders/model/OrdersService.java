@@ -50,7 +50,9 @@ public class OrdersService {
 		return HibernateUtil_CompositeQuery_Orders.getAllC(map,sessionFactory.openSession());
 	}
 
-    
+	public List<OrdersVO> getAllByStore(Integer storeId) {
+		return repository.findAllByStoreId(storeId);
+	}
 	
     
 }

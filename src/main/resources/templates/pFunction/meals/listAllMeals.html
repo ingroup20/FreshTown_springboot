@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>所有客製項目選項資料 - listAllCustomizedDetail.html</title>
+<title>所有商品資料 - listAllMeals.html</title>
 <script th:src="@{/js/jquery-1.11.3.min.js}"></script> <!-- 左側jquery為table分頁用 -->
 <head></head>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>                                    <!-- ●●js  for jquery datatables 用 -->
@@ -60,32 +60,42 @@ body {
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>所有客製項目選項資料 - listAllCustomizeddetail.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/customizeddetail/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+		 <div align="center"> <h2>所有商品資料 - listAllMeals.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/meals/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
 </nav>
 
 <table id="example" class="display" style="width: 100%">
   <thead >
 	<tr style="background-color:#CCCCFF">
 		<th>計數</th>
-		<th>項目選項流水號</th>
-		<th>客製項目編號</th>
-		<th>客製項目選項名稱</th>		
+		<th>商品編號</th>
+		<th>商品名稱</th>		
+		<th>價格</th>		
+		<th>餐點分類</th>		
+		<th>餐點狀態</th>		
+		<th>店家</th>		
+		<th>餐點圖片</th>		
+		<th>預估製作時間</th>		
 		<th>修改</th>
 	</tr>
   </thead>
 	
   <tbody>
-		<th:block th:each="customizedDetailVO : ${customizedDetailListData}">
+		<th:block th:each="mealsVO : ${mealsListData}">
 			<tr>
-				<td th:text="${customizedDetailVOStat.count}"></td>
-				<td th:text="${customizedDetailVO.custedDtlNo}"></td>
-				<td th:text="${customizedDetailVO.customizedItemsVO.custedItemsNo}+${customizedDetailVO.customizedItemsVO.custedName}"></td>
-				<td th:text="${customizedDetailVO.custedDtlName}"></td>
+				<td th:text="${mealsVOStat.count}"></td>
+				<td th:text="${mealsVO.mealNo}"></td>
+				<td th:text="${mealsVO.mealName}"></td>
+				<td th:text="${mealsVO.mealPrice}"></td>
+				<td th:text="${mealsVO.mealTypeVO.mealTypeName}"></td>
+				<td th:text="${mealsVO.mealOnsale}"></td>
+				<td th:text="${mealsVO.storesVO.storeName}"></td>
+				<td><img th:src="@{/meals/DBGifReader2} + '?mealNo=' + ${mealsVO.mealNo}" width="100px"></td>
+				<td th:text="${mealsVO.cookingTime}"></td>
 				<td>
-				  <form method="post" th:action="@{/customizeddetail/getOne_For_Update}" style="margin-bottom: 0px;">
+				  <form method="post" th:action="@{/pFunction/meals/getOne_For_Update}" style="margin-bottom: 0px;">
 				     <input type="submit" value="修改">
-				     <input type="hidden" name="custedDtlNo" th:value="${customizedDetailVO.custedDtlNo}">
+				     <input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">
 				  </form>			
 				</td>
 			</tr>
