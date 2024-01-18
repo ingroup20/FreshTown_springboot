@@ -57,6 +57,10 @@ public class PLoginController {
 		  }
 		  return false;
 		}
+<<<<<<< HEAD
+=======
+		  
+>>>>>>> refs/heads/master
 	
 	  
 	  //登入畫面

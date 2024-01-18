@@ -13,7 +13,6 @@ import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 public interface CustomizedRepository extends JpaRepository<CustomizedVO, Integer>{
 
 	@Transactional
-	@Modifying
 	@Query(value = " from customized where mealNo =?1 and custedItemsNo =?2", nativeQuery = true)
 	Optional<CustomizedVO> findByCompositeKey(Integer mealNo, Integer custedItemsNo);//自訂除了Pk外的查詢方法
 

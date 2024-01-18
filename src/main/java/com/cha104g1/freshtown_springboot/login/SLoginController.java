@@ -33,7 +33,7 @@ public class SLoginController {
 	  protected boolean allowUserS(String account, String password) {
 		  if(account!=null && !account.equals("")) {
 			  storeEmpLogin = storeEmpSvc.getBySEmpId(Integer.valueOf(account));
-			  if ( storeEmpLogin != null && account.equals(String.valueOf( storeEmpLogin.getsEmpId()) ) && password.equals(String.valueOf( storeEmpLogin.getsEmpId()) ) )
+			  if ( storeEmpLogin != null && storeEmpLogin.getsEmpId().equals(Integer.valueOf(account ) ) && storeEmpLogin.getsEmpId().equals(Integer.valueOf( password) ) )
 				  return true;
 		  }
 		  return false;

@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>所有員工資料 - listAllEmp.html</title>
+<title>所有商品可客製選項資料 - listAllCustomized.html</title>
 <script th:src="@{/js/jquery-1.11.3.min.js}"></script> <!-- 左側jquery為table分頁用 -->
 <head></head>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>                                    <!-- ●●js  for jquery datatables 用 -->
@@ -60,50 +60,33 @@ body {
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>所有退款申請資料 - listAllOrders.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/orders/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+		 <div align="center"> <h2>所有商品可客製選項資料 - listAllCustomized.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/customized/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
 </nav>
 
 <table id="example" class="display" style="width: 100%">
   <thead >
 	<tr style="background-color:#CCCCFF">
 		<th>計數</th>
-		<th>店家流水號</th>
-		<th>訂單編號</th>
-		<th>訂餐狀態</th>
-		<th>下單時間</th>
-		<th>線上付款時間</th>
-		<th>付款方式</th>
-		<th>付款狀態</th>
-		<th>完成時間</th>
-		<th>會員流水號</th>
-		<th>總金額</th>
-		<th>匯款狀態</th>	
-		<th>匯款日期</th>		
+		<th>商品編號</th>
+		<th>客製項目編號</th>
+		<th>客製選項狀態</th>		
 		<th>修改</th>
 	</tr>
   </thead>
 	
   <tbody>
-		<th:block th:each="ordersVO : ${ordersListDataS}">
+		<th:block th:each="customizedVO : ${customizedListData}">
 			<tr>
-				<td th:text="${ordersVOStat.count}">計數</td>
-				<td th:text="${ordersVO.storesVO.storeId}+${ordersVO.storesVO.storeName}">店家名稱</td>
-				<td th:text="${ordersVO.orderId}">訂單編號</td>
-				<td th:text="${ordersVO.orderState}">訂餐狀態</td>
-				<td th:text="${ordersVO.orderTime}">下單時間</td>
-				<td th:text="${ordersVO.payDate}">線上付款時間</td>
-				<td th:text="${ordersVO.payMethod}">付款方式</td>
-				<td th:text="${ordersVO.payState}">付款狀態</td>
-				<td th:text="${ordersVO.finishTime}">完成時間</td>
-				<td th:text="${ordersVO.customerVO.customerId}">會員流水號</td>
-				<td th:text="${ordersVO.totalPrice}">總金額</td>
-				<td th:text="${ordersVO.remitState}">匯款狀態</td>
-				<td th:text="${ordersVO.remitDate}">匯款日期</td>
+				<td th:text="${customizedVOStat.count}"></td>
+				<td th:text="${customizedVO.mealNo}"></td>
+				<td th:text="${customizedVO.custedItemsNo}"></td>
+				<td th:text="${customizedVO.custedStatus}"></td>
 				<td>
-				  <form method="post" th:action="@{/orders/getOne_For_Update}" style="margin-bottom: 0px;">
+				  <form method="post" th:action="@{/pFunction/customized/getOne_For_Update}" style="margin-bottom: 0px;">
 				     <input type="submit" value="修改">
-				     <input type="hidden" name="orderId" th:value="${ordersVO.orderId}">
+				     <input type="hidden" name="mealNo" th:value="${customizedVO.mealNo}">
+				     <input type="hidden" name="custedItemsNo" th:value="${customizedVO.custedItemsNo}">
 				  </form>			
 				</td>
 			</tr>
