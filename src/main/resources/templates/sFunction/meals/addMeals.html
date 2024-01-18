@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>商品修改 - update_meals_input.html</title>
+<title>商品新增 - addMeals.html</title>
 
 <head ></head>
 <style type="text/css">
@@ -47,19 +47,15 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>商品修改 - update_meals_input.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/pFunction/meals/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
+		 <div align="center"> <h2>商品新增 - addMeals.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/sFunction/meals/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
 </nav>
 
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{update}" method="post" th:object="${mealsVO}" enctype="multipart/form-data">
+		<form th:action="@{insert}" method="post" th:object="${mealsVO}" enctype="multipart/form-data">
 			
-			<div>
-			<label>商品編號:</label>
-			<input type="text" th:field="*{mealNo}" style="border:0px ; font-weight: bold;" readonly />
-			</div>
-			
+		
 			<div>
 			<label>商品名稱:</label>
 			<input type="text" th:field="*{mealName}" onclick="hideContent('mealName.errors');" /><br/>
@@ -88,15 +84,21 @@
 		
 			<div>
 			<label>店家:</label>
-			<input type="text" th:field="*{storesVO.storeName}" readonly /><br/>
-			<span  th:if="${#fields.hasErrors('storesVO.storeName')}" th:errors="*{storesVO.storeName}" class="error" id="storesVO.storeName.errors"></span>
+<!-- 			<input type="text" th:field="*{storesVO.storeName}" onclick="hideContent('storesVO.storeName.errors');" /><br/> -->
+<!-- 			<span  th:if="${#fields.hasErrors('storesVO.storeName')}" th:errors="*{storesVO.storeName}" class="error" id="storesVO.storeName.errors"></span> -->
+			<select th:field="*{storesVO.storeId}">
+				<option th:each="storesVO : ${storesListData2}" th:value="${storesVO.storeId}" th:text="${storesVO.storeName}" />
+			</select>
+			<span  th:if="${#fields.hasErrors('storesVO.storeId')}" th:errors="*{storesVO.storeId}" class="error" id="storesVO.storeId.errors"></span>
 			</div>
 		
 			<div>
 			<label>餐點圖片:</label>
-			<input type="file" th:field="*{mealPicture}" onclick="previewImage()" multiple="multiple" /><br/>
-<!-- 		可以不修改圖片	<span  th:if="${#fields.hasErrors('mealPicture')}" th:errors="*{mealPicture}" class="error" id="mealPicture.errors"></span> -->
-			<div id="blob_holder"><img th:src="@{/meals/DBGifReader2} + '?mealNo=' + ${mealsVO.mealNo}" width="100px"></div>
+			<input type="file" th:field="*{mealPicture}" onclick="previewImage()" multiple="multiple" onchange="hideContent('mealPicture.errors');" /><br/>
+<!-- 			<span  th:if="${#fields.hasErrors('mealPicture')}" th:errors="*{mealPicture}" class="error" id="mealPicture.errors"></span> -->
+			<span class="error" th:utext="${errorMessage}" id="mealPicture.errors">${errorMessage}</span>
+<!-- 			<h2 id="errorMessage">${errorMessage}</h2>  -->
+			<div id="blob_holder"></div>
 			</div>
 		
 			<div>
@@ -104,10 +106,10 @@
 			<input type="text" th:field="*{cookingTime}" onclick="hideContent('cookingTime.errors');" /><br/>
 			<span  th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}" class="error" id="cookingTime.errors"></span>
 			</div>
-		
+					
 			<div>
 				<div></div>
-				<div><button type="submit" id="submit"> 送出修改 </button></div>
+				<div><button type="submit" id="submit"> 送出新增 </button></div>
 				<div></div>
 			</div>		
 		</form>
@@ -133,7 +135,7 @@ acceptedTypes = {
 		'image/gif' : true
 };
 function previewImage() {
-	var upfile1 = document.getElementById("upFiles");
+	var upfile1 = document.getElementById("mealPicture");
 	upfile1.addEventListener("change", function(event) {
 		var files = event.target.files || event.dataTransfer.files;
 		for (var i = 0; i < files.length; i++) {

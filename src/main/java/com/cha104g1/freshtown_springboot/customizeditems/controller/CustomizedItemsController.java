@@ -20,7 +20,7 @@ import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
 
 @Controller
-@RequestMapping("/pFunction/customizeditems")
+@RequestMapping("/sFunction/customizeditems")
 public class CustomizedItemsController {
 
 	@Autowired
@@ -30,7 +30,7 @@ public class CustomizedItemsController {
 	public String addCustomizedItems(ModelMap model) {
 		CustomizedItemsVO customizedItemsVO = new CustomizedItemsVO();
 		model.addAttribute("customizedItemsVO", customizedItemsVO);
-		return "pFunction/customizeditems/addCustomizedItems";
+		return "sFunction/customizeditems/addCustomizedItems";
 	}
 	
 	@PostMapping("insert")
@@ -40,7 +40,7 @@ public class CustomizedItemsController {
 
 		if (result.hasErrors()) {
 			System.out.println("資料有誤");
-			return "pFunction/customizeditems/addCustomizedItems";
+			return "sFunction/customizeditems/addCustomizedItems";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
 		customizedItemsSvc.addCustomizedItemsVO(customizedItemsVO);
@@ -48,7 +48,7 @@ public class CustomizedItemsController {
 		List<CustomizedItemsVO> list = customizedItemsSvc.getAll();
 		model.addAttribute("customizedItemsListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:pFunction/customizeditems/listAllCustomizedItems"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:/sFunction/customizeditems/listAllCustomizedItems"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
 	@PostMapping("getOne_For_Update")
@@ -60,7 +60,7 @@ public class CustomizedItemsController {
 
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
 		model.addAttribute("customizedItemsVO", customizedItemsVO);
-		return "pFunction/customizeditems/update_customizeditems_input"; // 查詢完成後轉交update_emp_input.html
+		return "sFunction/customizeditems/update_customizeditems_input"; // 查詢完成後轉交update_emp_input.html
 	}
 	
 	@PostMapping("update")
@@ -68,7 +68,7 @@ public class CustomizedItemsController {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		if (result.hasErrors()) {
 			System.out.println("資料不全");
-			return "pFunction/customizeditems/update_customizeditems_input";
+			return "sFunction/customizeditems/update_customizeditems_input";
 		}
 		/*************************** 2.開始修改資料 *****************************************/
 		customizedItemsSvc.updateCustomizedItemsVO(customizedItemsVO);
@@ -77,7 +77,7 @@ public class CustomizedItemsController {
 		model.addAttribute("success", "- (修改成功)");
 		customizedItemsVO = customizedItemsSvc.getCustomizedItemsVOByCustedItemsNo(Integer.valueOf(customizedItemsVO.getCustedItemsNo()));
 		model.addAttribute("customizedItemsVO", customizedItemsVO);
-		return "pFunction/customizeditems/listOneCustomizedItems"; // 修改成功後轉交listOneEmp.html
+		return "sFunction/customizeditems/listOneCustomizedItems"; // 修改成功後轉交listOneEmp.html
 	}
 	
 	// 全資料一覽
