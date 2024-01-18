@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>供應商資料</title>
+
+<head ></head>
+<style type="text/css">
+	
+    span {
+		display: inline-block;
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>供應商資料</h2>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/supplier/supplierMain}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+</nav>
+
+	<div align="center" th:fragment="listOneRefunds-div"> <!-- 此div被select_page.html第128行insert用 -->
+		<h3><span>查詢結果 :</span></h3>
+		<span>供應商編號:</span><span th:text="${supVO.supId}"></span><br/>
+		<span>供應商名稱:</span><span th:text="${supVO.supplierName}"></span><br/>
+		<span>聯絡人姓名:</span><span th:text="${supVO.supplierContact}"></span><br/>
+		<span>電話:</span><span th:text="${supVO.supplierPhone}"></span><br/>
+		<span>店家:</span><span th:text="${supVO.storeId}"></span><br/>
+		<span>供應商狀態:</span><span th:text="${supVO.supplierState}"></span><br/>
+	</div>
+
+
+</body>
+</html>

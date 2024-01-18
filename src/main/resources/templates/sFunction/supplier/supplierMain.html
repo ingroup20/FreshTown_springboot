@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>供應商查詢</title>
+
+<style type="text/css">
+
+	button {
+		padding: 5px;
+	}
+	form {
+		display: table;
+	}
+	form div {
+		display: table-row;
+	}
+	label, input, span, select {
+		display: table-cell;
+		margin: 2px;
+		text-align: left;		
+	}
+
+	form div div {
+		display: table-cell;
+	}
+	.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    span {
+		display: inline-block;
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+	div.a {
+        display: inline-block;
+        width: 50%;
+        height: auto;
+        padding: 5px;
+        border: 0px solid blue;    
+        background-color: white; 
+    }
+    div.b {
+        display: inline-block;
+        width: 45%;
+        height: auto;
+        padding: 5px;
+        border: 1px solid blue;    
+        background-color: white;
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>供應商查詢</h2>
+		  <h3><a class="navbar-brand" th:href="@{/}">>回index.html</a></h3></div>
+</nav>
+
+	<h4><span>資料查詢:</span></h4>
+
+	<div class="a">
+	  <ul>
+		<li><h5><a href='supList'>全部</a> 供應商. <br><br></h5></li>
+
+		
+	      <li>   
+		    <form method="post" th:action="@{listSupplier_ByCompositeQuery}">
+		        <font color=blue>萬用複合查詢:</font><br>
+		        
+		        請輸入供應商名稱: 
+		        <input type="text" name="supplierName" value=""><br>
+		        
+		         請輸入供應商的聯絡人: 
+		        <input type="text" name="supplierContact" value=""><br>
+		           
+		        選擇供應商是否有在使用狀態: 
+				<select name="supplierState">
+				     <option value="0">不使用</option>
+		  			 <option value="1">正在使用</option>
+			    </select>
+			    
+	            <input type="submit" value="送出">
+		     </form>
+		  </li>
+      </ul>
+
+
+      <h4><span>更新供應商</span></h4>
+	  <ul>
+		  <li><h5><a href='addSup'>新增</a> 供應商.</h5></li>
+	  </ul>
+	</div>
+    
+<!-- 
+    <div class="b" th:if="${getOne_For_Display}">
+        <div th:insert="~{/pFunction/supplier/supOne :: listOnesup}"></div>
+    </div>
+-->
+</body>
+</html>
