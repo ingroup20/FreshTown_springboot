@@ -18,6 +18,11 @@ public interface OrdersRepository extends JpaRepository<OrdersVO, Integer> {
 		@Transactional
 		@Query(value = "from OrdersVO where storeId =?1")
 		List<OrdersVO> findAllByStoreId( Integer storeId);
+		
+		//登入身分篩選
+		@Transactional
+		@Query(value = "from OrdersVO where CustomerId =?1")
+		List<OrdersVO> findAllByCustomerId( Integer CustomerId);
 }
 
 

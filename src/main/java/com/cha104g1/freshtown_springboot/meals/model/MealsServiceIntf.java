@@ -23,5 +23,6 @@ public interface MealsServiceIntf {
 	int getPageTotal();
 	
 	List<MealsVO> getMealsVOByCompositeQuery(Map<String, String[]> map);
-	
+	//店家菜單
+	List<MealsVO> getAllByStoreId(Integer storeId);
 }

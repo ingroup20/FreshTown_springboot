@@ -36,6 +36,7 @@ public class CLoginController {
 			  if ( customerLogin != null && account.equals(customerLogin.getCustomerAddress()) && password.equals(customerLogin.getCustomerPw())  )
 				  return true;
 		  }
+		  System.out.println("帳密錯誤，或不存在");
 		  return false;
 		}
 	  
@@ -62,7 +63,7 @@ public class CLoginController {
                     url = location;
                 } 
 	        } 
-	    	System.out.println("帳密錯誤");
+
 		  	return "redirect:" + url;
 	    }
 }

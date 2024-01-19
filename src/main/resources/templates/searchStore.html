@@ -8,54 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlHoUB7fxl9z1I7kF7dJ1lFqIiiPmM1I2j9c5n9d" crossorigin="anonymous">
 </head>
 <body class="body">
-    <nav class="nav ">
-        <div  class="nav ">
-        	<span><a href="#!"><img id="logo" src="./cFunction/images/LOGO.png"></a></span>
-            <span><a class="title logo" href="#!">鮮城 FreshTown</a></span>
-            <button class="phone-btn">行動版導覽按鈕</button>
-            <ul class="nav">
-                <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>
-                <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li>
-                <li class="nav_item ">
-                    <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">註冊專區</a>
-                    <ul class="dropdown_menu -none">
-                        <li><a class="dropdown_item title" href="#!">訂餐會員註冊</a></li>
-                        <li><hr class="dropdown_divider" /></li>
-                        <li><a class="dropdown_item title" href="#!">合作店家申請</a></li>
-                    </ul>
-                </li>
-                <li class="nav_item ">
-               	 <a th:href="@{/cEntrance/cFunction/cEntrancePass}" th:text="顧客會員登入" style="font-size:2rem"></a>
-				</li>
-            
-            	<li class="nav_item ">
-                	<a th:href="@{/index}"  th:text="index測試頁" style="font-size:2rem"></a>
-				</li>
-				<li class="nav_item ">
-                	<a th:href="@{/sFunction/sEntrance}"  th:text="店家後台入口" style="font-size:2rem"></a>
-				</li>
-				<li class="nav_item ">
-                	<a th:href="@{/pFunction/pEntrance}"  th:text="平台後台入口" style="font-size:2rem"></a>
-				</li>
-            
-            </ul>
-                    
-            <!--購物車-->
-            <form class="buy_car">
-                <button class="buy_car" type="submit">
-                    <img></img>
-                    Cart
-                    <!--購物車數量-->
-                    <span>0</span>
-                </button>
-            </form>
-            <div class="nav_footer"></div>
 
-        </div>
-        
-    </nav>
-
-    <header class="header">
+    <header class="header" th:fragment="searchStore-div">
         <div class="header">
             <h1 class="header ">美食饗宴  盡在鮮城</h1>
             <p class="header">最公正的餐廳推薦平台，立即加入會員訂餐吧!</p>
@@ -64,7 +18,7 @@
   
     </header>
 
-    <section class="section">
+    <section class="section" th:fragment="searchStore-div">
         <div class="section">
             <!-- 店家-->
             <th:block th:each="storesVO : ${storesListData}">
@@ -93,12 +47,12 @@
 	
 	                </div>
 	                <!-- 控制項-->
-<!-- 	                <div class="card_footer title"> -->
-<!-- 	                    <form id="entrance" method="get" th:action="@{/cEntrance/onceStorePage}" >  -->
-<!-- 		 				     <input id="entrance" type="submit" value="看菜單">  -->
-<!-- 						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}"> -->
-<!-- 					     </form>		 -->
-<!-- 	                </div> -->
+	                <div class="card_footer title">
+	                    <form id="entrance" method="get" th:action="@{getOneStoreMeal}" > 
+		 				     <input id="entrance" type="submit" value="看菜單"> 
+						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
+					     </form>		
+	                </div>
 	                
 	            </div>
            </th:block>

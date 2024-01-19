@@ -72,6 +72,7 @@
   <filter-mapping>
     <filter-name>CloginFilter</filter-name>
     <url-pattern>/cFunction/*</url-pattern>
+    <url-pattern>/cEntrance/cFunction/*</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

@@ -192,7 +192,7 @@ public class IndexController_inSpringBoot {
 	
 
 	//=================================
-	@GetMapping("/cEntranceStores")
+	@GetMapping("/cEntrance")
 	public String goCEntrance(Model model) {
 		return "cEntrance";
 	}

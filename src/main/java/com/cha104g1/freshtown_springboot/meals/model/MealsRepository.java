@@ -1,5 +1,6 @@
 package com.cha104g1.freshtown_springboot.meals.model;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,5 +34,9 @@ public interface MealsRepository extends JpaRepository<MealsVO, Integer>{
 //	@Query(value = " from meals where storeId =?1", nativeQuery = true)
 //	Optional<MealsVO> findByStoresId(StoresVO storesVO);//自訂除了Pk外的查詢方法
 
-	
+	//店家頁面查菜單(中群)
+	@Transactional
+	@Query(value = " from MealsVO where storeId =?1")
+	List<MealsVO> findAllByStoreId(Integer storeId);
+
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Homepage - 鮮城 FreshTown</title>
+    <link rel="stylesheet" th:href="@{/css/allBase.css} ">
+</head>
+<body class="body">
+    <nav class="nav ">
+        <div  class="nav ">
+            <a class="logo title " th:href="@{/}"><img src="./images/LOGO.png" alt=""> </a>
+            <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
+            <button class="phone-btn">行動版導覽按鈕</button>
+            <ul class="nav">
+                <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>
+                <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li>
+                <li class="nav_item ">
+                    <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
+                    <ul class="dropdown_menu ">
+                        <li>
+                            <form method="post" th:action="searchPersonalInfo">
+                                <input type="submit" value="個人資料管理"> 
+                            </form><br>
+                        </li>
+                        <li>
+                            <form method="post" th:action="searchLikeStore">
+                                 <input type="submit" value="收藏店家"> 
+                            </form><br>
+                        </li>
+                        <li>
+                            <form method="post" th:action="searchBlackStore">
+                                <input type="submit" value=" 黑名單店家"> 
+                            </form><br>
+                        </li>
+                        <li>
+                            <form method="post" th:action="searchOrderHistory"> 
+                                <input type="submit" value=" 下單紀錄"> 
+                            </form><br>
+                        </li>
+                      
+                    </ul>
+                </li>
+            </ul>
+            
+            <form id="logout"  th:action="logout">
+                <input type="submit" value="登出"> 
+            </form>
+            購物車
+            <form class="buy_car">
+                <p><span th:text="customerName">X X X</span> 您好!</p>
+                <button class="buy_car" type="submit">
+                    <img></img>
+                    Cart
+                    購物車數量
+                    <span>0</span>
+                </button>
+            </form>
+            <div class="nav_footer"></div>
+        </div>   
+    </nav>
+
+    <!-- include首頁 ==========================================-->
+ 	<header class="main" th:if="${searchStore}">
+        <div th:insert="~{/searchStore :: searchStore-div}"></div>
+    </header>
+    <select class="main" th:if="${searchStore}">
+        <div th:insert="~{/searchStore :: searchStore-div}"></div>
+    </select>
+    
+    
+    <header class="main" th:if="${getOneStoreMeal}">
+        <div th:insert="~{/onceStorePage :: onceStorePage-div}"></div>
+    </header>  
+    <select class="main" th:if="${getOneStoreMeal}">
+        <div th:insert="~{/onceStorePage :: onceStorePage-div}"></div>
+    </select>
+    
+    
+    <!-- include內容 ======================================-->
+ 
+    <main class="main" th:if="${searchPersonalInfo}">
+        <div th:insert="~{/cFunction/customer/showallpage :: showallpage-div}"></div>
+    </main>
+    <main class="main" th:if="${searchLikeStore}">
+        <div th:insert="~{/cFunction/likestore/listAllLikeStore :: listAllLikeStore-div}"></div>
+    </main>
+    <main class="main" th:if="${searchBlackStore}">
+        <div th:insert="~{/cFunction/likestore/listAllLikeStore :: listAllLikeStore-div}"></div>
+    </main>
+    <main class="main" th:if="${searchOrderHistory}">
+        <div th:insert="~{/cFunction/orders/listAllOrders :: listAllOrders-div}"></div>
+    </main>
+  
+ 
+    <!--  ======================================-->
+    <br><br>
+    
+    
+    
+    <footer class="footer">
+        <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
+        <p><a th:href="@{/sFunction}">後台入口</a></p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>
