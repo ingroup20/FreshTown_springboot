@@ -45,18 +45,11 @@ public class PLoginController {
 			  if ( platformEmpLogin != null && account.equals(platformEmpLogin.getpEmpAccount()) && password.equals(platformEmpLogin.getpEmpPw())  )
 				  return true;
 		  }
+		  System.out.println("帳密錯誤，或不存在");
 		  return false;
 		}
 		
-	//驗證身分，C顧客
-	  protected boolean allowUserC(String account, String password) {
-		  if(account!=null && !account.equals("")) {
-			  customerLogin = customerSvc.getByCustomerAddress(account);
-			  if ( customerLogin != null && account.equals(customerLogin.getCustomerAddress()) && password.equals(customerLogin.getCustomerPw())  )
-				  return true;
-		  }
-		  return false;
-		}
+	
 		  
 	
 	  
@@ -83,7 +76,7 @@ public class PLoginController {
                     url = location;
                 } 
 	        } 
-	    	System.out.println("帳密錯誤");
+	    	
 		  	return "redirect:" + url;
 	    }
 }

@@ -46,7 +46,7 @@ import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
 import java.util.*;
 
 
-@Controller
+//@Controller
 public class IndexController_inSpringBoot {
 
 	@Autowired
@@ -101,7 +101,7 @@ public class IndexController_inSpringBoot {
     private String message;
 	
     private List<String> myList = Arrays.asList("refunds 官網 ", "mealtype 官網", "likestore 官網", "orders 官網", "stores 官網");
-    @GetMapping("/")
+//    @GetMapping("/")
     public String index(Model model) {
     	model.addAttribute("message", message);
         model.addAttribute("myList", myList);
@@ -197,10 +197,10 @@ public class IndexController_inSpringBoot {
 	
 
 	//=================================
-	@GetMapping("/cEntranceStores")
-	public String goCEntrance(Model model) {
-		return "cEntrance";
-	}
+//	@GetMapping("/cEntrance")
+//	public String goCEntrance(Model model) {
+//		return "cEntrance";
+//	}
 	
 	
 	

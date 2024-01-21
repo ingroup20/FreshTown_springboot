@@ -1,0 +1,88 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>店家菜單</title>
+    <link rel="stylesheet" th:href="@{/css/oneStore.css}">
+</head>
+<body class="body">
+    <header class="header" th:fragment="onceStorePage-div">
+        <div class="header">
+            <div class="header_item">
+                <div class="card">
+                    圖片
+                    <img class="card_img_top" src="" alt="..." />
+                    資訊
+                    <div class="card_body">
+                        固定資訊
+                        <div class="card_info">
+                            <p th:text="${storesVO.storeName}">店家名</p>
+
+                            評等
+<!--                             <div class="star_area" th:text="${mealsVO.storesVO.totalScore}"></div> -->
+<!--                             <p th:text="${mealsVO.storesVO.storeAddress}"> 地址</p> -->
+                        </div>
+                        <div class="card_map">google地圖</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+  
+    </header>
+
+    <section class="section" th:fragment="onceStorePage-div">
+        <div class="section">
+            <!-- 商品-->
+
+<th:block th:each="mealsVO : ${menuListS}">
+            <div class="section_item">
+                <div class="prd_card">
+                    圖片
+                    <div class="prd_card_ing"><img class="card_img_top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /></div>           
+                    資訊
+                    <div class="prd_card_body">
+                        固定資訊
+                        <div class="prd_info">
+                            <p><span th:text="${mealsVO.mealName}">商品名</span></p>
+                            <p>售價: $<span th:text="${mealsVO.mealPrice}">100.00</span></p>
+                        <p th:text="${mealsVO.storesVO.storeName}">店家名</p> 
+                        
+                        </div>
+                        
+                    </div>
+
+                </div>
+                控制項
+                <div class="prd_card_footer title">
+                    <form id="buyCart" method="post" action="" > 
+                		<label class="buyCart" for="">數量:</label><input class="buyCart" type="range" min="0" max="30" default="0" name="mealQty" value="">
+                    	<div class="buyCart"><a href="#">加入購物車</a></div>
+                	
+		 				     <input id="buyCart" type="submit" value="加入購物車"> 
+						     <input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">
+						     <input type="hidden" name="priceBought" th:value="${mealsVO.mealPrice}">
+					     </form>
+                
+                </div>
+            </div>
+</th:block>
+        </div>
+    </section>
+
+    <main></main>
+
+    <footer class="footer">
+        <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>

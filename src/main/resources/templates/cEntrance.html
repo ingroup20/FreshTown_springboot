@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Homepage - 鮮城 FreshTown</title>
-    <link rel="stylesheet" th:href="@{/css/allBase.css}">
+    <link rel="stylesheet" th:href="@{/css/cEntrance.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlHoUB7fxl9z1I7kF7dJ1lFqIiiPmM1I2j9c5n9d" crossorigin="anonymous">
 </head>
 <body class="body">
     <nav class="nav ">
         <div  class="nav ">
-        	<span><a href="#!"><img id="logo" src="./cFunction/images/LOGO.png"></a></span>
-            <span><a class="title logo" href="#!">鮮城 FreshTown</a></span>
+        	<span><a th:href="@{/}"><img id="logo" th:src="@{./images/logo.png}"></a></span>
+            <span><a class="title logo" th:href="@{/}">鮮城 FreshTown</a></span>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
                 <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>
@@ -24,7 +24,20 @@
                         <li><a class="dropdown_item title" href="#!">合作店家申請</a></li>
                     </ul>
                 </li>
-                <li class="nav_item "><a class="title" th:href="@{/loginP}">會員登入</a></li>
+                <li class="nav_item ">
+               	 <a th:href="@{/cFunction/cEntrancePass}" th:text="顧客會員登入" style="font-size:1.2rem"></a>
+				</li>
+            
+            	<li class="nav_item ">
+                	<a th:href="@{/index}"  th:text="index測試頁" style="font-size:1.3rem"></a>
+				</li>
+				<li class="nav_item ">
+                	<a th:href="@{/sFunction/sEntrancePass}"  th:text="店家後台入口" style="font-size:1.3rem"></a>
+				</li>
+				<li class="nav_item ">
+                	<a th:href="@{/pFunction/pEntrancePass}"  th:text="平台後台入口" style="font-size:1.3rem"></a>
+				</li>
+            
             </ul>
                     
             <!--購物車-->
@@ -72,6 +85,7 @@
 									        <span class="star" data-star="4"><i class="fas fa-star"></i></span>
 									        <span class="star" data-star="5"><i class="fas fa-star"></i></span>
 		                            </div>
+		                        <p>評等:<span th:text="${storesVO.storeAddress}"></span>星</p>
 								<p th:text="${storesVO.storeAddress}">店家地址</p>
 	                        </div>
 	                        
@@ -79,9 +93,13 @@
 	
 	                </div>
 	                <!-- 控制項-->
-	                <div class="card_footer title">
-	                    <a id="entrance" href="#">看菜單</a>
-	                </div>
+<!-- 	                <div class="card_footer title"> -->
+<!-- 	                    <form id="entrance" method="get" th:action="@{/cEntrance/onceStorePage}" >  -->
+<!-- 		 				     <input id="entrance" type="submit" value="看菜單">  -->
+<!-- 						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}"> -->
+<!-- 					     </form>		 -->
+<!-- 	                </div> -->
+	                
 	            </div>
            </th:block>
         </div>

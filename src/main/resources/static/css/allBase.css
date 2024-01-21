@@ -128,10 +128,13 @@ form.buy_car{
     display: inline-block;
     position: absolute;
     right: 10px;
-    top: 10px;
+    margin-top: 3px;
     z-index: 10;
 } 
-
+form.buy_car > p{
+    display: inline-block;
+    font-size: 1.2rem;
+} 
 button.buy_car{
     width: 100px;
     height: 30px;
@@ -146,117 +149,13 @@ div.nav_footer{
     /* margin-top: 0px; */
 
 }
-/*=========== header ======================*/
-
-header.header{
-    display: block;
-    background-color: var(--m-color);
-    height: 180px;
-    text-align: center;
+form#logout{
+ display: inline-block;
+ position: absolute;
+ right: 200px;
+ margin-top: 7px;
+ z-index: 10;
 }
-
-h1.header{
-    font-size: 4rem ;
-    color: var(--m-white);
-    padding-top:30px ;
-    margin: 0;
-}
-
-p.header{
-    font-size: 2rem ;
-    margin: 2rem 0;
-}
-
-
-/*===============section=============*/
-section.section{
-    border: 1px solid red;
-    min-height: 700px;
-   
-}
-
-div.section{
-    width: calc(100% - 100px);
-
-    /* border: 1px solid blue; */
-    margin: 20px auto;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-div.section_item{
-    width: calc((100% - 90px)/4);
-    border: 2px solid orange;
-    height: 300px;
-    margin: 10px 30px 10px 0;
-    border-radius: 2rem;
-}
-
-
-div.section_item:nth-child(4n){
-    margin-right:0 ;
-}
-
-div.card{
-    border: 2px solid orange;
-    height: 250px;
-    position: relative;
-    margin: 3px;
-    border-radius: 1.5rem 1.5rem 0 0;
-    overflow:hidden;
-}
-
-img.card_img_top{
-    max-width: 100%;
-}
-
-div.card_info{
-    position: absolute;
-    bottom: 0;
-/*     border: 1px  solid black; */
-    width: 100%;
-    overflow: hidden;
-}
-
-div.card_info>h3{
-	font-size:1.4rem;
-}
-
-div.card_info>p{
-	font-size:1.4rem;
-}
-div.star_area{
-/*  border: 1px solid black; */
- 
-}
-
-div.star{
-    display: inline-block;
-    font-size: 1rem;
-}
-
-
-div.card_footer{
-    width: 100%;
-    text-align: center;
-
-    /* border: 1px  solid black; */
-}
-a#entrance{
-	vertical-align:middle;
-	background-color: var(--m-color);
-    padding: 5px 50px;
-    height: 35px;
-    border-radius: 0.8rem;
-    font-size:1.6rem;
-    
-	
-}
-    
-/* ===== 重要性的星號 ===== */
-
-
 
 /*=========  footer ===============*/
 footer.footer{
@@ -268,4 +167,5 @@ footer.footer{
 
 p.footer{
     color: var(--m-white);
+    font-size: 1.2rem;
 }
