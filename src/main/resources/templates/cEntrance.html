@@ -10,8 +10,8 @@
 <body class="body">
     <nav class="nav ">
         <div  class="nav ">
-        	<span><a href="#!"><img id="logo" src="./cFunction/images/LOGO.png"></a></span>
-            <span><a class="title logo" href="#!">鮮城 FreshTown</a></span>
+        	<span><a th:href="@{/}"><img id="logo" th:src="@{./images/logo.png}"></a></span>
+            <span><a class="title logo" th:href="@{/}">鮮城 FreshTown</a></span>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
                 <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>
@@ -25,17 +25,17 @@
                     </ul>
                 </li>
                 <li class="nav_item ">
-               	 <a th:href="@{/cEntrance/cFunction/cEntrancePass}" th:text="顧客會員登入" style="font-size:2rem"></a>
+               	 <a th:href="@{/cFunction/cEntrancePass}" th:text="顧客會員登入" style="font-size:1.2rem"></a>
 				</li>
             
             	<li class="nav_item ">
-                	<a th:href="@{/index}"  th:text="index測試頁" style="font-size:2rem"></a>
+                	<a th:href="@{/index}"  th:text="index測試頁" style="font-size:1.3rem"></a>
 				</li>
 				<li class="nav_item ">
-                	<a th:href="@{/sFunction/sEntrance}"  th:text="店家後台入口" style="font-size:2rem"></a>
+                	<a th:href="@{/sFunction/sEntrance}"  th:text="店家後台入口" style="font-size:1.3rem"></a>
 				</li>
 				<li class="nav_item ">
-                	<a th:href="@{/pFunction/pEntrance}"  th:text="平台後台入口" style="font-size:2rem"></a>
+                	<a th:href="@{/pFunction/pEntrance}"  th:text="平台後台入口" style="font-size:1.3rem"></a>
 				</li>
             
             </ul>

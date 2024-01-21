@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Homepage - 鮮城 FreshTown</title>
-    <link rel="stylesheet" th:href="@{/css/allBase.css} ">
+    <link rel="stylesheet" th:href="@{/cFunction/css/allBase.css} ">
 </head>
 <body class="body">
     <nav class="nav ">
         <div  class="nav ">
-            <a class="logo title " th:href="@{/}"><img src="./images/LOGO.png" alt=""> </a>
-            <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
+           <span><a th:href="@{/}"><img id="logo" th:src="@{./images/logo.png}"></a></span>
+           <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
                 <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>

@@ -150,6 +150,11 @@ div.nav_footer{
     /* margin-top: 0px; */
     font-size: 1rem;
 }
+
+img#logo {
+	height:55px;
+}
+
 /*=========== header ======================*/
 
 header.header{

@@ -42,7 +42,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @Validated
-@RequestMapping("/cEntrance/cFunction")
+@RequestMapping("/cFunction")
 public class CEntrancePassController {
 
 	@Autowired

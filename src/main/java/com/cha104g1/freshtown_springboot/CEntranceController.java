@@ -40,7 +40,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @Validated
-@RequestMapping("/cEntrance")
+@RequestMapping("/")
 public class CEntranceController {
 
 	@Autowired
@@ -50,11 +50,12 @@ public class CEntranceController {
 	MealsService mealsSvc;
 	
 
-	//=====oneStore===============================================
-//    @GetMapping("/onceStorePage")
-//    public String onceStorePage(Model model) {
-//    	return "onceStorePage"; //view
-//    }
+	//====================================================
+
+	@GetMapping
+    public String cEntrance(Model model) {
+        return "cEntrance"; //view
+    }
     
     @GetMapping("/cFunction/cEntrancePass")
     public String onceStoreMealPage1(Model model) {
@@ -62,29 +63,11 @@ public class CEntranceController {
     }
     
 
-
+    
 	
-//    @ModelAttribute("menuListS") 
-//	protected List<MealsVO> getAllMenuListS(@RequestParam("storeId") String storeId,Model model) {
-//
-//	    if (storeId != null) {
-//	        List<MealsVO> list = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
-//	        System.out.println(list.size());
-//	        model.addAttribute("storeName", list.get(0).getStoresVO().getStoreName());
-//	        return list;
-//	        
-//	    } else {
-//	     
-//	       System.out.println("xxx");
-//	    	return null;
-//	    }
-//	}
-//    
     
     
-    
-    
-   //==include個人資料管理=================== 
+
    
    
 	
