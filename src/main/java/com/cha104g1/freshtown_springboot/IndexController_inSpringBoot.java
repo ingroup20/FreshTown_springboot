@@ -40,6 +40,8 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 import com.cha104g1.freshtown_springboot.supplier.model.SupService;
 import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
 
 import java.util.*;
 
@@ -67,6 +69,9 @@ public class IndexController_inSpringBoot {
 
 	@Autowired
 	SupService supSvc;
+	
+	@Autowired
+	SupOrderService supOrderSvc;
 
 	@Autowired
 	MaterialService materialSvc;
@@ -202,19 +207,36 @@ public class IndexController_inSpringBoot {
 
 
     //=========== supplier  要使用的資料 ===================   
-    @GetMapping("/pFunction/supplier/supplierMain")
+    @GetMapping("/sFunction/supplier/supplierMain")
 	public String supplierMain(Model model) {
-		return "pFunction/supplier/supplierMain";
+		return "sFunction/supplier/supplierMain";
 	}
     
-    @GetMapping("/pFunction/supplier/supList")
+    @GetMapping("/sFunction/supplier/supList")
 	public String supList(Model model) {
-		return "pFunction/supplier/supList";
+		return "sFunction/supplier/supList";
 	}
     
 	@ModelAttribute("supListData") // for select_page.html 第135行用
 	protected List<SupVO> referenceListData_Stores(Model model) {
 		List<SupVO> list = supSvc.getAll();
+		return list;
+	}
+	
+	//=========== suporder  要使用的資料 ===================   
+	@GetMapping("/sFunction/suporder/supOrderMain")
+	public String supOrderMain(Model model) {
+		return "sFunction/suporder/supOrderMain";
+	}
+	
+	@GetMapping("/sFunction/suporder/supOrderList")
+	public String supOrderList(Model model) {
+		return "sFunction/suporder/supOrderList";
+	}
+	
+	@ModelAttribute("supOrderListData") // for select_page.html 第135行用
+	protected List<SupOrderVO> referenceListData_SupOrder(Model model) {
+		List<SupOrderVO> list = supOrderSvc.getAll();
 		return list;
 	}
 	
@@ -295,14 +317,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== CustomizedDetail  要使用的資料 ===================   
-    @GetMapping("/pFunction/customizeddetail/select_page")
+    @GetMapping("/sFunction/customizeddetail/select_page")
 	public String select_page9(Model model) {
-		return "/pFunction/customizeddetail/select_page";
+		return "/sFunction/customizeddetail/select_page";
 	}
     
-    @GetMapping("/pFunction/customizeddetail/listAllCustomizedDetail")
+    @GetMapping("/sFunction/customizeddetail/listAllCustomizedDetail")
 	public String listAllCustomizedDetail(Model model) {
-		return "/pFunction/customizeddetail/listAllCustomizedDetail";
+		return "/sFunction/customizeddetail/listAllCustomizedDetail";
 	}
     
 	@ModelAttribute("customizedDetailListData") // for select_page.html 第135行用
@@ -312,14 +334,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== CustomizedItems  要使用的資料 ===================   
-	@GetMapping("/pFunction/customizeditems/select_page")
+	@GetMapping("/sFunction/customizeditems/select_page")
 	public String select_page10(Model model) {
-		return "/pFunction/customizeditems/select_page";
+		return "/sFunction/customizeditems/select_page";
 	}
 	
-	@GetMapping("/pFunction/customizeditems/listAllCustomizedItems")
+	@GetMapping("/sFunction/customizeditems/listAllCustomizedItems")
 	public String listAllCustomizedItems(Model model) {
-		return "/pFunction/customizeditems/listAllCustomizedItems";
+		return "/sFunction/customizeditems/listAllCustomizedItems";
 	}
 	
 	@ModelAttribute("customizedItemsListData") // for select_page.html 第135行用
@@ -329,14 +351,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== Meals  要使用的資料 ===================   
-	@GetMapping("/pFunction/meals/select_page")
+	@GetMapping("/sFunction/meals/select_page")
 	public String select_page11(Model model) {
-		return "/pFunction/meals/select_page";
+		return "/sFunction/meals/select_page";
 	}
 	
-	@GetMapping("/pFunction/meals/listAllMeals")
+	@GetMapping("/sFunction/meals/listAllMeals")
 	public String listAllMeals(Model model) {
-		return "/pFunction/meals/listAllMeals";
+		return "/sFunction/meals/listAllMeals";
 	}
 	
 	@ModelAttribute("mealsListData") // for select_page.html 第135行用
@@ -346,14 +368,14 @@ public class IndexController_inSpringBoot {
 	}
 	
 	//=========== Customized  要使用的資料 ===================   
-	@GetMapping("/pFunction/customized/select_page")
+	@GetMapping("/sFunction/customized/select_page")
 	public String select_page12(Model model) {
-		return "/pFunction/customized/select_page";
+		return "/sFunction/customized/select_page";
 	}
 	
-	@GetMapping("/pFunction/customized/listAllCustomized")
+	@GetMapping("/sFunction/customized/listAllCustomized")
 	public String listAllCustomized(Model model) {
-		return "/pFunction/customized/listAllCustomized";
+		return "/sFunction/customized/listAllCustomized";
 	}
 	
 	@ModelAttribute("customizedListData") // for select_page.html 第135行用

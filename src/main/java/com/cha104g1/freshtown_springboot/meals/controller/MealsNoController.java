@@ -27,7 +27,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
 @Validated
-@RequestMapping("/pFunction/meals")
+@RequestMapping("/sFunction/meals")
 public class MealsNoController {
 
 	@Autowired
@@ -61,7 +61,7 @@ public class MealsNoController {
     	
 		if (mealsVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
-			return "/pFunction/meals/select_page";
+			return "/sFunction/meals/select_page";
 		}
 		
 		/***************************3.查詢完成,準備轉交(Send the Success view)*****************/
@@ -69,7 +69,7 @@ public class MealsNoController {
 		model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
 		
 //		return "back-end/emp/listOneEmp";  // 查詢完成後轉交listOneEmp.html
-		return "/pFunction/meals/select_page"; // 查詢完成後轉交select_page.html由其第158行insert listOneEmp.html內的th:fragment="listOneEmp-div
+		return "/sFunction/meals/select_page"; // 查詢完成後轉交select_page.html由其第158行insert listOneEmp.html內的th:fragment="listOneEmp-div
 	}
 
 	
@@ -93,6 +93,6 @@ public class MealsNoController {
     	List<StoresVO> list3 = storesSvc.getAll();
     	model.addAttribute("storesListData2",list3);    // for select_page.html 第135行用
 		String message = strBuilder.toString();
-	    return new ModelAndView("/pFunction/meals/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
+	    return new ModelAndView("/sFunction/meals/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
 	}
 }

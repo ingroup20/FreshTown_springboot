@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>新增採購單</title>
+<style type="text/css">
+	
+	button {
+		padding: 5px;
+	}
+	form {
+		display: table;
+	}
+	form div {
+		display: table-row;
+	}
+	label, input, span, select {
+		display: table-cell;
+		margin: 5px;
+		text-align: left;		
+	}
+	form div div {
+		display: table-cell;
+	}
+	.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>新增採購單</h2>
+		 <h3><a class="navbar-brand" th:href="@{/sFunction/suporder/supOrderMain}">回查詢頁</a></h3></div>
+</nav>
+
+	<div align="center">
+		<h3><b>所有欄位皆為必填欄位</b></h3>
+		<form th:action="@{insert}" method="post" th:object="${supOrderVO}" enctype="multipart/form-data">
+			
+			
+			
+			
+			<div>
+			<label>採購單編號:</label>
+			<input type="number" th:field="*{id}" onclick="hideContent('id.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('Id')}" th:errors="*{Id}" class="error" id="Id.errors"></span>
+			</div>
+			
+			<div>
+			<label>供應商編號:</label>
+			<input type="number" th:field="*{supId}" onclick="hideContent('supId.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('supId')}" th:errors="*{supId}" class="error" id="supId.errors"></span>
+			</div>
+			
+			<div>
+			<label>物料編號:</label>
+			<input type="number" th:field="*{purNo}" onclick="hideContent('purNo.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('purNo')}" th:errors="*{purNo}" class="error" id="purNo.errors"></span>
+			</div>
+			
+			<div>
+			<label>數量:</label>
+			<input type="number" th:field="*{amount}" onclick="hideContent('amount.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" class="error" id="amount.errors"></span>
+			</div>
+			
+			<div>
+			<label>單價:</label>
+			<input type="number" th:field="*{unitPrice}" onclick="hideContent('unitPrice.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}" class="error" id="unitPrice.errors"></span>
+			</div>
+			
+			<div>
+			<label>採購日期:</label>
+			<input type="date" th:field="*{purDate}" onclick="hideContent('purDate.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('purDate')}" th:errors="*{purDate}" class="error" id="purDate.errors"></span>
+			</div>
+			
+			<div>
+			<label>預計交期:</label>
+			<input type="date" th:field="*{preDate}" onclick="hideContent('preDate.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('preDate')}" th:errors="*{preDate}" class="error" id="preDate.errors"></span>
+			</div>
+			
+			<div>
+			<label>採購單狀態:</label>
+			<input type="number" th:field="*{oStatus}" onclick="hideContent('oStatus.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('oStatus')}" th:errors="*{oStatus}" class="error" id="oStatus.errors"></span>
+			</div>
+			
+			<div>
+			<label>到貨日期:</label>
+			<input type="date" th:field="*{deliDate}" onclick="hideContent('deliDate.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('deliDate')}" th:errors="*{deliDate}" class="error" id="deliDate.errors"></span>
+			</div>
+			
+			<div>
+			<label>備註:</label>
+			<input type="text" th:field="*{marks}" onclick="hideContent('marks.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('marks')}" th:errors="*{marks}" class="error" id="marks.errors"></span>
+			</div>
+			
+			<div>
+			<label>店家帳號:</label>
+			<input type="text" th:field="*{StoresVO.storeId}" onclick="hideContent('storeId.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
+			</div>
+			
+			
+			<div>
+				<div></div>
+				<div><button type="submit" id="submit"> 送出新增 </button></div>
+				<div></div>
+			</div>		
+		</form>
+	
+	</div>
+
+
+<!-- JavaScript part -->
+<script type="text/javascript">
+//清除提示信息
+function hideContent(d) {
+     document.getElementById(d).style.display = "none";
+}
+</script>
+
+</body>
+</html>

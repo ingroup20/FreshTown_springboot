@@ -22,7 +22,7 @@ import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsSe
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
 
 @Controller
-@RequestMapping("/pFunction/customizeddetail")
+@RequestMapping("/sFunction/customizeddetail")
 public class CustomizedDetailController {
 	
 	@Autowired
@@ -35,7 +35,7 @@ public class CustomizedDetailController {
 	public String addCustomizedDetail(ModelMap model) {
 		CustomizedDetailVO customizedDetailVO = new CustomizedDetailVO();
 		model.addAttribute("customizedDetailVO", customizedDetailVO);
-		return "pFunction/customizeddetail/addCustomizedDetail";
+		return "sFunction/customizeddetail/addCustomizedDetail";
 	}
 	
 	@PostMapping("insert")
@@ -45,7 +45,7 @@ public class CustomizedDetailController {
 
 		if (result.hasErrors()) {
 			System.out.println("資料有誤");
-			return "pFunction/customizeddetail/addCustomizedDetail";
+			return "sFunction/customizeddetail/addCustomizedDetail";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
 		customizedDetailSvc.addCustomizedDetailVO(customizedDetailVO);
@@ -53,7 +53,7 @@ public class CustomizedDetailController {
 		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
 		model.addAttribute("customizedDetailListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:pFunction/customizeddetail/listAllCustomizedDetail"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:/sFunction/customizeddetail/listAllCustomizedDetail"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
 	@PostMapping("getOne_For_Update")
@@ -65,7 +65,7 @@ public class CustomizedDetailController {
 
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
 		model.addAttribute("customizedDetailVO", customizedDetailVO);
-		return "pFunction/customizeddetail/update_customizeddetail_input"; // 查詢完成後轉交update_emp_input.html
+		return "sFunction/customizeddetail/update_customizeddetail_input"; // 查詢完成後轉交update_emp_input.html
 	}
 	
 	@PostMapping("update")
@@ -73,7 +73,7 @@ public class CustomizedDetailController {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		if (result.hasErrors()) {
 			System.out.println("資料不全");
-			return "pFunction/customizeddetail/update_customizeddetail_input";
+			return "sFunction/customizeddetail/update_customizeddetail_input";
 		}
 		/*************************** 2.開始修改資料 *****************************************/
 		customizedDetailSvc.updateCustomizedDetailVO(customizedDetailVO);
@@ -82,7 +82,7 @@ public class CustomizedDetailController {
 		model.addAttribute("success", "- (修改成功)");
 		customizedDetailVO = customizedDetailSvc.getCustomizedDetailVOByCustedDtlNo(Integer.valueOf(customizedDetailVO.getCustedDtlNo()));
 		model.addAttribute("customizedDetailVO", customizedDetailVO);
-		return "pFunction/customizeddetail/listOneCustomizedDetail"; // 修改成功後轉交listOneEmp.html
+		return "sFunction/customizeddetail/listOneCustomizedDetail"; // 修改成功後轉交listOneEmp.html
 	}
 	
 	// 全資料一覽
