@@ -39,7 +39,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>更新供應商資料</h2>
-		 <h3><a class="navbar-brand" th:href="@{/supplier/supplierMain}">回查詢頁</a></h3></div>
+		 <h3><a class="navbar-brand" th:href="@{/sFunction/suporder/supOrderMain}">回查詢頁</a></h3></div>
 </nav>
 
 	<div align="center">
@@ -106,8 +106,8 @@
 			</div>
 			
 			<div>
-			<input type="hidden" th:field="*{storeId}" onclick="hideContent('storeId.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('storeId')}" th:errors="*{storeId}" class="error" id="storeId.errors"></span>
+			<input type="hidden" th:field="*{StoresVO.storeId}" onclick="hideContent('StoresVO.storeId.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
 			</div>
 			
 			<div>
