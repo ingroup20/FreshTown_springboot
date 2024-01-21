@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot;
+package com.cha104g1.freshtown_springboot.apagecontroller;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -9,7 +9,7 @@
 <body class="body">
     <nav class="nav ">
         <div  class="nav ">
-           <span><a th:href="@{/}"><img id="logo" th:src="@{./images/logo.png}"></a></span>
+           <span><a th:href="@{/}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
            <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
@@ -43,10 +43,12 @@
                 </li>
             </ul>
             
+            <!--登出-->
             <form id="logout"  th:action="logout">
                 <input type="submit" value="登出"> 
             </form>
-            購物車
+            
+            <!--購物車-->
             <form class="buy_car">
                 <p><span th:text="customerName">X X X</span> 您好!</p>
                 <button class="buy_car" type="submit">

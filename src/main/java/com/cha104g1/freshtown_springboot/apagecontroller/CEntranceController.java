@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot;
+package com.cha104g1.freshtown_springboot.apagecontroller;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,17 +53,29 @@ public class CEntranceController {
 	//====================================================
 
 	@GetMapping
-    public String cEntrance(Model model) {
+    public String gotoCEntrance(Model model) {
         return "cEntrance"; //view
     }
     
     @GetMapping("/cFunction/cEntrancePass")
-    public String onceStoreMealPage1(Model model) {
+    public String gotoCEntrancePass(Model model) {
     	return "cFunction/cEntrancePass"; //view
     }
     
-
+    @GetMapping("/index")
+    public String gotoIndex(Model model) {
+    	return "index"; //view
+    }
     
+    @GetMapping("/sFunction/sEntrancePass")
+    public String gotoSEntrancePass(Model model) {
+    	return "sFunction/sEntrancePass"; //view
+    }
+    
+    @GetMapping("/pFunction/pEntrancePass")
+    public String gotoPEntrancePass(Model model) {
+    	return "pFunction/pEntrancePass"; //view
+    }
 	
     
     
