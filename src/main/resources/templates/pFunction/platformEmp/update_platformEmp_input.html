@@ -1,0 +1,172 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>平台員工狀態修改 - update_platformEmp_input.html</title>
+
+<head ></head>
+<style type="text/css">
+	
+	button {
+		padding: 5px;
+	}
+	form {
+		display: table;
+	}
+	form div {
+		display: table-row;
+	}
+	label, input, span, select {
+		display: table-cell;
+		margin: 5px;
+		text-align: left;		
+	}
+	input[type=text], input[type=password], select, textarea {
+		width: 200px;
+		margin: 5px;
+	}
+	form div div {
+		display: table-cell;
+	}
+	.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>平台員工資料修改 - update_platformEmp_input.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/platformEmp/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
+</nav>
+
+	<div align="center">
+		<h3><b>只能改狀態</b></h3>
+		<form th:action="@{update}" method="post" th:object="${platformEmpVO}" enctype="multipart/form-data">
+			
+			<div>
+			<!--pk --><input type="text" th:field="*{pEmpId}" style="border:0px ; font-weight: bold;" readonly />
+			<label>員工編號:</label>
+			<input type="text" th:field="*{pEmpId}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			</div>
+			
+			<div>
+			<label>員工姓名:</label>
+			<input type="text" th:field="*{pEmpName}"  onclick="hideContent('pEmpPerm.errors');" readonly /><br/>
+			<span th:if="${#fields.hasErrors('pEmpName')}" th:errors="*{pEmpName}" class="error" id="pEmpName.errors"></span>
+			</div>
+			
+			<div>
+			<label>員工帳號:</label>
+			<input type="text" th:field="*{pEmpAccount}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<span th:if="${#fields.hasErrors('pEmpAccount')}" th:errors="*{pEmpAccount}" class="error" id="pEmpAccount.errors"></span>
+			</div>
+			
+			<div>
+            <label>員工密碼:</label>
+            <input type="password" th:field="*{pEmpPw}" style="border:0px ; font-weight: bold;" readonly /><br/>
+            <span th:if="${#fields.hasErrors('pEmpPw')}" th:errors="*{pEmpPw}" class="error" id="pEmpPw.errors"></span>
+            </div>
+			
+			<div>
+			<label>員工信箱:</label>
+			<input type="text" th:field="*{pEmpEmail}" onclick="hideContent('pEmpEmail.errors');" readonly /><br/>
+			<span th:if="${#fields.hasErrors('pEmpEmail')}" th:errors="*{pEmpEmail}" class="error" id="pEmpEmail.errors"></span>
+			</div>
+			
+			<div>
+			<label>員工狀態:</label>
+			<select th:field="*{pEmpState}">
+				<option  th:value="0" th:text="入職未報到" ></option>
+				<option  th:value="1" th:text="入職已報到" ></option>
+				<option  th:value="2" th:text="已離職" ></option>
+			</select>
+			<span th:if="${#fields.hasErrors('pEmpState')}" th:errors="*{pEmpState}" class="error" id="pEmpState.errors"></span>
+			</div>
+			
+			<div>
+			<label>員工權限:</label>
+			<select th:field="*{pEmpPerm}">
+				<option  th:value="0" th:text="客服" ></option>
+				<option  th:value="1" th:text="工程師" ></option>
+				<option  th:value="2" th:text="主管" ></option>
+			</select>
+			<span th:if="${#fields.hasErrors('pEmpPerm')}" th:errors="*{pEmpPerm}" class="error" id="pEmpPerm.errors"></span>
+			
+			</div>
+		
+			<div>
+				<div></div>
+				<div><button type="submit" id="submit"> 送出修改 </button></div>
+				<div></div>
+			</div>		
+		</form>
+	
+	</div>
+
+
+<!-- JavaScript part -->
+<script type="text/javascript">
+//清除提示信息
+function hideContent(d) {
+     document.getElementById(d).style.display = "none";
+}
+
+//照片上傳-預覽用
+var filereader_support = typeof FileReader != 'undefined';
+if (!filereader_support) {
+	alert("No FileReader support");
+}
+acceptedTypes = {
+		'image/png' : true,
+		'image/jpeg' : true,
+		'image/gif' : true
+};
+function previewImage() {
+	var upfile1 = document.getElementById("upFiles");
+	upfile1.addEventListener("change", function(event) {
+		var files = event.target.files || event.dataTransfer.files;
+		for (var i = 0; i < files.length; i++) {
+			previewfile(files[i])
+		}
+	}, false);
+}
+function previewfile(file) {
+	if (filereader_support === true && acceptedTypes[file.type] === true) {
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			var image = new Image();
+			image.src = event.target.result;
+			image.width = 100;
+			image.height = 75;
+			image.border = 2;
+			if (blob_holder.hasChildNodes()) {
+				blob_holder.removeChild(blob_holder.childNodes[0]);
+			}
+			blob_holder.appendChild(image);
+		};
+		reader.readAsDataURL(file);
+		document.getElementById('submit').disabled = false;
+	} else {
+		blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
+				+ "<br>" + "● ContentTyp: " + file.type
+				+ "<br>" + "● size: " + file.size + "bytes"
+				+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
+		document.getElementById('submit').disabled = true;
+	}
+}
+</script>
+
+</body>
+</html>
