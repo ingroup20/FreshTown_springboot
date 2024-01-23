@@ -19,15 +19,14 @@
                 <div class="card">
                     圖片
                     <img class="card_img_top" src="" alt="..." />
-                    資訊
+                    <!-- 資訊-->
                     <div class="card_body">
-                        固定資訊
+                        <!-- 固定資訊-->
                         <div class="card_info">
-                            <p th:text="${storesVO.storeName}">店家名</p>
-
-                            評等
-<!--                             <div class="star_area" th:text="${mealsVO.storesVO.totalScore}"></div> -->
-<!--                             <p th:text="${mealsVO.storesVO.storeAddress}"> 地址</p> -->
+                            <p th:text="${storeName}">店家名</p>
+	                        <p>店家評分:<span th:text="${scoreAvg}"></span></p>
+                            <p>店家地址:<span th:text="${storeAddress}"></span></p>
+                            <p>店家電話:<span th:text="${storePhone}"></span></p>
                         </div>
                         <div class="card_map">google地圖</div>
                     </div>

@@ -1,4 +1,4 @@
-package com.cha104g1.freshtown_springboot.stores.controller;
+package com.cha104g1.freshtown_springboot.apagecontroller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,60 +27,28 @@ import java.util.stream.Collectors;
 
 
 @Controller
-@RequestMapping("/cFunction/stores/")
+@RequestMapping("/addStoresC")
 public class CStoresController {
 	//申請新店家
 	
 	@Autowired
 	StoresService storesSvc;
 
-	/*
-	 * This method will serve as addStores.html handler.
-	 */
-	@GetMapping("addStoresC")
-	public String addStoresC(ModelMap model) {
-		StoresVO storesVO = new StoresVO();
-		model.addAttribute("storesVO", storesVO);
-		return "cFunction/stores/addStores";
-	}
-
-	/*
-	 * This method will be called on addStores.html form submission, handling POST request It also validates the user input
-	 */
 	@PostMapping("insertC")
-	public String insertC(@Valid StoresVO storesVO, BindingResult result, ModelMap model,
+	public String insertC(BindingResult result, ModelMap model,
 			@RequestParam("photo") MultipartFile[] parts) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
-		// 去除BindingResult中upFiles欄位的FieldError紀錄 --> 見第172行
-		result = removeFieldErrorC(storesVO, result, "photo");
 
-		if (parts[0].isEmpty()) { // 使用者未選擇要上傳的圖片時
-			model.addAttribute("errorMessage", "店家照片: 請上傳照片");
-		} else {
-			for (MultipartFile multipartFile : parts) {
-				byte[] buf = multipartFile.getBytes();
-				storesVO.setPhoto(buf);
-			}
-		}
-		if (result.hasErrors() || parts[0].isEmpty()) {
-			  // 迭代每個字段的錯誤
-		    for (FieldError error : result.getFieldErrors()) {
-		        String fieldName = error.getField();
-		        String errorMessage = error.getDefaultMessage();
-		        
-		        System.out.println("Field: " + fieldName + ", Error: " + errorMessage);
-		    }
-		    
-			return "cFunction/stores/addStores";
-		}
 		/*************************** 2.開始新增資料 *****************************************/
+		StoresVO storesVO = new StoresVO();
+		model.addAttribute("storesVO", storesVO);
 		storesSvc.addStores(storesVO);
 		/*************************** 3.新增完成,準備轉交(Send the Success view) **************/
 		List<StoresVO> list = storesSvc.getAll();
 		model.addAttribute("storesListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:cFunction/stores/listAllStores"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:/successPage"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}//不用錢依資歷夾?斜線
 
 

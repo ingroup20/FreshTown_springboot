@@ -13,8 +13,8 @@
            <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
-                <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>
-                <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li>
+                <li class="nav_item "><input class="title" th:action="${searchStores}" value="餐點分類"></li>
+                <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li>
                 <li class="nav_item ">
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
                     <ul class="dropdown_menu ">
@@ -37,6 +37,12 @@
                             <form method="post" th:action="searchOrderHistory"> 
                                 <input type="submit" value=" 下單紀錄"> 
                             </form><br>
+                        </li>
+<!--                         測試用 -->
+                        <li>
+<form  method="post" th:action="manageOrders"> 
+<input style="color:red" type="submit" value=" 管理訂單"> 
+</form>  
                         </li>
                       
                     </ul>
@@ -63,12 +69,49 @@
     </nav>
 
     <!-- include首頁 ==========================================-->
- 	<header class="main" th:if="${searchStore}">
-        <div th:insert="~{/searchStore :: searchStore-div}"></div>
+ <header class="header" th:if ="${searchStores}">
+        <div class="header">
+            <h1 class="header ">美食饗宴  盡在鮮城</h1>
+            <p class="header">最公正的餐廳推薦平台，立即加入會員訂餐吧!</p>
+  
+        </div>
+  
     </header>
-    <select class="main" th:if="${searchStore}">
-        <div th:insert="~{/searchStore :: searchStore-div}"></div>
-    </select>
+
+    <section class="section" th:if ="${searchStores}">
+        <div class="section">
+            <!-- 店家-->
+            <th:block th:each="storesVO : ${storesListData}">
+	            <div class="section_item">
+	                <div class="card">
+	                    <!-- 圖片-->
+<!-- 	                    <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
+	                    <!-- 資訊-->
+	                    <div class="card_body">
+	                        <!--固定資訊-->
+	                        <div class="card_info">
+	                            <h3 th:text="${storesVO.storeName}">店家名稱</h3>
+								<!-- 評等-->
+		                            <div class="star_area"></div>
+		                        <p>評等:<span th:text="${storesVO.storeAddress}"></span>星</p>
+								<p th:text="${storesVO.storeAddress}">店家地址</p>
+	                        </div>
+	                        
+	                    </div>
+	
+	                </div>
+	                <!-- 控制項-->
+	                <div class="card_footer title">
+	                    <form id="entrance" method="get" th:action="@{getOneStoreMeal}" > 
+		 				     <input id="entrance" type="submit" value="看菜單"> 
+						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
+					     </form>		
+	                </div>
+	                
+	            </div>
+           </th:block>
+        </div>
+    </section>
     
     
     <header class="main" th:if="${getOneStoreMeal}">
@@ -90,9 +133,25 @@
     <main class="main" th:if="${searchBlackStore}">
         <div th:insert="~{/cFunction/likestore/listAllLikeStore :: listAllLikeStore-div}"></div>
     </main>
-    <main class="main" th:if="${searchOrderHistory}">
+    <main class="main" th:if="${searchOrderHistory}" th:method="post">
         <div th:insert="~{/cFunction/orders/listAllOrders :: listAllOrders-div}"></div>
     </main>
+    
+    
+    
+    <!-- Content wrapper置換插入內容======================================================================================== -->
+			<!--訂單管理 -->
+           <div class="content-wrapper" th:if="${manageOrders}">
+           		<div th:insert="~{/sFunction/orders/select_page :: select_page-div}">
+           </div>
+           <!--訂單排程 -->
+<!--            <div class="content-wrapper" th:if="${orderOrders}"> -->
+<!--            		<div th:insert="~{/sFunction/orders/making_page :: making_page-div}"> -->
+<!--            </div> -->
+           <!--店家資料 -->
+           <div class="content-wrapper" th:if="${storeInfo}">
+           		<div th:insert="~{/sFunction/stores/select_page :: select_page-div}">
+           </div>
   
  
     <!--  ======================================-->

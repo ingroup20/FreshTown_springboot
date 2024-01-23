@@ -11,7 +11,7 @@ import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpVO;
 
 
 @Service("CustomerService")
-public class CustomerService implements CustomerServiceIntf{
+public class CustomerService {
 	
 	@Autowired
 	CustomerRepository repository;
@@ -20,51 +20,36 @@ public class CustomerService implements CustomerServiceIntf{
 		this.repository = repository;
 	}
 	
-	@Override
+	
 	public CustomerVO addCustomerVO(CustomerVO customerVO) {
 		repository.save(customerVO);
 		return customerVO;
 	}
 
-	@Override
+	
 	public CustomerVO updateCustomerVO(CustomerVO customerVO) {
 	    repository.save(customerVO);
 	    return customerVO;
 	}
     
-	@Override
-	public CustomerVO getCustomerVOById(Integer id) {
-		Optional<CustomerVO> optional = repository.findById(id);
+
+	public CustomerVO getByCustomerId(Integer customerId) {
+		Optional<CustomerVO> optional = repository.findById(customerId);
 		return optional.orElse(null);
 	}
     
-	@Override
-	public List<CustomerVO> getAllCustomerVO(int currentPage) {
-		// TODO Auto-generated method stub
-		return repository.findAll();
-	}
 
-
-	@Override
 	public List<CustomerVO> getAll() {
-		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
 	
-	@Override
-	public int getPageTotal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
 	public List<CustomerVO> getCustomerVOsByCompositeQuery(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	//取得SQL身分帳密(中群)
-	public CustomerVO getByCustomerAddress( String customerAddress) {
+	public CustomerVO getByCustomerAddress(String customerAddress) {
 		CustomerVO  customerLogin =repository.findByCustomerAddress(customerAddress);
 		return customerLogin; 
 	}
