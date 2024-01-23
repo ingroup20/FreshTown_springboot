@@ -50,15 +50,29 @@ public class CEntranceController {
 	MealsService mealsSvc;
 	
 
-	//====================================================
+	//===超連結=================================================
 
 	@GetMapping
     public String gotoCEntrance(Model model) {
-        return "cEntrance"; //view
+        return "cEntrance"; //首頁view
     }
     
+    @GetMapping("addStoresC")
+    public String gotoAddStores(Model model) {
+		StoresVO storesVO = new StoresVO();
+		model.addAttribute("storesVO", storesVO);
+    	return "addStoresC"; //店家註冊view
+    }
+	
+    @GetMapping("successPage")
+    public String gotoSuccessPage(Model model) {
+    	return "successPage"; //成功訊息頁面view
+    }
+	
+	
     @GetMapping("/cFunction/cEntrancePass")
     public String gotoCEntrancePass(Model model) {
+    	model.addAttribute("searchStores","ture");
     	return "cFunction/cEntrancePass"; //view
     }
     
@@ -77,10 +91,31 @@ public class CEntranceController {
     	return "pFunction/pEntrancePass"; //view
     }
 	
-    
-    
+    //==========================================================
 
-   
-   
+    @ModelAttribute("storesListData")
+    public List<StoresVO> getStores(Model model){
+    	List<StoresVO> list = storesSvc.getAll();
+    	
+    	return list;
+    }
+
+   @GetMapping("getOneStoreMeal")
+   public String getOneStoreMeal(@RequestParam("storeId") String storeId,Model model) {
+	   List<MealsVO> menuListS = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
+	   StoresVO storesVO=storesSvc.getOneStores(Integer.valueOf(storeId));
+	  //計算平均評分 
+	   double scoreAvg = storesVO.getTotalScore()/storesVO.getScorePeople();
+	   scoreAvg=(int)(scoreAvg*10)/10;
+	   
+	   model.addAttribute("menuListS", menuListS);
+	   model.addAttribute("storeName", storesVO.getStoreName());
+	   model.addAttribute("storeAddress", storesVO.getStoreAddress());
+	   model.addAttribute("storePhone", storesVO.getStorePhone());
+	   model.addAttribute("openTime", storesVO.getOpenTime());	
+	   model.addAttribute("scoreAvg", scoreAvg);
+	   model.addAttribute("getOneStoreMeal", "true"); 
+	   return "cEntrance";
+   }
 	
 }

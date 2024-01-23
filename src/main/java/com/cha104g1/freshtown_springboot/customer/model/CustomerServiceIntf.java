@@ -9,7 +9,7 @@ public interface CustomerServiceIntf {
 
 	CustomerVO updateCustomerVO(CustomerVO customerVO);
 
-	CustomerVO getCustomerVOById(Integer id);
+	CustomerVO getByCustomerId(Integer customerId);
 
 	List<CustomerVO> getAllCustomerVO(int currentPage);
 

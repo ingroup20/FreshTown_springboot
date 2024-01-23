@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>店家申請註冊 - addEmp.html</title>
+<title>店家申請註冊 - addStore.html</title>
 
 <head ></head>
 <style type="text/css">
@@ -58,7 +58,7 @@
 			
 				<div>
 				<label>店家帳號:</label>
-				<input type="text" th:field="*{storeAccount}" onclick="hideContent('storeAccount.errors');" />
+				<input type="text" th:name="storeAccount" onclick="hideContent('storeAccount.errors');" />
 				<span  th:if="${#fields.hasErrors('storeAccount')}" th:errors="*{storeAccount}" class="error" id="storeAccount.errors"></span>
 				</div>
 						
@@ -181,13 +181,13 @@
 			
 				<div>
 				<label>店家簡介:</label>
-				<input type="text" th:field="*{storeDesc}" onclick="hideContent('storeDesc.errors');" /><br/>/>
+				<input type="text" th:field="*{storeDesc}" onclick="hideContent('storeDesc.errors');" /><br/>
 				<span  th:if="${#fields.hasErrors('storeDesc')}" th:errors="*{storeDesc}" class="error" id="storeDesc.errors"></span>
 				</div>
 			
 							<div>
 				<label>固定店休日:</label>
-				<input type="text" th:field="*{restDay}" onclick="hideContent('restDay.errors');" /><br/>/>
+				<input type="text" th:field="*{restDay}" onclick="hideContent('restDay.errors');" /><br/>
 				<span  th:if="${#fields.hasErrors('restDay')}" th:errors="*{restDay}" class="error" id="restDay.errors"></span>
 				</div>
 			

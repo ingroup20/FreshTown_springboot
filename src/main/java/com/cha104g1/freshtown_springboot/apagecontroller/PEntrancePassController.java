@@ -33,8 +33,8 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @Validated
-@RequestMapping("/cFunction")
-public class CEntrancePassController {
+@RequestMapping("/pFunction")
+public class PEntrancePassController {
 
 	@Autowired
 	StoresService storesSvc;
@@ -232,24 +232,6 @@ public class CEntrancePassController {
    		
    		return "cFunction/cEntrancePass"; 	
    	}
-	
-	
-	
-	/**測試*****************************************************/
-	//==insert訂單管理=================== 
-		@PostMapping("manageOrders")
-	   	public String manageOrders(HttpServletRequest req,ModelMap model) {
-	   		/***************************1.接收請求↑ ************************/
-	   		/***************************2.查詢*********************************************/
-			
-	   		List<OrdersVO> ordersListData = ordersSvc.getAllByStore(1); 	
-	   		model.addAttribute("ordersListData", ordersListData);     // for listOnePage.html 
-	   	
-	   		/***************************3.顯示*****************/
-	   		model.addAttribute("manageOrders", "true"); // for cEnrance.html
-	   		
-	   		return "cFunction/cEntrancePass"; 	
-	   	}
    
 	
 }
