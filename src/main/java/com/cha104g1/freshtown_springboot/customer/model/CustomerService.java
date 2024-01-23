@@ -69,5 +69,10 @@ public class CustomerService implements CustomerServiceIntf{
 		return customerLogin; 
 	}
 
+	public CustomerVO getOneCustomer(Integer valueOf) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

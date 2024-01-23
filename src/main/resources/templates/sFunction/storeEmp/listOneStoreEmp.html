@@ -1,0 +1,53 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>員工資料 - listOneEmp.html</title>
+
+<head></head>
+<style type="text/css">
+	
+    span {
+		display: inline-block;
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>員工個人資料 - listOneEmp.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/emp/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+</nav>
+
+	<div align="center" th:fragment="listOneplatformEmp-div"> <!-- 此div被select_page.html第128行insert用 -->
+		<h3><span>查詢結果 :</span></h3>
+		<span>員工編號:</span><span th:text="${platformEmpVO.pEmpId}"></span><br/>
+		<span>員工姓名:</span><span th:text="${platformEmpVO.pEmpName}"></span><br/>
+		<span>庫存權限:</span><span th:text="${platformEmpVO.invPerm}"></span><br/>
+		<span>採購權限:</span><span th:text="${platformEmpVO.purPerm"></span><br/>
+		<span>餐點權限:</span><span th:text="${platformEmpVO.manuPerm}"></span><br/>
+		<span>訂單權限:</span><span th:text="${platformEmpVO.orderPerm}"></span><br/>
+		<span>修改權限許可:</span><span th:text="${platformEmpVO.modifyPerm}"></span><br/>
+		<span>店家編號:</span><span th:text="${platformEmpVO.storesVO}"></span><br/>
+		<span>員工部門:</span><span th:text="${platformEmpVO.sEmpDeptno}"></span><br/>
+		<span>員工職稱:</span><span th:text="${platformEmpVO.sEmpTitle}"></span><br/>
+		<span>店家員工狀態:</span><span th:text="${platformEmpVO.sEmpState}"></span><br/>
+		
+	</div>
+
+
+</body>
+</html>
