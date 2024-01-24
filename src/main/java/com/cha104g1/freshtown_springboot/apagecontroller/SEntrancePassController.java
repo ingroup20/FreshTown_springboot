@@ -1,6 +1,11 @@
 package com.cha104g1.freshtown_springboot.apagecontroller;
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,26 +15,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
-import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
-import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
-import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpService;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
-import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
-
-import redis.clients.jedis.Jedis;
-
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -47,6 +41,8 @@ public class SEntrancePassController {
 	CustomerService customerSvc;
 	@Autowired
 	OrdersService ordersSvc;
+	@Autowired
+	StoreEmpService storeEmpSvc;
 
 
 	@ModelAttribute//每次進入controller都會叫用
@@ -131,6 +127,22 @@ public class SEntrancePassController {
 		   		return "sFunction/sEntrancePass"; 	
 		   	}
 			
+			//=========== StoreEmp  要使用的資料 ===================   
+			@GetMapping("/storeEmp/select_page")
+			public String select_page14(Model model) {
+				return "/sFunction/storeEmp/select_page";
+			}
+			
+			@GetMapping("/storeEmp/listAllStoreEmp")
+			public String listAllStoreEmp(Model model) {
+				return "/sFunction/storeEmp/listAllStoreEmp";
+			}
+			
+			@ModelAttribute("storeEmpListData") // for select_page.html 第135行用
+			protected List<StoreEmpVO> referenceListData_StoreEmp(Model model) {
+				List<StoreEmpVO> list = storeEmpSvc.getAll();
+				return list;
+			}
 			
 
 	

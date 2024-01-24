@@ -50,11 +50,11 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "sEmpPw")
-		public String getpEmpPw() {
+		public String getsEmpPw() {
 			return sEmpPw;
 		}
-		public void setpEmpPw(String pEmpPw) {
-			this.sEmpPw = pEmpPw;
+		public void setsEmpPw(String sEmpPw) {
+			this.sEmpPw = sEmpPw;
 		}
 		
 		@Column(name = "sEmpName")

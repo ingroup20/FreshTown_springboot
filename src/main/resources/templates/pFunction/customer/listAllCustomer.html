@@ -76,7 +76,7 @@ body {
 		<div align="center">
 			<h2>所有員工資料 - listAllEmp.html</h2>
 			<h3>
-				<a class="navbar-brand" th:href="@{/sFunction/storeEmp/select_page}"><img
+				<a class="navbar-brand" th:href="@{/emp/select_page}"><img
 					th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a>
 			</h3>
 		</div>
@@ -86,41 +86,31 @@ body {
 		<thead>
 			<tr style="background-color: #CCCCFF">
 				<th>計數</th>
-				<th>員工編號</th>
-				<th>員工姓名</th>
-				<th>庫存權限</th>
-				<th>採購權限</th>
-				<th>餐點權限</th>
-				<th>訂單權限</th>
-				<th>修改權限許可</th>
-				<th>店家編號</th>
-				<th>員工部門</th>
-				<th>員工職稱</th>
-				<th>店家員工狀態</th>
+				<th>會員編號</th>
+				<th>會員暱稱</th>
+				<th>手機號碼</th>
+				<th>會員信箱</th>
+				<th>會員地址</th>
+				<th>會員狀態</th>
 				<th></th> 
 			</tr>
 		</thead>
 
 		<tbody>
-			<th:block th:each="storeEmpVO, storeEmpVOStat : ${storeEmpListData}">
+			<th:block th:each="customerVO, customerVOStat : ${customerListData}">
 				<tr>
-					<td th:text="${storeEmpVOStat.count}"></td>
-					<td th:text="${storeEmpVO.sEmpId}"></td>
-					<td th:text="${storeEmpVO.sEmpName}"></td>
-					<td th:text="${storeEmpVO.invPerm}"></td>
-					<td th:text="${storeEmpVO.purPerm}"></td>
-					<td th:text="${storeEmpVO.manuPerm}"></td>
-					<td th:text="${storeEmpVO.orderPerm}"></td>
-					<td th:text="${storeEmpVO.modifyPerm}"></td>
-					<td th:text="${storeEmpVO.storesVO}"></td>
-					<td th:text="${storeEmpVO.sEmpDeptno}"></td>
-					<td th:text="${storeEmpVO.sEmpTitle}"></td>
-					<td th:text="${storeEmpVO.sEmpState}"></td>
+					<td th:text="${customerVOStat.count}"></td>
+					<td th:text="${customerVO.customerId}"></td>
+					<td th:text="${customerVO.customerNic}"></td>
+					<td th:text="${customerVO.customerMob}"></td>
+					<td th:text="${customerVO.customerEmail}"></td>
+					<td th:text="${customerVO.customerAddress}"></td>
+					<td th:text="${customerVO.customerState}"></td>
 					<td>
-						<form method="post" th:action="@{/sFunction/storeEmp/getOne_For_Update}"
+						<form method="post" th:action="@{/pFunction/customer/getOne_For_Update}"
 							style="margin-bottom: 0px;">
 							<input type="submit" value="修改"> <input type="hidden"
-								name="sEmpId" th:value="${storeEmpVO.sEmpId}">
+								name="customerId" th:value="${customerVO.customerId}">
 						</form>
 					</td>
 				</tr>

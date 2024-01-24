@@ -22,7 +22,7 @@ import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 
 
 @Controller
-@RequestMapping("/cFunction/customer")
+@RequestMapping("/pFunction/customer")
 public class CustomerController {
 	
 
@@ -36,7 +36,7 @@ public class CustomerController {
 		CustomerVO customerVO = new CustomerVO();
 		model.addAttribute("customerVO", customerVO);
 		System.out.println("轉交請求");
-		return "cFunction/customer/addCustomer";
+		return "pFunction/customer/addCustomer";
 	}
 
 	@PostMapping("insert")
@@ -46,7 +46,7 @@ public class CustomerController {
 
 		if (result.hasErrors()) {
 			System.out.println("資料有誤");
-			return "cFunction/customer/addCustomer";
+			return "pFunction/customer/addCustomer";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
 		customerSvc.addCustomerVO(customerVO);
@@ -54,7 +54,7 @@ public class CustomerController {
 		List<CustomerVO> list = customerSvc.getAll();
 		model.addAttribute("customerListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:cFunction/customer/listAllCustomer"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:pFunction/customer/listAllCustomer"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 
 	
@@ -67,7 +67,7 @@ public class CustomerController {
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
 		model.addAttribute("customerVO", customerVO);
 		System.out.println("修改成功1");
-		return "cFunction/customer/update_customer_input"; // 查詢完成後轉交update_emp_input.html
+		return "pFunction/customer/update_customer_input"; // 查詢完成後轉交update_emp_input.html
 	}
 
 	@PostMapping("update")
@@ -77,7 +77,7 @@ public class CustomerController {
 
 		if (result.hasErrors()) {
 			System.out.println("資料不全");
-			return "cFunction/customer/update_customer_input";
+			return "pFunction/customer/update_customer_input";
 		}
 		/*************************** 2.開始修改資料 *****************************************/
 
@@ -87,7 +87,7 @@ public class CustomerController {
 		model.addAttribute("success", "- (修改成功)");
 		customerVO = customerSvc.getOneCustomer(Integer.valueOf(customerVO.getCustomerId()));
 		model.addAttribute("customerVO", customerVO);
-		return "cFunction/customer/listOneCustomer"; // 修改成功後轉交listOneEmp.html
+		return "pFunction/customer/listOneCustomer"; // 修改成功後轉交listOneEmp.html
 	}
 
 	

@@ -64,8 +64,8 @@ public class PlatformEmpService implements PlatformEmpServiceIntf{
 		return null;
 	}
 	
-	public PlatformEmpVO getOnePlatformEmp(Integer id) {
-		Optional<PlatformEmpVO> optional = repository.findById(id);
+	public PlatformEmpVO getOnePlatformEmp(Integer pEmpId) {
+		Optional<PlatformEmpVO> optional = repository.findById(pEmpId);
 		return optional.orElse(null); 
 	}
 	
