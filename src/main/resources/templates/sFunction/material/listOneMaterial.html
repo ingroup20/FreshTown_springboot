@@ -5,7 +5,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>物料資料 - listOneMaterial.html</title>
-<head th:insert="~{sFunction/material/includedFragment}"></head>
+<head></head>
 <style type="text/css">
 span {
 	display: inline-block;
@@ -22,7 +22,7 @@ span {
 		<div align="center">
 			<h2>物料資料 - listOneMaterial.html</h2>
 			<h3>
-				<a class="navbar-brand" th:href="@{sFunction/material/select_page}"><img
+				<a class="navbar-brand" th:href="@{/sFunction/material/select_page}"><img
 					th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a>
 			</h3>
 		</div>
@@ -36,7 +36,7 @@ span {
 		<span>物料編號:</span><span th:text="${materialVO.itemNumber}"></span><br />
 		<span>物料名稱:</span><span th:text="${materialVO.itemName}"></span><br />
 		<span>物料分類編號:</span><span
-			th:text="${materialVO.itemsClass.itemClassId}"></span><br /> <span>庫存數量:</span><span
+			th:text="${materialVO.itemsClassVO.itemClassId}"></span><br /> <span>庫存數量:</span><span
 			th:text="${materialVO.stockQuantity}"></span><br /> <span>未入庫數量:</span><span
 			th:text="${materialVO.quantityNot}"></span><br /> <span>物料單位:</span><span
 			th:text="${materialVO.itemUnit}"></span><br /> <span>安全庫存線:</span><span

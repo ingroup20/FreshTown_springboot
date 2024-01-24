@@ -2,6 +2,7 @@ package com.cha104g1.freshtown_springboot.material.model.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -41,7 +44,7 @@ public class MaterialVO implements Serializable{
 	private String itemName;
 	
 	@ManyToOne
-	@JoinColumn(name="itemClassId",referencedColumnName ="itemClassId")
+	@JoinColumn(name="itemClassId", referencedColumnName = "itemClassId")
 	private ItemsClassVO itemsClassVO;
 	
 	@Column(name = "stockQuantity")
@@ -62,6 +65,9 @@ public class MaterialVO implements Serializable{
 	
 	@Column(name = "itemStatus")
 	@NotNull(message="物料狀態: 請勿空白")
+	@Min(value=0, message = "領料狀態: 只能是數字(0:低於安全庫存 1:數量足夠 2:作廢 )")
+	@Max(value=2, message = "領料狀態: 只能是數字(0:低於安全庫存 1:數量足夠 2:作廢)")
+//	@Pattern(regexp = "^[012]$", message = "物料狀態: 只能是數字(0: 低於安全庫存 1: 數量足夠 2:作廢")
 	private Integer itemStatus;
 	
 	@Column(name = "purDate", nullable = true)
@@ -71,9 +77,18 @@ public class MaterialVO implements Serializable{
 	@JoinColumn(name="storeId",referencedColumnName ="storeId")
 	private StoresVO storesVO;
 	
-	@OneToMany(mappedBy = "materialVO", fetch=FetchType.EAGER,cascade= CascadeType.ALL)
-	@OrderBy("pickingNo asc")
-	private Set<PickingVO> pickingVO;
+	
+	@OneToMany(mappedBy = "materialVO",cascade= CascadeType.ALL)
+//	@OrderBy("pickingNo asc")
+	private Set<PickingVO> pickingVO = new HashSet<PickingVO>();
+	
+	public Set<PickingVO> getPickingVO() {
+		return this.pickingVO;
+	}
+	public void setPickingVO(Set<PickingVO> pickingVO) {
+		this.pickingVO = pickingVO;
+	}
+	
 
 	
 	public MaterialVO() {
@@ -145,22 +160,15 @@ public class MaterialVO implements Serializable{
 		this.purDate = purDate;
 	}
 
-	public Set<PickingVO> getPickingVO() {
-		return pickingVO;
-	}
 
-	public void setPickingVO(Set<PickingVO> pickingVO) {
-		this.pickingVO = pickingVO;
-	}
-
-	public ItemsClassVO getItemsClass() {
+	public ItemsClassVO getItemsClassVO() {
 		return itemsClassVO;
 	}
-	
-	public void setItemsClass(ItemsClassVO itemsClassVO) {
+
+	public void setItemsClassVO(ItemsClassVO itemsClassVO) {
 		this.itemsClassVO = itemsClassVO;
 	}
-	
+
 	public StoresVO getStoresVO() {
 		return storesVO;
 	}
