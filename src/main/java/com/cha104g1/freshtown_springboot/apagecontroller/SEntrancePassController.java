@@ -57,6 +57,7 @@ public class SEntrancePassController {
 	SupService supSvc;
 	@Autowired
 	SupOrderService supOrderSvc;
+	@Autowired
 	StoreEmpService storeEmpSvc;
 
 
