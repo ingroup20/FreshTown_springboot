@@ -80,21 +80,15 @@ xmlns:th="http://www.thymeleaf.org">
                     <i class="menu-icon tf-icons bx bx-store"></i>
                     <div data-i18n="store">採購作業</div>
                  </a>
-                 <ul class="menu-sub">
+                 <ul>
                   <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a th:href="@{/sFunction/suporder/supOrderMain}" class="menu-link">
                     <i class="menu-icon"></i>
                     <div data-i18n="store">管理採購單</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <i class="menu-icon"></i>
-                    <div data-i18n="client">採購入庫</div>
-                   </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a th:href="@{/sFunction/supplier/test}" class="menu-link">
                     <i class="menu-icon"></i>
                     <div data-i18n="client">管理供應商</div>
                    </a>
@@ -357,19 +351,22 @@ xmlns:th="http://www.thymeleaf.org">
     <!-- / Layout wrapper -->
     
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="./libs/jquery/jquery.js"></script>
-    <script src="./libs/popper/popper.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script th:src="@{/backhome/libs/jquery/jquery.js}"></script>
+    <script th:src="@{/backhome/libs/popper/popper.js}"></script>
+    <script th:src="@{/backhome/js/bootstrap.js}"></script>
+    <script th:src="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
 
-    <script src="./js/menu.js"></script>
+    <script th:src="@{/backhome/js/menu.js}"></script>
+
+ 	<!-- Vendors JS -->
+    <script src="@{/backhome/libs/apex-charts/apexcharts.js}"></script>
 
     <!-- Main JS -->
-    <script src="./js/main.js"></script>
+    <script th:src="@{/backhome/js/main.js}"></script>
 
     <!-- Page JS -->
 
-    <script src=".js/form-basic-inputs.js"></script>
+    <script th:src="@{/backhome/js/form-basic-inputs.js}"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
