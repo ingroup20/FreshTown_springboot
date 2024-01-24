@@ -13,6 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.material.model.service.MaterialRepository;
+import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpRepository;
 
 import redis.clients.jedis.Jedis;
@@ -24,8 +27,12 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
     //main方法，單獨測區塊功能
 	
 	
+//	@Autowired
+//	PlatformEmpRepository repository;
 	@Autowired
-	PlatformEmpRepository repository;
+	MaterialRepository repository;
+	@Autowired
+	MaterialService materialSvc;
 	
 	@Autowired
 	LikeStoreService likeStoreSvc;
@@ -37,15 +44,21 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String...args) throws Exception {
 
+
     	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
 
+
 //    	
+    	
+    	
 //    	List<RefundsVO> list = repository.findAll();
+
     	for (LikeStoreVO refunds : likeStoreList) {
 			System.out.print(refunds.getLikeUnlike() + ",");
 			System.out.print(refunds.getClass() + ",");
 			System.out.print(refunds.getCustomerVO() + ",");
 			System.out.print(refunds.getStoresVO() + ",");
+
     	}
     	
     	

@@ -18,10 +18,10 @@
                 <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li>
                 <li class="nav_item ">
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">註冊專區</a>
-                    <ul class="dropdown_menu -none">
+                    <ul class="dropdown_menu ">
                         <li><a class="dropdown_item title" href="#!">訂餐會員註冊</a></li>
                         <li><hr class="dropdown_divider" /></li>
-                        <li><a class="dropdown_item title" href="#!">合作店家申請</a></li>
+                        <li><a class="dropdown_item title" th:href="@{addStoresC}">合作店家申請</a></li>
                     </ul>
                 </li>
                 <li class="nav_item ">
@@ -55,7 +55,7 @@
         
     </nav>
 
-    <header class="header">
+    <header class="header" th:unless ="${getOneStoreMeal}">
         <div class="header">
             <h1 class="header ">美食饗宴  盡在鮮城</h1>
             <p class="header">最公正的餐廳推薦平台，立即加入會員訂餐吧!</p>
@@ -64,7 +64,7 @@
   
     </header>
 
-    <section class="section">
+    <section class="section" th:unless ="${getOneStoreMeal}">
         <div class="section">
             <!-- 店家-->
             <th:block th:each="storesVO : ${storesListData}">
@@ -93,19 +93,21 @@
 	
 	                </div>
 	                <!-- 控制項-->
-<!-- 	                <div class="card_footer title"> -->
-<!-- 	                    <form id="entrance" method="get" th:action="@{/cEntrance/onceStorePage}" >  -->
-<!-- 		 				     <input id="entrance" type="submit" value="看菜單">  -->
-<!-- 						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}"> -->
-<!-- 					     </form>		 -->
-<!-- 	                </div> -->
+	                <div class="card_footer title">
+	                    <form id="entrance" method="get" th:action="@{getOneStoreMeal}" > 
+		 				     <input id="entrance" type="submit" value="看菜單"> 
+						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
+					     </form>		
+	                </div>
 	                
 	            </div>
            </th:block>
         </div>
     </section>
 
-    <main></main>
+    <main class="main" th:if="${getOneStoreMeal}">
+    	<div th:insert="~{/onceStorePage :: onceStorePage-div}" ></div>
+    </main>
 
     <footer class="footer">
         <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>

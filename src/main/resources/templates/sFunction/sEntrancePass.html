@@ -66,7 +66,7 @@ xmlns:th="http://www.thymeleaf.org">
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a th:href="@{index}" class="menu-link">
+              <a th:href="@{/sFunction/sEntrancePass}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">店家後台首頁</div>
               </a>
@@ -129,12 +129,18 @@ xmlns:th="http://www.thymeleaf.org">
               
               <li class="menu-item">
   
-                   <a href="#" class="menu-link">
+<!--管理訂單        -->
+				<a href="#" class="menu-link">
                       <i class="menu-icon tf-icons bx bx-receipt"></i>
-                      <div data-i18n="store">管理訂單</div>
-                   </a>
+                      <div data-i18n="store">
+                      	<form class="menu-link" method="post" th:action="manageOrders"> 
+                          <input type="submit" value=" 管理訂單"> 
+                        </form>
+                      </div>
+                  </a> 
+
   
-                   <a href="#" class="menu-link">
+  					<a href="#" class="menu-link" th:onclick="submitForm('orderOrders')">
                     <i class="menu-icon tf-icons bx bx-sort-up"></i>
                     <div data-i18n="store">顯示訂單排程</div>
                  </a>
@@ -155,10 +161,14 @@ xmlns:th="http://www.thymeleaf.org">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
 
              <li class="menu-item">
-              <a href="#" class="menu-link">
-                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+<a href="#" class="menu-link" th:onclick="submitForm('storeInfo')">                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
                  <div data-i18n="store">店家資料管理</div>
+
               </a>
+              
+<form class="menu-link" method="post" th:action="storeInfo"> 
+                          <input type="submit" value=" 店家資料管理"> 
+                        </form>
              </li>
               <li class="menu-item">
               <a href="#" class="menu-link">
@@ -231,8 +241,9 @@ xmlns:th="http://www.thymeleaf.org">
 
           <!-- / Navbar -->
 
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
+          <!-- Content wrapper首頁${defaultPage}======================================================================================== -->
+
+          <div class="content-wrapper" th:if="${defaultPage}">
                         <!-- Content -->
               <div class="container-xxl flex-grow-1 container-p-y">
                           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">店家後台首頁/</span></h4>
@@ -260,7 +271,7 @@ xmlns:th="http://www.thymeleaf.org">
                                     <!-- <div class="carousel-caption d-none d-md-block">
                                       <h3>Second slide</h3>
                                       <p>In numquam omittam sea.</p>
-                                    </div> -->
+                                    </div> -->                               
                                   </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
@@ -274,8 +285,7 @@ xmlns:th="http://www.thymeleaf.org">
                             </div>
                           </div>
                         </div>
-                    
-
+     
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -296,6 +306,44 @@ xmlns:th="http://www.thymeleaf.org">
           <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
+
+
+
+
+<!-- Content wrapper置換插入內容======================================================================================== -->
+			<!--訂單管理 -->
+           <div class="content-wrapper" th:if="${manageOrders}">
+           		<div th:insert="~{/sFunction/orders/select_page :: select_page-div}">
+           </div>
+           <!--訂單排程 -->
+<!--            <div class="content-wrapper" th:if="${orderOrders}"> -->
+<!--            		<div th:insert="~{/sFunction/orders/making_page :: making_page-div}"> -->
+<!--            </div> -->
+           <!--店家資料 -->
+           <div class="content-wrapper" th:if="${storeInfo}">
+           		<div th:insert="~{/sFunction/stores/select_page :: select_page-div}">
+           </div>
+           
+           
+           
+           
+           
+           
+<!-- ======================================================================================== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
@@ -322,5 +370,25 @@ xmlns:th="http://www.thymeleaf.org">
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+
+<script th:inline="javascript"> 
+    function submitForm(action) {
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', action);
+        
+        var hiddenField = document.createElement('input');
+        hiddenField.setAttribute('type', 'hidden');
+        hiddenField.setAttribute('name', 'parameterName'); // Replace 'parameterName' with your actual parameter name
+        hiddenField.setAttribute('value', 'parameterValue'); // Replace 'parameterValue' with your actual parameter value
+        form.appendChild(hiddenField);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    </script>
+    
 </body>
 </html>

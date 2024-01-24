@@ -1,10 +1,19 @@
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>所有分類資料 - listAllMealType.html</title>
+<title>所有員工資料 - listAllEmp.html</title>
 <script th:src="@{/js/jquery-1.11.3.min.js}"></script>
 <!-- 左側jquery為table分頁用 -->
 <head></head>
@@ -65,10 +74,9 @@ body {
 	<nav
 		class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		<div align="center">
-			<h2>所有物料分類資料 - listAllItemsClass.html</h2>
+			<h2>所有員工資料 - listAllEmp.html</h2>
 			<h3>
-				<a class="navbar-brand"
-					th:href="@{/sFunction/itemsclass/select_page}"><img
+				<a class="navbar-brand" th:href="@{/emp/select_page}"><img
 					th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a>
 			</h3>
 		</div>
@@ -78,25 +86,29 @@ body {
 		<thead>
 			<tr style="background-color: #CCCCFF">
 				<th>計數</th>
-				<th>物料分類編號</th>
-				<th>物料分類名稱</th>
-				<th>修改</th>
+				<th>員工編號</th>
+				<th>員工姓名</th>
+				<th>員工信箱</th>
+				<th>員工權限</th>
+				<th>員工狀態</th>
+				<th></th> 
 			</tr>
 		</thead>
 
 		<tbody>
-			<th:block th:each="itemsClassVO : ${itemsClassListData}">
+			<th:block th:each="platformEmpVO, platformEmpVOStat : ${platformEmpListData}">
 				<tr>
-					<td th:text="${itemsClassVOStat.count}">計數</td>
-					<td th:text="${itemsClassVO.itemClassId}">分類編號</td>
-					<td th:text="${itemsClassVO.itemClassName}">分類名稱</td>
-
-
+					<td th:text="${platformEmpVOStat.count}"></td>
+					<td th:text="${platformEmpVO.pEmpId}"></td>
+					<td th:text="${platformEmpVO.pEmpName}"></td>
+					<td th:text="${platformEmpVO.pEmpEmail}"></td>
+					<td th:text="${platformEmpVO.pEmpPerm}"></td>
+					<td th:text="${platformEmpVO.pEmpState}"></td>
 					<td>
-						<form method="post" th:action="@{/sFunction/itemsclass/getOne_For_Update}"
+						<form method="post" th:action="@{/pFunction/platformEmp/getOne_For_Update}"
 							style="margin-bottom: 0px;">
 							<input type="submit" value="修改"> <input type="hidden"
-								name="itemClassId" th:value="${itemsClassVO.itemClassId}">
+								name="pEmpId" th:value="${platformEmpVO.pEmpId}">
 						</form>
 					</td>
 				</tr>
