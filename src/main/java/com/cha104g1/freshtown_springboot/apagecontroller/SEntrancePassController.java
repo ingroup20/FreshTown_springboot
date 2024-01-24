@@ -23,6 +23,10 @@ import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
+import com.cha104g1.freshtown_springboot.supplier.model.SupService;
+import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 import redis.clients.jedis.Jedis;
 
@@ -47,6 +51,10 @@ public class SEntrancePassController {
 	CustomerService customerSvc;
 	@Autowired
 	OrdersService ordersSvc;
+	@Autowired
+	SupService supSvc;
+	@Autowired
+	SupOrderService supOrderSvc;
 
 
 	@ModelAttribute//每次進入controller都會叫用
@@ -132,6 +140,39 @@ public class SEntrancePassController {
 		   	}
 			
 			
+	//=========== supplier  要使用的資料 ===================   
+    @GetMapping("/supplier/test")
+	public String supplierMain(Model model) {
+		return "sFunction/supplier/test";
+	}
+    
+    @GetMapping("/supplier/supList")
+	public String supList(Model model) {
+		return "sFunction/supplier/supList";
+	}
+    
+	@ModelAttribute("supListData")
+	protected List<SupVO> referenceListData_Stores(Model model) {
+		List<SupVO> list = supSvc.getAll();
+		return list;
+	}
+	
+	//=========== suporder  要使用的資料 ===================   
+	@GetMapping("/suporder/supOrderMain")
+	public String supOrderMain(Model model) {
+		return "sFunction/suporder/supOrderMain";
+	}
+	
+	@GetMapping("/suporder/supOrderList")
+	public String supOrderList(Model model) {
+		return "sFunction/suporder/supOrderList";
+	}
+	
+	@ModelAttribute("supOrderListData")
+	protected List<SupOrderVO> referenceListData_SupOrder(Model model) {
+		List<SupOrderVO> list = supOrderSvc.getAll();
+		return list;
+	}
 
 	
 }

@@ -217,7 +217,7 @@ public class IndexController_inSpringBoot {
 		return "sFunction/supplier/supList";
 	}
     
-	@ModelAttribute("supListData") // for select_page.html 第135行用
+	@ModelAttribute("supListData")
 	protected List<SupVO> referenceListData_Stores(Model model) {
 		List<SupVO> list = supSvc.getAll();
 		return list;
@@ -234,7 +234,7 @@ public class IndexController_inSpringBoot {
 		return "sFunction/suporder/supOrderList";
 	}
 	
-	@ModelAttribute("supOrderListData") // for select_page.html 第135行用
+	@ModelAttribute("supOrderListData")
 	protected List<SupOrderVO> referenceListData_SupOrder(Model model) {
 		List<SupOrderVO> list = supOrderSvc.getAll();
 		return list;
