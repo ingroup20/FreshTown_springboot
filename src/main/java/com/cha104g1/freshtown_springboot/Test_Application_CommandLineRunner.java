@@ -1,34 +1,47 @@
 package com.cha104g1.freshtown_springboot;
 
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.cha104g1.freshtown_springboot.adao.CartService;
+import com.cha104g1.freshtown_springboot.amodel.CartVO;
+import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
-import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
+import com.cha104g1.freshtown_springboot.meals.model.MealsService;
+import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
+import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailService;
+import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
+import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpRepository;
 
 import redis.clients.jedis.Jedis;
 
-
-
 @SpringBootApplication
 public class Test_Application_CommandLineRunner implements CommandLineRunner {
     //main方法，單獨測區塊功能
-	
 	
 	@Autowired
 	PlatformEmpRepository repository;
 	
 	@Autowired
 	LikeStoreService likeStoreSvc;
+	
+	@Autowired
+	CartService cartSvc;
+	
+
+	@Autowired
+	OrderDetailService orderDetailSvc;
+	@Autowired
+	CustomerService customerSvc;
+	@Autowired
+	OrdersService ordersSvc;
+	@Autowired
+	MealsService mealsSvc;
+
 
 	public static void main(String[] args) {
         SpringApplication.run(Test_Application_CommandLineRunner.class);
@@ -36,17 +49,54 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String...args) throws Exception {
-
-    	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
+    	
+    	OrderDetailVO orderDetailVO = orderDetailSvc.getOneOrderDetail(1);
+    	
+    	MealsVO mealsVO = mealsSvc.getMealsVOByMealNo(2);
+    	
+	
+    	CartVO cart =new CartVO();
+    	cart.setCustomerId(4);
+    	cart.setId(1);
+    	cart.setMealsVO(mealsVO);
+    	cart.setStoreId(3);
+    	cart.setOrderDetailVO(orderDetailVO);
+    	
+    	
+    	cartSvc.addCart(cart, 4);
+    	System.out.println("執行玩了");
+    	
+    	Jedis jedis = new Jedis("localhost", 6379);
+		jedis.select(15);//資料第15區
+    
+		System.out.println("重取出");
+    	jedis.smembers("cart:4:1");
+		JSONObject orderObj = new JSONObject(jedis.smembers("cart:4:1"));
+		JSONObject orderObj1 = new JSONObject(jedis.smembers("cart:4"));
+		JSONObject orderObj2 = new JSONObject(jedis.smembers("cart"));
+		System.out.println("1="+orderObj);
+		System.out.println("2="+orderObj1);
+		System.out.println("3="+orderObj2);
+    	
+		System.out.println("結束");
+    	
+    	
+    	
+		jedis.close();
+    	
+    	
+    	
+    	
+//    	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
 
 //    	
 //    	List<RefundsVO> list = repository.findAll();
-    	for (LikeStoreVO refunds : likeStoreList) {
-			System.out.print(refunds.getLikeUnlike() + ",");
-			System.out.print(refunds.getClass() + ",");
-			System.out.print(refunds.getCustomerVO() + ",");
-			System.out.print(refunds.getStoresVO() + ",");
-    	}
+//    	for (LikeStoreVO refunds : likeStoreList) {
+//			System.out.print(refunds.getLikeUnlike() + ",");
+//			System.out.print(refunds.getClass() + ",");
+//			System.out.print(refunds.getCustomerVO() + ",");
+//			System.out.print(refunds.getStoresVO() + ",");
+//    	}
     	
     	
 
