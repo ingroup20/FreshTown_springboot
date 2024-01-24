@@ -20,15 +20,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassService;
 import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
+import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+import com.cha104g1.freshtown_springboot.picking.service.PickingService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
-@RequestMapping("sFunction/material")
+@RequestMapping("/sFunction/material")
 public class MaterialController {
 
 	@Autowired
@@ -36,6 +39,9 @@ public class MaterialController {
 
 	@Autowired
 	ItemsClassService itemsClassSvc;
+	
+	@Autowired
+	PickingService pickingSvc;
 
 	@GetMapping("addMaterial")
 	public String addMaterial(ModelMap model) {
@@ -62,6 +68,23 @@ public class MaterialController {
 		model.addAttribute("success", "- (新增成功)");
 		return "redirect:sFunction/material/listAllMaterial"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
+	
+//	@GetMapping("listAllMaterial")
+//    public String listAllMaterial(Model model) {
+//        List<PickingVO> pickingList = pickingSvc.getAll();// fetch or create your list of objects
+//        model.addAttribute("pickingList", pickingList);
+//        return "sFunction/material/addMaterial";
+//    }
+	
+//    @PostMapping("/updateValue")
+//    @ResponseBody
+//    public String updateValue(@RequestParam String pickingNo, @RequestParam String newValue, Model model) {
+//        // Perform the update logic here, e.g., update the value in the database
+//    	PickingVO pickingVO = pickingSvc.getOnePicking(Integer.valueOf(pickingNo));
+//    	model.addAttribute("pickingVO", pickingVO);
+//        return "Success"; // Return a response indicating success or failure
+//    }
+
 
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("itemNumber") String itemNumber, ModelMap model) {
@@ -151,4 +174,16 @@ public class MaterialController {
 		List<MaterialVO> list = materialSvc.getAll();
 		return list;
 	}
+	
+//	//picking
+//	@PostMapping("picking")
+//	public String picking(Integer itemNumber,HttpServletRequest req, Model model) {
+//		MaterialVO materialVO = materialSvc.getOneMaterial(itemNumber);
+////		Integer quantity =materialVO.getStockQuantity();
+//		model.addAttribute("materialVO",materialVO);
+//		return "sFunction/material/addpacking";
+//	}
+	
+	
+	
 }

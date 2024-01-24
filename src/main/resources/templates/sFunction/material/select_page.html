@@ -92,14 +92,14 @@ div.b {
 					<br>
 				</h5></li>
 
-			<li>
-				<form method="post" th:action="@{getOne_For_Display}">
-					輸入物料編號: <input type="text" name="itemNumber"
-						th:value="${param.itemNumber}"> <input type="submit"
-						value="送出"> (輸入如1)
-				</form>
-				<br>
-			</li>
+<!-- 			<li> -->
+<!-- 				<form method="post" th:action="@{getOne_For_Display}"> -->
+<!-- 					輸入物料編號: <input type="text" name="itemNumber" -->
+<!-- 						th:value="${param.itemNumber}"> <input type="submit" -->
+<!-- 						value="送出"> (輸入如1) -->
+<!-- 				</form> -->
+<!-- 				<br> -->
+<!-- 			</li> -->
 			
 			<!--  萬用複合查詢-以下欄位-可隨意增減 -->
             <li>
@@ -109,20 +109,20 @@ div.b {
               <input type="text" name="itemName" value=""><br>
              
               選擇物料分類編號: 
-              <input type="text" name="itemClassId" value=""><br>
+              
               <select th:field="*{itemsClassVO.itemClassId}">
 			  <option value="">
 			  <option th:each="itemsClassVO : ${itemsClassListData}" th:value="${itemsClassVO.itemClassId}" th:text="${itemsClassVO.itemClassName}" />
 		      </select><br>
               
-              庫存數量: 
-              <input type="text" name="stockQuantity" value=""><br>
+<!--               庫存數量:  -->
+<!--               <input type="text" name="stockQuantity" value=""><br> -->
               
-              未入庫數量: 
-              <input type="text" name="quantityNot" value=""><br>
+<!--               未入庫數量:  -->
+<!--               <input type="text" name="quantityNot" value=""><br> -->
               
-              安全庫存線:
-              <input type="text" name="safetyStock" value=""><br>
+<!--               安全庫存線: -->
+<!--               <input type="text" name="safetyStock" value=""><br> -->
               
               選擇物料狀態: (0: 低於安全庫存 1: 數量足夠 2:作廢)
               <input type="text" name="itemStatus" value=""><br>
@@ -130,8 +130,9 @@ div.b {
               採購需求送出日期: 
               <input type="Date" name="purDate"> ~ <input type="Date" name="purDate"><br>
               
-              店家流水號: 
-              <input type="text" name="storeId" value=""><br>
+<!--               店家流水號:  -->
+<!--               <input type="text" name="storeId" value=""><br> -->
+              
               
               <input type="submit" value="送出">
 			</form>
@@ -153,7 +154,7 @@ div.b {
 		<!-- 見listOneEmp.html的第35行的th:fragment="listOneEmp-div" -->
 		<!-- 使用th:replace也可 -->
 		<div
-			th:insert="~{sFunction/material/listOneMaterial :: listOneMaterial-div}"></div>
+			th:insert="~{/sFunction/material/listOneMaterial :: listOneMaterial-div}"></div>
 	</div>
 </body>
 </html>

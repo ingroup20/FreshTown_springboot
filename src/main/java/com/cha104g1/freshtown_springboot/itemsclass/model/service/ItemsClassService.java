@@ -25,6 +25,7 @@ public class ItemsClassService {
          
          public ItemsClassVO getOneItemsClass(Integer itemClassId) {
      		Optional<ItemsClassVO> optional = repository.findById(itemClassId);
+     		//return optional.get();
     		return optional.orElse(null);
          }
          
