@@ -27,7 +27,7 @@ public class StoreEmpcontroller {
 	
 	@Autowired
 	StoreEmpService storeEmpSvc;
-	private String storeEmpId;
+	private String sEmpId;
 	
 	
 	@GetMapping("addStoreEmp")
@@ -58,10 +58,10 @@ public class StoreEmpcontroller {
 
 	
 	@PostMapping("getOne_For_Update")
-	public String getOne_For_Update(@RequestParam("storeEmpId") String storeEmpId, ModelMap model) {
+	public String getOne_For_Update(@RequestParam("sEmpId") String sEmpId, ModelMap model) {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		/*************************** 2.開始查詢資料 *****************************************/
-		StoreEmpVO storeEmpVO = storeEmpSvc.getOneStoreEmp(Integer.valueOf(storeEmpId));
+		StoreEmpVO storeEmpVO = storeEmpSvc.getOneStoreEmp(Integer.valueOf(sEmpId));
 
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
 		model.addAttribute("storeEmpVO", storeEmpVO);
