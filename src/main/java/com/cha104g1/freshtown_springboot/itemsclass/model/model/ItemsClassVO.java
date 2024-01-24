@@ -1,11 +1,13 @@
 package com.cha104g1.freshtown_springboot.itemsclass.model.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +18,6 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-
 import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
@@ -39,9 +40,9 @@ public class ItemsClassVO implements Serializable {
 	@JoinColumn(name = "storeId", referencedColumnName = "storeId")
 	private StoresVO storesVO;
 
-	@OneToMany(mappedBy = "itemsClassVO", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "itemsClassVO", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("itemNumber asc")
-	private Set<MaterialVO> materialVO;
+	private java.util.Set<MaterialVO> materialVO = new HashSet<MaterialVO>();
 
 	public ItemsClassVO() {
 		super();
@@ -78,5 +79,7 @@ public class ItemsClassVO implements Serializable {
 	public void setStoresVO(StoresVO storesVO) {
 		this.storesVO = storesVO;
 	}
+	
+	
 
 }

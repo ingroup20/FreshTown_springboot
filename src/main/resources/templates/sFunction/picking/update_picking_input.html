@@ -47,7 +47,7 @@ form div div {
 		<div align="center">
 			<h2>領料資料修改 - update_picking_input.html</h2>
 			<h3>
-				<a class="navbar-brand" th:href="@{sFunction/picking/select_page}"><img
+				<a class="navbar-brand" th:href="@{/sFunction/picking/select_page}"><img
 					th:src="@{/images/back1.gif}">回查詢頁</a>
 			</h3>
 		</div>
@@ -65,9 +65,11 @@ form div div {
 			</div>
 
 			<div>
-				<label>物料編號:</label> <input type="text"
-					th:field="*{materialVO.itemNumber}"
-					onclick="hideContent('materialVO.itemNumber.errors');" /><br /> <span
+				<label>物料編號:</label> 
+				    <select th:field="*{materialVO.itemNumber}">
+				        <option th:each="materialVO : ${materialListData}" th:value="${materialVO.itemNumber}" th:text="${materialVO.itemName}" />
+				    </select>
+					 <span
 					th:if="${#fields.hasErrors('materialVO.itemNumber')}"
 					th:errors="*{materialVO.itemNumber}" class="error"
 					id="materialVO.itemNumber.errors"></span>

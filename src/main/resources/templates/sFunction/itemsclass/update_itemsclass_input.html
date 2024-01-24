@@ -66,8 +66,9 @@ form div div {
 			</div>
 
 			<div>
-				<label>物料分類名稱::</label> <input type="text"
-					th:field="*{itemClassName}" style="border: 0px; font-weight: bold;" /><br />
+				<label>物料分類名稱:</label> <input type="text"
+					th:field="*{itemClassName}"
+					onclick="hideContent('itemClassName.errors');" /><br />
 				<span th:if="${#fields.hasErrors('itemClassName')}"
 					th:errors="*{itemClassName}" class="error"
 					id="itemClassName.errors"></span>

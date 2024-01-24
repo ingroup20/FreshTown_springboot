@@ -261,6 +261,8 @@ public class IndexController_inSpringBoot {
     
 	@ModelAttribute("materialListData") // for select_page.html 第135行用
 	protected List<MaterialVO> referenceListData_Material(Model model) {
+		//符合要什麼給什麼
+		model.addAttribute("itemsClassVO", new ItemsClassVO());
 		List<MaterialVO> list = materialSvc.getAll();
 		return list;
 	}
@@ -278,6 +280,7 @@ public class IndexController_inSpringBoot {
     
 	@ModelAttribute("pickingListData") // for select_page.html 第135行用
 	protected List<PickingVO> referenceListData_Picking(Model model) {
+		model.addAttribute("materialVO", new MaterialVO());
 		List<PickingVO> list = pickingSvc.getAll();
 		return list;
 	}

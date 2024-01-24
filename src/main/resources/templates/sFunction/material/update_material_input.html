@@ -47,7 +47,7 @@ form div div {
 		<div align="center">
 			<h2>物料資料修改 - update_material_input.html</h2>
 			<h3>
-				<a class="navbar-brand" th:href="@{sFunction/material/select_page"><img
+				<a class="navbar-brand" th:href="@{/sFunction/material/select_page}"><img
 					th:src="@{/images/back1.gif}">回查詢頁</a>
 			</h3>
 		</div>
@@ -72,12 +72,14 @@ form div div {
 			</div>
 
 			<div>
-				<label>物料分類編號:</label> <input type="text"
-					th:field="*{itemsClass.itemClassId}"
-					onclick="hideContent('itemsClass.itemClassId.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('itemsClass.itemClassId')}"
-					th:errors="*{itemsClass.itemClassId}" class="error"
-					id="itemsClass.itemClassId.errors"></span>
+				<label>物料分類編號:</label> 
+				    <select th:field="*{itemsClassVO.itemClassId}">
+				        <option th:each="itemsClassVO : ${itemsClassListData}" th:value="${itemsClassVO.itemClassId}" th:text="${itemsClassVO.itemClassId}" />
+				    </select>
+					 <span
+					th:if="${#fields.hasErrors('itemsClassVO.itemClassId')}"
+					th:errors="*{itemsClassVO.itemClassId}" class="error"
+					id="itemsClassVO.itemClassId.errors"></span>
 			</div>
 
 			<div>

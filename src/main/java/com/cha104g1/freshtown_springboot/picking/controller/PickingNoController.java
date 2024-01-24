@@ -28,16 +28,19 @@ import com.cha104g1.freshtown_springboot.picking.service.PickingService;
 
 @Controller
 @Validated
-@RequestMapping("sFunction/picking")
+@RequestMapping("/sFunction/picking")
 public class PickingNoController {
     
 	@Autowired
 	PickingService pickingSvc;
 	
+	@Autowired
+	MaterialService materialSvc;
+	
 	@PostMapping("getOne_For_Display")
 	public String getOne_For_Display(
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理*************************/	
-			@NotNull(message="領料編號: 請勿空白")
+//			@NotEmpty(message="領料編號: 請勿空白")
 			@RequestParam("pickingNo") String pickingNo,
 			ModelMap model
 			) {
@@ -47,7 +50,9 @@ public class PickingNoController {
 		
 		List<PickingVO> list = pickingSvc.getAll();
 		model.addAttribute("pickingListData", list);// for select_page.html 第97 109行用
-		
+		model.addAttribute("materialVO", new MaterialVO());
+		List<MaterialVO> list2 = materialSvc.getAll();
+    	model.addAttribute("materialListData",list2);    // for select_page.html 第135行用
 		if (pickingVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
 			return "sFunction/picking/select_page";
@@ -58,7 +63,7 @@ public class PickingNoController {
 
 		return "sFunction/picking/select_page";
 	}
-		
+		//錯誤訊息
 		@ExceptionHandler(value = { ConstraintViolationException.class })
 		//@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 		public ModelAndView handleError(HttpServletRequest req,ConstraintViolationException e,Model model) {
@@ -71,6 +76,9 @@ public class PickingNoController {
 
 			List<PickingVO> list = pickingSvc.getAll();
 			model.addAttribute("pickingListData", list);     // for select_page.html 第97 109行用
+			model.addAttribute("materialVO", new MaterialVO());  // for select_page.html 第133行用
+			List<MaterialVO> list2 = materialSvc.getAll();
+	    	model.addAttribute("materialListData",list2); 
 	    	
 			String message = strBuilder.toString();
 		    return new ModelAndView("sFunction/picking/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);

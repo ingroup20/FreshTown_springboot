@@ -47,7 +47,7 @@ form div div {
 		<div align="center">
 			<h2>領料資料新增 - addPicking.html</h2>
 			<h3>
-				<a class="navbar-brand" th:href="@{sFunction/picking/select_page}"><img
+				<a class="navbar-brand" th:href="@{/sFunction/picking/select_page}"><img
 					th:src="@{/images/back1.gif}">回查詢頁</a>
 			</h3>
 		</div>
@@ -59,84 +59,91 @@ form div div {
 		</h3>
 		<form th:action="@{insert}" method="post" th:object="${pickingVO}"
 			enctype="multipart/form-data">
-			
-			<div>
-				<label>物料編號:</label> <input type="text"
-					th:field="*{materialVO.itemNumber}"
-					onclick="hideContent('materialVO.itemNumber.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('materialVO.itemNumber')}"
-					th:errors="*{materialVO.itemNumber}" class="error"
-					id="materialVO.itemNumber.errors"></span>
-			</div>
 
-			<div>
-				<label>店家流水號:</label> <input type="text"
-					th:field="*{storesVO.storeId}"
-					onclick="hideContent('storesVO.storeId.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('storesVO.storeId')}"
-					th:errors="*{storesVO.storeId}" class="error"
-					id="storesVO.storeId.errors"></span>
-			</div>
+			<!-- 			   <div> -->
+			<!-- 				<label>物料編號:</label> <input type="text" -->
+			<!-- 					th:field="*{materialVO.itemNumber}" -->
+			<!-- 					onclick="hideContent('materialVO.itemNumber.errors');" /><br /> <span -->
+			<!-- 					th:if="${#fields.hasErrors('materialVO.itemNumber')}" -->
+			<!-- 					th:errors="*{materialVO.itemNumber}" class="error" -->
+			<!-- 					id="materialVO.itemNumber.errors"></span> -->
+			<!-- 				   </div> -->
+			                選擇物料名稱: <select
+							th:field="*{materialVO.itemNumber}">
+							<option value="">
+							<option th:each="materialVO : ${materialListData}"
+								th:value="${materialVO.itemNumber}"
+								th:text="${materialVO.itemName}" />
+						</select><br>
+				   	<div>
+						<label>店家流水號:</label> <input type="text"
+							th:field="*{storesVO.storeId}"
+							onclick="hideContent('storesVO.storeId.errors');" /><br /> <span
+							th:if="${#fields.hasErrors('storesVO.storeId')}"
+							th:errors="*{storesVO.storeId}" class="error"
+							id="storesVO.storeId.errors"></span>
+							</div>
+							
+							<div>
+								<label>店家員工編號:</label> <input type="text"
+									th:field="*{storeEmpVO.sEmpId}"
+									onclick="hideContent('storeEmpVO.sEmpId.errors');" /><br /> <span
+									th:if="${#fields.hasErrors('storeEmpVO.sEmpId')}"
+									th:errors="*{storeEmpVO.sEmpId}" class="error"
+									id="storeEmpVO.sEmpId.errors"></span>
+							</div>
 
-			<div>
-				<label>店家員工編號:</label> <input type="text"
-					th:field="*{storeEmpVO.sEmpId}"
-					onclick="hideContent('storeEmpVO.sEmpId.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('storeEmpVO.sEmpId')}"
-					th:errors="*{storeEmpVO.sEmpId}" class="error"
-					id="storeEmpVO.sEmpId.errors"></span>
-			</div>
-			<div>
-				<label>領料數量:</label> <input type="text"
-					th:field="*{pickingQuantity}"
-					onclick="hideContent('pickingQuantity.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('pickingQuantity')}"
-					th:errors="*{pickingQuantity}" class="error"
-					id="pickingQuantity.errors"></span>
-			</div>
-
-			<div>
-				<label>領料單位:</label> <input type="text" th:field="*{pickingUnit}"
-					onclick="hideContent('pickingUnit.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('pickingUnit')}"
-					th:errors="*{pickingUnit}" class="error" id="pickingUnit.errors"></span>
-			</div>
-
-			<div>
-				<label>領料狀態:</label> <input type="text" th:field="*{pickingStatus}"
-					onclick="hideContent('pickingStatus.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('pickingStatus')}"
-					th:errors="*{pickingStatus}" class="error"
-					id="pickingStatus.errors"></span>
-			</div>
-
-			<div>
-				<label>領料類型:</label> <input type="text" th:field="*{pickingClass}"
-					onclick="hideContent('pickingClass.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('pickingClass')}"
-					th:errors="*{pickingClass}" class="error" id="pickingClass.errors"></span>
-			</div>
-
-			<div>
-				<label>領料日期:</label> <input type="date" th:field="*{pickingDate}"
-					onclick="hideContent('pickingDate.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('pickingDate')}"
-					th:errors="*{pickingDate}" class="error" id="pickingDate.errors"></span>
-			</div>
-			<div>
-				<label>備註:</label> <input type="text" th:field="*{marks}"
-					onclick="hideContent('marks.errors');" /><br /> <span
-					th:if="${#fields.hasErrors('marks')}" th:errors="*{marks}"
-					class="error" id="marks.errors"></span>
-			</div>
-
-			<div>
-				<div></div>
 				<div>
-					<button type="submit" id="submit">送出新增</button>
+					<label>領料數量:</label> <input type="text"
+						th:field="*{pickingQuantity}"
+						onclick="hideContent('pickingQuantity.errors');" /><br /> <span
+						th:if="${#fields.hasErrors('pickingQuantity')}"
+						th:errors="*{pickingQuantity}" class="error"
+						id="pickingQuantity.errors"></span>
 				</div>
-				<div></div>
-			</div>
+
+				<div>
+					<label>領料單位:</label> <input type="text" th:field="*{pickingUnit}"
+						onclick="hideContent('pickingUnit.errors');" /><br /> <span
+						th:if="${#fields.hasErrors('pickingUnit')}"
+						th:errors="*{pickingUnit}" class="error" id="pickingUnit.errors"></span>
+				</div>
+
+				<div>
+					<label>領料狀態:</label> <input type="text" th:field="*{pickingStatus}"
+						onclick="hideContent('pickingStatus.errors');" /><br /> <span
+						th:if="${#fields.hasErrors('pickingStatus')}"
+						th:errors="*{pickingStatus}" class="error"
+						id="pickingStatus.errors"></span>
+				</div>
+
+				<div>
+					<label>領料類型:</label> <input type="text" th:field="*{pickingClass}"
+						onclick="hideContent('pickingClass.errors');" /><br /> <span
+						th:if="${#fields.hasErrors('pickingClass')}"
+						th:errors="*{pickingClass}" class="error" id="pickingClass.errors"></span>
+				</div>
+
+				<div>
+					<label>領料日期:</label> <input type="date" th:field="*{pickingDate}"
+						onclick="hideContent('pickingDate.errors');" /><br /> <span
+						th:if="${#fields.hasErrors('pickingDate')}"
+						th:errors="*{pickingDate}" class="error" id="pickingDate.errors"></span>
+				</div>
+				<div>
+					<label>備註:</label> <input type="text" th:field="*{marks}"
+						onclick="hideContent('marks.errors');" /><br /> <span
+						th:if="${#fields.hasErrors('marks')}" th:errors="*{marks}"
+						class="error" id="marks.errors"></span>
+				</div>
+
+				<div>
+					<div></div>
+					<div>
+						<button type="submit" id="submit">送出新增</button>
+					</div>
+					<div></div>
+				</div>
 		</form>
 	</div>
 
