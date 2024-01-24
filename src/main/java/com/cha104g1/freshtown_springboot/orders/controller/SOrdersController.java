@@ -29,7 +29,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
 @Validated
-@RequestMapping("/sFunction/orders")
+@RequestMapping("/sFunction/manageOrders")
 public class SOrdersController {
 
 	@Autowired
@@ -107,9 +107,9 @@ public class SOrdersController {
 	    }
 	}
 	
-    @GetMapping("/listAllOrders")
-	public String listAllOrders(Model model) {
-		return "sFunction/orders/listAllOrders";
-	}
+//    @GetMapping("/listAllOrders")
+//	public String listAllOrders(Model model) {
+//		return "sFunction/orders/listAllOrders";
+//	}
 	
 }

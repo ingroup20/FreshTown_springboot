@@ -2,6 +2,7 @@ package com.cha104g1.freshtown_springboot.meals.controller;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +31,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
-@RequestMapping("/pFunction/meals")
+@RequestMapping("/sFunction/meals")
 public class MealsController {
 
 	@Autowired
@@ -44,17 +48,28 @@ public class MealsController {
 	public String addMeals(ModelMap model) {
 		MealsVO mealsVO = new MealsVO();
 		model.addAttribute("mealsVO", mealsVO);
-		return "pFunction/meals/addMeals";
+		return "sFunction/meals/addMeals";
 	}
 	
 	@PostMapping("insert")
-	public String insert(@Valid MealsVO mealsVO, BindingResult result, ModelMap model) throws IOException {
+	public String insert(@Valid MealsVO mealsVO, BindingResult result, ModelMap model,
+			@RequestParam("mealPicture") MultipartFile[] parts) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
+		// 去除BindingResult中upFiles欄位的FieldError紀錄 --> 見第172行
+		result = removeFieldError(mealsVO, result, "mealPicture");
 
-		if (result.hasErrors()) {
+		if (parts[0].isEmpty()) { // 使用者未選擇要上傳的圖片時
+			model.addAttribute("errorMessage", "商品照片: 請上傳照片");
+		} else {
+			for (MultipartFile multipartFile : parts) {
+				byte[] buf = multipartFile.getBytes();
+				mealsVO.setMealPicture(buf);
+			}
+		}
+		if (result.hasErrors() || parts[0].isEmpty()) {
 			System.out.println("資料有誤");
-			return "pFunction/meals/addMeals";
+			return "sFunction/meals/addMeals";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
 		mealsSvc.addMealsVO(mealsVO);
@@ -62,7 +77,7 @@ public class MealsController {
 		List<MealsVO> list = mealsSvc.getAll();
 		model.addAttribute("mealsListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:pFunction/meals/listAllMeals"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:/sFunction/meals/listAllMeals"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
 	@PostMapping("getOne_For_Update")
@@ -75,16 +90,30 @@ public class MealsController {
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
 		model.addAttribute("mealsVO", mealsVO);
 		System.out.println("修改成功1");
-		return "pFunction/meals/update_meals_input"; // 查詢完成後轉交update_emp_input.html
+		return "sFunction/meals/update_meals_input"; // 查詢完成後轉交update_emp_input.html
 	}
 
 	@PostMapping("update")
-	public String update(@Valid MealsVO mealsVO, BindingResult result, ModelMap model) throws IOException {
+	public String update(@Valid MealsVO mealsVO, BindingResult result, ModelMap model,
+			@RequestParam("mealPicture") MultipartFile[] parts) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
+		// 去除BindingResult中upFiles欄位的FieldError紀錄 --> 見第172行
+		result = removeFieldError(mealsVO, result, "mealPicture");
+
+		if (parts[0].isEmpty()) { // 使用者未選擇要上傳的新圖片時
+			// EmpService empSvc = new EmpService();
+			byte[] mealPicture = mealsSvc.getMealsVOByMealNo(mealsVO.getMealNo()).getMealPicture();
+			mealsVO.setMealPicture(mealPicture);
+		} else {
+			for (MultipartFile multipartFile : parts) {
+				byte[] mealPicture = multipartFile.getBytes();
+				mealsVO.setMealPicture(mealPicture);
+			}
+		}
 		if (result.hasErrors()) {
 			System.out.println("資料不全");
-			return "pFunction/meals/update_meals_input";
+			return "sFunction/meals/update_meals_input";
 		}
 		/*************************** 2.開始修改資料 *****************************************/
 
@@ -94,9 +123,20 @@ public class MealsController {
 		model.addAttribute("success", "- (修改成功)");
 		mealsVO = mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealsVO.getMealNo()));
 		model.addAttribute("mealsVO", mealsVO);
-		return "pFunction/meals/listOneMeals"; // 修改成功後轉交listOneEmp.html
+		return "sFunction/meals/listOneMeals"; // 修改成功後轉交listOneEmp.html
 	}
 	
+	// 去除BindingResult中某個欄位的FieldError紀錄
+	public BindingResult removeFieldError(MealsVO mealsVO, BindingResult result, String removedFieldname) {
+		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
+				.filter(fieldname -> !fieldname.getField().equals(removedFieldname))
+				.collect(Collectors.toList());
+		result = new BeanPropertyBindingResult(mealsVO, "mealsVO");
+		for (FieldError fieldError : errorsListToKeep) {
+			result.addError(fieldError);
+		}
+		return result;
+	}
 	
 	//複合查詢
 	@PostMapping("listMeals_ByCompositeQuery")
@@ -104,10 +144,10 @@ public class MealsController {
 		Map<String, String[]> map = req.getParameterMap();
 		List<MealsVO> list = mealsSvc.getMealsVOByCompositeQuery(map);
 		model.addAttribute("mealsListData", list); // for listAllEmp.html 第85行用
-		for(MealsVO rs: list) {
-			System.out.println(rs.getMealNo());
-		}
-		return "pFunction/meals/listAllMeals";
+//		for(MealsVO rs: list) {
+//			System.out.println(rs.getMealNo());
+//		}
+		return "sFunction/meals/listAllMeals";
 	}
 	// 全資料一覽
 		@ModelAttribute("mealTypeListData2") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用

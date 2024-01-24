@@ -39,8 +39,6 @@ public class LikeStoreVO implements java.io.Serializable{
 	private StoresVO storesVO;
 
 	@Column(name="likeUnlike")
-	@NotEmpty(message="收藏/黑名單: 請勿空白")
-	@Pattern(regexp = "^(LU)$",message="收藏/黑名單: 只能英文(L:收藏 U:黑名單)")
 	private String	likeUnlike;
 	
 	public Integer getId() {

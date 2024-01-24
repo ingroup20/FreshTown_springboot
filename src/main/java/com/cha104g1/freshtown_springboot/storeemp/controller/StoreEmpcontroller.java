@@ -31,7 +31,7 @@ public class StoreEmpcontroller {
 	
 	
 	@GetMapping("addStoreEmp")
-	public String addCStoreEmp(ModelMap model) {
+	public String addStoreEmp(ModelMap model) {
 		StoreEmpVO storeEmpVO = new StoreEmpVO();
 		model.addAttribute("storeEmpVO", storeEmpVO);
 		System.out.println("轉交請求");

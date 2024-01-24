@@ -36,6 +36,7 @@ public class SLoginController {
 			  if ( storeEmpLogin != null && storeEmpLogin.getsEmpId().equals(Integer.valueOf(account ) ) && storeEmpLogin.getsEmpId().equals(Integer.valueOf( password) ) )
 				  return true;
 		  }
+		  System.out.println("帳密錯誤，或不存在");
 		  return false;
 		}
 	  
@@ -62,7 +63,6 @@ public class SLoginController {
                     url = location;
                 } 
 	        } 
-	    	System.out.println("帳密錯誤");
 		  	return "redirect:" + url;
 	    }
 }

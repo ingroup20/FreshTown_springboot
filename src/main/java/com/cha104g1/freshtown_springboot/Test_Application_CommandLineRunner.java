@@ -44,16 +44,20 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String...args) throws Exception {
 
-	
-		List<MaterialVO> list = materialSvc.getAll();
-		
+
+    	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
+
+
 //    	
     	
     	
 //    	List<RefundsVO> list = repository.findAll();
-    	for (MaterialVO refunds : list) {
-			System.out.println(refunds.getItemName()+ ",");
 
+    	for (LikeStoreVO refunds : likeStoreList) {
+			System.out.print(refunds.getLikeUnlike() + ",");
+			System.out.print(refunds.getClass() + ",");
+			System.out.print(refunds.getCustomerVO() + ",");
+			System.out.print(refunds.getStoresVO() + ",");
 
     	}
     	

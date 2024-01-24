@@ -33,8 +33,14 @@ public class SupOrderVO implements java.io.Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="storeId",referencedColumnName ="storeId")
-    private StoresVO storesVO;
+    private StoresVO storeId;
 	
+	public StoresVO getStoresVO() {
+		return storeId;
+	}
+	public void setStoresVO(StoresVO storeId) {
+		this.storeId = storeId;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -94,16 +100,6 @@ public class SupOrderVO implements java.io.Serializable {
 	}
 	public void setMarks(String marks) {
 		this.marks = marks;
-	}
-	//
-	public StoresVO getStoresVO() {
-		return storesVO;
-	}
-	//
-	public void setStoresVO(StoresVO storesVO) {
-		this.storesVO = storesVO;
-	}
-
-	
+	}	
 
 }

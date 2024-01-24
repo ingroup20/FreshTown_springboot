@@ -39,7 +39,7 @@ public class CustomizedVO implements java.io.Serializable{
 	
 	@Column(name = "custedStatus")
 	@NotNull(message="客製選項狀態: 請勿空白")
-	@Pattern(regexp = "^[(01)]$", message = "客製選項狀態: 只能是數字(0無此客製選項 1有此客製選項) ")
+//	@Pattern(regexp = "^[(01)]$", message = "客製選項狀態: 只能是數字(0無此客製選項 1有此客製選項) ")
 	private Integer custedStatus;
 	
 	public CustomizedVO() {

@@ -26,7 +26,7 @@ import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 
 @Controller
-@RequestMapping("/pFunction/customized")
+@RequestMapping("/sFunction/customized")
 public class CustomizedController {
 	
 	@Autowired
@@ -42,7 +42,7 @@ public class CustomizedController {
 	public String addCustomized(ModelMap model) {
 		CustomizedVO customizedVO = new CustomizedVO();
 		model.addAttribute("customizedVO", customizedVO);
-		return "pFunction/customized/addCustomized";
+		return "sFunction/customized/addCustomized";
 	}
 	
 	@PostMapping("insert")
@@ -52,7 +52,7 @@ public class CustomizedController {
 
 		if (result.hasErrors()) {
 			System.out.println("資料有誤");
-			return "pFunction/customized/addCustomized";
+			return "sFunction/customized/addCustomized";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
 		customizedSvc.addCustomizedVO(customizedVO);
@@ -60,7 +60,7 @@ public class CustomizedController {
 		List<CustomizedVO> list = customizedSvc.getAll();
 		model.addAttribute("customizedListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:pFunction/customized/listAllCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "redirect:/sFunction/customized/listAllCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
 	@PostMapping("getOne_For_Update")
@@ -72,7 +72,7 @@ public class CustomizedController {
 
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
 		model.addAttribute("customizedVO", customizedVO);
-		return "pFunction/customized/update_customized_input"; // 查詢完成後轉交update_emp_input.html
+		return "sFunction/customized/update_customized_input"; // 查詢完成後轉交update_emp_input.html
 	}
 	
 	@PostMapping("update")
@@ -80,7 +80,7 @@ public class CustomizedController {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		if (result.hasErrors()) {
 			System.out.println("資料不全");
-			return "pFunction/customized/update_customized_input";
+			return "sFunction/customized/update_customized_input";
 		}
 		/*************************** 2.開始修改資料 *****************************************/
 		customizedSvc.updateCustomizedVO(customizedVO);
@@ -89,7 +89,7 @@ public class CustomizedController {
 		model.addAttribute("success", "- (修改成功)");
 		customizedVO = customizedSvc.getCustomizedVOByCompositeKey(Integer.valueOf(customizedVO.getMealNo()), Integer.valueOf(customizedVO.getCustedItemsNo()));
 		model.addAttribute("customizedVO", customizedVO);
-		return "pFunction/customized/listOneCustomized"; // 修改成功後轉交listOneEmp.html
+		return "sFunction/customized/listOneCustomized"; // 修改成功後轉交listOneEmp.html
 	}
 	//複合查詢
 		@PostMapping("listCustomized_ByCompositeQuery")
@@ -100,7 +100,7 @@ public class CustomizedController {
 			for(CustomizedVO rs: list) {
 				System.out.println(rs.getCompositeKey());
 			}
-			return "pFunction/customized/listAllCustomized";
+			return "sFunction/customized/listAllCustomized";
 		}
 	// 全資料一覽
 	@ModelAttribute("customizedListData") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用

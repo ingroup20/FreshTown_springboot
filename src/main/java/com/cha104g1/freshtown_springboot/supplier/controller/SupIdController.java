@@ -22,7 +22,7 @@ import com.cha104g1.freshtown_springboot.supplier.model.SupService;
 import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 @Controller
-@RequestMapping("/pFunction/supplier")
+@RequestMapping("/sFunction/supplier")
 public class SupIdController {
 
 	
@@ -33,20 +33,20 @@ public class SupIdController {
 	public String addSup(ModelMap model) {
 		SupVO supVO = new SupVO();
 		model.addAttribute("supVO", supVO);
-		return "pFunction/supplier/supplierAdd";
+		return "sFunction/supplier/supplierAdd";
 	}
 
 
 	 @PostMapping("/insert")
 	    public String insert(@Valid SupVO supVO, BindingResult result, ModelMap model) {
 	        if (result.hasErrors()) {
-	            return "pFunction/supplier/supplierAdd";
+	            return "sFunction/supplier/supplierAdd";
 	        }
 	        supSvc.addSup(supVO);
 	        List<SupVO> list = supSvc.getAll();
 	        model.addAttribute("supListData", list);
 	        model.addAttribute("success", "- (新增成功)");
-	        return "pFunction/supplier/supList";
+	        return "sFunction/supplier/supList";
 	    }
 	
 	@PostMapping("getOne_For_Update")
@@ -54,7 +54,7 @@ public class SupIdController {
 		SupVO supVO = supSvc.getOneSup(Integer.valueOf(supId));
 		System.out.println("test");
 		model.addAttribute("supVO", supVO);
-		return "pFunction/supplier/updateSup";
+		return "sFunction/supplier/updateSup";
 	}
 	
 	@PostMapping("update")
@@ -67,7 +67,7 @@ public class SupIdController {
 		model.addAttribute("success", "- (修改成功)");
 		supVO = supSvc.getOneSup(Integer.valueOf(supVO.getSupId()));
 		model.addAttribute("supVO", supVO);
-		return "pFunction/supplier/supOne";
+		return "sFunction/supplier/supOne";
 	}
 
 

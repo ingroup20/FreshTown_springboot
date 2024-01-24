@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>新增供應商</title>
+<style type="text/css">
+	
+	button {
+		padding: 5px;
+	}
+	form {
+		display: table;
+	}
+	form div {
+		display: table-row;
+	}
+	label, input, span, select {
+		display: table-cell;
+		margin: 5px;
+		text-align: left;		
+	}
+	form div div {
+		display: table-cell;
+	}
+	.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>新增供應商</h2>
+		 <h3><a class="navbar-brand" th:href="@{/sFunction/supplier/supplierMain}">回查詢頁</a></h3></div>
+</nav>
+
+	<div align="center">
+		<h3><b>所有欄位皆為必填欄位</b></h3>
+		<form th:action="@{insert}" method="post" th:object="${supVO}" enctype="multipart/form-data">
+			
+			
+			
+			
+			<div>
+			<label>供應商編號:</label>
+			<input type="number" th:field="*{supId}" onclick="hideContent('supId.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('supId')}" th:errors="*{supId}" class="error" id="supId.errors"></span>
+			</div>
+			
+			<div>
+			<label>供應商名稱:</label>
+			<input type="text" th:field="*{supplierName}" onclick="hideContent('supplierName.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('supplierName')}" th:errors="*{supplierName}" class="error" id="supplierName.errors"></span>
+			</div>
+			
+			<div>
+			<label>聯絡人:</label>
+			<input type="text" th:field="*{supplierContact}" onclick="hideContent('supplierContact.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('supplierContact')}" th:errors="*{supplierContact}" class="error" id="supplierContact.errors"></span>
+			</div>
+			
+			<div>
+			<label>連絡電話:</label>
+			<input type="number" th:field="*{supplierPhone}" onclick="hideContent('supplierPhone.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('supplierPhone')}" th:errors="*{supplierPhone}" class="error" id="supplierPhone.errors"></span>
+			</div>
+			
+			<div>
+			<label>店家帳號:</label>
+			<input type="number" th:field="*{storeId}" onclick="hideContent('storeId.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('storeId')}" th:errors="*{storeId}" class="error" id="storeId.errors"></span>
+			</div>
+			
+			<div>
+			<label>供應商狀態:</label>
+			<input type="number" th:field="*{supplierState}" onclick="hideContent('supplierState.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('supplierState')}" th:errors="*{supplierState}" class="error" id="supplierState.errors"></span>
+			</div>
+			
+			
+			<div>
+				<div></div>
+				<div><button type="submit" id="submit"> 送出新增 </button></div>
+				<div></div>
+			</div>		
+		</form>
+	
+	</div>
+
+
+<!-- JavaScript part -->
+<script type="text/javascript">
+//清除提示信息
+function hideContent(d) {
+     document.getElementById(d).style.display = "none";
+}
+</script>
+
+</body>
+</html>

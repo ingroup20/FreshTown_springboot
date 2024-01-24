@@ -85,5 +85,12 @@ public class MealsService implements MealsServiceIntf{
 		return null;
 	}
 
+	@Override
+	public List<MealsVO> getAllByStoreId(Integer storeId) {
+		List<MealsVO> list = repository.findAllByStoreId(storeId);
+		return list;
+	}
+
+	
 	
 }

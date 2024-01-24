@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -40,17 +42,19 @@ public class MealsVO implements java.io.Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "mealTypeNo", referencedColumnName = "mealTypeNo")
-	@NotEmpty(message="餐點分類: 請勿空白")
+	@NotNull(message="餐點分類: 請勿空白")
 	private MealTypeVO mealTypeVO;
 
 	@Column(name = "mealOnsale")
 	@NotNull(message="餐點狀態: 請勿空白")
-	@Pattern(regexp = "^[(012)]$", message = "餐點狀態: 只能是數字(0準備中 1上架中 2已下架)  ")
+	@Min(value = 0, message = "餐點狀態: 只能是數字(0準備中 1上架中 2已下架)  ")
+	@Max(value = 2, message = "餐點狀態: 只能是數字(0準備中 1上架中 2已下架)  ")
+//	@Pattern(regexp = "^[(012)]$", message = "餐點狀態: 只能是數字(0準備中 1上架中 2已下架)  ")
 	private Integer mealOnsale;
 
 	@ManyToOne
 	@JoinColumn(name = "storeId", referencedColumnName = "storeId")
-	@NotEmpty(message="店家流水號: 請勿空白")
+	@NotNull(message="店家流水號: 請勿空白")
 	private StoresVO storesVO;
 
 	@Column(name = "mealPicture", columnDefinition = "longblob")
@@ -58,7 +62,7 @@ public class MealsVO implements java.io.Serializable{
 
 	@Column(name = "cookingTime")
 	@NotNull(message="餐點製作時間: 請勿空白")
-	@DateTimeFormat(pattern="HH:mm:ss") 
+//	@DateTimeFormat(pattern = "HH:mm:ss")
 	private Time cookingTime;
 	
 	public MealsVO() {
@@ -115,6 +119,11 @@ public class MealsVO implements java.io.Serializable{
 	public void setCookingTime(Time cookingTime) {
 		this.cookingTime = cookingTime;
 	}
+
+//	public void setCookingTime(Object cookingTime) {
+//		this.cookingTime = java.sql.Time.valueOf(cookingTime.toString());
+//	}
+
 	//
 	public MealTypeVO getMealTypeVO() {
 		return mealTypeVO;
