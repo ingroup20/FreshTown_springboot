@@ -56,9 +56,10 @@
 		<form th:action="@{update}" method="post" th:object="${storeEmpVO}" enctype="multipart/form-data">
 			
 			<div>
-			<!--pk --><input type="text" th:field="*{sEmpId}" style="border:0px ; font-weight: bold;" readonly />
+			<!--pk -->
 			<label>員工編號:</label>
-			<input type="text" th:field="*{sEmpId}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<input type="text" th:field="*{sEmpId}" onclick="hideContent('sEmpId.errors');" readonly />
+			<span th:if="${#fields.hasErrors('sEmpId')}" th:errors="*{sEmpId}" class="error" id="sEmpId.errors"></span>
 			</div>
 			
 			<div>
@@ -69,7 +70,7 @@
 						
 			<div>
             <label>員工密碼:</label>
-            <input type="password" th:field="*{sEmpPw}" style="border:0px ; font-weight: bold;" readonly /><br/>
+            <input type="password" th:field="*{sEmpPw}" onclick="hideContent('sEmpPw.errors');" readonly /><br/>
             <span th:if="${#fields.hasErrors('sEmpPw')}" th:errors="*{sEmpPw}" class="error" id="sEmpPw.errors"></span>
             </div>
 			
@@ -120,9 +121,9 @@
 			</div>
 			
 			<div>
-			<!--pk --><input type="text" th:field="*{storesVO}" style="border:0px ; font-weight: bold;" readonly />
 			<label>店家編號:</label>
-			<input type="text" th:field="*{storesVO}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<input type="text" th:field="*{StoresVO.storeId}" onclick="hideContent('StoresVO.storeId.errors');" readonly />
+			<span th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
 			</div>
 			
 			<div>

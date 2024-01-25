@@ -5,11 +5,13 @@ import java.util.Map;
 
 public interface StoreEmpServiceIntf {
 	
-	StoreEmpVO addStoreEmpVO(StoreEmpVO storeEmpVO);
+	StoreEmpVO addStoreEmp(StoreEmpVO storeEmpVO);
 
 	StoreEmpVO updateStoreEmpVO(StoreEmpVO storeEmpVO);
 
-	StoreEmpVO getStoreEmpVOById(Integer id);
+	StoreEmpVO getStoreEmpVOById(Integer sEmpId);
+	
+	StoreEmpVO getOneStoreEmp(Integer sEmpId);
 
 	List<StoreEmpVO> getAllStoreEmpVO(int currentPage);
 

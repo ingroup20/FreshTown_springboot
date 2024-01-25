@@ -25,7 +25,7 @@ public class PlatformEmpController {
 	
 	@Autowired
 	PlatformEmpService platformEmpSvc;
-	private String platformEmpId;
+//	private String platformEmpId;
 	
 	
 	@GetMapping("addPlatformEmp")
@@ -36,7 +36,7 @@ public class PlatformEmpController {
 		return "pFunction/platformEmp/addPlatformEmp";
 	}
 
-	@PostMapping("insert")
+	@PostMapping("/insert")
 	public String insert(@Valid PlatformEmpVO platformEmpVO, BindingResult result, ModelMap model) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
@@ -46,12 +46,12 @@ public class PlatformEmpController {
 			return "pFunction/platformEmp/addPlatformEmp";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
-		platformEmpSvc.addPlatformEmpVO(platformEmpVO);
+		platformEmpSvc.addPlatformEmp(platformEmpVO);
 		/*************************** 3.新增完成,準備轉交(Send the Success view) **************/
 		List<PlatformEmpVO> list = platformEmpSvc.getAll();
 		model.addAttribute("platformEmpListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:pFunction/platformEmp/listAllPlatformEmp"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "pFunction/platformEmp/listAllPlatformEmp"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 
 	
