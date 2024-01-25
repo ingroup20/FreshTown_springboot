@@ -3,17 +3,75 @@
 	data-theme="theme-default" data-template="vertical-menu-template-free"
 	xmlns:th="http://www.thymeleaf.org">
 	<style>
-	.container-data{
-		display:flex;
-	    flex-direction: row;
-	    align-content: center;
-	    justify-content: center;
-	    flex-wrap: nowrap;
-		/* 		自己 	*/
-		position: absolute;
-		left: 50%;
-		right: 50%;
-		transform: translate(10px, 10px);
+	.container-data {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        /* 自己 */
+        position: absolute;
+        left: 20%;
+        right: 50%;
+        transform: translate(0px, 130px);
+        top : 0;
+    }
+	.container-data2 {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        /* 自己 */
+        position: relative;
+        left: 20%;
+        right: 50%;
+        transform: translate(0px, 130px);
+        width : 75%;
+        bottom: 7em;
+            
+    }
+
+    .horizontal-form {
+        display: table;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    
+    .form-row {
+        display: table-row;
+    }
+
+    .form-row label,
+    .form-row input,
+    .form-row select {
+        display: table-cell;
+        padding: 5px;
+    }
+
+    .horizontal-form input,
+    .horizontal-form select {
+        margin-right: 10px; /* 输入框和选择框之间的间隔 */
+    }
+
+    .horizontal-form input[type="submit"] {
+        display: block;
+        margin-top: 10px;
+    }
+
+    table {
+        padding: 0.01rem 1.25rem;
+        
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+	
+	
+	table td{
+		padding : 0 !important;
 	}
 	
 	</style>
@@ -189,30 +247,36 @@
 			</nav>
 
 			<div class="container-data">
-				<h4>
-					<span>資料查詢:</span>
-				</h4>
-
-				<div class="center">
-					<ul>
-
-
-						<li>
-							<form method="post" th:action="@{listSupplier_ByCompositeQuery}">
-								<font color=blue>萬用複合查詢:</font><br> 請輸入供應商名稱: <input
-									type="text" name="supplierName" value=""><br>
-
-								請輸入供應商的聯絡人: <input type="text" name="supplierContact" value=""><br>
-
-								選擇供應商是否有在使用狀態: <select name="supplierState">
-									<option value="0">不使用</option>
-									<option value="1">正在使用</option>
-								</select> <input type="submit" value="送出">
-							</form>
-						</li>
-					</ul>
-
-					<table class="center">
+			        <form method="post" th:action="@{listSupplier_ByCompositeQuery}" class="horizontal-form">
+			             <div class="form-row">
+				            <label for="supplierName">請輸入供應商名稱:</label>
+				            <input type="text" name="supplierName" id="supplierName">
+				        </div>
+				
+				        <div class="form-row">
+				            <label for="supplierContact">請輸入供應商的聯絡人:</label>
+				            <input type="text" name="supplierContact" id="supplierContact">
+				        </div>
+				
+				        <div class="form-row">
+				            <label for="supplierState">選擇供應商是否有在使用狀態:</label>
+				            <select name="supplierState" id="supplierState">
+				                <option value="0">不使用</option>
+				                <option value="1">正在使用</option>
+				            </select>
+				        </div>
+				
+				        <div class="form-row">
+				            <input type="submit" value="送出">
+				        </div>
+			        </form>
+		        </div>
+			    <div class="container-data2">
+			    
+			        <a href="addSup">新增供應商</a>
+				<div>
+			        <table class="table table-striped table-hover shadow-sm">
+			            <thead class="thead-inverse">
 						<th:block th:each="supVO : ${supListData}">
 							<tr>
 								<td th:text="${supVOStat.count}"></td>
@@ -232,37 +296,13 @@
 							</tr>
 						</th:block>
 					</table>
-
-					<h4>
-						<span>更新供應商</span>
-					</h4>
-					<ul>
-						<li><h5>
-								<a href='addSup'>新增</a> 供應商.
-							</h5></li>
-					</ul>
-						<li><h5>
-								<a href='supList'>全部</a> 供應商. <br>
-								<br>
-							</h5></li>
 				</div>
 			</div>
 
 
 			<!-- Footer -->
 			<footer class="content-footer footer bg-footer-theme">
-				<div
-					class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-					<div class="mb-2 mb-md-0">
-						©
-						<script>
-							document.write(new Date().getFullYear());
-						</script>
-						, made with ❤️ by <a href="https://themeselection.com"
-							target="_blank" class="footer-link fw-bolder">Tibame Cha104
-							Team1</a>
-					</div>
-				</div>
+
 			</footer>
 			<!-- / Footer -->
 
