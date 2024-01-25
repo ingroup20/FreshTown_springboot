@@ -25,7 +25,7 @@ import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 
 @Controller
 @Validated
-@RequestMapping("/cFunction/customer")
+@RequestMapping("/pFunction/customer")
 public class CustomerNoController {
 	
 	@Autowired
@@ -47,14 +47,14 @@ public class CustomerNoController {
 
 		if (customerVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
-			return "cFunction/customer/select_page";
+			return "pFunction/customer/select_page";
 		}
 		
 		/***************************3.查詢完成,準備轉交(Send the Success view)*****************/
 		model.addAttribute("customerVO", customerVO);
 		model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
 
-		return "cFunction/customer/select_page"; 
+		return "pFunction/customer/select_page"; 
 	}
 
 
@@ -74,7 +74,7 @@ public class CustomerNoController {
 		model.addAttribute("CustomerListData", list);     // for select_page.html 第97 109行用
     	
 		String message = strBuilder.toString();
-	    return new ModelAndView("cFunction/customer/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
+	    return new ModelAndView("pFunction/customer/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);
 	}
 
 }

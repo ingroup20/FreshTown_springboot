@@ -1,6 +1,11 @@
 package com.cha104g1.freshtown_springboot.apagecontroller;
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,19 +15,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
-import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedVO;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
-import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpService;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
+import com.cha104g1.freshtown_springboot.supplier.model.SupService;
+import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 import redis.clients.jedis.Jedis;
 
@@ -47,7 +60,19 @@ public class SEntrancePassController {
 	CustomerService customerSvc;
 	@Autowired
 	OrdersService ordersSvc;
-
+	@Autowired
+	SupService supSvc;
+	@Autowired
+	SupOrderService supOrderSvc;
+	@Autowired
+	StoreEmpService storeEmpSvc;
+	@Autowired
+	CustomizedDetailService customizedDetailSvc;	
+	@Autowired
+	CustomizedItemsService customizedItemsSvc;
+	
+	@Autowired
+	CustomizedService customizedSvc;
 
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
@@ -131,7 +156,124 @@ public class SEntrancePassController {
 		   		return "sFunction/sEntrancePass"; 	
 		   	}
 			
+			//=========== StoreEmp  要使用的資料 ===================   
+			@GetMapping("/storeEmp/select_page")
+			public String select_page14(Model model) {
+				return "/sFunction/storeEmp/select_page";
+			}
 			
-
+			@GetMapping("/storeEmp/listAllStoreEmp")
+			public String listAllStoreEmp(Model model) {
+				return "/sFunction/storeEmp/listAllStoreEmp";
+			}
+			
+			@ModelAttribute("storeEmpListData") // for select_page.html 第135行用
+			protected List<StoreEmpVO> referenceListData_StoreEmp(Model model) {
+				List<StoreEmpVO> list = storeEmpSvc.getAll();
+				return list;
+			}
+			
+	//=========== supplier  要使用的資料 ===================   
+    @GetMapping("/supplier/test")
+	public String supplierMain(Model model) {
+		return "sFunction/supplier/test";
+	}
+    
+    @GetMapping("/supplier/supList")
+	public String supList(Model model) {
+		return "sFunction/supplier/supList";
+	}
+    
+	@ModelAttribute("supListData")
+	protected List<SupVO> referenceListData_Stores(Model model) {
+		List<SupVO> list = supSvc.getAll();
+		return list;
+	}
 	
+	//=========== suporder  要使用的資料 ===================   
+	@GetMapping("/suporder/supOrderMain")
+	public String supOrderMain(Model model) {
+		return "sFunction/suporder/supOrderMain";
+	}
+	
+	@GetMapping("/suporder/supOrderList")
+	public String supOrderList(Model model) {
+		return "sFunction/suporder/supOrderList";
+	}
+	
+	@ModelAttribute("supOrderListData")
+	protected List<SupOrderVO> referenceListData_SupOrder(Model model) {
+		List<SupOrderVO> list = supOrderSvc.getAll();
+		return list;
+	}
+
+
+	//=========== CustomizedDetail  要使用的資料 ===================   
+    @GetMapping("/customizeddetail/select_page")
+	public String select_page9(Model model) {
+		return "/sFunction/customizeddetail/select_page";
+	}
+    
+    @GetMapping("/customizeddetail/listAllCustomizedDetail")
+	public String listAllCustomizedDetail(Model model) {
+		return "/sFunction/customizeddetail/listAllCustomizedDetail";
+	}
+    
+	@ModelAttribute("customizedDetailListData") // for select_page.html 第135行用
+	protected List<CustomizedDetailVO> referenceListData_CustomizedDetail(Model model) {
+		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
+		return list;
+	}
+	
+	//=========== CustomizedItems  要使用的資料 ===================   
+	@GetMapping("/customizeditems/select_page")
+	public String select_page10(Model model) {
+		return "/sFunction/customizeditems/select_page";
+	}
+	
+	@GetMapping("/customizeditems/listAllCustomizedItems")
+	public String listAllCustomizedItems(Model model) {
+		return "/sFunction/customizeditems/listAllCustomizedItems";
+	}
+	
+	@ModelAttribute("customizedItemsListData") // for select_page.html 第135行用
+	protected List<CustomizedItemsVO> referenceListData_CustomizedItems(Model model) {
+		List<CustomizedItemsVO> list = customizedItemsSvc.getAll();
+		return list;
+	}
+	
+	//=========== Meals  要使用的資料 ===================   
+	@GetMapping("/meals/select_page")
+	public String select_page11(Model model) {
+		return "/sFunction/meals/select_page";
+	}
+	
+	@GetMapping("/meals/listAllMeals")
+	public String listAllMeals(Model model) {
+		return "/sFunction/meals/listAllMeals";
+	}
+	
+	@ModelAttribute("mealsListData") // for select_page.html 第135行用
+	protected List<MealsVO> referenceListData_Meals(Model model) {
+		List<MealsVO> list = mealsSvc.getAll();
+		return list;
+	}
+	
+	//=========== Customized  要使用的資料 ===================   
+	@GetMapping("/customized/select_page")
+	public String select_page12(Model model) {
+		return "/sFunction/customized/select_page";
+	}
+	
+	@GetMapping("/customized/listAllCustomized")
+	public String listAllCustomized(Model model) {
+		return "/sFunction/customized/listAllCustomized";
+	}
+	
+	@ModelAttribute("customizedListData") // for select_page.html 第135行用
+	protected List<CustomizedVO> referenceListData_Customized(Model model) {
+		List<CustomizedVO> list = customizedSvc.getAll();
+		return list;
+	}
+
 }

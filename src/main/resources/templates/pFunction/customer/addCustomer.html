@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>員工資料新增 - addEmp.html</title>
+<title>會員資料新增 - addEmp.html</title>
 
 <head ></head>
 <style type="text/css">
@@ -47,62 +47,70 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>員工資料新增 - addPlatformEmp.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/pFunction/platformEmp/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
+		 <div align="center"> <h2>會員資料新增 - addEmp.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/customer/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
 </nav>
 
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{/insert}" method="post" th:object="${platformEmpVO}" enctype="multipart/form-data">
+		<form th:action="@{/insert}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
 			
 			<div>
-			<!--pk --><input type="text" th:field="*{pEmpId}" style="border:0px ; font-weight: bold;" readonly />
-			<label>員工編號:</label>
-			<input type="text" th:field="*{pEmpId}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<!--pk --><input type="text" th:field="*{customerId}" style="border:0px ; font-weight: bold;"  />
+			<label>會員編號:</label>
+			<input type="text" th:field="*{customerId}" style="border:0px ; font-weight: bold;" readonly /><br/>
 			</div>
 			
 			<div>
-			<label>員工姓名:</label>
-			<input type="text" th:field="*{pEmpName}"  onclick="hideContent('pEmpPerm.errors');"  /><br/>
-			<span th:if="${#fields.hasErrors('pEmpName')}" th:errors="*{pEmpName}" class="error" id="pEmpName.errors"></span>
+			<label>會員暱稱:</label>
+			<input type="text" th:field="*{customerNic}"  style="border:0px ; font-weight: bold;"  /><br/>
+			<span th:if="${#fields.hasErrors('customerNic')}" th:errors="*{customerNic}" class="error" id="customerNic.errors"></span>
 			</div>
 			
 			<div>
-			<label>員工帳號:</label>
-			<input type="text" th:field="*{pEmpAccount}" style="border:0px ; font-weight: bold;"  /><br/>
-			<span th:if="${#fields.hasErrors('pEmpAccount')}" th:errors="*{pEmpAccount}" class="error" id="pEmpAccount.errors"></span>
-			</div>
-			
-			<div>
-            <label>員工密碼:</label>
-            <input type="password" th:field="*{pEmpPw}" style="border:0px ; font-weight: bold;"  /><br/>
-            <span th:if="${#fields.hasErrors('pEmpPw')}" th:errors="*{pEmpPw}" class="error" id="pEmpPw.errors"></span>
+            <label>會員密碼:</label>
+            <input type="password" th:field="*{customerPw}" style="border:0px ; font-weight: bold;" /><br/>
+            <span th:if="${#fields.hasErrors('customerPw')}" th:errors="*{customerPw}" class="error" id="customerPw.errors"></span>
             </div>
 			
 			<div>
-			<label>員工信箱:</label>
-			<input type="text" th:field="*{pEmpEmail}" onclick="hideContent('pEmpEmail.errors');"  /><br/>
-			<span th:if="${#fields.hasErrors('pEmpEmail')}" th:errors="*{pEmpEmail}" class="error" id="pEmpEmail.errors"></span>
+			<label>手機號碼:</label>
+			<input type="text" th:field="*{customerMob}" style="border:0px ; font-weight: bold;"  /><br/>
+			<span th:if="${#fields.hasErrors('customerMob')}" th:errors="*{customerMob}" class="error" id="customerMob.errors"></span>
 			</div>
 			
 			<div>
-			<label>員工狀態:</label>
-			<select th:field="*{pEmpState}">
-				<option  th:value="0" th:text="入職未報到" ></option>
-				<option  th:value="1" th:text="入職已報到" ></option>
-				<option  th:value="2" th:text="已離職" ></option>
+            <label>手機認證:</label>
+            <select th:field="*{mobChecked}">
+				<option  th:value="0" th:text="N" ></option>
+				<option  th:value="1" th:text="Y" ></option>
 			</select>
-			<span th:if="${#fields.hasErrors('pEmpState')}" th:errors="*{pEmpState}" class="error" id="pEmpState.errors"></span>
+            <span th:if="${#fields.hasErrors('mobChecked')}" th:errors="*{mobChecked}" class="error" id="mobChecked.errors"></span>
+            </div>
+			
+			<div>
+			<label>會員信箱:</label>
+			<input type="text" th:field="*{customerEmail}" style="border:0px ; font-weight: bold;" /><br/>
+			<span th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" class="error" id="customerEmail.errors"></span>
 			</div>
 			
 			<div>
-			<label>員工權限:</label>
-			<select th:field="*{pEmpPerm}">
-				<option  th:value="0" th:text="客服" ></option>
-				<option  th:value="1" th:text="工程師" ></option>
-				<option  th:value="2" th:text="主管" ></option>
+			<label>會員地址:</label>
+			<input type="text" th:field="*{customerAddress}" style="border:0px ; font-weight: bold;" /><br/>
+			<span th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}" class="error" id="customerAddress.errors"></span>
+			</div>
+			
+			<div>
+			<label>會員狀態:</label>
+			<select th:field="*{customerState}">
+				<option  th:value="0" th:text="正常" ></option>
+				<option  th:value="1" th:text="停權" ></option>
+				<option  th:value="2" th:text="已註銷" ></option>
 			</select>
-			<span th:if="${#fields.hasErrors('pEmpPerm')}" th:errors="*{pEmpPerm}" class="error" id="pEmpPerm.errors"></span>
+			<span th:if="${#fields.hasErrors('customerState')}" th:errors="*{customerState}" class="error" id="customerState.errors"></span>
+			</div>
+			
+			
 			
 			</div>
 			
