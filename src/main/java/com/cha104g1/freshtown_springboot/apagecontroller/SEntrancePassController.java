@@ -17,8 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedVO;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
+import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
+import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpService;
@@ -59,7 +66,13 @@ public class SEntrancePassController {
 	SupOrderService supOrderSvc;
 	@Autowired
 	StoreEmpService storeEmpSvc;
-
+	@Autowired
+	CustomizedDetailService customizedDetailSvc;	
+	@Autowired
+	CustomizedItemsService customizedItemsSvc;
+	
+	@Autowired
+	CustomizedService customizedSvc;
 
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
@@ -194,5 +207,73 @@ public class SEntrancePassController {
 		return list;
 	}
 
+
+	//=========== CustomizedDetail  要使用的資料 ===================   
+    @GetMapping("/customizeddetail/select_page")
+	public String select_page9(Model model) {
+		return "/sFunction/customizeddetail/select_page";
+	}
+    
+    @GetMapping("/customizeddetail/listAllCustomizedDetail")
+	public String listAllCustomizedDetail(Model model) {
+		return "/sFunction/customizeddetail/listAllCustomizedDetail";
+	}
+    
+	@ModelAttribute("customizedDetailListData") // for select_page.html 第135行用
+	protected List<CustomizedDetailVO> referenceListData_CustomizedDetail(Model model) {
+		List<CustomizedDetailVO> list = customizedDetailSvc.getAll();
+		return list;
+	}
 	
+	//=========== CustomizedItems  要使用的資料 ===================   
+	@GetMapping("/customizeditems/select_page")
+	public String select_page10(Model model) {
+		return "/sFunction/customizeditems/select_page";
+	}
+	
+	@GetMapping("/customizeditems/listAllCustomizedItems")
+	public String listAllCustomizedItems(Model model) {
+		return "/sFunction/customizeditems/listAllCustomizedItems";
+	}
+	
+	@ModelAttribute("customizedItemsListData") // for select_page.html 第135行用
+	protected List<CustomizedItemsVO> referenceListData_CustomizedItems(Model model) {
+		List<CustomizedItemsVO> list = customizedItemsSvc.getAll();
+		return list;
+	}
+	
+	//=========== Meals  要使用的資料 ===================   
+	@GetMapping("/meals/select_page")
+	public String select_page11(Model model) {
+		return "/sFunction/meals/select_page";
+	}
+	
+	@GetMapping("/meals/listAllMeals")
+	public String listAllMeals(Model model) {
+		return "/sFunction/meals/listAllMeals";
+	}
+	
+	@ModelAttribute("mealsListData") // for select_page.html 第135行用
+	protected List<MealsVO> referenceListData_Meals(Model model) {
+		List<MealsVO> list = mealsSvc.getAll();
+		return list;
+	}
+	
+	//=========== Customized  要使用的資料 ===================   
+	@GetMapping("/customized/select_page")
+	public String select_page12(Model model) {
+		return "/sFunction/customized/select_page";
+	}
+	
+	@GetMapping("/customized/listAllCustomized")
+	public String listAllCustomized(Model model) {
+		return "/sFunction/customized/listAllCustomized";
+	}
+	
+	@ModelAttribute("customizedListData") // for select_page.html 第135行用
+	protected List<CustomizedVO> referenceListData_Customized(Model model) {
+		List<CustomizedVO> list = customizedSvc.getAll();
+		return list;
+	}
+
 }
