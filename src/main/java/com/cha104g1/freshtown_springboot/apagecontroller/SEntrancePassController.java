@@ -174,9 +174,9 @@ public class SEntrancePassController {
 			}
 			
 	//=========== supplier  要使用的資料 ===================   
-    @GetMapping("/supplier/test")
+    @GetMapping("/supplier/supplierMain")
 	public String supplierMain(Model model) {
-		return "sFunction/supplier/test";
+		return "sFunction/supplier/supplierMain";
 	}
     
     @GetMapping("/supplier/supList")

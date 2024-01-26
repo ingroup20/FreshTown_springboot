@@ -47,7 +47,6 @@
 		<form th:action="@{update}" method="post" th:object="${supVO}" enctype="multipart/form-data">
 
 			<div>
-			<label>供應商編號:</label>
 			<input type="hidden" th:field="*{supId}" />
 			<span  th:if="${#fields.hasErrors('supplierName')}" th:errors="*{supplierName}" class="error" id="supplierName.errors"></span>
 			</div>			
