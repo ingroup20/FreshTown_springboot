@@ -61,8 +61,8 @@
                 </div>
                 控制項
                 <div class="prd_card_footer title">
-                    <form id="buyCart" method="post" action="" > 
-                		<label class="buyCart" for="">數量:</label><input class="buyCart" type="range" min="0" max="30" default="0" name="mealQty" value="">
+                    <form id="buyCart" method="post" action="checkMealDetail" > 
+                		<label class="buyCart" for="">數量:</label><input class="buyCart" type="text" min="0" max="30" default="0" name="mealQty" value="">
                     	<div class="buyCart"><a href="#">加入購物車</a></div>
                 	
 		 				     <input id="buyCart" type="submit" value="加入購物車"> 
@@ -76,7 +76,9 @@
         </div>
     </section>
 
-    <main></main>
+    <main th:if="${checkMealDetail}">
+    	<div th:insert="~{/cFunction/cart/addCustomizedOrder :: addCustomizedOrder-div}"> </div>
+    </main>
 
     <footer class="footer">
         <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>

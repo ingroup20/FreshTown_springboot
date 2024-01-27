@@ -133,12 +133,12 @@ public class OrdersVO implements java.io.Serializable{
 	@Column(name="payMethod")
 	@NotEmpty(message="付款方式: 請勿空白")
 	@Pattern(regexp = "^[(1)]$", message = "付款方式: 只能是數字 (1:刷卡 )")
-	private String payMethod;
+	private Integer payMethod;
 	
 	@Column(name="payState")
 	@NotEmpty(message="付款狀態: 請勿空白")
 	@Pattern(regexp = "^[(012)]$", message = "付款狀態: 只能是數字(0未付款 1已付款 2退款)  ")
-	private String payState;
+	private Integer payState;
 	
 //	@Transient
 //	private String OrderStateName;
@@ -248,16 +248,16 @@ public class OrdersVO implements java.io.Serializable{
 	public void setPayDate(Date payDate) {
 		this.payDate = payDate;
 	}
-	public String getPayMethod() {
+	public Integer getPayMethod() {
 		return payMethod;
 	}
-	public void setPayMethod(String payMethod) {
+	public void setPayMethod(Integer payMethod) {
 		this.payMethod = payMethod;
 	}
-	public String getPayState() {
+	public Integer getPayState() {
 		return payState;
 	}
-	public void setPayState(String payState) {
+	public void setPayState(Integer payState) {
 		this.payState = payState;
 	}
 	

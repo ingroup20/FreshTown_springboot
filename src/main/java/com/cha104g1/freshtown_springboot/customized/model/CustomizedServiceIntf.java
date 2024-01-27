@@ -17,6 +17,7 @@ public interface CustomizedServiceIntf {
 	
 	List<CustomizedVO> getAllCustomizedVO(int currentPage);
 	List<CustomizedVO> getAll();
+	List<CustomizedVO> getAll(Integer i);
 	
 	int getPageTotal();
 	

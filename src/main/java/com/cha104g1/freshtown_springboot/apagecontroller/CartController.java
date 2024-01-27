@@ -14,7 +14,7 @@ import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
 
 @Controller
 public class CartController {
-
+	CartVO cartVO ;
 
 	@ModelAttribute
 	public int cartCount(Model model) {
@@ -26,7 +26,7 @@ public class CartController {
 	@PostMapping("addOneInCart")
 	public void addOneInCart(MealsVO mealsVO,OrderDetailVO orderDetailVO ,Model model) {	
 		
-		CartVO cartVO =new CartVO();
+		
 		cartVO.setId(cartCount(model)+1);
 		cartVO.setCustomerId((Integer)model.getAttribute("cLogin") );
 		cartVO.setMealsVO(mealsVO);

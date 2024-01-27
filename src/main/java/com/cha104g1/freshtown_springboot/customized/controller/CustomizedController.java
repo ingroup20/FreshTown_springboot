@@ -3,10 +3,8 @@ package com.cha104g1.freshtown_springboot.customized.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
 import com.cha104g1.freshtown_springboot.customized.model.CustomizedVO;
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
@@ -63,45 +60,45 @@ public class CustomizedController {
 		return "redirect:/sFunction/customized/listAllCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
-	@PostMapping("getOne_For_Update")
-	public String getOne_For_Update(@RequestParam("mealNo") String mealNo, @RequestParam("custedItemsNo") String custedItemsNo, ModelMap model) {
-		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
-		/*************************** 2.開始查詢資料 *****************************************/
-		// EmpService empSvc = new EmpService();
-		CustomizedVO customizedVO = customizedSvc.getCustomizedVOByCompositeKey(Integer.valueOf(mealNo), Integer.valueOf(custedItemsNo));
-
-		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
-		model.addAttribute("customizedVO", customizedVO);
-		return "sFunction/customized/update_customized_input"; // 查詢完成後轉交update_emp_input.html
-	}
+//	@PostMapping("getOne_For_Update")
+//	public String getOne_For_Update(@RequestParam("mealNo") String mealNo, @RequestParam("custedItemsNo") String custedItemsNo, ModelMap model) {
+//		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
+//		/*************************** 2.開始查詢資料 *****************************************/
+//		// EmpService empSvc = new EmpService();
+//		CustomizedVO customizedVO = customizedSvc.getCustomizedVOByCompositeKey(Integer.valueOf(mealNo), Integer.valueOf(custedItemsNo));
+//
+//		/*************************** 3.查詢完成,準備轉交(Send the Success view) **************/
+//		model.addAttribute("customizedVO", customizedVO);
+//		return "sFunction/customized/update_customized_input"; // 查詢完成後轉交update_emp_input.html
+//	}
 	
-	@PostMapping("update")
-	public String update(@Valid CustomizedVO customizedVO, BindingResult result, ModelMap model) throws IOException {
-		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
-		if (result.hasErrors()) {
-			System.out.println("資料不全");
-			return "sFunction/customized/update_customized_input";
-		}
-		/*************************** 2.開始修改資料 *****************************************/
-		customizedSvc.updateCustomizedVO(customizedVO);
-		System.out.println("修改成功2");
-		/*************************** 3.修改完成,準備轉交(Send the Success view) **************/
-		model.addAttribute("success", "- (修改成功)");
-		customizedVO = customizedSvc.getCustomizedVOByCompositeKey(Integer.valueOf(customizedVO.getMealNo()), Integer.valueOf(customizedVO.getCustedItemsNo()));
-		model.addAttribute("customizedVO", customizedVO);
-		return "sFunction/customized/listOneCustomized"; // 修改成功後轉交listOneEmp.html
-	}
+//	@PostMapping("update")
+//	public String update(@Valid CustomizedVO customizedVO, BindingResult result, ModelMap model) throws IOException {
+//		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
+//		if (result.hasErrors()) {
+//			System.out.println("資料不全");
+//			return "sFunction/customized/update_customized_input";
+//		}
+//		/*************************** 2.開始修改資料 *****************************************/
+//		customizedSvc.updateCustomizedVO(customizedVO);
+//		System.out.println("修改成功2");
+//		/*************************** 3.修改完成,準備轉交(Send the Success view) **************/
+//		model.addAttribute("success", "- (修改成功)");
+//		customizedVO = customizedSvc.getCustomizedVOByCompositeKey(Integer.valueOf(customizedVO.getMealNo()), Integer.valueOf(customizedVO.getCustedItemsNo()));
+//		model.addAttribute("customizedVO", customizedVO);
+//		return "sFunction/customized/listOneCustomized"; // 修改成功後轉交listOneEmp.html
+//	}
 	//複合查詢
-		@PostMapping("listCustomized_ByCompositeQuery")
-		public String listAllCustomized(HttpServletRequest req, Model model) {
-			Map<String, String[]> map = req.getParameterMap();
-			List<CustomizedVO> list = customizedSvc.getCustomizedVOByCompositeQuery(map);
-			model.addAttribute("customizedListData", list); // for listAllEmp.html 第85行用
-			for(CustomizedVO rs: list) {
-				System.out.println(rs.getCompositeKey());
-			}
-			return "sFunction/customized/listAllCustomized";
-		}
+	@PostMapping("listCustomized_ByCompositeQuery")
+	public String listAllCustomized(HttpServletRequest req, Model model) {
+		Map<String, String[]> map = req.getParameterMap();
+		List<CustomizedVO> list = customizedSvc.getCustomizedVOByCompositeQuery(map);
+		model.addAttribute("customizedListData", list); // for listAllEmp.html 第85行用
+		for(CustomizedVO rs: list) {
+			System.out.println(rs.getCompositeKey());
+		}//會報錯
+		return "sFunction/customized/listAllCustomized";
+	}
 	// 全資料一覽
 	@ModelAttribute("customizedListData") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
 	protected List<CustomizedVO> referenceListData(Model model) {

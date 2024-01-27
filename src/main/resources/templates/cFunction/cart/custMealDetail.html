@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/cFunction/css/mealMenu.css}">
+
+</head>
+<body class="body">
+    <nav class="nav ">
+        <div  class="nav ">
+           <span><a th:href="@{/}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
+           <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
+            <button class="phone-btn">行動版導覽按鈕</button>
+            <ul class="nav">
+                <li class="nav_item "><a class="title" th:href="@{cFunction/cEntrancePass}" value="收尋店家"></li>
+<!--                 <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> -->
+                <li class="nav_item ">
+                    <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
+                    <ul class="dropdown_menu ">
+                        <li>
+                            <form method="post" th:action="searchPersonalInfo">
+                                <input type="submit" value="個人資料管理"> 
+                            </form><br>
+                        </li>
+                        <li>
+                            <form method="post" th:action="searchLikeStore">
+                                 <input type="submit" value="收藏店家"> 
+                            </form><br>
+                        </li>
+                        <li>
+                            <form method="post" th:action="searchBlackStore">
+                                <input type="submit" value=" 黑名單店家"> 
+                            </form><br>
+                        </li>
+                        <li>
+                            <form method="post" th:action="searchOrderHistory"> 
+                                <input type="submit" value=" 下單紀錄"> 
+                            </form><br>
+                        </li>                     
+                    </ul>
+                </li>
+            </ul>
+            
+            <!--登出-->
+            <form id="logout"  th:action="logout">
+                <input type="submit" value="登出"> 
+            </form>
+            
+            <!--購物車-->
+            <form class="buy_car">
+                <p><span th:text="customerName">X X X</span> 您好!</p>
+                <button class="buy_car" type="submit">
+                    <img></img>
+                    Cart
+                    購物車數量
+                    <span>0</span>
+                </button>
+            </form>
+            <div class="nav_footer"> </div>
+        </div>   
+    </nav>
+    <header class="header" >
+        <div class="header">
+              <!-- 固定資訊-->
+            <div class="card_info">
+                <h1 th:text="${storeName}">店家名</h1>
+                <p>店家評分:<span th:text="${scoreAvg}"></span></p>
+                <p>店家地址:<span th:text="${storeAddress}"></span></p>
+                <p>店家電話:<span th:text="${storePhone}"></span></p>
+                <a th:action="@{/cFunction/storeMenu}">返回菜單</a>
+            </div>
+            <div class="card_map">google地圖</div>
+            <!-- <div class="header_img"><img class="card_img_top" src="./images/store.png" alt="圖片加載中" /></div> -->
+        </div>
+    </header>
+    <main>
+        <table class="mealDetail">
+        	<tr>
+        		<td>餐點:</td>
+        		<td ><span id="mealName" th:text="${mealsVO.mealName}"></span></td>
+                   
+                </tr>
+        	<tr>
+        		<td>單價:</td>
+        		<td><span id="mealPrice" th:text="${mealsVO.mealPrice}"></span></td>
+        	</tr>
+        	<tr>
+        		<td>數量:</td>
+        		<td ><span id="qty" th:text="${qty}"></span></td>
+        	</tr>
+        	<tr>
+                    <td>項目></td>
+                    <td >選擇</td>
+                </tr>
+        </table>
+        <hr>
+<!--          客制明細 -->
+         <form id="checkMealDetail" method="post" action="checkMealDetail" >      
+	         <input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">
+		     <table >
+			 	<th:block th:each="customizedVO : ${customizedDetailData}">   
+		      	 	<tr>
+			            <td th:text="${customizedVO.customizedItemsVO.custedDtlName}"></td>
+<!-- 						<td><select th:field="*{customizedVO.customizedItemsVO.customizedDetailVO.custedItemsNo}"> -->
+<!-- 							<option th:each="customizedDetailVO : ${customizedDetailData}" th:value="${customizedDetailVO.custedItemsNo}" th:text="${customizedDetailVO.custedDtlName}" /> -->
+<!-- 							</select> -->
+<!-- 						</td> -->
+					</tr>	
+				</th:block>
+		  	</table>      
+	        <a th:action="@{/cFunction/storeMenu}">取消</a>
+	        <button type="submit" class="btn ">送出</button>
+      </form>			
+	</main>
+    <footer class="footer">
+        <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<script th:src="@{/cFunction/mealMenu.js}"></script>
+
+ 	
+ 	
+	
+</body>
+</html>

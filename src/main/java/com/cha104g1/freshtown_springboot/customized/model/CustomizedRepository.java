@@ -1,5 +1,6 @@
 package com.cha104g1.freshtown_springboot.customized.model;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,5 +21,10 @@ public interface CustomizedRepository extends JpaRepository<CustomizedVO, Intege
 	@Modifying
 	@Query(value = " from customized where custedStatus =?1", nativeQuery = true)
 	Optional<CustomizedVO> findByCustedStatus(Integer custedStatus);//自訂除了Pk外的查詢方法
+
+	//中群
+	@Transactional
+	@Query(value = " from CustomizedVO where mealNo =?1")
+	List<CustomizedVO> findByMealNo(Integer mealNo);//自訂除了Pk外的查詢方法
 
 }

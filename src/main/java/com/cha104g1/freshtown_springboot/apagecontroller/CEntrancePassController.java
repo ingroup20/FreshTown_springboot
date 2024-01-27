@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
+import com.cha104g1.freshtown_springboot.customized.model.CustomizedVO;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
@@ -35,6 +39,7 @@ import javax.servlet.http.HttpSession;
 @Validated
 @RequestMapping("/cFunction")
 public class CEntrancePassController {
+	
 
 	@Autowired
 	StoresService storesSvc;
@@ -46,6 +51,10 @@ public class CEntrancePassController {
 	CustomerService customerSvc;
 	@Autowired
 	OrdersService ordersSvc;
+	@Autowired
+	CustomizedService customizedSvc;
+	@Autowired
+	CustomizedDetailService customizedDetailSvc;
 	//缺下單&購物車功能
 
 	@ModelAttribute//每次進入controller都會叫用
@@ -74,26 +83,7 @@ public class CEntrancePassController {
         }
     	return "cEntrance"; //view
     }
-    
 
-
-	
-//    @ModelAttribute("menuListS") 
-//	protected List<MealsVO> getAllMenuListS(@RequestParam("storeId") String storeId,Model model) {
-//
-//	    if (storeId != null) {
-//	        List<MealsVO> list = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
-//	        System.out.println(list.size());
-//	        model.addAttribute("storeName", list.get(0).getStoresVO().getStoreName());
-//	        return list;
-//	        
-//	    } else {
-//	     
-//	       System.out.println("xxx");
-//	    	return null;
-//	    }
-//	}
-//    
   //==include店家搜尋=================== 
 	@PostMapping("searchStores")
    	public String searchStore(HttpServletRequest req,ModelMap model) {
@@ -110,39 +100,7 @@ public class CEntrancePassController {
    	}
     
     
-    //==include進入店家===================    
-	@GetMapping("getOneStoreMeal")
-	public String getOneStoreMeal(@RequestParam("storeId") String storeId,ModelMap model) {
-		/***************************1.接收請求↑ ************************/
-	
-		/***************************2.查詢*********************************************/
-		StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
-		List<MealsVO> menuListS = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
-	
-		//計算平均評分 
-		double scoreAvg = storesVO.getTotalScore()/storesVO.getScorePeople();
-		scoreAvg=(int)(scoreAvg*10)/10;
-			   
-		model.addAttribute("menuListS", menuListS);
-		model.addAttribute("storeName", storesVO.getStoreName());
-		model.addAttribute("storeAddress", storesVO.getStoreAddress());
-		model.addAttribute("storePhone", storesVO.getStorePhone());
-		model.addAttribute("openTime", storesVO.getOpenTime());	
-		model.addAttribute("scoreAvg", scoreAvg);		
-
-		model.addAttribute("menuListS", menuListS);  // for listOnePage.html 
-		
-		if (storesVO == null) {
-			model.addAttribute("errorMessage", "無此店家");
-			return "cFunction/cEntrancePass";
-		}
-		
-		/***************************3.顯示*****************/
-		model.addAttribute("getOneStoreMeal", "true"); // for cEnrance.html
-		
-		return "cFunction/cEntrancePass"; 	
-	}
-    
+   
     
    //==include個人資料管理=================== 
 	@PostMapping("searchPersonalInfo")
@@ -165,7 +123,6 @@ public class CEntrancePassController {
    		return "cFunction/cEntrancePass"; 	
    	}
     
-   
     //==include收藏店家=================== 
 	@PostMapping("searchLikeStore")
    	public String searchLikeStore(HttpServletRequest req,ModelMap model) {
@@ -233,23 +190,85 @@ public class CEntrancePassController {
    		return "cFunction/cEntrancePass"; 	
    	}
 	
-	
-	
-	/**測試*****************************************************/
-	//==insert訂單管理=================== 
-		@PostMapping("manageOrders")
-	   	public String manageOrders(HttpServletRequest req,ModelMap model) {
-	   		/***************************1.接收請求↑ ************************/
-	   		/***************************2.查詢*********************************************/
+		
+	    //==insert 加入購物車===================    
+		@PostMapping("checkMealDetail")
+		public String putInCart(@RequestParam("mealNo") String mealNo,@RequestParam("priceBought") String priceBought,@RequestParam("mealQty") String mealQty,ModelMap model) {
+			/***************************1.接收請求↑ ************************/
+			Integer oneTotalPrice = Integer.valueOf(priceBought) *Integer.valueOf(mealQty);//單項總金額
 			
-	   		List<OrdersVO> ordersListData = ordersSvc.getAllByStore(1); 	
-	   		model.addAttribute("ordersListData", ordersListData);     // for listOnePage.html 
-	   	
-	   		/***************************3.顯示*****************/
-	   		model.addAttribute("manageOrders", "true"); // for cEnrance.html
-	   		
-	   		return "cFunction/cEntrancePass"; 	
-	   	}
-   
+			/***************************2.查詢*********************************************/
+			List<CustomizedVO> customizedListData = customizedSvc.getAll(Integer.valueOf(mealNo));
+			if(model.getAttribute("totalPrice")==null) {
+				Integer totalPrice=oneTotalPrice;	
+				model.addAttribute("totalPrice",totalPrice);
+			}else {
+				Integer totalPrice = (Integer)(model.getAttribute("totalPrice"));
+				totalPrice =totalPrice+oneTotalPrice;//整車總金額
+				model.addAttribute("totalPrice",totalPrice);
+			}
+			
+			model.addAttribute("mealsVO",mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealNo)));
+			model.addAttribute("oneTotalPrice",oneTotalPrice);
+			model.addAttribute("customizedListData",customizedListData);
+			/***************************3.顯示*****************/
 	
+			model.addAttribute("putInCart", "true"); // for cEnrance.html
+			
+			return "cFunction/cEntrancePass"; 	
+		}
+	    
+//==include進入店家===================    
+		@SuppressWarnings("unused")
+		@GetMapping("storeMenu")
+		public String getOneStoreMeal(@RequestParam("storeId") String storeId,ModelMap model) {
+			/***************************1.接收請求↑ ************************/
+		
+			/***************************2.查詢*********************************************/
+			StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
+			List<MealsVO> menuListS = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
+
+			//計算平均評分 
+			double scoreAvg = storesVO.getTotalScore()/storesVO.getScorePeople();
+			scoreAvg=(int)(scoreAvg*10)/10;
+				   
+			model.addAttribute("menuListS", menuListS);
+			model.addAttribute("storeVO", storesVO);
+			model.addAttribute("storeId", storesVO.getStoreId());
+			model.addAttribute("storeName", storesVO.getStoreName());
+			model.addAttribute("storeAddress", storesVO.getStoreAddress());
+			model.addAttribute("storePhone", storesVO.getStorePhone());
+			model.addAttribute("openTime", storesVO.getOpenTime());	
+			model.addAttribute("scoreAvg", scoreAvg);		
+
+			model.addAttribute("menuListS", menuListS);
+			
+			if (storesVO == null) {
+				model.addAttribute("errorMessage", "無此店家");
+				return "cFunction/cEntrancePass";
+			}
+			
+			/***************************3.顯示*****************/
+//			model.addAttribute("getOneStoreMeal", "true"); // for cEnrance.html
+//			
+			return "cFunction/storeMenu"; 	
+		}
+	    
+		
+		
+		
+		@ModelAttribute("customizedDetailData")
+		public List<CustomizedDetailVO> customizedListData(Model model){	
+			return customizedDetailSvc.getAll();
+		}
+		
+		@GetMapping("cFunction/storeMenu")
+		public String seeMenu(Model model) {
+		System.out.println("轉2");
+			return "/cFunction/storeMenu";
+		}
+		
+		
+
+		    
 }

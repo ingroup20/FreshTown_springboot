@@ -14,7 +14,7 @@
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
                 <li class="nav_item "><input class="title" th:action="${searchStores}" value="餐點分類"></li>
-                <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li>
+<!--                 <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> -->
                 <li class="nav_item ">
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
                     <ul class="dropdown_menu ">
@@ -37,14 +37,7 @@
                             <form method="post" th:action="searchOrderHistory"> 
                                 <input type="submit" value=" 下單紀錄"> 
                             </form><br>
-                        </li>
-<!--                         測試用 -->
-                        <li>
-<form  method="post" th:action="manageOrders"> 
-<input style="color:red" type="submit" value=" 管理訂單"> 
-</form>  
-                        </li>
-                      
+                        </li>                      
                     </ul>
                 </li>
             </ul>
@@ -102,7 +95,7 @@
 	                </div>
 	                <!-- 控制項-->
 	                <div class="card_footer title">
-	                    <form id="entrance" method="get" th:action="@{getOneStoreMeal}" > 
+	                    <form id="entrance" method="get" th:action="@{storeMenu}" > 
 		 				     <input id="entrance" type="submit" value="看菜單"> 
 						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
 					     </form>		
@@ -115,12 +108,14 @@
     
     
     <header class="main" th:if="${getOneStoreMeal}">
-        <div th:insert="~{/onceStorePage :: onceStorePage-div}"></div>
+        <div th:insert="~{/cFunction/storeMenu :: storeMenu-div}"></div>
     </header>  
     <select class="main" th:if="${getOneStoreMeal}">
-        <div th:insert="~{/onceStorePage :: onceStorePage-div}"></div>
-    </select>
-    
+        <div th:insert="~{/cFunction/storeMenu :: storeMenu-div}"></div>
+    </select>   
+    <main class="main" th:if="${getOneStoreMeal}">
+        <div th:insert="~{/cFunction/storeMenu :: storeMenu-main}"></div>
+    </main>
     
     <!-- include內容 ======================================-->
  
