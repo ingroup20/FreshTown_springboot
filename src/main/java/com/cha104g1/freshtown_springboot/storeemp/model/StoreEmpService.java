@@ -64,8 +64,8 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 		return null;
 	}
 	
-	public StoreEmpVO getOneStoreEmp(Integer id) {
-		Optional<StoreEmpVO> optional = repository.findById(id);
+	public StoreEmpVO getOneStoreEmp(Integer sEmpId) {
+		Optional<StoreEmpVO> optional = repository.findById(sEmpId);
 		return optional.orElse(null); 
 	}
 

@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpVO;
 
 
 @Service("CustomerService")
@@ -54,9 +53,9 @@ public class CustomerService {
 		return customerLogin; 
 	}
 
-	public CustomerVO getOneCustomer(Integer valueOf) {
-		// TODO Auto-generated method stub
-		return null;
+	public CustomerVO getOneCustomer(Integer customerId) {
+		Optional<CustomerVO> optional = repository.findById(customerId);
+		return optional.orElse(null); 
 	}
 
 
