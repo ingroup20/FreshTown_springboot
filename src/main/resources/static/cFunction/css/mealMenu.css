@@ -295,9 +295,17 @@ button#buyit{
     font-size: 1.5rem;
 }
 /*========== checkMealDetail ====================*/
+table.mealDetail {
+	display: inline-block;
+	margin-right:20px;
+	border: 2px solid black;
+}
+
 
 table.mealDetail td,
 table.mealDetail span,
+table.mealDetail select,
+table.mealDetail option,
 table.mealDetail input {
     font-size: 2rem;
 }
@@ -306,7 +314,23 @@ table.mealDetail tr > td:first-child {
     width: 100px;
 }
 
+form#checkMealDetail{
+	display: inline;
+}
 
+button.btn {
+	font-size: 2rem;
+	background:lightseagreen;
+}
+
+button.MealDetail{
+	width:50x;
+	margin:5px 10px;
+}
+
+button.MealDetail >a{
+	font-size: 2rem;
+}
 
 /*=========  footer ===============*/
 footer.footer{

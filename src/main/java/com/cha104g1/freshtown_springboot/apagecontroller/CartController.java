@@ -23,24 +23,24 @@ public class CartController {
 	}
 	
 
-	@PostMapping("addOneInCart")
-	public void addOneInCart(MealsVO mealsVO,OrderDetailVO orderDetailVO ,Model model) {	
-		
-		
-		cartVO.setId(cartCount(model)+1);
-		cartVO.setCustomerId((Integer)model.getAttribute("cLogin") );
-		cartVO.setMealsVO(mealsVO);
-		cartVO.setOrderDetailVO(orderDetailVO);
-		cartVO.setStoreId(mealsVO.getStoresVO().getStoreId());
-		//======================================
-		model.addAttribute("cartIndex", cartVO.getId());//更新cart搜尋碼
-		
-		List<CartVO> cartList =new ArrayList<>();
-		cartList.add(cartVO);
-		model.addAttribute("cartList", cartList);
-		
-
-	}
+//	@PostMapping("addOneInCart")
+//	public void addOneInCart(MealsVO mealsVO,OrderDetailVO orderDetailVO ,Model model) {	
+//		
+//		
+//		cartVO.setId(cartCount(model)+1);
+//		cartVO.setCustomerId((Integer)model.getAttribute("cLogin") );
+//		cartVO.setMealsVO(mealsVO);
+//		cartVO.setOrderDetailVO(orderDetailVO);
+//		cartVO.setStoreId(mealsVO.getStoresVO().getStoreId());
+//		//======================================
+//		model.addAttribute("cartIndex", cartVO.getId());//更新cart搜尋碼
+//		
+//		List<CartVO> cartList =new ArrayList<>();
+//		cartList.add(cartVO);
+//		model.addAttribute("cartList", cartList);
+//		
+//
+//	}
 	
 	@PostMapping("updateCart")
 	public void updateCart(Integer quality ,Model model) {	

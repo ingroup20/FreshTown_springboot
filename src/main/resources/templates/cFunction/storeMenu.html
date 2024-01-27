@@ -95,9 +95,9 @@
 	                <form method="get" th:action="@{/cFunction/storeMenu/custMealDetail}" >
 	                    <div class="quantity-container">
 	                        <h3>數量:</h3>
-	                        <button class="quantity-btn" onclick="decrementQuantity()">-</button>
+	                        <button type="button"class="quantity-btn" onclick="decrementQuantity()">-</button>
 	                        <input type="number" id="quantityInput" name="quantity" value="1" min="1" max="99">
-	                        <button class="quantity-btn" onclick="incrementQuantity()">+</button>
+	                        <button type="button"class="quantity-btn" onclick="incrementQuantity()">+</button>
 	                    </div>  
 	                   		
 	                         <input type="hidden" name="storeId" th:value="${storeVO.storeId}">       

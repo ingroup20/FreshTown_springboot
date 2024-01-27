@@ -3,6 +3,7 @@ package com.cha104g1.freshtown_springboot.adao;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +12,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cha104g1.freshtown_springboot.amodel.CartVO;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
@@ -73,48 +76,62 @@ public class CartService {
 		return keys;
 	}
 	
-	
-	
-	//新餐點加入&更新
-	public String addCart(CartVO cartVO,Integer customerNo) {
-		String custCart = String.valueOf(customerNo);
-		String cartId = String.valueOf(cartVO.getId());
-		String cartKey =custCart+":"+cartId;
+	//新餐點喜好調整明細
+	@PostMapping
+	public List<CustomizedOrderVO> addCustomizedOrder(CustomizedOrderVO customizedOrderVO,Model model) {
+		Object obj = model.getAttribute("customizedOrderList");
+		List<CustomizedOrderVO> customizedOrderList=new ArrayList<CustomizedOrderVO>();
+	    if (obj != null && obj instanceof List<?>) {
+	        List<?> list = (List<?>) obj;
+	        // 然后你可以进一步判断 List 中的元素类型是否是 CustomizedOrderVO
+	        if (!list.isEmpty() && list.get(0) instanceof CustomizedOrderVO) 
+	             customizedOrderList = (List<CustomizedOrderVO>) list;	 	
+	    }
+	    customizedOrderList.add(customizedOrderVO);
+	    model.addAttribute("customizedOrderList",customizedOrderList);
+	    return customizedOrderList;
+	}
+//	
+//	//新餐點加入&更新
+//	public String addCart(CartVO cartVO,Integer customerNo) {
+//		String custCart = String.valueOf(customerNo);
+//		String cartId = String.valueOf(cartVO.getId());
+//		String cartKey =custCart+":"+cartId;
+//		
+//		Jedis jedis = new Jedis("localhost", 6379);
+//		jedis.select(15);//資料第15區cart
+//		System.out.println(jedis.ping());
+//		
+//		//轉換成文字
+//		
+//		String mealsVO=new JSONObject(cartVO.getMealsVO()).toString();
+//		String orderDetailVO=new JSONObject(cartVO.getOrderDetailVO()).toString();
+//		String customerId=String.valueOf(cartVO.getCustomerId());
+//		String storeId=String.valueOf(cartVO.getStoreId());
+//		String customizedOrderVO=String.valueOf(cartVO.getCustomizedOrderVO());
 		
-		Jedis jedis = new Jedis("localhost", 6379);
-		jedis.select(15);//資料第15區cart
-		System.out.println(jedis.ping());
-		
-		//轉換成文字
-		
-		String mealsVO=new JSONObject(cartVO.getMealsVO()).toString();
-		String orderDetailVO=new JSONObject(cartVO.getOrderDetailVO()).toString();
-		String customerId=String.valueOf(cartVO.getCustomerId());
-		String storeId=String.valueOf(cartVO.getStoreId());
-		String customizedOrderVO=String.valueOf(cartVO.getCustomizedOrderVO());
 		
 		
 		
-		
-		
-		//檢查jedis存在的cart(無論有無都向後+物件)
-		String jsonStrCart = new JSONObject(cartVO).toString();
-		System.out.println("Object to JSON: " + jsonStrCart);			
-		jedis.hset(cartKey,"cartId",cartId);//加入同時創建
-		jedis.hset(cartKey,"mealsVO",mealsVO);//加入同時創建
-		jedis.hset(cartKey,"orderDetailVO",orderDetailVO);//加入同時創建
-		jedis.hset(cartKey,"customizedOrderVO",customizedOrderVO);//加入同時創建
-		jedis.hset(cartKey,"customerId",customerId);//加入同時創建
-		jedis.hset(cartKey,"storeId",storeId);//加入同時創建
-		
-		jedis.expire(cartKey, 1814400);//資料存活時間7天	
-		//全部印出瞧瞧
-		findCart(custCart);
+//		
+//		//檢查jedis存在的cart(無論有無都向後+物件)
+//		String jsonStrCart = new JSONObject(cartVO).toString();
+//		System.out.println("Object to JSON: " + jsonStrCart);			
+//		jedis.hset(cartKey,"cartId",cartId);//加入同時創建
+//		jedis.hset(cartKey,"mealsVO",mealsVO);//加入同時創建
+//		jedis.hset(cartKey,"orderDetailVO",orderDetailVO);//加入同時創建
+//		jedis.hset(cartKey,"customizedOrderVO",customizedOrderVO);//加入同時創建
+//		jedis.hset(cartKey,"customerId",customerId);//加入同時創建
+//		jedis.hset(cartKey,"storeId",storeId);//加入同時創建
+//		
+//		jedis.expire(cartKey, 1814400);//資料存活時間7天	
+//		//全部印出瞧瞧
+//		findCart(custCart);
        
 
-		jedis.close();
-		return "1";
-	}
+//		jedis.close();
+//		return "1";
+//	}
 	
 	//jedis購物車刪除
 	public String deleteCart(String cartId,Integer customerNo) {

@@ -71,5 +71,9 @@ public class CustomizedDetailService implements CustomizedDetailServiceIntf{
 		return null;
 	}
 
+	public List<CustomizedDetailVO> getAllByCustedItemsNo(Integer custedItemsNo) {
+		
+		return repository.findByCustedItemsNo(custedItemsNo);
+	}
 	
 }

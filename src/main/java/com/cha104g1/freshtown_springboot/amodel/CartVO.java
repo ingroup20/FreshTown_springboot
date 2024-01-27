@@ -1,5 +1,7 @@
 package com.cha104g1.freshtown_springboot.amodel;
 
+import java.util.List;
+
 import com.cha104g1.freshtown_springboot.customizedorder.model.CustomizedOrderVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
@@ -7,12 +9,11 @@ import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
 public class CartVO {
 	private Integer id;
 	private MealsVO mealsVO;
-	private OrderDetailVO orderDetailVO;
-	private CustomizedOrderVO customizedOrderVO;
+	private Integer mealQty;
+	private List<CustomizedOrderVO> customizedOrderList;
 	private Integer customerId;
 	private Integer storeId;
-	
-	
+
 	
 	public Integer getId() {
 		return id;
@@ -26,12 +27,14 @@ public class CartVO {
 	public void setMealsVO(MealsVO mealsVO) {
 		this.mealsVO = mealsVO;
 	}
-	public OrderDetailVO getOrderDetailVO() {
-		return orderDetailVO;
+
+	public Integer getMealQty() {
+		return mealQty;
 	}
-	public void setOrderDetailVO(OrderDetailVO orderDetailVO) {
-		this.orderDetailVO = orderDetailVO;
+	public void setMealQty(Integer mealQty) {
+		this.mealQty = mealQty;
 	}
+
 	public Integer getCustomerId() {
 		return customerId;
 	}
@@ -44,13 +47,13 @@ public class CartVO {
 	public void setStoreId(Integer storeId) {
 		this.storeId = storeId;
 	}
-	public CustomizedOrderVO getCustomizedOrderVO() {
-		return customizedOrderVO;
+	public List<CustomizedOrderVO> getCustomizedOrderList() {
+		return customizedOrderList;
 	}
-	public void setCustomizedOrderVO(CustomizedOrderVO customizedOrderVO) {
-		this.customizedOrderVO = customizedOrderVO;
+	public void setCustomizedOrderList(List<CustomizedOrderVO> customizedOrderList) {
+		this.customizedOrderList = customizedOrderList;
 	}
-
+	
 	
 	
 	
