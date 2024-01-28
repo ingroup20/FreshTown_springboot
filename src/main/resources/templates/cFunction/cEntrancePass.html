@@ -48,15 +48,11 @@
             </form>
             
             <!--購物車-->
-            <form class="buy_car">
-                <p><span th:text="customerName">X X X</span> 您好!</p>
-                <button class="buy_car" type="submit">
-                    <img></img>
-                    Cart
-                    購物車數量
-                    <span>0</span>
-                </button>
-            </form>
+            <p><span th:text="${customerVO.getCustomerNic}">X X X</span> 您好!</p>
+            <a th:href="@{cFunction/cartPage}">
+               <img></img>購物車<span th:text="${cartQty}"></span>
+           </a>
+            
             <div class="nav_footer"></div>
         </div>   
     </nav>

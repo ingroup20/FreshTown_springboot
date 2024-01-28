@@ -294,6 +294,12 @@ button#buyit{
     height: 30px;
     font-size: 1.5rem;
 }
+
+a#cancel{
+	font-size:1.3rem;
+	margin-right:10px;
+}
+
 /*========== checkMealDetail ====================*/
 table.mealDetail {
 	display: inline-block;

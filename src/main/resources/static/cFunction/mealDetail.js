@@ -1,25 +1,23 @@
 
-	
- let mealNo ;
-//數量+-按鈕
-function incrementQuantity() {
-    const input = document.getElementById('quantityInput');
-    input.value = parseInt(input.value, 10) + 1;
-}
 
-function decrementQuantity() {
-    const input = document.getElementById('quantityInput');
-    const currentValue = parseInt(input.value, 10);
-    input.value = currentValue > 1 ? currentValue - 1 : 1;
-}
+//function incrementQuantity() {
+//    const input = document.getElementById('quantityInput');
+//    input.value = parseInt(input.value, 10) + 1;
+//}
+//
+//function decrementQuantity() {
+//    const input = document.getElementById('quantityInput');
+//    const currentValue = parseInt(input.value, 10);
+//    input.value = currentValue > 1 ? currentValue - 1 : 1;
+//}
 
-$("button#buyit").click(function(){
-//	mealNo = $(this).closest("div").find("input#mealNo").val();
-
-    let qty = $(this).closest("div").find("input#quantityInput").val();
-    $("input#qty_back").val(qty);
-
-});
+//$("button#buyit").click(function(){
+////	mealNo = $(this).closest("div").find("input#mealNo").val();
+//
+//    let qty = $(this).closest("div").find("input#quantityInput").val();
+//    $("input#qty_back").val(qty);
+//
+//});
 
 //====喜好選擇==================================================================
 

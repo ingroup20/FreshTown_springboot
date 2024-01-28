@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cha104g1.freshtown_springboot.adao.CartService;
 import com.cha104g1.freshtown_springboot.amodel.CartVO;
@@ -22,6 +23,8 @@ import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetail
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
+import com.cha104g1.freshtown_springboot.customizedorder.model.CustomizedOrderService;
+import com.cha104g1.freshtown_springboot.customizedorder.model.CustomizedOrderVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
@@ -68,6 +71,8 @@ public class StoreMenuController {
 	@Autowired
 	CustomizedItemsService customizedItemsSvc;
 	@Autowired
+	CustomizedOrderService customizedOrderSvc;
+	@Autowired
 	CartService cartSvc;
 
 	@ModelAttribute//每次進入controller都會叫用
@@ -100,7 +105,11 @@ public class StoreMenuController {
   
   //喜好調整
     @GetMapping("/custMealDetail")
-	public String geMealCustDetail(@RequestParam("mealNo") String mealNo,@RequestParam("storeId") String storeId, String quantity,ModelMap model) {
+	public String geMealCustDetail(@RequestParam("mealNo") String mealNo,
+			@RequestParam("storeId") String storeId, 
+			String quantity,
+			ModelMap model,
+			RedirectAttributes redirectAttributes) {
     	/***************************1.接收請求↑ ************************/	
 		/***************************2.查詢*********************************************/
 		List<CustomizedVO> customizedListData = customizedSvc.getAll(Integer.valueOf(mealNo));
@@ -125,12 +134,11 @@ public class StoreMenuController {
 			/***************************3.顯示*****************/
 			return "cFunction/cart/custMealDetail"; 
 		}else {
-			
-			
-			
+	
 //			無客制，直接加入購物車
 			model.addAttribute("success","ture");//成功加入購物車
-			return "cFunction/storeMenu"; 
+//			redirectAttributes.addAttribute("store",storesVO.getStoreId() );
+			return "redirect:/cFunction/storeMenu?storeId=" + storesVO.getStoreId();   
 		}
     
     }
@@ -143,50 +151,60 @@ public class StoreMenuController {
 
 		 @GetMapping("/")
 		 public String backStoreMenu(Model model) {
-			 model.getAttribute("storeId");
-			 return "cFunction/storeMenu";
+			 String storeId= (String)model.getAttribute("storeId");
+			 return  "redirect:/cFunction/storeMenu?storeId=" + storeId; 
+			    
 		 }
 		 
 		 
 		 
 		 //====送出到購物車==============================	 
-			@ModelAttribute
-			public int cartCount(Model model) {
-				Integer cartIndex = (Integer) model.getAttribute("cartIndex");
-				System.out.println("購物車="+cartIndex);
-			    return (cartIndex != null) ? cartIndex : 0;
-			}
+			
+
 			
 		 @PostMapping("/addOneInCart")
-			public String addOneInCart(@RequestParam("mealNo") String mealNo, @RequestParam("customizedOrderList") String customizedOrderList, String mealQty,Model model) {
-		    	CartVO cartVO =new CartVO();
+			public String addOneInCart(@RequestParam("mealNo") String mealNo, 
+					@RequestParam("customizedOrderList") String customizedOrderList, 
+					String mealQty,
+					Model model,
+					HttpServletRequest req,
+					RedirectAttributes redirectAttributes) {
+			 
+				HttpSession session = req.getSession(); 
+				CustomerVO customerVO = (CustomerVO) session.getAttribute("customerLogin");//
+				Integer customerId=customerVO.getCustomerId();
+			 	CartVO cartVO =new CartVO();
 		    	MealsVO mealsVO = mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealNo));
 				StoresVO storesVO =mealsVO.getStoresVO();
+				List<CustomizedOrderVO> list = new ArrayList<>();
 				// 解析字符串	    
 				if (customizedOrderList != null && !customizedOrderList.isEmpty()) {
 					// 解析逗號分隔的字符串
 				    String[] customizedOrders = customizedOrderList.split(",");
-
 				    // 使用取得的數據進行其他操作
 				    for (String custedDtlNo : customizedOrders) {
 				        // 對每個 custedDtlNo 做一些處理
-				        System.out.println("custedDtlNo: " + custedDtlNo);
+				    	CustomizedOrderVO customizedOrderVO =customizedOrderSvc.getOneCustomizedOrder(Integer.valueOf(custedDtlNo));
+				        list.add(customizedOrderVO);
 				    }
 				    
 				}else {
 				    System.out.println("customizedOrderList為空值.");
 				}
-		      
-		    	cartVO.setId(cartCount(model)+1);
-		    	cartVO.setMealsVO(mealsVO);
+				
+		    	cartVO.setId(cartSvc.getCartCount(req));
+		    	System.out.println("cartCount="+cartVO.getId());
+		    	cartVO.setMealNo(Integer.valueOf(mealNo));
 		    	cartVO.setMealQty(Integer.valueOf(mealQty));
-		    	cartVO.setCustomizedOrderList(null);
-				cartVO.setCustomerId((Integer)model.getAttribute("cLogin") );
+		    	cartVO.setCustomizedOrderNoList(customizedOrderList);
+				cartVO.setCustomerId(customerId);
 				cartVO.setStoreId(storesVO.getStoreId());				
-			
-				System.out.println(cartVO.getId());
-				return "cFunction/storeMenu"; 
-		    
+				System.out.println("cartVO創建成功");
+				
+				cartSvc.addCartToRedis(cartVO,customerId);
+				
+//				redirectAttributes.addAttribute("store",storesVO.getStoreId() );
+				return "redirect:/cFunction/storeMenu?storeId=" + storesVO.getStoreId(); 
 		    }
 		 
 

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cha104g1.freshtown_springboot.adao.CartService;
+import com.cha104g1.freshtown_springboot.amodel.CartDetailVO;
+import com.cha104g1.freshtown_springboot.amodel.CartVO;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
@@ -55,7 +58,9 @@ public class CEntrancePassController {
 	CustomizedService customizedSvc;
 	@Autowired
 	CustomizedDetailService customizedDetailSvc;
-	//缺下單&購物車功能
+	@Autowired
+	CartService cartSvc;
+	
 
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
@@ -269,6 +274,16 @@ public class CEntrancePassController {
 		}
 		
 		
+		@GetMapping("cFunction/cartPage")
+		public String seeCart(Model model) {
+			List<CartDetailVO> cartDetailListData = new ArrayList<>();
+			
+			List<CartVO> list = cartSvc.findCart((Integer)(model.getAttribute("customerId")));
+			for(CartVO cartVO :list )
+				cartDetailListData.add(cartSvc.toCartDetailVO(cartVO));
 
+			model.addAttribute("cartDetailListData",cartDetailListData);
+			return "cFunction/cart/cartPage";
+		}
 		    
 }

@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>                                    <!-- ●●js  for jquery datatables 用 -->
 <script	src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>              <!-- ●●js  for jquery datatables 用 -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.jqueryui.min.css" /> <!-- ●●css for jquery datatables 用 -->
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <!-- ●● jquery datatables 設定 -->
 <script>
 	$(document).ready(function() {
@@ -68,33 +68,75 @@ body {
 <table id="example" class="display" style="width: 100%">
   <thead >
 	<tr style="background-color:#CCCCFF">
-		<th>計數</th>
-		<th>meal編號</th>
-		<th>meal名稱</th>
-	    <th>meal數量</th>
-	    <th>meal價格</th>
+		<th>項次</th>
+		<th>餐點</th>
+		<th>單價</th>
+	    <th>數量</th>
+	    <th>明細</th>
+	    <th>小計</th>
+	    <th>刪除</th>
 	</tr>
   </thead>
 	
   <tbody>
-		<th:block th:each="cartVO : ${cartListData}">
+		<th:block th:each="cartDetailVO: ${cartDetailListData}">
 			<tr>
-				<td th:text="${cartVOStat.count}">計數</td>
-				<td th:text="${cartVO.mealNo}">meal編號</td>
-				<td th:text="${cartVO.mealName}">meal名稱</td>
-				<td th:text="${cartVO.mealQty}">meal數量</td>
-				<td th:text="${cartVO.priceBought}">meal價格</td>
-
+				<td th:text="${cartDetailVOStat.count}">項次</td>
+				<td th:text="${cartDetailVO.mealsVO.mealName}">餐點</td>
+<!-- 				<td th:text="${cartDetailVO != null ? (cartDetailVO.mealsVO != null ? cartDetailVO.mealsVO.mealName : '空mealsVO') : '空cartDetailVO'}"></span> -->	
+				<td th:text="${cartDetailVO.mealsVO.mealPrice}">單價</td>
+				<td th:text="${cartDetailVO.mealQty}">數量</td>
 				<td>
-				  <form method="post" th:action="@{/cFunction/cart}" style="margin-bottom: 0px;">
-				    <input type="text" name="newQuality " value="">數量
-				     <input type="submit" value="修改">
+					<button  th:if="${cartDetailVO.customizedDetailList}!=null" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					 明細
+					</button> 		
+									<!--彈窗明細 -->
+														<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														  <div class="modal-dialog">
+														    <div class="modal-content">
+														      <div class="modal-header">
+														        <h5 class="modal-title" id="exampleModalLabel">餐點明細</h5>
+														        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														      </div>
+														      <div class="modal-body">
+														        <table>
+														        	<tr>
+														        		<td>項目:</td>
+											                   			 <td >選擇</td>  
+											                   		</tr>
+											                   		 <th:block th:each="customizedDetailVO: ${cartDetailVO.customizedDetailList}">
+											                   		<tr>
+																            <td th:text="${customizedDetailVO!=null?  customizedDetailVO.customizedItemsVO.custedName: ''}"></td>
+																			<td th:text="${customizedDetailVO!=null?  customizedDetailVO.custedDtlName: ''}"></td>
+																	</tr>
+																</th:block>
+														        </table>
+														      </div>
+														    </div>
+														  </div>
+														</div>	
+				</td>	
+				<td th:text="${cartDetailVO.qtyPrice}">小計</td>
+				<td>
+				  <form method="post" th:action="@{cFunction/cartPage/deleteCart}" style="margin-bottom: 0px;">
+				    <input type="hidden" name="cartId " th:value="${cartDetailVO.getId}">
+				     <input type="submit" value="刪除">
 				  </form>			
 				</td>
 			</tr>
 		</th:block>
   </tbody>
 </table>
+
+<form method="post" th:action="@{cFunction/cartPage/payCart}">
+<div>總餐點:<span th:text="${totalQty}"></span> 總金額:<input name="totalPrice" th:text="${totalPrice}" th:value="${totalPrice}"></div>
+<button type="button"><a th:href="@{cFunction/storeMenu}">繼續點餐</a></button> <button type="submit">結帳</button>
+</form>
 </div>
+			
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>

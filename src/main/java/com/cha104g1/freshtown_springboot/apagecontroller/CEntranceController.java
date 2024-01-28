@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cha104g1.freshtown_springboot.adao.CartService;
+import com.cha104g1.freshtown_springboot.amodel.CartDetailVO;
+import com.cha104g1.freshtown_springboot.amodel.CartVO;
+import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
@@ -48,6 +52,8 @@ public class CEntranceController {
 
 	@Autowired
 	MealsService mealsSvc;
+	@Autowired
+	CartService cartSvc;
 	
 
 	//===超連結=================================================
@@ -73,6 +79,8 @@ public class CEntranceController {
     @GetMapping("/cFunction/cEntrancePass")
     public String gotoCEntrancePass(Model model) {
     	model.addAttribute("searchStores","ture");
+    	CustomerVO customerVO =new CustomerVO();
+    	model.addAttribute("customerVO",customerVO);
     	return "cFunction/cEntrancePass"; //view
     }
     
@@ -117,5 +125,40 @@ public class CEntranceController {
 	   model.addAttribute("getOneStoreMeal", "true"); 
 	   return "cEntrance";
    }
+   
+
+	@GetMapping("cFunction/cartPage")
+	public String seeCart(HttpServletRequest req ,Model model) {
+		List<CartDetailVO> cartDetailListData = new ArrayList<>();
+		
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("customerLogin");
+		CustomerVO customerVO= (CustomerVO)idVO;
+		model.addAttribute("customerId", customerVO.getCustomerId());
+		
+		List<CartVO> list = new ArrayList<>();
+		list=cartSvc.findCart(customerVO.getCustomerId());
+		
+		for(CartVO cartVO :list ) {
+			System.out.println("getId"+cartVO.getId());
+			System.out.println("getMealNo"+cartVO.getMealNo());
+			System.out.println("getMealQty()"+cartVO.getMealQty());
+			System.out.println("=============================");
+            
+		}
+		
+		
+		
+		for(CartVO cartVO :list ) {
+			CartDetailVO cartDetailVO = new CartDetailVO();
+			cartDetailVO=cartSvc.toCartDetailVO(cartVO);
+			cartDetailListData.add(cartDetailVO);
+			System.out.println("3="+cartDetailVO.getMealsVO());
+		}
+		
+		model.addAttribute("cartListData",list);
+		model.addAttribute("cartDetailListData",cartDetailListData);
+		return "cFunction/cart/cartPage";
+	}
 	
 }

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" th:href="@{/cFunction/css/mealMenu.css}">
+
+	 <link rel="stylesheet" th:href="@{/cFunction/css/mealMenu.css}">	
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 </head>
 <body class="body">
@@ -92,8 +93,9 @@
         	</tr>
 
         </table>     
-<!--          客制明細 -->
+ 			
 		     <table class="mealDetail">
+		     <th>客制明細</th>
 		      		 <tr>
 	                    <td>項目:</td>
 	                    <td >選擇</td>
@@ -116,7 +118,7 @@
 		  	   	<input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">
 		  	   	<input type="hidden" id="selectDate" name="customizedOrderList" value=""> 
 			  	<input type="hidden" name="mealQty" th:value="${qty}"> 
-			  	<a th:href="@{/cFunction/storeMenu}">取消</a>
+			  	<a id="cancel" th:href="@{/cFunction/storeMenu}">取消</a>
 		        <button  id="sentMealOrder" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >送出</button>
      		</form>			
      		

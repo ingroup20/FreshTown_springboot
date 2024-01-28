@@ -59,7 +59,7 @@ public class CLoginController {
                     session.removeAttribute("location");
                     System.out.println(location+"帳密正確");
 					session.setAttribute("customerLogin", customerLogin);//以此身分登入
-
+					session.setAttribute("customerVO", customerLogin);
                     url = location;
                 } 
 	        } 

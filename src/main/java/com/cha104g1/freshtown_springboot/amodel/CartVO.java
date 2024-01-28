@@ -8,9 +8,9 @@ import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
 
 public class CartVO {
 	private Integer id;
-	private MealsVO mealsVO;
+	private Integer mealNo;
 	private Integer mealQty;
-	private List<CustomizedOrderVO> customizedOrderList;
+	private String customizedOrderNoList;
 	private Integer customerId;
 	private Integer storeId;
 
@@ -21,12 +21,7 @@ public class CartVO {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public MealsVO getMealsVO() {
-		return mealsVO;
-	}
-	public void setMealsVO(MealsVO mealsVO) {
-		this.mealsVO = mealsVO;
-	}
+
 
 	public Integer getMealQty() {
 		return mealQty;
@@ -47,12 +42,19 @@ public class CartVO {
 	public void setStoreId(Integer storeId) {
 		this.storeId = storeId;
 	}
-	public List<CustomizedOrderVO> getCustomizedOrderList() {
-		return customizedOrderList;
+	public Integer getMealNo() {
+		return mealNo;
 	}
-	public void setCustomizedOrderList(List<CustomizedOrderVO> customizedOrderList) {
-		this.customizedOrderList = customizedOrderList;
+	public void setMealNo(Integer mealNo) {
+		this.mealNo = mealNo;
 	}
+	public String getCustomizedOrderNoList() {
+		return customizedOrderNoList;
+	}
+	public void setCustomizedOrderNoList(String customizedOrderNoList) {
+		this.customizedOrderNoList = customizedOrderNoList;
+	}
+	
 	
 	
 	
