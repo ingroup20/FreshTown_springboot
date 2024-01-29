@@ -9,50 +9,51 @@
 <body class="body">
     <nav class="nav ">
         <div  class="nav ">
-           <span><a th:href="@{/}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
-           <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
+           <span><a th:href="@{/cFunction/cEntrancePass}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
+           <a class="logo title " th:href="@{/cFunction/cEntrancePass}">鮮城 FreshTown</a>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
-                <li class="nav_item "><input class="title" th:action="${searchStores}" value="餐點分類"></li>
-<!--                 <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> -->
-                <li class="nav_item ">
+               <li class="nav_item li_item"><a class="title" th:href="@{/cFunction/cEntrancePass}">找店家</a></li>
+<!--                      <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> --> 
+               <li class="nav_item li_item">
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
                     <ul class="dropdown_menu ">
-                        <li>
+                       <li class="li_item ">
                             <form method="post" th:action="searchPersonalInfo">
-                                <input type="submit" value="個人資料管理"> 
+                                <input class="li_item " type="submit" value="個人資料管理"> 
                             </form><br>
                         </li>
-                        <li>
+                        <li class="li_item ">
                             <form method="post" th:action="searchLikeStore">
-                                 <input type="submit" value="收藏店家"> 
+                                 <input class="li_item " type="submit" value="收藏店家"> 
                             </form><br>
                         </li>
-                        <li>
+                        <li class="li_item ">
                             <form method="post" th:action="searchBlackStore">
-                                <input type="submit" value=" 黑名單店家"> 
+                                <input class="li_item " type="submit" value=" 黑名單店家"> 
                             </form><br>
                         </li>
-                        <li>
+                        <li class="li_item ">
                             <form method="post" th:action="searchOrderHistory"> 
-                                <input type="submit" value=" 下單紀錄"> 
+                                <input class="li_item " type="submit" value=" 下單紀錄"> 
                             </form><br>
                         </li>                      
                     </ul>
                 </li>
             </ul>
-            
-            <!--登出-->
-            <form id="logout"  th:action="logout">
-                <input type="submit" value="登出"> 
-            </form>
-            
-            <!--購物車-->
-            <p><span th:text="${customerVO.getCustomerNic}">X X X</span> 您好!</p>
-            <a th:href="@{cFunction/cartPage}">
-               <img></img>購物車<span th:text="${cartQty}"></span>
-           </a>
-            
+            <div class="loginPart">
+
+	            <p><span th:text="${customerVO.customerNic}"></span>  您好!</p>
+	            <!--登出-->
+	            <button id="logout"  type="button">
+	                <a th:href="@{/}">登出</a>
+	            </button>
+					
+	            <!--購物車-->
+	            <div class="cart">
+               		 <a th:href="@{/cFuncton/cartPage}">購物車</a>
+                </div>
+            </div>
             <div class="nav_footer"></div>
         </div>   
     </nav>
@@ -62,9 +63,7 @@
         <div class="header">
             <h1 class="header ">美食饗宴  盡在鮮城</h1>
             <p class="header">最公正的餐廳推薦平台，立即加入會員訂餐吧!</p>
-  
         </div>
-  
     </header>
 
     <section class="section" th:if ="${searchStores}">
@@ -74,45 +73,31 @@
 	            <div class="section_item">
 	                <div class="card">
 	                    <!-- 圖片-->
-<!-- 	                    <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
-	                    <!-- 資訊-->
-	                    <div class="card_body">
-	                        <!--固定資訊-->
-	                        <div class="card_info">
-	                            <h3 th:text="${storesVO.storeName}">店家名稱</h3>
-								<!-- 評等-->
-		                            <div class="star_area"></div>
-		                        <p>評等:<span th:text="${storesVO.storeAddress}"></span>星</p>
-								<p th:text="${storesVO.storeAddress}">店家地址</p>
-	                        </div>
-	                        
-	                    </div>
-	
+                        <div class="card_img"><img th:src="@{/images/store.png}"></div>
+	                    <!-- <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
+                        <h4 class="cardfont" th:text="${storesVO.storeName}">店家名稱</h4>
+                        <!-- 評等-->
+                        <p class="cardfont">評等:<span class="cardfont" th:text="${storesVO.totalScore/(storesVO.scorePeople!=null&&storesVO.scorePeople!=0?storesVO.scorePeople:1)}"></span>星</p>
+                        <p class="cardfont" th:text="${storesVO.storeAddress}">店家地址</p>
+                        <div class="cardfont"><span class="cardfont" th:text="${storesVO.pushUp}">營業中</span>營業時間:<span class="cardfont" th:text="${storesVO.openTime}"></span></div>
+                        <p class="cardfont">店休:<span th:text="${storesVO.restDay}"></span></p>
+						<!-- 控制項-->
+                        <div class="card_footer title">
+                            <form id="entrance" method="get" th:action="@{storeMenu}" > 
+                                  <input class="cardfont" id="entrance" type="submit" value="看菜單"> 
+                                 <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
+                             </form>		
+                        </div>
 	                </div>
-	                <!-- 控制項-->
-	                <div class="card_footer title">
-	                    <form id="entrance" method="get" th:action="@{storeMenu}" > 
-		 				     <input id="entrance" type="submit" value="看菜單"> 
-						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
-					     </form>		
-	                </div>
+	                
+
 	                
 	            </div>
            </th:block>
         </div>
     </section>
     
-    
-    <header class="main" th:if="${getOneStoreMeal}">
-        <div th:insert="~{/cFunction/storeMenu :: storeMenu-div}"></div>
-    </header>  
-    <select class="main" th:if="${getOneStoreMeal}">
-        <div th:insert="~{/cFunction/storeMenu :: storeMenu-div}"></div>
-    </select>   
-    <main class="main" th:if="${getOneStoreMeal}">
-        <div th:insert="~{/cFunction/storeMenu :: storeMenu-main}"></div>
-    </main>
-    
+ 
     <!-- include內容 ======================================-->
  
     <main class="main" th:if="${searchPersonalInfo}">

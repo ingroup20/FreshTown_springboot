@@ -13,77 +13,65 @@
     <link rel="stylesheet" th:href="@{/css/oneStore.css}">
 </head>
 <body class="body">
-    <header class="header" th:fragment="onceStorePage-div">
-        <div class="header">
-            <div class="header_item">
-                <div class="card">
-                    圖片
-                    <img class="card_img_top" src="" alt="..." />
-                    <!-- 資訊-->
-                    <div class="card_body">
-                        <!-- 固定資訊-->
-                        <div class="card_info">
-                            <p th:text="${storeName}">店家名</p>
-	                        <p>店家評分:<span th:text="${scoreAvg}"></span></p>
-                            <p>店家地址:<span th:text="${storeAddress}"></span></p>
-                            <p>店家電話:<span th:text="${storePhone}"></span></p>
-                        </div>
-                        <div class="card_map">google地圖</div>
-                    </div>
 
-                </div>
+    <header class="header_oneStore" th:fragment="onceStorePage-div">
+        <div class="header">
+              <!-- 固定資訊-->
+            <div class="card_info">
+                <h1 th:text="${storeName}">店家名</h1>
+                <p>店家評分:<span th:text="${scoreAvg}"></span></p>
+                <p>店家地址:<span th:text="${storeAddress}"></span></p>
+                <p>店家電話:<span th:text="${storePhone}"></span></p>
             </div>
+<!--             <div class="card_map">google地圖</div> -->
+            <!-- <div class="header_img"><img class="card_img_top" src="./images/store.png" alt="圖片加載中" /></div> -->
         </div>
-  
     </header>
 
-    <section class="section" th:fragment="onceStorePage-div">
-        <div class="section">
+    <section class="section_oneStore" th:fragment="onceStorePage-div">
+   <div class="section">
             <!-- 商品-->
-
 <th:block th:each="mealsVO : ${menuListS}">
+			
             <div class="section_item">
-                <div class="prd_card">
-                    圖片
-                    <div class="prd_card_ing"><img class="card_img_top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /></div>           
-                    資訊
-                    <div class="prd_card_body">
-                        固定資訊
-                        <div class="prd_info">
-                            <p><span th:text="${mealsVO.mealName}">商品名</span></p>
-                            <p>售價: $<span th:text="${mealsVO.mealPrice}">100.00</span></p>
-                        <p th:text="${mealsVO.storesVO.storeName}">店家名</p> 
-                        
-                        </div>
-                        
-                    </div>
-
-                </div>
-                控制項
-                <div class="prd_card_footer title">
-                    <form id="buyCart" method="post" action="checkMealDetail" > 
-                		<label class="buyCart" for="">數量:</label><input class="buyCart" type="text" min="0" max="30" default="0" name="mealQty" value="">
-                    	<div class="buyCart"><a href="#">加入購物車</a></div>
-                	
-		 				     <input id="buyCart" type="submit" value="加入購物車"> 
-						     <input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">
-						     <input type="hidden" name="priceBought" th:value="${mealsVO.mealPrice}">
-					     </form>
-                
-                </div>
+                <div class="section_shadow">
+	                <div class="prd_card">        
+	                    <div class="prd_card_ing"><img class="card_img_top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="圖片載入中" /></div>           
+	                    <div class="prd_info">
+	                        <h2 th:text="${mealsVO.mealName}">商品名</h2>
+	                        <h3>售價: $<span th:text="${mealsVO.mealPrice}"></span></h3>                      
+	                    </div>  
+	                </div>
+	                <!-- 控制項 -->
+	                <div class="prd_card_footer">
+	                <form method="get" th:action="@{/cFunction/storeMenu/custMealDetail}" >
+	                    <div class="quantity-container">
+	                        <h3>數量:</h3>
+	                        <button type="button"class="quantity-btn decrementQuantity">-</button>
+	                        <input type="number" class="quantity" th:id="${mealsVO.mealNo}" name="quantity" value="1" min="1" max="99">
+	                        <button type="button"class="quantity-btn incrementQuantity">+</button>
+	                    </div>  
+	                   		
+	                         <input type="hidden" name="storeId" th:value="${storeVO.storeId}">       
+		                    <input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">     
+		                    <button type="submit" id="buyit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+		                            加入購物車
+		                    </button>
+		               </form>
+	                </div>
+	                
+	            </div>
             </div>
 </th:block>
         </div>
     </section>
 
-    <main th:if="${checkMealDetail}">
-    	<div th:insert="~{/cFunction/cart/addCustomizedOrder :: addCustomizedOrder-div}"> </div>
-    </main>
-
+  
     <footer class="footer">
         <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script th:src="@{/cFunction/mealMenu.js}"></script>
 </body>
 </html>

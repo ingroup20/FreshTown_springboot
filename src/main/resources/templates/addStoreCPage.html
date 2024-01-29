@@ -46,11 +46,9 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>店家申請註冊 - addstoreC.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/}"><img th:src="@{/images/back1.gif}">回index</a></h3></div>
-</nav>
+<main th:fragment="addStoreCPage-div">
 
+<h1>店家註冊申請</h1>
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
 		<form th:action="@{insertC}" method="post" th:object="${storesVO}" enctype="multipart/form-data">
@@ -200,7 +198,7 @@
 		</form>
 	
 	</div>
-
+</main>
 
 <!-- JavaScript part -->
 <script type="text/javascript">

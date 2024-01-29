@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cha104g1.freshtown_springboot.adao.CartService;
+import com.cha104g1.freshtown_springboot.amodel.CartDetailVO;
 import com.cha104g1.freshtown_springboot.amodel.CartVO;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
@@ -85,22 +86,19 @@ public class StoreMenuController {
 		System.out.println("身分暱稱="+customerVO.getCustomerNic());
 	}
 	 model.addAttribute("customerId", customerVO.getCustomerId());
+	 model.addAttribute("customerVO", customerVO);
    }
    
-	//登出
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest req ,Model model) {
-    	// 獲取 HttpSession，防止在會話不存在時創建新的會話。如果您確定會話一定存在，可以使用 getSession()。
-        HttpSession session = req.getSession(false);
-
-        // 檢查 HttpSession 是否存在，並且 platformEmpLogin 屬性是否存在
-        if (session != null && session.getAttribute("customerLogin") != null) {
-            // 移除 platformEmpLogin 屬性
-//        	session.setAttribute("customerLogin", null);
-            session.removeAttribute("customerLogin");
-        }
-    	return "cEntrance"; //view
-    }
+//	//登出
+//    @GetMapping("/logout")
+//    public String logout(HttpServletRequest req ,Model model) {
+//    	// 獲取 HttpSession，防止在會話不存在時創建新的會話。如果您確定會話一定存在，可以使用 getSession()。
+//        HttpSession session = req.getSession(false);
+//        if (session != null && session.getAttribute("customerLogin") != null) {
+//            session.removeAttribute("customerLogin");
+//        }
+//    	return "cEntrance"; //view
+//    }
     
   
   //喜好調整
@@ -152,6 +150,7 @@ public class StoreMenuController {
 		 @GetMapping("/")
 		 public String backStoreMenu(Model model) {
 			 String storeId= (String)model.getAttribute("storeId");
+			 System.out.println("storeId="+storeId);
 			 return  "redirect:/cFunction/storeMenu?storeId=" + storeId; 
 			    
 		 }
@@ -205,7 +204,43 @@ public class StoreMenuController {
 				
 //				redirectAttributes.addAttribute("store",storesVO.getStoreId() );
 				return "redirect:/cFunction/storeMenu?storeId=" + storesVO.getStoreId(); 
-		    }
+//				return "cFunction/cartPage";
+		 }
 		 
+		 
+			@GetMapping("cFunction/cartPage")
+			public String seeCart(HttpServletRequest req ,Model model) {
+				List<CartDetailVO> cartDetailListData = new ArrayList<>();
+				
+				HttpSession session = req.getSession(false);
+				Object idVO =session.getAttribute("customerLogin");
+				CustomerVO customerVO= (CustomerVO)idVO;
+				model.addAttribute("customerId", customerVO.getCustomerId());
+				
+				List<CartVO> list = new ArrayList<>();
+				list=cartSvc.findCart(customerVO.getCustomerId());
+				
+				for(CartVO cartVO :list ) {
+					System.out.println("getId"+cartVO.getId());
+					System.out.println("getMealNo"+cartVO.getMealNo());
+					System.out.println("getMealQty()"+cartVO.getMealQty());
+					System.out.println("=============================");
+		            
+				}
+				
+				
+				
+				for(CartVO cartVO :list ) {
+					CartDetailVO cartDetailVO = new CartDetailVO();
+					cartDetailVO=cartSvc.toCartDetailVO(cartVO);
+					cartDetailListData.add(cartDetailVO);
+					System.out.println("3="+cartDetailVO.getMealsVO());
+				}
+				
+				model.addAttribute("cartListData",list);
+				model.addAttribute("cartDetailListData",cartDetailListData);
+				return "cFunction/cart/cartPage";
+			}
+			
 
 }

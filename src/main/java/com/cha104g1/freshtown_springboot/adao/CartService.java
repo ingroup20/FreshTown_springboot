@@ -35,6 +35,7 @@ import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailService;
 import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 import redis.clients.jedis.Jedis;
@@ -43,6 +44,8 @@ import redis.clients.jedis.Jedis;
 public class CartService {
 	private static final long serialVersionUID = 1L;
 	
+	@Autowired
+	StoresService storesSvc;
 	@Autowired
 	OrderDetailService orderDetailSvc;
 	@Autowired
@@ -59,20 +62,20 @@ public class CartService {
 	CustomizedItemsService CustomizedItemsSvc;
 	
 
-	public String findLastCartNo(Integer customerId) {
-		Jedis jedis = new Jedis("localhost", 6379);
-		jedis.select(15);//資料第15區cart
-		System.out.println(jedis.ping());
-
-		Set<String> keys2 = new TreeSet<>();
-		Map<String, String> hAll2 = jedis.hgetAll(String.valueOf(customerId));
-		for (String str : hAll2.keySet()) {
-    	  keys2.add(str);
-		}
-		String lastCart = findMaxString(keys2);
-	    jedis.close();	
-	      return lastCart;
-	}
+//	public String findLastCartNo(Integer customerId) {
+//		Jedis jedis = new Jedis("localhost", 6379);
+//		jedis.select(15);//資料第15區cart
+//		System.out.println(jedis.ping());
+//
+//		Set<String> keys2 = new TreeSet<>();
+//		Map<String, String> hAll2 = jedis.hgetAll(String.valueOf(customerId));
+//		for (String str : hAll2.keySet()) {
+//    	  keys2.add(str);
+//		}
+//		String lastCart = findMaxString(keys2);
+//	    jedis.close();	
+//	      return lastCart;
+//	}
 	
 	//查詢CART筆數
 	public Integer getCartCount(HttpServletRequest req) {
@@ -122,7 +125,7 @@ public class CartService {
 	
 	//查詢
 	public List<CartVO> findCart(Integer customerId) {
-//		String custCart = String.valueOf(customerNo);
+//		String custCart = String.valueOf(customerId);
 		
 		List<CartVO> list = new ArrayList<>();
 		//叫用jedisS
@@ -188,8 +191,8 @@ public class CartService {
 //	}
 	
 	//新餐點加入&更新
-	public void addCartToRedis(CartVO cartVO,Integer customerNo) {
-		String custCart = String.valueOf(customerNo);
+	public void addCartToRedis(CartVO cartVO,Integer customerId) {
+		String custCart = String.valueOf(customerId);
 		String cartId = String.valueOf(cartVO.getId());
 		String cartKey =custCart+":"+cartId;
 		
@@ -201,153 +204,157 @@ public class CartService {
 		String mealNo=String.valueOf(cartVO.getMealNo());
 		String mealQty=String.valueOf(cartVO.getMealQty());
 		String customizedOrderNoList=cartVO.getCustomizedOrderNoList();
-		String customerId=String.valueOf(cartVO.getCustomerId());
+		String customerNo=String.valueOf(cartVO.getCustomerId());
 		String storeId=String.valueOf(cartVO.getStoreId());
 
 		//檢查jedis存在的cart(無論有無，都向後+物件)	
 		jedis.hset(cartKey,"mealNo",mealNo);//加入同時創建
 		jedis.hset(cartKey,"mealQty",mealQty);//加入同時創建
 		jedis.hset(cartKey,"customizedOrderNoList",customizedOrderNoList);//加入同時創建
-		jedis.hset(cartKey,"customerId",customerId);//加入同時創建
+		jedis.hset(cartKey,"customerId",customerNo);//加入同時創建
 		jedis.hset(cartKey,"storeId",storeId);//加入同時創建
 		
 		jedis.expire(cartKey, 1814400);//資料存活時間7天	
 		//全部印出瞧瞧
-		findCart(customerNo);
+		findCart(customerId);
 
 		jedis.close();
 		System.out.println("加入Redis成功");
 	}
 	
 	//jedis購物車刪除
-	public String deleteCart(String cartId,Integer customerNo) {
-		String custCart = String.valueOf(customerNo);
-		String cartKey = custCart+":"+cartId;
+	public String deleteJedisCart(String cartId,String customerId) {
+		
+		String cartKey = customerId+":"+cartId;
 		
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.select(15);//資料第15區
 		System.out.println(jedis.ping());
-		
+		System.out.println("到這~1");
 		//檢查jedis存在的cart(無論有無都向後+物件)
-		if(jedis.get(cartKey)!=null) {
-			jedis.hdel(cartKey);
+		if(jedis.hexists(cartKey,"mealNo")) {
+			jedis.del(cartKey);
 			System.out.println("刪除成功");
 		}else
 			System.out.println("刪除失敗");
-
-		//全部印出瞧瞧
-		findCart(customerNo);
 
 		jedis.close();
 		return "1";
 	}
 	
+	//jedis全部刪除
+	public void deleteAllJedisOrder(String customerId) {
+		
+		Jedis jedis = new Jedis("localhost", 6379);
+		jedis.select(15);//資料第15區
+		System.out.println(jedis.ping());
+		
+		Set<String> keys = jedis.keys(customerId+":*");     
+        if(keys !=null) {
+	       for (String key : keys) 
+	    	   jedis.del(key);
+	    }
+        
+        if(findCart(Integer.valueOf(customerId))==null)
+        	System.out.println("全刪除成功");
+        else
+			System.out.println("刪除失敗");
+
+		jedis.close();
+
+	}
+	
 	
 	//訂單成立寫入sql
-//	public void findCartVO(String customerNo,String lastMealNo) {
-//		
-//		Jedis jedis = new Jedis("localhost", 6379);
-//		jedis.select(15);//資料第15區
-//		
-//		//新增寫入sql-orders=======================================
-//       	OrdersVO ordersVO = new OrdersVO();
-//       	ordersVO.setOrderState(0);
-//	         // 取得當前的日期和時間
-//	            LocalDateTime now = LocalDateTime.now();	
-//	            // 將 LocalDateTime 轉換為 Timestamp
-//	            Timestamp timestamp = Timestamp.valueOf(now);
-//       	ordersVO.setOrderTime(timestamp);
-//       		//下單顧客資料
-//       	    CustomerVO customerVO = customerSvc.getByCustomerId(Integer.valueOf(customerNo));
-//       	ordersVO.setCustomerVO(customerVO);
-//       	ordersVO.setTotalPrice(getTotalPrice(customerNo));
-//       			//商品店家資料
-//       			MealsVO mealsVO = mealsSvc.getMealsVOByMealNo(Integer.valueOf(lastMealNo));      	
-//       			StoresVO storesVO = mealsVO.getStoresVO();
-//       	ordersVO.setStoresVO(storesVO);
-//       	ordersVO.setRemitState(customerNo);
-//	           	// 取得當前的日期（不包含時間）
-//	            LocalDate currentDate = LocalDate.now();
-//	            // 將 LocalDate 轉換為 java.sql.Date
-//	            java.sql.Date Date = java.sql.Date.valueOf(currentDate);
-//       	ordersVO.setPayDate(Date);
-//       	ordersVO.setPayMethod(1);
-//       	ordersVO.setPayState(0);
-//		//==============================================================
-//			
-////遍歷取得物件
-//		Set<String> keys=findCart(customerNo);
-//		for (String key : keys) {
-//            // 取得對應的 hash 數據
-//        	List<String> data = jedis.hmget(key, "cartId", "mealsVO", "orderDetailVO","customizedOrderVO","customerId","storeId");        	
-//                
-//        	//處理orderDetail================================================
-//            JSONObject jsonOrderDetail = new JSONObject(data.get(2));
-//	            //取得-MealsVO
-//	            JSONObject jsonMeals = new JSONObject(data.get(1));
-//	            Integer mealNo = jsonMeals.getInt("mealNo");
-//	        MealsVO orderMealVO =mealsSvc.getMealsVOByMealNo(mealNo);
-//            Integer mealQty = jsonOrderDetail.getInt("mealQty");
-//            Integer priceBought = jsonOrderDetail.getInt("priceBought");
-//            //存入物件
-//    		OrderDetailVO orderDetailVO = new OrderDetailVO();
-//    		orderDetailVO.setMealsVO(orderMealVO);	
-//    		orderDetailVO.setMealQty(mealQty);
-//    		orderDetailVO.setOrdersVO(ordersVO);
-//    		orderDetailVO.setOrderDtlNo(priceBought);
-//    		//物件寫入sql
-//           	orderDetailSvc.addOrderDetail(orderDetailVO);
-//           	System.out.println("orderDetail新增完成");
-//          //=================================================
-//           	
-//            //處理customized_order餐點喜好調整明細
-//           	JSONObject jsonCustOrderDetail = new JSONObject(data.get(3));
-//           		//取得CustomizedDetailVO
-////           		Integer custedDtlNo =jsonCustOrderDetail.getInt("mealNo");
-//           	
-//           		Object object = jsonCustOrderDetail;
-//           		CustomizedDetailVO customizedDetailVO =new CustomizedDetailVO();
-//           				if (object instanceof CustomizedDetailVO) {
-//           				    // 可以進行轉型
-//           					customizedDetailVO = (CustomizedDetailVO) object;
-//           					System.out.println("轉型成功");
-//           				} else {
-//           					System.out.println("轉型失敗");
-//           				}
-//         		           		
-//           	CustomizedOrderVO customizedOrderVO=new CustomizedOrderVO();
-//           	customizedOrderVO.setCustomizedDetailVO(customizedDetailVO);
-//           	customizedOrderVO.setOrderDetailVO(orderDetailVO);
-//           	customizedOrderSvc.addCustomizedOrder(customizedOrderVO);
-//           	System.out.println("CustomizedOrder新增完成");
-//		}	
-//		jedis.close();
-//	}
-//	
+	public Integer addSQL(String customerId,String storeId) {
+		
+		Jedis jedis = new Jedis("localhost", 6379);
+		jedis.select(15);//資料第15區
+		
+		//新增寫入sql-orders=======================================
+       	OrdersVO ordersVO = new OrdersVO();
+       	ordersVO.setOrderState(0);
+	         // 取得當前的日期和時間
+	            LocalDateTime now = LocalDateTime.now();	
+	            // 將 LocalDateTime 轉換為 Timestamp
+	            Timestamp timestamp = Timestamp.valueOf(now);
+       	ordersVO.setOrderTime(timestamp);
+       		//下單顧客資料
+       	    CustomerVO customerVO = customerSvc.getByCustomerId(Integer.valueOf(customerId));
+       	ordersVO.setCustomerVO(customerVO);
+       	ordersVO.setTotalPrice(getTotalPrice(customerId));
+       			//商品的店家資料  	
+       			StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
+       	ordersVO.setStoresVO(storesVO);
+       	ordersVO.setRemitState("N");
+	           	// 取得當前的日期（不包含時間）
+	            LocalDate currentDate = LocalDate.now();
+	            // 將 LocalDate 轉換為 java.sql.Date
+	            java.sql.Date Date = java.sql.Date.valueOf(currentDate);
+       	ordersVO.setPayDate(Date);
+       	ordersVO.setPayMethod(1);
+       	ordersVO.setPayState(0);
+      //物件寫入sql
+       	OrdersVO newOrdersVO =  ordersSvc.addOrders(ordersVO);
+       	Integer newOrderId= newOrdersVO.getOrderId();
+       	System.out.println("order新增完成");
+		//==============================================================
+			
+//遍歷取得物件
+       	List<CartVO> list=findCart(Integer.valueOf(customerId));		
+       	for(CartVO cartVO:list) {
+    		MealsVO mealsVO = mealsSvc.getMealsVOByMealNo(cartVO.getMealNo());
+
+    		//存入OrderDetailVO物件
+    		OrderDetailVO orderDetailVO = new OrderDetailVO();
+    		orderDetailVO.setMealsVO(mealsVO);	
+    		orderDetailVO.setMealQty(cartVO.getMealQty());
+    		orderDetailVO.setOrdersVO(ordersVO);
+    		orderDetailVO.setPriceBought(mealsVO.getMealPrice());
+    		//物件寫入sql
+    		orderDetailSvc.addOrderDetail(orderDetailVO);
+           	System.out.println("orderDetail新增完成");
+            //=================================================         	
+            //處理customized_order餐點喜好調整明細  	
+           	 String customizedDetail = cartVO.getCustomizedOrderNoList();
+		          	 
+		           	if (customizedDetail != null && !customizedDetail.isEmpty()) {
+						// 解析逗號分隔的字符串
+		           		String[] customizedDetailArray = customizedDetail.split(",");
+					    // 使用取得的數據進行其他操作
+					    for (String custedDtlNo : customizedDetailArray) {
+					    	CustomizedDetailVO customizedDetailVO =customizedDetailSvc.getCustomizedDetailVOByCustedDtlNo(Integer.valueOf(custedDtlNo));
+					    	//存入CustomizedOrderVO物件
+					    	CustomizedOrderVO customizedOrderVO=new CustomizedOrderVO();
+					    	customizedOrderVO.setCustomizedDetailVO(customizedDetailVO);
+					    	customizedOrderVO.setOrderDetailVO(orderDetailVO);
+					    	//物件寫入sql
+			             	customizedOrderSvc.addCustomizedOrder(customizedOrderVO);
+			             	System.out.println("CustomizedOrder新增完成");
+					    }     		
+		           	}
+       	}
+
+       	return newOrderId;
+	}
+	
+	
+	
 	
 	
 	
 	
 	//訂單總金額
-	public Integer getTotalPrice(String customerNo) {
-		Jedis jedis = new Jedis("localhost", 6379);
-		jedis.select(15);//資料第15區cart
-		System.out.println(jedis.ping());
-		int totalPrice =0;
-		 // 找到所有keys
-        Set<String> keys = jedis.keys(customerNo+":*");
-       
-     // 遍歷這些 key
-        for (String key : keys) {
-            // 取得對應的 hash 數據
-        	List<String> data = jedis.hmget(key, "cartId", "mealsVO", "orderDetailVO","customerId","storeId");
-            System.out.println("orderDetailVO: " + data.get(2));
-            JSONObject jsonOrderDetail = new JSONObject(data.get(2));
-            Integer mealQty = jsonOrderDetail.getInt("mealQty");
-            Integer priceBought = jsonOrderDetail.getInt("priceBought");
-            totalPrice =totalPrice+(mealQty*priceBought);
-        }
-		jedis.close();	
+	public Integer getTotalPrice(String customerId) {
+		Integer totalPrice =0;
+		List<CartVO> list=findCart(Integer.valueOf(customerId));		
+       	for(CartVO cartVO:list) {
+    		MealsVO mealsVO = mealsSvc.getMealsVOByMealNo(cartVO.getMealNo());
+    		Integer mealPrice =mealsVO.getMealPrice();
+    		Integer mealQty =cartVO.getMealQty();
+    		Integer mealTotalPrice = mealPrice*mealQty;
+    		totalPrice += mealTotalPrice;
+       	}
 		return totalPrice;
 	}
 	

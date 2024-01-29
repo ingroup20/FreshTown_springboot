@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/cFunction/css/mealMenu.css}">
-
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">     
+     <link rel="stylesheet" th:href="@{/cFunction/css/allBase.css} ">
+	<link rel="stylesheet" th:href="@{/cFunction/css/mealMenu.css}">
 </head>
 <body class="body">
     <nav class="nav ">
         <div  class="nav ">
-           <span><a th:href="@{/}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
-           <a class="logo title " th:href="@{/}">鮮城 FreshTown</a>
+           <span><a th:href="@{/cFunction/cEntrancePass}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
+           <a class="logo title " th:href="@{/cFunction/cEntrancePass}">鮮城 FreshTown</a>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
-                <li class="nav_item "><a class="title" th:href="@{cFunction/cEntrancePass}" value="收尋店家"></li>
+                <li class="nav_item li_item"><a class="title" th:href="@{/cFunction/cEntrancePass}">找店家</a></li>
 <!--                 <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> -->
                 <li class="nav_item ">
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
@@ -43,22 +43,18 @@
                     </ul>
                 </li>
             </ul>
-            
-            <!--登出-->
-            <form id="logout"  th:action="logout">
-                <input type="submit" value="登出"> 
-            </form>
-            
-            <!--購物車-->
-            <form class="buy_car">
-                <p><span th:text="customerName">X X X</span> 您好!</p>
-                <button class="buy_car" type="submit">
-                    <img></img>
-                    Cart
-                    購物車數量
-                    <span>0</span>
-                </button>
-            </form>
+             <div class="loginPart">
+
+	            <p><span th:text="${customerVO.customerNic}"></span>  您好!</p>
+	            <!--登出-->
+	            <button id="logout"  type="button">
+	                <a th:href="@{/}">登出</a>
+	            </button>
+	            <!--購物車-->
+	            <div class="cart">
+               		 <a th:href="@{/cFunction/cartPage}">購物車</a>
+                </div>
+            </div>
             <div class="nav_footer"> </div>
         </div>   
     </nav>
@@ -71,7 +67,7 @@
                 <p>店家地址:<span th:text="${storeAddress}"></span></p>
                 <p>店家電話:<span th:text="${storePhone}"></span></p>
             </div>
-            <div class="card_map">google地圖</div>
+<!--             <div class="card_map">google地圖</div> -->
             <!-- <div class="header_img"><img class="card_img_top" src="./images/store.png" alt="圖片加載中" /></div> -->
         </div>
     </header>
