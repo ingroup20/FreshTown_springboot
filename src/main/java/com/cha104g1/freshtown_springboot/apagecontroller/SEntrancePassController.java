@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
@@ -43,6 +44,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotEmpty;
 
 
 @Controller
@@ -131,12 +133,35 @@ public class SEntrancePassController {
 	   	}
 		
 		//===
-	    @GetMapping("/listAllOrders")
-		public String listAllOrders(Model model) {
-			return "sFunction/orders/listAllOrders";
-		}
-	    
-	    
+				    @GetMapping("/listAllOrders")
+					public String listAllOrders(Model model) {
+						return "sFunction/orders/listAllOrders";
+					}
+				    @PostMapping("getOne_For_Display")
+					public String getOne_For_Display(
+						/***************************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+						@NotEmpty(message="訂單編號: 請勿空白")
+						@RequestParam("orderId") String orderId,
+						ModelMap model) {
+						
+						/***************************2.開始查詢資料*********************************************/
+						OrdersVO ordersVO = ordersSvc.getOneOrders(Integer.valueOf(orderId));
+						
+						List<OrdersVO> list = ordersSvc.getAll();
+						model.addAttribute("ordersListData", list);     // for select_page.html 第97 109行用
+			
+						if (ordersVO == null) {
+							model.addAttribute("errorMessage", "查無資料");
+							return "sFunction/manageOrders";
+						}
+						
+						/***************************3.查詢完成,準備轉交(Send the Success view)*****************/
+						model.addAttribute("ordersVO", ordersVO);
+						model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
+			
+						return "sFunction/manageOrders"; 
+					}
+				    
 	    
 	    
 	    

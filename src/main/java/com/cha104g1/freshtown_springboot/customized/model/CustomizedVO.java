@@ -148,11 +148,18 @@ public class CustomizedVO implements java.io.Serializable{
 				if (mealNo.equals(compositeKey.mealNo) && custedItemsNo.equals(compositeKey.custedItemsNo)) {
 					return true;
 				}
+//				toString();//不確定加在哪
 			}
 
 			return false;
 		}
 
+		@Override
+		public String toString() {
+			return "CompositeDetail [mealNo=" + mealNo + ", custedItemsNo=" + custedItemsNo + "]";
+		}
+		
+		
 	}
 
 }

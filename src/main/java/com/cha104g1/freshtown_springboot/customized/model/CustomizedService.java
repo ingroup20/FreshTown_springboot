@@ -12,14 +12,14 @@ import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 
 @Service("customizedService")
-public class CustomizedService implements CustomizedServiceIntf{
+public class CustomizedService implements CustomizedServiceIntf {
 
 	@Autowired
-	CustomizedRepository repository;	
+	CustomizedRepository repository;
 
 	@Autowired
-    private SessionFactory sessionFactory;
-	
+	private SessionFactory sessionFactory;
+
 	@Override
 	public CustomizedVO addCustomizedVO(CustomizedVO customizedVO) {
 		repository.save(customizedVO);
@@ -64,6 +64,13 @@ public class CustomizedService implements CustomizedServiceIntf{
 	public List<CustomizedVO> getCustomizedVOByCompositeQuery(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	// 中群
+	@Override
+	public List<CustomizedVO> getAll(Integer mealNo) {
+		List<CustomizedVO> list = repository.findByMealNo(mealNo);
+		return list;
 	}
 
 }

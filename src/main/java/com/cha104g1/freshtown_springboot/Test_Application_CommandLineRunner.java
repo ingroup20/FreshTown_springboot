@@ -1,34 +1,27 @@
 package com.cha104g1.freshtown_springboot;
 
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.cha104g1.freshtown_springboot.adao.CartService;
+import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
-import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
-import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialRepository;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
-import com.cha104g1.freshtown_springboot.platformemp.model.PlatformEmpRepository;
-
-import redis.clients.jedis.Jedis;
-
-
+import com.cha104g1.freshtown_springboot.meals.model.MealsService;
+import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailService;
+import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 
 @SpringBootApplication
 public class Test_Application_CommandLineRunner implements CommandLineRunner {
     //main方法，單獨測區塊功能
 	
-	
+
 //	@Autowired
 //	PlatformEmpRepository repository;
+
 	@Autowired
 	MaterialRepository repository;
 	@Autowired
@@ -36,6 +29,20 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 	
 	@Autowired
 	LikeStoreService likeStoreSvc;
+	
+	@Autowired
+	CartService cartSvc;
+	
+
+	@Autowired
+	OrderDetailService orderDetailSvc;
+	@Autowired
+	CustomerService customerSvc;
+	@Autowired
+	OrdersService ordersSvc;
+	@Autowired
+	MealsService mealsSvc;
+
 
 	public static void main(String[] args) {
         SpringApplication.run(Test_Application_CommandLineRunner.class);
@@ -45,7 +52,9 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
     public void run(String...args) throws Exception {
 
 
-    	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
+
+//    	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
+
 
 
 //    	
@@ -53,13 +62,15 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
     	
 //    	List<RefundsVO> list = repository.findAll();
 
-    	for (LikeStoreVO refunds : likeStoreList) {
-			System.out.print(refunds.getLikeUnlike() + ",");
-			System.out.print(refunds.getClass() + ",");
-			System.out.print(refunds.getCustomerVO() + ",");
-			System.out.print(refunds.getStoresVO() + ",");
+//
+//    	for (LikeStoreVO refunds : likeStoreList) {
+//			System.out.print(refunds.getLikeUnlike() + ",");
+//			System.out.print(refunds.getClass() + ",");
+//			System.out.print(refunds.getCustomerVO() + ",");
+//			System.out.print(refunds.getStoresVO() + ",");
+//
+//    	}
 
-    	}
     	
     	
 

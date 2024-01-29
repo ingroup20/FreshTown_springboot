@@ -31,21 +31,21 @@ public class OrderDetailVO implements java.io.Serializable{
 	//
 	@ManyToOne
 	@JoinColumn(name="mealNo",referencedColumnName="mealNo")
-	@NotEmpty(message="商品編號: 請勿空白")
+//	@NotEmpty(message="商品編號: 請勿空白")
 	private MealsVO mealsVO;
 	
 	@Column(name="mealQty")
-	@NotEmpty(message="商品數量: 請勿空白")
+//	@NotEmpty(message="商品數量: 請勿空白")
 	private Integer	mealQty;
 	
 	//
 	@ManyToOne
 	@JoinColumn(name="orderId", referencedColumnName="orderId")
-	@NotEmpty(message="訂單編號: 請勿空白")
+//	@NotEmpty(message="訂單編號: 請勿空白")
 	private OrdersVO ordersVO;
 	
 	@Column(name="priceBought")
-	@NotEmpty(message="購買價格: 請勿空白")
+//	@NotEmpty(message="購買價格: 請勿空白")
 	private Integer	priceBought;
 	
 	
