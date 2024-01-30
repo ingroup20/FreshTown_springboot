@@ -53,14 +53,14 @@
 				
 			<div>
 			<label>供應商編號:</label>
-			<input type="number" th:field="*{supId}" />
-			<span  th:if="${#fields.hasErrors('supId')}" th:errors="*{supId}" class="error" id="supId.errors"></span>
+			<input type="number" th:field="*{supVO.supId}" />
+			<span  th:if="${#fields.hasErrors('supVO.supId')}" th:errors="*{supVO.supId}" class="error" id="supVO.supId.errors"></span>
 			</div>
 			
 			<div>
 			<label>物料編號:</label>
-			<input type="number" th:field="*{purNo}" onclick="hideContent('purNo.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('purNo')}" th:errors="*{purNo}" class="error" id="purNo.errors"></span>
+			<input type="number" th:field="*{materialVO.itemNumber}" onclick="hideContent('materialVO.itemNumber.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('materialVO.itemNumber')}" th:errors="*{materialVO.itemNumber}" class="error" id="materialVO.itemNumber.errors"></span>
 			</div>
 			
 			<div>

@@ -34,7 +34,7 @@ public class SupOrderService {
 		return optional.orElseGet(null);
 	}
 	
-	public List<SupOrderVO> findSupOrderByCompositeQuery(Integer id, Integer supId, Integer purNo, Integer amount, Integer unitPrice, Date purDate, Date preDate, Integer oStatus, Date deliDate, String marks) {
+	public List<SupOrderVO> findSupOrderByCompositeQuery(Integer id, Integer supId, String purNo, Integer amount, Integer unitPrice, Date purDate, Date preDate, Integer oStatus, Date deliDate, String marks) {
         return repository.findSupOrderByCompositeQuery(id, supId, purNo, amount, unitPrice, purDate, preDate, oStatus, deliDate, marks);
 	}
 	

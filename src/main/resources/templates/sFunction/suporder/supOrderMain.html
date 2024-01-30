@@ -250,7 +250,7 @@
 						        <input type="number" name="supId" value=""><br>
 						           
 							    請輸入物料編號: 
-						        <input type="number" name="purNo" value=""><br>
+						        <input type="text" name="purNo" value=""><br>
 						        
 						        請輸入數量: 
 						        <input type="number" name="amount" value=""><br>
@@ -291,8 +291,8 @@
 						<th:block th:each="supOrderVO : ${supOrderListData}">
 							<tr>
 						<td th:text="${supOrderVOStat.count}"></td>
-						<td th:text="${supOrderVO.supId}"></td>
-						<td th:text="${supOrderVO.purNo}"></td>
+						<td th:text="${supOrderVO.supVO.supplierName}"></td>
+						<td th:text="${supOrderVO.materialVO.itemName}"></td>
 						<td th:text="${supOrderVO.amount}"></td>
 						<td th:text="${supOrderVO.unitPrice}"></td>
 						<td th:text="${supOrderVO.purDate}"></td>
