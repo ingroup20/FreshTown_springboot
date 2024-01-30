@@ -23,11 +23,18 @@ import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetail
 import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsVO;
+import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
+import com.cha104g1.freshtown_springboot.itemsclass.model.service.ItemsClassService;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreService;
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+import com.cha104g1.freshtown_springboot.picking.service.PickingService;
+import com.cha104g1.freshtown_springboot.service.model.model.ServiceVO;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpService;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
@@ -73,6 +80,15 @@ public class SEntrancePassController {
 	
 	@Autowired
 	CustomizedService customizedSvc;
+	
+	@Autowired
+	MaterialService materialSvc;
+
+	@Autowired
+	ItemsClassService itemsClassSvc;
+	
+	@Autowired
+	PickingService pickingSvc;
 
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
@@ -275,5 +291,60 @@ public class SEntrancePassController {
 		List<CustomizedVO> list = customizedSvc.getAll();
 		return list;
 	}
+	
+	//=========== material  要使用的資料 =================== 
+    @GetMapping("/material/select_page")
+	public String select_page5(Model model) {
+		return "sFunction/material/select_page";
+	}
+    
+    @GetMapping("/material/listAllMaterial")
+	public String listAllMaterial(Model model) {
+		return "sFunction/material/listAllMaterial";
+	}
+    
+	@ModelAttribute("materialListData") // for select_page.html 第135行用
+	protected List<MaterialVO> referenceListData_Material(Model model) {
+		//符合要什麼給什麼
+		model.addAttribute("itemsClassVO", new ItemsClassVO());
+		List<MaterialVO> list = materialSvc.getAll();
+		return list;
+	}
+	
+	//=========== picking  要使用的資料 =================== 
+    @GetMapping("/picking/select_page")
+	public String select_page6(Model model) {
+		return "sFunction/picking/select_page";
+	}
+    
+    @GetMapping("/picking/listAllPicking")
+	public String listAllPicking(Model model) {
+		return "sFunction/picking/listAllPicking";
+	}
+    
+	@ModelAttribute("pickingListData") // for select_page.html 第135行用
+	protected List<PickingVO> referenceListData_Picking(Model model) {
+		model.addAttribute("materialVO", new MaterialVO());
+		List<PickingVO> list = pickingSvc.getAll();
+		return list;
+	}
+	
+	//=========== itemsclass  要使用的資料 =================== 
+    @GetMapping("/itemsclass/select_page")
+	public String select_page7(Model model) {
+		return "sFunction/itemsclass/select_page";
+	}
+    
+    @GetMapping("/itemsclass/listAllItemsClass")
+	public String listAllItemsClass(Model model) {
+		return "sFunction/itemsclass/listAllItemsClass";
+	}
+    
+	@ModelAttribute("itemsClassListData") 
+	protected List<ItemsClassVO> referenceListData_ItemsClass(Model model) {
+		List<ItemsClassVO> list = itemsClassSvc.getAll();
+		return list;
+	}
+	
 
 }
