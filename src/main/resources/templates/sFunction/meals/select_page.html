@@ -38,13 +38,6 @@ xmlns:th="http://www.thymeleaf.org">
     <!-- Vendors CSS -->
     <link rel="stylesheet" th:href="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.css}" />
 
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script th:src="@{backhome/js/helpers.js}"></script>
-
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script th:src="@{backhome/js/config.js}"></script>
 </head>
 <body>
     <!-- Layout wrapper -->
@@ -53,12 +46,12 @@ xmlns:th="http://www.thymeleaf.org">
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a th:href="@{index}" class="app-brand-link">
-              <img class="img-fluid" width="160" src="/img/freshlogo1.png" alt="Icon">            
-            </a>
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-              <i class="bx bx-chevron-left bx-sm align-middle"></i>
-            </a>
+	            <a th:href="@{index}" class="app-brand-link">
+	              <img class="img-fluid" width="160" th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">            
+	            </a>
+	            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+	              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+	            </a>
           </div>
 
           <div class="menu-inner-shadow"></div>
@@ -76,90 +69,83 @@ xmlns:th="http://www.thymeleaf.org">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Inventory&Purchasing</span></li>
               
               <li class="menu-item"> 
-                <a href="#" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-store"></i>
-                    <div data-i18n="store">採購作業</div>
-                 </a>
-                 <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <i class="menu-icon"></i>
-                    <div data-i18n="store">管理採購單</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <i class="menu-icon"></i>
-                    <div data-i18n="client">採購入庫</div>
-                   </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <i class="menu-icon"></i>
-                    <div data-i18n="client">管理供應商</div>
-                   </a>
-                  </li>
+		                <a href="#" class="menu-link menu-toggle">
+		                   <i class="menu-icon tf-icons bx bx-store"></i>
+		                   <div data-i18n="store">採購作業</div>
+		                </a>
+                <ul class="menu-sub">
+                  	<li class="menu-item">
+	                    <a th:href="@{/sFunction/suporder/supOrderMain}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">管理採購單</div>
+	                    </a>
+                  	</li>
+                  	<li class="menu-item">
+	                    <a th:href="@{/sFunction/supplier/test}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="client">管理供應商</div>
+	                   </a>
+                  	</li>
                  </ul>
                </li>
 
                <li class="menu-item"> 
-                <a href="#" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-package"></i>
-                    <div data-i18n="store">庫存作業</div>
-                 </a>
-                 <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <i class="menu-icon"></i>
-                    <div data-i18n="store">管理物料</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <i class="menu-icon"></i>
-                    <div data-i18n="client">領取庫存</div>
-                   </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#" class="menu-link">
-                    <i class="menu-icon"></i>
-                    <div data-i18n="client">查詢庫存異動紀錄</div>
-                   </a>
-                  </li>
+	                <a href="#" class="menu-link menu-toggle">
+	                    <i class="menu-icon tf-icons bx bx-package"></i>
+	                    <div data-i18n="store">庫存作業</div>
+	                 </a>
+                <ul class="menu-sub">
+                   <li class="menu-item">
+	                  <a href="#" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">管理物料</div>
+	                  </a>
+                   </li>
+                   <li class="menu-item">
+	                    <a href="#" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="client">領取庫存</div>
+	                   </a>
+                   </li>
+                   <li class="menu-item">
+	                    <a href="#" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="client">查詢庫存異動紀錄</div>
+	                   </a>
+                   </li>
                  </ul>
                </li>
               <!-- Order-->
-               <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Order</span>
-              </li>
+               <li class="menu-header small text-uppercase"><span class="menu-header-text">Order</span></li>
+
+ <!--管理訂單        -->             
+				<li class="menu-item">
+					<a th:href="@{/sFunction/orders/select_page}" class="menu-link"> 
+					    <i class="menu-icon tf-icons bx bx-receipt"></i>
+							<div data-i18n="orders">管理訂單</div>
+<!-- 							<div data-i18n="store"> -->
+<!-- 								<form class="menu-link" method="post" th:action="manageOrders"> -->
+<!-- 									<input type="submit" value=" 管理訂單"> -->
+<!-- 								</form> -->
+<!-- 							</div> -->
+					      </a> 
+					   </li>
+                    <li class="menu-item">
+  					  <a href="#" class="menu-link" th:onclick="submitForm('orderOrders')">
+                        <i class="menu-icon tf-icons bx bx-sort-up"></i>
+                           <div data-i18n="store">顯示訂單排程</div>
+                      </a>
+                   </li>
+              
+                  
+             <!-- Meals-->
+              <li class="menu-header small text-uppercase"> <span class="menu-header-text">Meals</span></li>
               
               <li class="menu-item">
-  
-<!--管理訂單        -->
-				<a href="#" class="menu-link">
-                      <i class="menu-icon tf-icons bx bx-receipt"></i>
-                      <div data-i18n="store">
-                      	<form class="menu-link" method="post" th:action="manageOrders"> 
-                          <input type="submit" value=" 管理訂單"> 
-                        </form>
-                      </div>
-                  </a> 
-
-  
-  					<a href="#" class="menu-link" th:onclick="submitForm('orderOrders')">
-                    <i class="menu-icon tf-icons bx bx-sort-up"></i>
-                    <div data-i18n="store">顯示訂單排程</div>
-                 </a>
-              </li>
-             <!-- Meals-->
-              <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Meals</span>
-              </li>
-              <li class="menu-item">
-                <a th:href="@{/sFunction/meals/select_page}" class="menu-link" th:action="manageMeals">
-                <i class="menu-icon tf-icons bx bx-restaurant"></i>
-                <div data-i18n="Authentications">管理餐點</div>
-              </a>
+	                <a th:href="@{/sFunction/meals/select_page}" class="menu-link">
+	                <i class="menu-icon tf-icons bx bx-restaurant"></i>
+	                <div data-i18n="Authentications">管理餐點</div>
+	                </a>
               </li>
 
       
@@ -167,95 +153,93 @@ xmlns:th="http://www.thymeleaf.org">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
 
              <li class="menu-item">
-<a href="#" class="menu-link" th:onclick="submitForm('storeInfo')">                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
-                 <div data-i18n="store">店家資料管理</div>
-
-              </a>
-              
-<form class="menu-link" method="post" th:action="storeInfo"> 
-                          <input type="submit" value=" 店家資料管理"> 
-                        </form>
+                  <a href="#" class="menu-link" th:onclick="submitForm('storeInfo')">                 
+	                   <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+	                   <div data-i18n="store">店家資料管理</div>
+                 </a>
+<!--                         <form class="menu-link" method="post" th:action="storeInfo">  -->
+<!--                           <input type="submit" value=" 店家資料管理">  -->
+<!--                         </form> -->
              </li>
               <li class="menu-item">
-              <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-message-dots"></i>
-                <div data-i18n="Account Settings">查看評論</div>
-              </a>
+	              <a href="#" class="menu-link">
+	                <i class="menu-icon tf-icons bx bx-message-dots"></i>
+	                <div data-i18n="Account Settings">查看評論</div>
+	              </a>
               </li>
 
              <li class="menu-item">
-               <a href="#" class="menu-link">
-                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                 <div data-i18n="store">店家員工帳號管理</div>
-              </a>
+	               <a href="@{/sFunction/storeEmp/select_page}" class="menu-link">
+	                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
+	                 <div data-i18n="store">店家員工帳號管理</div>
+	              </a>
              </li>
              <li class="menu-item">
-              <a href="#" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-support"></i>
-              <div data-i18n="Support">諮詢線上客服</div>
-              </a>
+	              <a href="#" class="menu-link">
+	              <i class="menu-icon tf-icons bx bx-support"></i>
+	              <div data-i18n="Support">諮詢線上客服</div>
+	              </a>
              </li>
              <li class="menu-item">
-              <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-exit"></i>
-              <div data-i18n="Exit">登出</div>
-              </a>
+	              <a href="#" class="menu-link">
+	                <i class="menu-icon tf-icons bx bx-exit"></i>
+	              <div data-i18n="Exit">登出</div>
+	              </a>
               </li>
-            </li>
-          </ul>
         </aside>
+        
         <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
-          <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar"
-          >
+<!--          <nav -->
+<!--             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" -->
+<!--             id="layout-navbar" -->
+<!--           > -->
             <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
               <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                 <i class="bx bx-menu bx-sm"></i>
               </a>
             </div>
 
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+<!--             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse"> -->
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                  />
-                </div>
-              </div>
+<!--               <div class="navbar-nav align-items-center"> -->
+<!--                 <div class="nav-item d-flex align-items-center"> -->
+<!--                   <i class="bx bx-search fs-4 lh-0"></i> -->
+<!--                   <input -->
+<!--                     type="text" -->
+<!--                     class="form-control border-0 shadow-none" -->
+<!--                     placeholder="Search..." -->
+<!--                     aria-label="Search..." -->
+<!--                   /> -->
+<!--                 </div> -->
+<!--               </div> -->
               <!-- /Search -->
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
+<!--               <ul class="navbar-nav flex-row align-items-center ms-auto"> -->
                 <!-- User -->
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                      <img src="/img/user-profile.png" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                  </a>            
+<!--                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"> -->
+<!--                     <div class="avatar avatar-online"> -->
+<!--                        <img th:src="@{/backhome/img/user-profile.png}" class="w-px-40 h-auto rounded-circle" /> -->
+<!--                     </div> -->
+<!--                  </a>            -->
                 <!--/ User -->
-              </ul>
-            </div>
-          </nav>
+<!--               </ul> -->
+<!--             </div> -->
+<!--           </nav> -->
 
           <!-- / Navbar -->
+                 <!-- Content wrapper首頁${defaultPage}======================================================================================== -->
 
-          <!-- Content wrapper首頁${defaultPage}======================================================================================== -->
-
-          <div class="content-wrapper">
+          <div class="content-wrapper"> 
+<!--           th:if="${defaultPage} -->
                         <!-- Content -->
-              
 <!-- <div th:fragment="select_page-div"> -->
-<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+<nav>
+<!-- <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center"> -->
 		 <div align="center"> <h2>餐點資料管理 - select_page.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/}"><img th:src="@{/images/back1.gif}">回index.html</a></h3></div>
+<!-- 		 <h3><a class="navbar-brand" th:href="@{/}"><img th:src="@{/images/back1.gif}">回index.html</a></h3></div> -->
 </nav>
 
 	<h4><span>資料查詢:</span></h4>
@@ -320,7 +304,7 @@ xmlns:th="http://www.thymeleaf.org">
         輸入餐點分類: 
         <input type="text" name="mealTypeVO.mealTypeNo" value=""><br>
     
-<!--         選擇餐點分類:  -->
+<!--         選擇餐點分類: -->
 <!--   		<select th:field="*{mealTypeVO.mealTypeNo}"> -->
 <!-- 			<option value=""> -->
 <!-- 			<option th:each="mealTypeVO : ${mealTypeListData2}" th:value="${mealTypeVO.mealTypeNo}" th:text="${mealTypeVO.mealTypeName}" /> -->
@@ -356,32 +340,8 @@ xmlns:th="http://www.thymeleaf.org">
         <div th:insert="~{sFunction/meals/listOneMeals :: listOneMeals-div}"></div>
     </div>
 <!-- </div> -->
-     
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Tibame Cha104 Team1</a>
-                </div>
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-
-
-
-
-<!-- Content wrapper置換插入內容======================================================================================== -->
+          
+          <!-- Content wrapper置換插入內容======================================================================================== -->
 			<!--訂單管理 -->
            <div class="content-wrapper" th:if="${manageOrders}">
            		<div th:insert="~{/sFunction/orders/select_page :: select_page-div}">
@@ -394,7 +354,39 @@ xmlns:th="http://www.thymeleaf.org">
            <div class="content-wrapper" th:if="${storeInfo}">
            		<div th:insert="~{/sFunction/stores/select_page :: select_page-div}">
            </div>
-           
+          </div>
+       </div>
+
+   
+     
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+	                  ©
+	                  <script>
+	                    document.write(new Date().getFullYear());
+	                  </script>
+	                  , made with ❤️ by
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Tibame Cha104 Team1</a>
+                </div>
+              </div>
+            </footer>
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+         <!-- Overlay -->
+       <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+
+
+
            
            
            
@@ -415,33 +407,27 @@ xmlns:th="http://www.thymeleaf.org">
 
 
 
-
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-    
+    <!-- Helpers -->
+    <script th:src="@{/backhome/js/helpers.js}"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script th:src="@{/backhome/js/config.js}"></script>  
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="./libs/jquery/jquery.js"></script>
-    <script src="./libs/popper/popper.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="./js/menu.js"></script>
-
+    <script th:src="@{/backhome/libs/jquery/jquery.js}"></script>
+    <script th:src="@{/backhome/libs/popper/popper.js}"></script>
+    <script th:src="@{/backhome/js/bootstrap.js}"></script>
+    <script th:src="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+    <script th:src="@{/backhome/js/menu.js}"></script>
+ 	<!-- Vendors JS -->
+<!--     <script src="@{/backhome/libs/apex-charts/apexcharts.js}"></script> -->
     <!-- Main JS -->
-    <script src="./js/main.js"></script>
-
+    <script th:src="@{/backhome/js/main.js}"></script>
     <!-- Page JS -->
-
-    <script src=".js/form-basic-inputs.js"></script>
+    <script th:src="@{/backhome/js/form-basic-inputs.js}"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    
 
-<script th:inline="javascript"> 
+   <script th:inline="javascript"> 
     function submitForm(action) {
         var form = document.createElement('form');
         form.setAttribute('method', 'post');
