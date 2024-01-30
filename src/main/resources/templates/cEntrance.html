@@ -6,56 +6,45 @@
     <title>Search Homepage - 鮮城 FreshTown</title>
     <link rel="stylesheet" th:href="@{/css/cEntrance.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlHoUB7fxl9z1I7kF7dJ1lFqIiiPmM1I2j9c5n9d" crossorigin="anonymous">
+
 </head>
 <body class="body">
     <nav class="nav ">
         <div  class="nav ">
-        	<span><a th:href="@{/}"><img id="logo" th:src="@{/backhome/img/freshlogo.svg}"></a></span>
-            <span><a class="title logo" th:href="@{/}"></a></span>
+        	<span><a th:href="@{/}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
+            <span class="logo"><a class="title logo" th:href="@{/}">鮮城 FreshTown</a></span>
             <button class="phone-btn">行動版導覽按鈕</button>
             <ul class="nav">
-                <li class="nav_item "><a class="title" href="#!">餐點分類</a></li>
-                <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li>
-                <li class="nav_item ">
-                    <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">註冊專區</a>
+                <li class="nav_item li_item"><a class="title" th:href="@{/}">找店家</a></li>
+                <!-- <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li> -->
+                <li class="nav_item li_item">
+                    <a class="nav_link title " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">註冊專區</a>
                     <ul class="dropdown_menu ">
-                        <li><a class="dropdown_item title" href="#!">訂餐會員註冊</a></li>
+                        <li class="li_item "><form method="get"  th:action="@{addCustomer}"><button type="submit" >點餐會員註冊</button></form></li>
                         <li><hr class="dropdown_divider" /></li>
-                        <li><a class="dropdown_item title" th:href="@{addStoresC}">合作店家申請</a></li>
+                        <li class="li_item "><form method="get"  th:action="@{addStoreC}"><button type="submit" >合作店家申請</button></form></li>
                     </ul>
                 </li>
-                <li class="nav_item ">
-               	 <a th:href="@{/cFunction/cEntrancePass}" th:text="顧客會員登入" style="font-size:1.2rem"></a>
-				</li>
-            
-            	<li class="nav_item ">
-                	<a th:href="@{/index}"  th:text="index測試頁" style="font-size:1.3rem"></a>
-				</li>
-				<li class="nav_item ">
-                	<a th:href="@{/sFunction/sEntrancePass}"  th:text="店家後台入口" style="font-size:1.3rem"></a>
-				</li>
-				<li class="nav_item ">
-                	<a th:href="@{/pFunction/pEntrancePass}"  th:text="平台後台入口" style="font-size:1.3rem"></a>
-				</li>
-            
+                <li class="nav_item li_item">
+               	 </li>
             </ul>
                     
             <!--購物車-->
-            <form class="buy_car">
-                <button class="buy_car" type="submit">
-                    <img></img>
-                    Cart
-                    <!--購物車數量-->
-                    <span>0</span>
-                </button>
-            </form>
+            <div class="loginPart">
+            	<div class="custName"> 
+            		<a th:href="@{/cFunction/cEntrancePass}" th:text="顧客會員登入" >顧客會員登入</a>
+				</div>
+				<div class="cart">
+               		 <a th:href="@{/cFunction/cartPage}">購物車</a>
+                </div>
+            </div>
             <div class="nav_footer"></div>
 
         </div>
         
     </nav>
 
-    <header class="header" th:unless ="${getOneStoreMeal}">
+    <header class="header" th:unless ="${hasInsert}">
         <div class="header">
             <h1 class="header ">美食饗宴  盡在鮮城</h1>
             <p class="header">最公正的餐廳推薦平台，立即加入會員訂餐吧!</p>
@@ -64,41 +53,31 @@
   
     </header>
 
-    <section class="section" th:unless ="${getOneStoreMeal}">
+    <section class="section" th:unless ="${hasInsert}">
         <div class="section">
             <!-- 店家-->
             <th:block th:each="storesVO : ${storesListData}">
 	            <div class="section_item">
 	                <div class="card">
 	                    <!-- 圖片-->
-<!-- 	                    <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
-	                    <!-- 資訊-->
-	                    <div class="card_body">
-	                        <!--固定資訊-->
-	                        <div class="card_info">
-	                            <h3 th:text="${storesVO.storeName}">店家名稱</h3>
-								<!-- 評等-->
-		                            <div class="star_area">
-		                                  	<span class="star" data-star="1"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="2"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="3"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="4"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="5"><i class="fas fa-star"></i></span>
-		                            </div>
-		                        <p>評等:<span th:text="${storesVO.storeAddress}"></span>星</p>
-								<p th:text="${storesVO.storeAddress}">店家地址</p>
-	                        </div>
-	                        
-	                    </div>
-	
+                        <div class="card_img"><img th:src="@{./images/store.png}"></div>
+	                    <!-- <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
+                        <h4 th:text="${storesVO.storeName}">店家名稱</h4>
+                        <!-- 評等-->
+                        <p>評等:<span th:text="${storesVO.storeAddress}"></span>星</p>
+                        <p th:text="${storesVO.storeAddress}">店家地址</p>
+                        <div><span th:text="${storesVO.pushUp}">營業中</span>營業時間:<span th:text="${storesVO.openTime}"></span></div>
+                        <p >店休:<span th:text="${storesVO.restDay}"></span></p>
+
+                        <div class="card_footer title">
+                            <form id="entrance" method="get" th:action="@{getOneStoreMeal}" > 
+                                  <input id="entrance" type="submit" value="看菜單"> 
+                                 <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
+                             </form>		
+                        </div>
 	                </div>
 	                <!-- 控制項-->
-	                <div class="card_footer title">
-	                    <form id="entrance" method="get" th:action="@{getOneStoreMeal}" > 
-		 				     <input id="entrance" type="submit" value="看菜單"> 
-						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
-					     </form>		
-	                </div>
+
 	                
 	            </div>
            </th:block>
@@ -108,16 +87,23 @@
     <main class="main" th:if="${getOneStoreMeal}">
     	<div th:insert="~{/onceStorePage :: onceStorePage-div}" ></div>
     </main>
+    <main class="main" th:if="${addCustomer}">
+    	<div th:insert="~{/addCustomerPage :: addCustomerPage-div}" ></div>
+    </main>
+    <main class="main" th:if="${addStoreC}">
+    	<div th:insert="~{/addStoreCPage :: addStoreCPage-div}" ></div>
+    </main>
 
     <footer class="footer">
-        <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
+        <div><p class="footer">鮮城 &copy; Your Website 2024</p></div>
+        <a th:href="@{/sFunction/sEntrancePass}"  th:text="店家後台入口" >店家後台入口</a>                	
+        <a th:href="@{/pFunction/pEntrancePass}"  th:text="平台後台入口" >平台後台入口</a>
+        <a th:href="@{/index}"  th:text="index測試頁" >index測試頁</a>
     </footer>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
+	<script th:src="@{/js/allBase.js}"></script>
+	<script th:src="@{/js/mealMenu.js}"></script>
 	
-	</script>
-
 
 </body>
 </html>

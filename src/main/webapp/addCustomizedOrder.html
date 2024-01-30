@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="BIG5">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:fragment="addCustomizedOrder-div">
+	<form th:action="@{cartbuy}" method="post" th:object="${storesVO}" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td>商品:</td>
+			<td th:text="${mealsVO.mealName}"></td>
+		</tr>
+		<tr>
+			<td>單價:</td>
+			<td th:text="${mealsVO.mealPrice}"></td>
+		</tr>
+		<tr>
+			<td>數量:</td>
+			<td th:text="${oneTotalPrice}"></td>
+		</tr>
+		<tr>
+			<td>喜好</td>
+			<td>選項</td>
+		</tr>
+		
+<!-- 		<th:block th:each="customizedVO : ${customizedListData}"> -->
+<!-- 		<tr> -->
+<!-- 			<td th:text="${customizedVO.customizedItemsVO.custedDtlName}"></td> -->
+<!-- 			<td><select th:field="*{customizedVO.customizedItemsVO.customizedDetailVO.custedItemsNo}"> -->
+<!-- 				<option th:each="customizedDetailVO : ${customizedDetailData}" th:value="${customizedDetailVO.custedItemsNo}" th:text="${customizedDetailVO.custedDtlName}" /> -->
+<!-- 				</select> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 		</th:block>	 -->
+	</table>
+	<input type="submit" value="加入購物車">
+	</form>
+	</div>
+</body>
+</html>

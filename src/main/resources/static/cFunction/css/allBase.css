@@ -15,6 +15,10 @@ a{
     display: none;
 }
 
+form{
+	width:100%;
+	height:100%;
+}
 
 /* 區塊內布局=========================== */
 .-none{  display: none;}
@@ -95,7 +99,7 @@ ul.nav{
 li.nav_item{
     display: inline-block;
     margin: 0 5px;
-    width: 150px;
+    width: 120px;
 
 /*     border: 1px solid red; */
  	text-align:center;
@@ -105,6 +109,12 @@ li.nav_item{
 li.nav_item>a{
     display: inline-block;
     padding:10px ;
+}
+
+input.li_item {
+	width:100%;
+	height:100%;
+	font-size:1.3rem;
 }
 
 ul.dropdown_menu{
@@ -149,14 +159,49 @@ div.nav_footer{
     /* margin-top: 0px; */
 
 }
+div.loginPart{
+	display:inline-block;
+	position:absolute;
+	right:5px;
+	margin-top:10px;
+}
 
-form#logout{
+
+div.loginPart>p,span{
+	font-size:1.5rem;
+}
+div.loginPart>p{
+	display:inline;
+}
+
+div.loginPart>button#logout{
  display: inline-block;
- position: absolute;
- right: 250px;
- margin-top: 7px;
- z-index: 10;
- font-size:1.5rem;
+	margin-right:10px;
+	width:60px;
+ 
+}
+div.loginPart>button#logout>a{
+	font-size:1.5rem;
+	width:100%;
+	height:100%;
+}
+
+div.cart{
+	display: inline-block;
+    width: 100px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 0.3rem;
+    background-color: #d3d3d4;
+/*     background-image: linear-gradient(to bottom, rgb(248, 245, 245) 50%,rgb(195, 194, 194) 50% ); */
+    text-align: center;
+    font-size:1.5rem;
+}
+div.cart>a{
+	font-size:1.5rem;
+}
+.cardfont{
+	font-size:1.5rem;
 }
 
 /*=========== header ======================*/
@@ -182,6 +227,87 @@ p.header{
 
 
 /*===============section=============*/
+section.section,section.section_oneStore {
+    /* border: 1px solid red; */
+    min-height: 700px;
+   
+}
+
+div.section{
+    width: calc(100% - 100px);
+    /* border: 1px solid blue; */
+    margin: 20px auto;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.section_item{
+    width: calc((100% - 90px)/4);
+    /* border: 2px solid orange; */
+    height: 350px;
+    margin: 10px 30px 10px 0;
+    border-radius: 2rem;
+}
+
+
+div.section_item:nth-child(4n){
+    margin-right:0 ;
+}
+
+div.card{
+    border: 2px solid orange;
+    height: 100%;
+    /* position: relative; */
+    /* margin: 3px; */
+    border-radius: 1rem ;
+    overflow:hidden;
+    box-shadow:  
+         2px 2px 5px 0px orange, /* 右下方向 */
+        -2px -2px 5px 0px orange, /* 左上方向 */
+        2px -2px 5px 0px orange, /* 右上方向 */
+        -2px 2px 5px 0px orange; /* 左下方向 */;
+}
+
+div.card_img{
+    height: 200px;
+    /* border: 1px solid black; */
+    overflow:hidden;
+}
+
+div.card_img>img{
+    /* height:100%; */
+    width:100%;
+}
+
+div.card>*{
+    margin:1px 0;
+}
+
+div.card_footer{
+    width: 100%;
+    text-align: center;
+    /* border: 1px  solid black; */
+}
+
+
+ form#entrance{
+    display: inline-block;
+    background-color: lightseagreen;
+    width: 100%;
+    height: 40px;
+    /* border-radius: 0.8rem; */
+}
+input#entrance{
+    background-color: lightseagreen;
+    font-size: 1.6rem;
+    color: aliceblue;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+/*======*/
+
 section.section{
     border: 1px solid red;
     min-height: 700px;
@@ -198,35 +324,17 @@ div.section{
     flex-wrap: wrap;
 }
 
-div.section_item{
-    width: calc((100% - 90px)/4);
-    border: 2px solid orange;
-    height: 300px;
-    margin: 10px 30px 10px 0;
-    border-radius: 2rem;
-}
-
-
 div.section_item:nth-child(4n){
     margin-right:0 ;
 }
 
-div.card{
-    border: 2px solid orange;
-    height: 250px;
-    position: relative;
-    margin: 3px;
-    border-radius: 1.5rem 1.5rem 0 0;
-    overflow:hidden;
-}
 
 img.card_img_top{
     max-width: 100%;
 }
 
 div.card_info{
-    position: absolute;
-    bottom: 0;
+/*     position: absolute; */
 /*     border: 1px  solid black; */
     width: 100%;
     overflow: hidden;
@@ -256,16 +364,16 @@ div.card_footer{
 
     /* border: 1px  solid black; */
 }
-a#entrance{
-	vertical-align:middle;
-	background-color: var(--m-color);
-    padding: 5px 50px;
-    height: 35px;
-    border-radius: 0.8rem;
-    font-size:1.6rem;
+/* a#entrance{ */
+/* 	vertical-align:middle; */
+/* 	background-color: var(--m-color); */
+/*     padding: 5px 50px; */
+/*     height: 35px; */
+/*     border-radius: 0.8rem; */
+/*     font-size:1.6rem; */
     
 	
-}
+/* } */
     
 /* ===== 重要性的星號 ===== */
 

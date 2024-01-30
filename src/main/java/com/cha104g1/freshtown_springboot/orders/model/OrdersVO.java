@@ -45,13 +45,13 @@ public class OrdersVO implements java.io.Serializable{
 	private Integer orderId;
 	
 	@Column(name="orderState")
-	@NotNull(message="訂餐狀態: 請勿空白")
+//	@NotNull(message="訂餐狀態: 請勿空白")
 	@Min(value=0, message = "訂餐狀態: 只能是數字(0未成立 1新訂單待確認 2製作中 3已出餐待取 4結單 5 取消訂單)")
 	@Max(value=5, message = "訂餐狀態: 只能是數字(0未成立 1新訂單待確認 2製作中 3已出餐待取 4結單 5 取消訂單)")
 	private Integer orderState;
 	
 	@Column(name="orderTime")
-	@NotNull(message="下單(預約)時間: 請勿空白")
+//	@NotNull(message="下單(預約)時間: 請勿空白")
 //	@Future(message="日期必須是在今日(不含)之後")
 //	@Past(message="日期必須是在今日(含)之前")
 //	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
@@ -80,17 +80,17 @@ public class OrdersVO implements java.io.Serializable{
 	//
 	@ManyToOne
 	@JoinColumn(name="customerId", referencedColumnName="customerId")
-	@NotNull(message="會員流水號: 請勿空白")
+//	@NotNull(message="會員流水號: 請勿空白")
 	private CustomerVO customerVO;
 
 	@Column(name="totalPrice")
-	@NotNull(message="總金額: 請勿空白")
+//	@NotNull(message="總金額: 請勿空白")
 	private Integer totalPrice;
 	
 	//
 	@ManyToOne
 	@JoinColumn(name="storeId", referencedColumnName="storeId")
-	@NotNull(message="店家流水號: 請勿空白")
+//	@NotNull(message="店家流水號: 請勿空白")
 	private StoresVO storesVO;
 	
 	@Column(name="delayDesc")
@@ -119,26 +119,26 @@ public class OrdersVO implements java.io.Serializable{
 	private Timestamp remitDate;
 	
 	@Column(name="remitState")
-	@NotEmpty(message="匯款狀態: 請勿空白")
+//	@NotEmpty(message="匯款狀態: 請勿空白")
 	@Pattern(regexp = "^[(NY)]$", message = "匯款狀態: 只能是英文字母 (N:未匯款 Y:已匯款)")
 	private String remitState;
 	
 	@Column(name="payDate")
-	@NotNull(message="線上付款時間: 請勿空白")
+//	@NotNull(message="線上付款時間: 請勿空白")
 //	@Future(message="日期必須是在今日(不含)之後")
 //	@Past(message="日期必須是在今日(含)之前")
 //	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	private Date payDate;
 	
 	@Column(name="payMethod")
-	@NotEmpty(message="付款方式: 請勿空白")
-	@Pattern(regexp = "^[(1)]$", message = "付款方式: 只能是數字 (1:刷卡 )")
-	private String payMethod;
+//	@NotEmpty(message="付款方式: 請勿空白")
+//	@Pattern(regexp = "^[(1)]$", message = "付款方式: 只能是數字 (1:刷卡 )")
+	private Integer payMethod;
 	
 	@Column(name="payState")
-	@NotEmpty(message="付款狀態: 請勿空白")
-	@Pattern(regexp = "^[(012)]$", message = "付款狀態: 只能是數字(0未付款 1已付款 2退款)  ")
-	private String payState;
+//	@NotEmpty(message="付款狀態: 請勿空白")
+//	@Pattern(regexp = "^[(012)]$", message = "付款狀態: 只能是數字(0未付款 1已付款 2退款)  ")
+	private Integer payState;
 	
 //	@Transient
 //	private String OrderStateName;
@@ -248,16 +248,16 @@ public class OrdersVO implements java.io.Serializable{
 	public void setPayDate(Date payDate) {
 		this.payDate = payDate;
 	}
-	public String getPayMethod() {
+	public Integer getPayMethod() {
 		return payMethod;
 	}
-	public void setPayMethod(String payMethod) {
+	public void setPayMethod(Integer payMethod) {
 		this.payMethod = payMethod;
 	}
-	public String getPayState() {
+	public Integer getPayState() {
 		return payState;
 	}
-	public void setPayState(String payState) {
+	public void setPayState(Integer payState) {
 		this.payState = payState;
 	}
 	
