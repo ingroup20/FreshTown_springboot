@@ -32,7 +32,7 @@ import com.cha104g1.freshtown_springboot.service.model.model.ChatMessage;
 
 @Controller
 @Validated
-@ServerEndpoint("/sFunction/service/${userAccount}")
+@ServerEndpoint("/sFunction/service")
 public class ServiceWSController {
 	private static Map<String, Session> sessionsMap = new ConcurrentHashMap<>();
 	
