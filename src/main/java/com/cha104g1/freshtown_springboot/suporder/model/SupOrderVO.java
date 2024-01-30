@@ -11,7 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
 @Entity
 @Table(name="sup_order")
@@ -21,8 +23,14 @@ public class SupOrderVO implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer supId;
-	private Integer purNo;
+	
+	@ManyToOne
+	@JoinColumn(name="supId",referencedColumnName ="supId")
+	private SupVO supVO;
+	
+	@ManyToOne
+	@JoinColumn(name="purNo",referencedColumnName ="itemNumber")
+	private MaterialVO materialVO;
 	private Integer amount;
 	private Integer unitPrice;
 	private Date purDate;
@@ -33,13 +41,25 @@ public class SupOrderVO implements java.io.Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="storeId",referencedColumnName ="storeId")
-    private StoresVO storeId;
+    private StoresVO storesVO;
 	
 	public StoresVO getStoresVO() {
-		return storeId;
+		return storesVO;
 	}
-	public void setStoresVO(StoresVO storeId) {
-		this.storeId = storeId;
+	public void setStoresVO(StoresVO storesVO) {
+		this.storesVO = storesVO;
+	}
+	public MaterialVO getMaterialVO() {
+		return materialVO;
+	}
+	public void setMaterialVO(MaterialVO materialVO) {
+		this.materialVO = materialVO;
+	}
+	public SupVO getSupVO() {
+		return supVO;
+	}
+	public void setSupVO(SupVO supVO) {
+		this.supVO = supVO;
 	}
 	public Integer getId() {
 		return id;
@@ -47,18 +67,18 @@ public class SupOrderVO implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getSupId() {
-		return supId;
-	}
-	public void setSupId(Integer supId) {
-		this.supId = supId;
-	}
-	public Integer getPurNo() {
-		return purNo;
-	}
-	public void setPurNo(Integer purNo) {
-		this.purNo = purNo;
-	}
+//	public Integer getSupId() {
+//		return supId;
+//	}
+//	public void setSupId(Integer supId) {
+//		this.supId = supId;
+//	}
+//	public Integer getPurNo() {
+//		return purNo;
+//	}
+//	public void setPurNo(Integer purNo) {
+//		this.purNo = purNo;
+//	}
 	public Integer getAmount() {
 		return amount;
 	}

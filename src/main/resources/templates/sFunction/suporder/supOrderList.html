@@ -229,11 +229,11 @@
 			<div class="layout-page">
 				<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 					
-				<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-	              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-	                <i class="bx bx-menu bx-sm"></i>
-	              </a>
-	            </div>
+					<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+		              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+		                <i class="bx bx-menu bx-sm"></i>
+		              </a>
+		            </div>
 					<h2>採購單查詢</h2>
 					<a class="navbar-brand" th:href="@{/sFunction/sEntrancePass}">回首頁</a>
 				</nav>
@@ -250,7 +250,7 @@
 						        <input type="number" name="supId" value=""><br>
 						           
 							    請輸入物料編號: 
-						        <input type="number" name="purNo" value=""><br>
+						        <input type="text" name="purNo" value=""><br>
 						        
 						        請輸入數量: 
 						        <input type="number" name="amount" value=""><br>
@@ -291,8 +291,8 @@
 						<th:block th:each="supOrderVO : ${supOrderListData}">
 							<tr>
 						<td th:text="${supOrderVOStat.count}"></td>
-						<td th:text="${supOrderVO.supId}"></td>
-						<td th:text="${supOrderVO.purNo}"></td>
+						<td th:text="${supOrderVO.supVO.supplierName}"></td>
+						<td th:text="${supOrderVO.materialVO.itemName}"></td>
 						<td th:text="${supOrderVO.amount}"></td>
 						<td th:text="${supOrderVO.unitPrice}"></td>
 						<td th:text="${supOrderVO.purDate}"></td>
