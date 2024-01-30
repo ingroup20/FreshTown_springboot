@@ -45,6 +45,7 @@ public class MaterialVO implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="itemClassId", referencedColumnName = "itemClassId")
+	@NotNull(message="物料分類編號: 請勿空白")
 	private ItemsClassVO itemsClassVO;
 	
 	@Column(name = "stockQuantity")

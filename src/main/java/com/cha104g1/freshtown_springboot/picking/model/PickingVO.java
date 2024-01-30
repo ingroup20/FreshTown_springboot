@@ -85,8 +85,8 @@ public class PickingVO implements Serializable{
 	}
 	@Column(name="pickingClass")
 	@NotNull(message="領料類型: 請勿空白")
-	@Min(value=0, message = "領料類型: 只能是數字(0:一般領料 1:報廢 )  DEFAULT 0")
-	@Max(value=1, message = "領料類型: 只能是數字(0:一般領料 1:報廢 )  DEFAULT 0")
+	@Min(value=0, message = "領料類型: 只能是數字(0:一般領料 1:報廢 )")
+	@Max(value=1, message = "領料類型: 只能是數字(0:一般領料 1:報廢 )")
 	public Integer getPickingClass() {
 		return pickingClass;
 	}
