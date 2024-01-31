@@ -1,9 +1,12 @@
 package com.cha104g1.freshtown_springboot.orders.controller;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,7 +34,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 @Validated
 @RequestMapping("/sFunction/manageOrders")
 public class SOrdersController {
-
+	
 	@Autowired
 	OrdersService ordersSvc;
 
@@ -111,5 +114,41 @@ public class SOrdersController {
 //	public String listAllOrders(Model model) {
 //		return "sFunction/orders/listAllOrders";
 //	}
+	
+	//===================================================
+//	 @GetMapping("/orderOrders")
+//		public String orderOrders( ModelMap model) {
+//			ServerSocket sc = null;
+//			int count = 0;
+//			
+//			System.out.println("TcpServerM listening port 8888.......");
+//			try {
+//				sc = new ServerSocket(8888); // 在8888埠建立ServerSocket, 並等待客戶端的連結
+//			} catch (IOException ioe) {
+//				System.err.println("Could not listen on port: 1024.");
+//				return "-1";
+//			}	
+//			
+//			try {
+//				while (true) {//雖然是無窮迴圈創thread，但有accept方法會發生wait，等有client連進來時，才繼續執行
+//					 // 連線start()
+//					new ConnSocketThread(sc.accept(),++count).start();
+//
+//					
+//					
+//				}
+//			} catch (IOException ioe) {
+//				System.err.println("Exception" + ioe);
+//			}
+//			sc.close();
+//			
+//	
+//		 return "1";
+//	 }
+	
+	
+	
+	
+	
 	
 }
