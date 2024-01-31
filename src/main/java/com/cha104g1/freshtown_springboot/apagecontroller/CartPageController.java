@@ -1,5 +1,6 @@
 package com.cha104g1.freshtown_springboot.apagecontroller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.adao.CartService;
+import com.cha104g1.freshtown_springboot.adao.OrderSocketService;
 import com.cha104g1.freshtown_springboot.amodel.CartDetailVO;
 import com.cha104g1.freshtown_springboot.amodel.CartVO;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
@@ -36,6 +38,8 @@ public class CartPageController {
 	CartService cartSvc;
 	@Autowired
 	OrdersService ordersSvc;
+	@Autowired
+	OrderSocketService orderSocketSvc;
 	
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
@@ -76,7 +80,7 @@ public class CartPageController {
 		return "redirect: /freshtown_springboot/cFunction/cartPage";
 	}
 	
-	@PostMapping("payOrder")
+	@PostMapping("payingOrder")
 	public String payOrder(String totalPrice,String storeId,Model model) {	
 		String customerId = String.valueOf(model.getAttribute("customerId"));
 		Integer newOrderId=cartSvc.addSQL(customerId,storeId);
@@ -92,6 +96,10 @@ public class CartPageController {
 		OrdersVO ordersVO= (OrdersVO)model.getAttribute("ordersVO");
 		ordersVO.setPayState(1);
 		ordersSvc.updateOrders(ordersVO);
+		
+		//==order socket通知
+		orderSocketSvc.customerSideConn(String.valueOf(ordersVO.getOrderId()));
+		System.out.println("有執行socket");
 		return "cFunction/cEntrancePass";
 	}
 	

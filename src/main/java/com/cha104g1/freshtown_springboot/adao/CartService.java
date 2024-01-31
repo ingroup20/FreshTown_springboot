@@ -60,6 +60,7 @@ public class CartService {
 	CustomizedDetailService customizedDetailSvc;
 	@Autowired
 	CustomizedItemsService CustomizedItemsSvc;
+
 	
 
 //	public String findLastCartNo(Integer customerId) {
@@ -234,9 +235,9 @@ public class CartService {
 		//檢查jedis存在的cart(無論有無都向後+物件)
 		if(jedis.hexists(cartKey,"mealNo")) {
 			jedis.del(cartKey);
-			System.out.println("刪除成功");
-		}else
 			System.out.println("刪除失敗");
+		}else
+			System.out.println("刪除成功");
 
 		jedis.close();
 		return "1";

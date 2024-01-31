@@ -9,11 +9,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.springframework.stereotype.Service;
+
 import com.cha104g1.freshtown_springboot.orders.model.dao.ConnSocketThread;
 
+@Service("OrderSocketService")
 public class OrderSocketService {
-	Socket socket;
-	int port;
+	
+	
 
 	
 	
@@ -35,40 +38,46 @@ public class OrderSocketService {
         return localhost;
     }
 	
-	public void storeSide() {
+	
+	public void customerSideConn(String orderId) {
+		Socket socket;
+		int port;
 		String data;
 		InetAddress storeAddr = null; //代表ip的類別InetAddress
-		BufferedReader orderId = null; //System.in鍵盤輸入事件->放入orderId
-		BufferedReader orderId_in;
-		PrintWriter orderId_out;
+
+		
+//		try {            
+//            storeAddr = InetAddress.getByName("34.80.58.5");// 將IP地址轉換為InetAddress對象
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 		
 		if(whoStore()!=null)
 			storeAddr =whoStore(); 
 		else
 			System.out.println("Server位址錯誤或未知...");
 
+		
+		
 		try {
 			port = 8888;//因為是parseInt方法沒有強制要處理例外，故可不用處理
 			socket = new Socket(storeAddr, port);//此建構子就會根據傳入的ip，port去找serverSocket建立連線(真正連線的地方)
-			orderId_in = new BufferedReader(new InputStreamReader(socket.getInputStream()));//socket是低階資料流
-			orderId_out = new PrintWriter(socket.getOutputStream());
-			while (true) {
-				System.out.println("保持連線中");
-				data = orderId.readLine();//socket寫入語法
-				orderId_out.println(data);//socket寫入語法
-				orderId_out.flush();//socket
-				if (data.equals("payDone"))
-					break;
-				System.out.println("");
-			}
+			BufferedReader orderId_in = new BufferedReader(new InputStreamReader(socket.getInputStream()));//socket是低階資料流
+			PrintWriter orderId_out = new PrintWriter(socket.getOutputStream());
+			
+			System.out.println("保持連線中");
+			orderId_out.println(orderId);//socket寫入語法
+			orderId_out.flush();//socket
+			System.out.println("訂單號執行送出");
 			socket.close();
+					
 		} catch (IOException ioe) {
 			System.out.println("無法連接主機...");
 		}
 	}
 	
 	
-	public void customerSide() throws IOException {
+	public void storeSideConn() throws IOException {
 		ServerSocket sc = null;
 		int count = 0;
 
