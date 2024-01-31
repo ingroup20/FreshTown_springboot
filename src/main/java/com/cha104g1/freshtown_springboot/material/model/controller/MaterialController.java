@@ -69,22 +69,6 @@ public class MaterialController {
 		return "redirect:sFunction/material/listAllMaterial"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
-//	@GetMapping("listAllMaterial")
-//    public String listAllMaterial(Model model) {
-//        List<PickingVO> pickingList = pickingSvc.getAll();// fetch or create your list of objects
-//        model.addAttribute("pickingList", pickingList);
-//        return "sFunction/material/addMaterial";
-//    }
-	
-//    @PostMapping("/updateValue")
-//    @ResponseBody
-//    public String updateValue(@RequestParam String pickingNo, @RequestParam String newValue, Model model) {
-//        // Perform the update logic here, e.g., update the value in the database
-//    	PickingVO pickingVO = pickingSvc.getOnePicking(Integer.valueOf(pickingNo));
-//    	model.addAttribute("pickingVO", pickingVO);
-//        return "Success"; // Return a response indicating success or failure
-//    }
-
 
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("itemNumber") String itemNumber, ModelMap model) {
@@ -175,14 +159,6 @@ public class MaterialController {
 		return list;
 	}
 	
-//	//picking
-//	@PostMapping("picking")
-//	public String picking(Integer itemNumber,HttpServletRequest req, Model model) {
-//		MaterialVO materialVO = materialSvc.getOneMaterial(itemNumber);
-////		Integer quantity =materialVO.getStockQuantity();
-//		model.addAttribute("materialVO",materialVO);
-//		return "sFunction/material/addpacking";
-//	}
 	
 	
 	
