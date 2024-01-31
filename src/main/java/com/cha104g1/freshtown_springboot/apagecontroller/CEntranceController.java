@@ -209,7 +209,7 @@ public class CEntranceController {
 			return "pFunction/customer/addCustomer";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
-		customerSvc.addCustomerVO(customerVO);
+		customerSvc.addCustomer(customerVO);
 		/*************************** 3.新增完成,準備轉交(Send the Success view) **************/
 		List<CustomerVO> list = customerSvc.getAll();
 		model.addAttribute("customerListData", list);
