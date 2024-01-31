@@ -22,7 +22,7 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 	}
 	
 	@Override
-	public StoreEmpVO addStoreEmpVO(StoreEmpVO storeEmpVO) {
+	public StoreEmpVO addStoreEmp(StoreEmpVO storeEmpVO) {
 		repository.save(storeEmpVO);
 		return storeEmpVO;
 	}
@@ -34,8 +34,8 @@ public class StoreEmpService implements StoreEmpServiceIntf{
 	}
     
 	@Override
-	public StoreEmpVO getStoreEmpVOById(Integer id) {
-		Optional<StoreEmpVO> optional = repository.findById(id);
+	public StoreEmpVO getStoreEmpVOById(Integer sEmpId) {
+		Optional<StoreEmpVO> optional = repository.findById(sEmpId);
 		return optional.orElse(null);
 	}
     

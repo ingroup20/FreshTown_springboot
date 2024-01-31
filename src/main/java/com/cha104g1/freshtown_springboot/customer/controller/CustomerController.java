@@ -49,12 +49,12 @@ public class CustomerController {
 			return "pFunction/customer/addCustomer";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
-		customerSvc.addCustomerVO(customerVO);
+		customerSvc.addCustomer(customerVO);
 		/*************************** 3.新增完成,準備轉交(Send the Success view) **************/
 		List<CustomerVO> list = customerSvc.getAll();
 		model.addAttribute("customerListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:pFunction/customer/listAllCustomer"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "pFunction/customer/listAllCustomer"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 
 	

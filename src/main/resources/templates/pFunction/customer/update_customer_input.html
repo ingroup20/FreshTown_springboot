@@ -56,35 +56,36 @@
 		<form th:action="@{update}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
 			
 			<div>
-			<!--pk --><input type="text" th:field="*{customerId}" style="border:0px ; font-weight: bold;"  />
+			<!--pk -->
 			<label>會員編號:</label>
-			<input type="text" th:field="*{customerId}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<input type="number" th:field="*{customerId}" onclick="hideContent('customerId.errors');" readonly /><br/>
+			<span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="error" id="customerId.errors"></span>
 			</div>
 			
 			<div>
 			<label>會員暱稱:</label>
-			<input type="text" th:field="*{customerNic}"  style="border:0px ; font-weight: bold;"  /><br/>
+			<input type="text" th:field="*{customerNic}"  onclick="hideContent('customerNic.errors');" readonly /><br/>
 			<span th:if="${#fields.hasErrors('customerNic')}" th:errors="*{customerNic}" class="error" id="customerNic.errors"></span>
 			</div>
 			
 			<div>
             <label>會員密碼:</label>
-            <input type="password" th:field="*{customerPw}" style="border:0px ; font-weight: bold;" /><br/>
+            <input type="password" th:field="*{customerPw}" onclick="hideContent('customerPw.errors');" readonly /><br/>
             <span th:if="${#fields.hasErrors('customerPw')}" th:errors="*{customerPw}" class="error" id="customerPw.errors"></span>
             </div>
 			
 			<div>
 			<label>手機號碼:</label>
-			<input type="text" th:field="*{customerMob}" style="border:0px ; font-weight: bold;"  /><br/>
+			<input type="text" th:field="*{customerMob}" onclick="hideContent('customerMob.errors');" readonly /><br/>
 			<span th:if="${#fields.hasErrors('customerMob')}" th:errors="*{customerMob}" class="error" id="customerMob.errors"></span>
 			</div>
 			
 			<div>
             <label>手機認證:</label>
             <select th:field="*{mobChecked}">
-				<option  th:value="0" th:text="N" ></option>
-				<option  th:value="1" th:text="Y" ></option>
-			</select>
+            <option th:value="'N'" th:text="N"></option>
+            <option th:value="'Y'" th:text="Y"></option>
+            </select>
             <span th:if="${#fields.hasErrors('mobChecked')}" th:errors="*{mobChecked}" class="error" id="mobChecked.errors"></span>
             </div>
 			
@@ -96,7 +97,7 @@
 			
 			<div>
 			<label>會員地址:</label>
-			<input type="text" th:field="*{customerAddress}" style="border:0px ; font-weight: bold;" /><br/>
+			<input type="text" th:field="*{customerAddress}" style="border:0px ; font-weight: bold;" readonly/><br/>
 			<span th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}" class="error" id="customerAddress.errors"></span>
 			</div>
 			

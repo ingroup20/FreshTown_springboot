@@ -33,7 +33,7 @@ public class StoreEmpVO {
 	    private Byte orderPerm;
 	    private Byte modifyPerm;
 	
-	    private StoresVO storesVO;
+	    private StoresVO storeId;
 
 	    private String sEmpDeptno;
 	    private String sEmpTitle;
@@ -128,11 +128,11 @@ public class StoreEmpVO {
 		@ManyToOne
 		@JoinColumn(name="storeId",referencedColumnName ="storeId")
 		public StoresVO getStoresVO() {
-			return storesVO;
+			return storeId;
 		}
 		//
-		public void setStoresVO(StoresVO storesVO) {
-			this.storesVO = storesVO;
+		public void setStoresVO(StoresVO storeId) {
+			this.storeId = storeId;
 		}
 	    
 		//領料表
