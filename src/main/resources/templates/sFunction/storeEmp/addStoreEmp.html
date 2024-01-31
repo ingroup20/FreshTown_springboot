@@ -53,23 +53,23 @@
 
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{/insert}" method="post" th:object="${storeEmpVO}" enctype="multipart/form-data">
+		<form th:action="@{insert}" method="post" th:object="${storeEmpVO}" enctype="multipart/form-data">
 			
 			<div>
-			<!--pk --><input type="text" th:field="*{sEmpId}" style="border:0px ; font-weight: bold;" readonly />
+			<!--pk -->
 			<label>員工編號:</label>
-			<input type="text" th:field="*{sEmpId}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<input type="number" th:field="*{sEmpId}" onclick="hideContent('sEmpId.errors');" /><br/>
 			</div>
 			
 			<div>
 			<label>員工姓名:</label>
-			<input type="text" th:field="*{sEmpName}"  onclick="hideContent('sEmpPerm.errors');" readonly /><br/>
+			<input type="text" th:field="*{sEmpName}"  onclick="hideContent('sEmpName.errors');" /><br/>
 			<span th:if="${#fields.hasErrors('sEmpName')}" th:errors="*{sEmpName}" class="error" id="sEmpName.errors"></span>
 			</div>
 						
 			<div>
             <label>員工密碼:</label>
-            <input type="password" th:field="*{sEmpPw}" style="border:0px ; font-weight: bold;" readonly /><br/>
+            <input type="password" th:field="*{sEmpPw}" onclick="hideContent('sEmpPw.errors');" /><br/>
             <span th:if="${#fields.hasErrors('sEmpPw')}" th:errors="*{sEmpPw}" class="error" id="sEmpPw.errors"></span>
             </div>
 			
@@ -120,20 +120,20 @@
 			</div>
 			
 			<div>
-			<!--pk --><input type="text" th:field="*{storesVO}" style="border:0px ; font-weight: bold;" readonly />
 			<label>店家編號:</label>
-			<input type="text" th:field="*{storesVO}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<input type="text" th:field="*{StoresVO.storeId}" onclick="hideContent('storeId.errors');"  /><br/>
+			<span th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
 			</div>
 			
 			<div>
 			<label>員工部門:</label>
-			<input type="text" th:field="*{sEmpDeptno}" onclick="hideContent('sEmpDeptno.errors');" readonly /><br/>
+			<input type="text" th:field="*{sEmpDeptno}" onclick="hideContent('sEmpDeptno.errors');" /><br/>
 			<span th:if="${#fields.hasErrors('sEmpDeptno')}" th:errors="*{sEmpDeptno}" class="error" id="sEmpDeptno.errors"></span>
 			</div>
 			
 			<div>
 			<label>員工職稱:</label>
-			<input type="text" th:field="*{sEmpTitle}" onclick="hideContent('sEmpTitle.errors');" readonly /><br/>
+			<input type="text" th:field="*{sEmpTitle}" onclick="hideContent('sEmpTitle.errors');" /><br/>
 			<span th:if="${#fields.hasErrors('sEmpTitle')}" th:errors="*{sEmpTitle}" class="error" id="sEmpTitle.errors"></span>
 			</div>
 			

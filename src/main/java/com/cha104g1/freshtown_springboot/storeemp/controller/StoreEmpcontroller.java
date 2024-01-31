@@ -48,12 +48,12 @@ public class StoreEmpcontroller {
 			return "sFunction/storeEmp/addStoreEmp";
 		}
 		/*************************** 2.開始新增資料 *****************************************/
-		storeEmpSvc.addStoreEmpVO(storeEmpVO);
+		storeEmpSvc.addStoreEmp(storeEmpVO);
 		/*************************** 3.新增完成,準備轉交(Send the Success view) **************/
 		List<StoreEmpVO> list = storeEmpSvc.getAll();
 		model.addAttribute("storeEmpListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:sFunction/storeEmp/listAllStoreEmp"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "sFunction/storeEmp/listAllStoreEmp"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 
 	

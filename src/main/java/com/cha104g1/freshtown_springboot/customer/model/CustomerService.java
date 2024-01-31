@@ -20,7 +20,7 @@ public class CustomerService {
 	}
 	
 	
-	public CustomerVO addCustomerVO(CustomerVO customerVO) {
+	public CustomerVO addCustomer(CustomerVO customerVO) {
 		repository.save(customerVO);
 		return customerVO;
 	}
@@ -29,12 +29,6 @@ public class CustomerService {
 	public CustomerVO updateCustomerVO(CustomerVO customerVO) {
 	    repository.save(customerVO);
 	    return customerVO;
-	}
-    
-
-	public CustomerVO getByCustomerId(Integer customerId) {
-		Optional<CustomerVO> optional = repository.findById(customerId);
-		return optional.orElse(null);
 	}
     
 

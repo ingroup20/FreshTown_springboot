@@ -5,14 +5,15 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
 
 public interface PlatformEmpServiceIntf {
 
-	PlatformEmpVO addPlatformEmpVO(PlatformEmpVO platformEmpVO);
+	PlatformEmpVO addPlatformEmp(PlatformEmpVO platformEmpVO);
 
 	PlatformEmpVO updatePlatformEmpVO(PlatformEmpVO platformEmpVO);
 
-	PlatformEmpVO getPlatformEmpVOById(Integer id);
+	PlatformEmpVO getOnePlatformEmp(Integer pEmpId);
 
 	List<PlatformEmpVO> getAllPlatformEmpVO(int currentPage);
 

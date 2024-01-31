@@ -281,7 +281,7 @@ public class CartService {
 	            Timestamp timestamp = Timestamp.valueOf(now);
        	ordersVO.setOrderTime(timestamp);
        		//下單顧客資料
-       	    CustomerVO customerVO = customerSvc.getByCustomerId(Integer.valueOf(customerId));
+       	    CustomerVO customerVO = customerSvc.getOneCustomer(Integer.valueOf(customerId));
        	ordersVO.setCustomerVO(customerVO);
        	ordersVO.setTotalPrice(getTotalPrice(customerId));
        			//商品的店家資料  	

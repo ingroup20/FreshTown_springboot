@@ -5,11 +5,13 @@ import java.util.Map;
 
 public interface CustomerServiceIntf {
 	
-	CustomerVO addCustomerVO(CustomerVO customerVO);
+	CustomerVO addCustomer(CustomerVO customerVO);
 
 	CustomerVO updateCustomerVO(CustomerVO customerVO);
 
 	CustomerVO getByCustomerId(Integer customerId);
+	
+	CustomerVO getOneCustomer(Integer customerId);
 
 	List<CustomerVO> getAllCustomerVO(int currentPage);
 

@@ -16,7 +16,7 @@ import com.cha104g1.freshtown_springboot.service.model.model.ServiceVO;
 
 @Entity
 @Table(name = "p_emp")
-public class PlatformEmpVO {
+public class PlatformEmpVO implements java.io.Serializable {
 	
 	
 	private Integer pEmpId;
