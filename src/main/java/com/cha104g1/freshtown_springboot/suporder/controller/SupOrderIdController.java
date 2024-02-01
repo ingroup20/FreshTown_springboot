@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,10 @@ public class SupOrderIdController {
 	MaterialService materialSvc;
 
 	@GetMapping("addSupOrder")
-	public String addSupOrder(ModelMap model) {
+	public String addSupOrder(HttpServletRequest req, ModelMap model) {
+		HttpSession session = req.getSession();
+		Object storeEmpLogin = session.getAttribute("storeEmpLogin");
+		model.addAttribute("storeEmpLogin", storeEmpLogin);
 		SupOrderVO suporderVO = new SupOrderVO();
 		model.addAttribute("supOrderVO", suporderVO);
 		return "sFunction/suporder/supOrderAdd";
@@ -44,10 +49,13 @@ public class SupOrderIdController {
 
 
 	 @PostMapping("/insert")
-	    public String insert(@Valid SupOrderVO suporderVO, BindingResult result, ModelMap model) {
+	    public String insert(@Valid SupOrderVO suporderVO, BindingResult result, ModelMap model, HttpServletRequest req) {
 	        if (result.hasErrors()) {
 	            return "sFunction/suporder/supOrderAdd";
 	        }
+	        HttpSession session = req.getSession();
+	        Object storeEmpLogin = session.getAttribute("storeEmpLogin");
+	        model.addAttribute("storeEmpLogin", storeEmpLogin);
 	        suporderSvc.addSupOrder(suporderVO);
 	        List<SupOrderVO> list = suporderSvc.getAll();
 	        model.addAttribute("supOrderListData", list);
