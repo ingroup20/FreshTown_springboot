@@ -69,6 +69,12 @@
 			</div>
 			
 			<div>
+			<label>會員帳號:</label>
+			<input type="text" th:field="*{customerAccount}" style="border:0px ; font-weight: bold;" readonly/><br/>
+			<span th:if="${#fields.hasErrors('customerAccount')}" th:errors="*{customerAccount}" class="error" id="customerAccount.errors"></span>
+			</div>
+			
+			<div>
             <label>會員密碼:</label>
             <input type="password" th:field="*{customerPw}" onclick="hideContent('customerPw.errors');" readonly /><br/>
             <span th:if="${#fields.hasErrors('customerPw')}" th:errors="*{customerPw}" class="error" id="customerPw.errors"></span>
@@ -95,11 +101,6 @@
 			<span th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" class="error" id="customerEmail.errors"></span>
 			</div>
 			
-			<div>
-			<label>會員地址:</label>
-			<input type="text" th:field="*{customerAddress}" style="border:0px ; font-weight: bold;" readonly/><br/>
-			<span th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}" class="error" id="customerAddress.errors"></span>
-			</div>
 			
 			<div>
 			<label>會員狀態:</label>

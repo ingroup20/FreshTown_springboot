@@ -71,7 +71,7 @@ CREATE TABLE customer (
     mobChecked CHAR(1) NOT NULL CHECK (mobChecked IN ('N', 'Y')),
     customerEmail VARCHAR(31) NOT NULL,
     customerNic VARCHAR(15) NOT NULL,
-    customerAddress VARCHAR(127) NOT NULL,
+    customerAccount VARCHAR(127) NOT NULL,
     customerState TINYINT NOT NULL CHECK (customerState IN (0, 1, 2))
 );
 

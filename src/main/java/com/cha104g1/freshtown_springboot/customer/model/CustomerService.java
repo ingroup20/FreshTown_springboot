@@ -42,8 +42,8 @@ public class CustomerService {
 	}
 	
 	//取得SQL身分帳密(中群)
-	public CustomerVO getByCustomerAddress(String customerAddress) {
-		CustomerVO  customerLogin =repository.findByCustomerAddress(customerAddress);
+	public CustomerVO getByCustomerAccount(String customerAccount) {
+		CustomerVO  customerLogin =repository.findByCustomerAccount(customerAccount);
 		return customerLogin; 
 	}
 
