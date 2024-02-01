@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
+
 
 
 @Service("supOrderService")
@@ -44,5 +46,17 @@ public class SupOrderService {
 
 	public List<SupOrderVO> getAll(Map<String, String[]> map) {
 		return HibernateUtil_CompositeQuery_SupOrder.getAllC(map,sessionFactory.openSession());
+	}
+	
+	public MaterialVO getMaterial(Integer purNo) {
+		return repository.findMaterial(purNo);
+	}
+	
+	public MaterialVO getStock(Integer purNo) {
+		return repository.findStock(purNo);
+	}
+	
+	public MaterialVO getQuantity(Integer purNo) {
+		return repository.findQuantity(purNo);
 	}
 }

@@ -156,90 +156,136 @@
 									class="menu-icon"></i>
 									<div data-i18n="client">管理供應商</div>
 							</a></li>
-						</ul></li>
+					</ul></li>
 
-					<li class="menu-item"><a href="#"
-						class="menu-link menu-toggle"> <i
-							class="menu-icon tf-icons bx bx-package"></i>
-							<div data-i18n="store">庫存作業</div>
-					</a>
-						<ul class="menu-sub">
-							<li class="menu-item"><a href="#" class="menu-link"> <i
-									class="menu-icon"></i>
-									<div data-i18n="store">管理物料</div>
-							</a></li>
-							<li class="menu-item"><a href="#" class="menu-link"> <i
-									class="menu-icon"></i>
-									<div data-i18n="client">領取庫存</div>
-							</a></li>
-							<li class="menu-item"><a href="#" class="menu-link"> <i
-									class="menu-icon"></i>
-									<div data-i18n="client">查詢庫存異動紀錄</div>
-							</a></li>
-						</ul></li>
-					<!-- Order-->
-					<li class="menu-header small text-uppercase"><span
-						class="menu-header-text">Order</span></li>
-
-					<li class="menu-item"><a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-receipt"></i>
-							<div data-i18n="store">管理訂單</div>
-					</a> <a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-sort-up"></i>
-							<div data-i18n="store">顯示訂單排程</div>
-					</a></li>
-					<!-- Meals-->
-					<li class="menu-header small text-uppercase"><span
-						class="menu-header-text">Meals</span></li>
-					<li class="menu-item"><a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-restaurant"></i>
-							<div data-i18n="Authentications">管理餐點</div>
-					</a></li>
-
-
-					<!-- Store -->
-					<li class="menu-header small text-uppercase"><span
-						class="menu-header-text">Store</span></li>
-
-					<li class="menu-item"><a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-spreadsheet"></i>
-							<div data-i18n="store">店家資料管理</div>
-					</a></li>
-					<li class="menu-item"><a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-message-dots"></i>
-							<div data-i18n="Account Settings">查看評論</div>
-					</a></li>
-
-					<li class="menu-item"><a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-dock-top"></i>
-							<div data-i18n="store">店家員工帳號管理</div>
-					</a></li>
-					<li class="menu-item"><a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-support"></i>
-							<div data-i18n="Support">諮詢線上客服</div>
-					</a></li>
-					<li class="menu-item"><a href="#" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-exit"></i>
-							<div data-i18n="Exit">登出</div>
-					</a></li>
-					</li>
-				</ul>
-			</aside>
+					<li class="menu-item"> 
+		                <a href="#" class="menu-link menu-toggle">
+		                    <i class="menu-icon tf-icons bx bx-package"></i>
+		                    <div data-i18n="store">庫存作業</div>
+		                 </a>
+	                <ul class="menu-sub">
+	                   <li class="menu-item">
+		                  <a th:href="@{/sFunction/material/listAllMaterial}" class="menu-link">
+		                    <i class="menu-icon"></i>
+		                    <div data-i18n="store">管理物料</div>
+		                  </a>
+	                   </li>
+	                     <li class="menu-item">
+		                  <a th:href="@{/sFunction/material/select_page}" class="menu-link">
+		                    <i class="menu-icon"></i>
+		                    <div data-i18n="store">查詢物料</div>
+		                  </a>
+	                   </li>
+	                    <li class="menu-item">
+		                    <a th:href="@{/sFunction/itemsclass/listAllItemsClass}" class="menu-link">
+		                    <i class="menu-icon"></i>
+		                    <div data-i18n="store">管理物料分類</div>
+		                   </a>
+	                   </li>
+	                   <li class="menu-item">
+		                    <a th:href="@{/sFunction/picking/listAllPicking}" class="menu-link">
+		                    <i class="menu-icon"></i>
+		                    <div data-i18n="store">領料申請</div>
+		                   </a>
+	                   </li>
+	                     <li class="menu-item">
+		                    <a th:href="@{/sFunction/picking/select_page}" class="menu-link">
+		                    <i class="menu-icon"></i>
+		                    <div data-i18n="store">查詢領料表</div>
+		                   </a>
+	                   </li>
+	<!--                    <li class="menu-item"> -->
+	<!-- 	                    <a href="#" class="menu-link"> -->
+	<!-- 	                    <i class="menu-icon"></i> -->
+	<!-- 	                    <div data-i18n="client">查詢庫存異動紀錄</div> -->
+	<!-- 	                   </a> -->
+	<!--                    </li> -->
+	                 </ul>
+	               </li>
+	              <!-- Order-->
+	               <li class="menu-header small text-uppercase"><span class="menu-header-text">Order</span></li>
+	
+	 <!--管理訂單        -->             
+					<li class="menu-item">
+						<a th:href="@{/sFunction/orders/select_page}" class="menu-link"> 
+						    <i class="menu-icon tf-icons bx bx-receipt"></i>
+								<div data-i18n="orders">管理訂單</div>
+	<!-- 							<div data-i18n="store"> -->
+	<!-- 								<form class="menu-link" method="post" th:action="manageOrders"> -->
+	<!-- 									<input type="submit" value=" 管理訂單"> -->
+	<!-- 								</form> -->
+	<!-- 							</div> -->
+						      </a> 
+						   </li>
+	                    <li class="menu-item">
+	  					  <a href="#" class="menu-link" th:onclick="submitForm('orderOrders')">
+	                        <i class="menu-icon tf-icons bx bx-sort-up"></i>
+	                           <div data-i18n="store">顯示訂單排程</div>
+	                      </a>
+	                   </li>
+	              
+	                  
+	             <!-- Meals-->
+	              <li class="menu-header small text-uppercase"> <span class="menu-header-text">Meals</span></li>
+	              
+	              <li class="menu-item">
+		                <a th:href="@{/sFunction/meals/select_page}" class="menu-link">
+		                <i class="menu-icon tf-icons bx bx-restaurant"></i>
+		                <div data-i18n="Authentications">管理餐點</div>
+		                </a>
+	              </li>
+	
+	      
+	            <!-- Store -->
+	            <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
+	
+	             <li class="menu-item">
+	                  <a href="#" class="menu-link" th:onclick="submitForm('storeInfo')">                 
+		                   <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+		                   <div data-i18n="store">店家資料管理</div>
+	                 </a>
+	<!--                         <form class="menu-link" method="post" th:action="storeInfo">  -->
+	<!--                           <input type="submit" value=" 店家資料管理">  -->
+	<!--                         </form> -->
+	             </li>
+	              <li class="menu-item">
+		              <a href="#" class="menu-link">
+		                <i class="menu-icon tf-icons bx bx-message-dots"></i>
+		                <div data-i18n="Account Settings">查看評論</div>
+		              </a>
+	              </li>
+	
+	             <li class="menu-item">
+		               <a href="@{/sFunction/storeEmp/select_page}" class="menu-link">
+		                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
+		                 <div data-i18n="store">店家員工帳號管理</div>
+		              </a>
+	             </li>
+	             <li class="menu-item">
+		              <a href="#" class="menu-link">
+		              <i class="menu-icon tf-icons bx bx-support"></i>
+		              <div data-i18n="Support">諮詢線上客服</div>
+		              </a>
+	             </li>
+	             <li class="menu-item">
+		              <a href="#" class="menu-link">
+		                <i class="menu-icon tf-icons bx bx-exit"></i>
+		              <div data-i18n="Exit">登出</div>
+		              </a>
+	              </li>
+	        </aside>
 			<!-- / Menu -->
 			<div class="layout-page">
-				<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-					
 					<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
 		              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
 		                <i class="bx bx-menu bx-sm"></i>
 		              </a>
 		            </div>
-					<h2>採購單查詢</h2>
-					<a class="navbar-brand" th:href="@{/sFunction/sEntrancePass}">回首頁</a>
-				</nav>
-				
 				<div class="content-wrapper">
 				<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span class="text-muted fw-light">店家後台首頁 /</span>採購單管理
+						</h4>
 					<div class="row">
 						<form method="post" th:action="@{listSupOrder_ByCompositeQuery}" class="horizontal-form">
 				             <div class="form-row">
@@ -286,38 +332,60 @@
 				        </form>
 				        
 				        <a href="addSupOrder">新增採購單</a>
-				        <table class="table table-striped table-hover shadow-sm">
-			            <thead class="thead-inverse">
-						<th:block th:each="supOrderVO : ${supOrderListData}">
-							<tr>
-						<td th:text="${supOrderVOStat.count}"></td>
-						<td th:text="${supOrderVO.supVO.supplierName}"></td>
-						<td th:text="${supOrderVO.materialVO.itemName}"></td>
-						<td th:text="${supOrderVO.amount}"></td>
-						<td th:text="${supOrderVO.unitPrice}"></td>
-						<td th:text="${supOrderVO.purDate}"></td>
-						<td th:text="${supOrderVO.preDate}"></td>
-						<td>
-			                <span th:if="${supOrderVO.oStatus == 1}">審核中</span>
-			                <span th:if="${supOrderVO.oStatus == 2}">已確認訂單並與供應商接洽</span>
-			                <span th:if="${supOrderVO.oStatus == 3}">貨品檢驗</span>
-			                <span th:if="${supOrderVO.oStatus == 4}">審核未通過</span>
-			                <span th:if="${supOrderVO.oStatus == 5}">驗收未通過</span>
-			                <span th:if="${supOrderVO.oStatus == 6}">作廢</span>
-			                <span th:if="${supOrderVO.oStatus == 7}">結單</span>
-			                
-			            </td>
-						<td th:text="${supOrderVO.deliDate}"></td>
-						<td th:text="${supOrderVO.marks}"></td>
-					<td>
-					  <form method="post" th:action="@{/sFunction/suporder/getOne_For_Update}" style="margin-bottom: 0px;">
-					     <input type="submit" value="修改">
-					     <input type="hidden" name="id" th:value="${supOrderVO.id}"></form>
-					</td>
-					</tr>
-						</th:block>
-						</thead>
-					</table>
+				        <div class="card">
+							<!--                               <h5 class="card-header">Material Basic</h5> -->
+							<div class="table-responsive text-nowrap py-1">
+								<table class="table" id="center">
+									<thead>
+										<tr>
+											<th>計數</th>
+											<th>供應商名稱</th>
+											<th>物品名稱</th>
+											<th>數量</th>
+											<th>單價</th>
+											<th>採購日期</th>
+											<th>預計交期</th>
+											<th>採購狀態</th>
+											<th>到貨日期</th>
+											<th>備註</th>
+
+										</tr>
+									</thead>
+									<tbody class="table-border-bottom-0">
+										<th:block th:each="supOrderVO : ${supOrderListData}">
+											<tr>
+												<td th:text="${supOrderVOStat.count}"></td>
+												<td th:text="${supOrderVO.supVO.supplierName}"></td>
+												<td th:text="${supOrderVO.materialVO.itemName}"></td>
+												<td th:text="${supOrderVO.amount}"></td>
+												<td th:text="${supOrderVO.unitPrice}"></td>
+												<td th:text="${supOrderVO.purDate}"></td>
+												<td th:text="${supOrderVO.purDate}"></td>
+												<td>
+									                <span th:if="${supOrderVO.oStatus == 1}">審核中</span>
+									                <span th:if="${supOrderVO.oStatus == 2}">已確認訂單並與供應商接洽</span>
+									                <span th:if="${supOrderVO.oStatus == 3}">貨品檢驗</span>
+									                <span th:if="${supOrderVO.oStatus == 4}">審核未通過</span>
+									                <span th:if="${supOrderVO.oStatus == 5}">驗收未通過</span>
+									                <span th:if="${supOrderVO.oStatus == 6}">作廢</span>
+									                <span th:if="${supOrderVO.oStatus == 7}">結單</span>
+									                
+									            </td>
+												<td th:text="${supOrderVO.deliDate}"></td>
+												<td th:text="${supOrderVO.marks}"></td>
+												<td>
+												  <th:block th:if="${supOrderVO.oStatus != 6 and supOrderVO.oStatus != 7}">
+												  <form method="post" th:action="@{/sFunction/suporder/getOne_For_Update}" style="margin-bottom: 0px;">
+												     <input type="submit" value="修改">
+												     <input type="hidden" name="id" th:value="${supOrderVO.id}"></form>
+												  </th:block>
+												</td>
+											</tr>
+										</th:block>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
