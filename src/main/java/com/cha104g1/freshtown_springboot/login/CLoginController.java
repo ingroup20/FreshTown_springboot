@@ -27,13 +27,14 @@ public class CLoginController {
 
 	//儲存登入帳號
 	CustomerVO customerLogin;
-
-		
+	
+	
+			
 	//驗證身分，C顧客
 	  protected boolean allowUserC(String account, String password) {
 		  if(account!=null && !account.equals("")) {
-			  customerLogin = customerSvc.getByCustomerAddress(account);
-			  if ( customerLogin != null && account.equals(customerLogin.getCustomerAddress()) && password.equals(customerLogin.getCustomerPw())  )
+			  customerLogin = customerSvc.getByCustomerAccount(account);
+			  if ( customerLogin != null && account.equals(customerLogin.getCustomerAccount()) && password.equals(customerLogin.getCustomerPw())  )
 				  return true;
 		  }
 		  System.out.println("帳密錯誤，或不存在");

@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>會員資料新增 - addEmp.html</title>
 
-<head ></head>
+
 <style type="text/css">
 	
 	button {
@@ -46,56 +46,62 @@
 </head>
 <body>
 
-<main th:fragment="addCustomerPage-div">
-<h1>會員註冊</h1>
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>會員註冊 - addCustomer.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/loginC}"><img th:src="@{/images/back1.gif}">回上一頁</a></h3></div>
+</nav>
+
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{/insert}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
+		<form th:action="@{insertC}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
 			
 			<div>
-			<!--pk --><th:field="*{customerId}">
+			<!--pk -->
 			<label>會員編號:</label>
-			<input type="text" th:field="*{customerId}" style="border:0px ; font-weight: bold;" readonly /><br/>
+			<input type="number" th:field="*{customerId}" onclick="hideContent('customerId.errors');"/><br/>
+			<span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="error" id="customerId.errors"></span>
 			</div>
 			
 			<div>
 			<label>會員暱稱:</label>
-			<input type="text" th:field="*{customerNic}"  style="border:0px ; font-weight: bold;"  /><br/>
+			<input type="text" th:field="*{customerNic}"  onclick="hideContent('customerNic.errors');"  /><br/>
 			<span th:if="${#fields.hasErrors('customerNic')}" th:errors="*{customerNic}" class="error" id="customerNic.errors"></span>
 			</div>
 			
 			<div>
+			<label>會員帳號:</label>
+			<input type="text" th:field="*{customerAccount}" onclick="hideContent('customerAccount.errors');" /><br/>
+			<span th:if="${#fields.hasErrors('customerAccount')}" th:errors="*{customerAccount}" class="error" id="customerAccount.errors"></span>
+			</div>
+			
+			<div>
             <label>會員密碼:</label>
-            <input type="password" th:field="*{customerPw}" style="border:0px ; font-weight: bold;" /><br/>
+            <input type="password" th:field="*{customerPw}" onclick="hideContent('customerPw.errors');" /><br/>
             <span th:if="${#fields.hasErrors('customerPw')}" th:errors="*{customerPw}" class="error" id="customerPw.errors"></span>
             </div>
 			
 			<div>
 			<label>手機號碼:</label>
-			<input type="text" th:field="*{customerMob}" style="border:0px ; font-weight: bold;"  /><br/>
+			<input type="number" th:field="*{customerMob}" onclick="hideContent('customerMob.errors');"  /><br/>
 			<span th:if="${#fields.hasErrors('customerMob')}" th:errors="*{customerMob}" class="error" id="customerMob.errors"></span>
 			</div>
 			
 			<div>
             <label>手機認證:</label>
             <select th:field="*{mobChecked}">
-				<option  th:value="0" th:text="N" ></option>
-				<option  th:value="1" th:text="Y" ></option>
-			</select>
+            <option th:value="'N'" th:text="N"></option>
+            <option th:value="'Y'" th:text="Y"></option>
+            </select>
             <span th:if="${#fields.hasErrors('mobChecked')}" th:errors="*{mobChecked}" class="error" id="mobChecked.errors"></span>
             </div>
 			
 			<div>
 			<label>會員信箱:</label>
-			<input type="text" th:field="*{customerEmail}" style="border:0px ; font-weight: bold;" /><br/>
+			<input type="text" th:field="*{customerEmail}" onclick="hideContent('customerEmail.errors');" /><br/>
 			<span th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" class="error" id="customerEmail.errors"></span>
 			</div>
 			
-			<div>
-			<label>會員地址:</label>
-			<input type="text" th:field="*{customerAddress}" style="border:0px ; font-weight: bold;" /><br/>
-			<span th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}" class="error" id="customerAddress.errors"></span>
-			</div>
+			
 			
 			<div>
 			<label>會員狀態:</label>
@@ -106,14 +112,20 @@
 			</select>
 			<span th:if="${#fields.hasErrors('customerState')}" th:errors="*{customerState}" class="error" id="customerState.errors"></span>
 			</div>
+			
+			
+			
+			</div>
+			
 			<div>
 				<div></div>
 				<div><button type="submit" id="submit"> 送出新增 </button></div>
 				<div></div>
 			</div>		
 		</form>
+	
 	</div>
-</main>
+
 
 <!-- JavaScript part -->
 <script type="text/javascript">
