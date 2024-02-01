@@ -216,45 +216,6 @@ public class CEntranceController {
 		model.addAttribute("success", "- (新增成功)");
 		return "cFunction/cEntrancePass"; 
 		}
-    
-    
-//	@GetMapping("cFunction/storeMenu/custMealDetail")
-//    public String loginOrder(@RequestParam("mealNo") String mealNo,
-//			@RequestParam("storeId") String storeId, 
-//			String quantity,
-//			ModelMap model) {
-//    	/***************************1.接收請求↑ ************************/	
-//		/***************************2.查詢*********************************************/
-//		List<CustomizedVO> customizedListData = customizedSvc.getAll(Integer.valueOf(mealNo));
-//		MealsVO mealsVO = mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealNo));
-//		StoresVO storesVO =storesSvc.getOneStores(Integer.valueOf(storeId));
-//		
-//		if(customizedListData != null) {
-//			Map<String,List<CustomizedDetailVO>> customizedDetailData =new HashMap<>();
-//			for(CustomizedVO customizedVO: customizedListData) {
-//				CustomizedItemsVO customizedItemsVO=customizedItemsSvc.getCustomizedItemsVOByCustedItemsNo(customizedVO.getCustedItemsNo());
-//				List<CustomizedDetailVO> list=customizedDetailSvc.getAllByCustedItemsNo(customizedItemsVO.getCustedItemsNo());
-//				
-//				customizedDetailData.put(customizedItemsVO.getCustedName(), list) ;
-//			}
-//			model.addAttribute("storeName", storesVO.getStoreName());
-//			model.addAttribute("storeAddress", storesVO.getStoreAddress());
-//			model.addAttribute("storePhone", storesVO.getStorePhone());
-//			model.addAttribute("customizedListData",customizedListData);
-//			model.addAttribute("mealsVO",mealsVO);
-//			model.addAttribute("qty",quantity);
-//			model.addAttribute("customizedDetailData",customizedDetailData);
-//			/***************************3.顯示*****************/
-//			return "cFunction/cart/custMealDetail"; 
-//		}else {
-//	
-////			無客制，直接加入購物車
-//			model.addAttribute("success","ture");//成功加入購物車
-////			redirectAttributes.addAttribute("store",storesVO.getStoreId() );
-//			return "redirect:/cFunction/storeMenu?storeId=" + storesVO.getStoreId();   
-//		}
-//    
-//    }
-    	
+       	
 	
 }

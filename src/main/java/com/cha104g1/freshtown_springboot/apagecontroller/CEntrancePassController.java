@@ -209,29 +209,35 @@ public class CEntrancePassController {
 		@GetMapping("storeMenu")
 		public String getOneStoreMeal(@RequestParam("storeId") String storeId,ModelMap model) {
 			/***************************1.接收請求↑ ************************/
-			/***************************2.查詢*********************************************/
-			StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
-			List<MealsVO> menuListS = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
-			//計算平均評分 
-			double scoreAvg = storesVO.getTotalScore()/storesVO.getScorePeople();
-			scoreAvg=(int)(scoreAvg*10)/10;
-				   
-			model.addAttribute("menuListS", menuListS);
-			model.addAttribute("storeVO", storesVO);
-			model.addAttribute("storeId", storesVO.getStoreId());
-			model.addAttribute("storeName", storesVO.getStoreName());
-			model.addAttribute("storeAddress", storesVO.getStoreAddress());
-			model.addAttribute("storePhone", storesVO.getStorePhone());
-			model.addAttribute("openTime", storesVO.getOpenTime());	
-			model.addAttribute("scoreAvg", scoreAvg);		
-			model.addAttribute("menuListS", menuListS);
-			
-			if (storesVO == null) {
-				model.addAttribute("errorMessage", "無此店家");
-				return "cFunction/cEntrancePass";
-			}	
-			/***************************3.顯示*****************/	
+			System.out.println("來過這");
+			if(model.getAttribute("storeId")!=null) {
+				String re_storeId= (String)model.getAttribute("storeId");
+				System.out.println("有storeId="+storeId);
+				return "redirect:/cFunction/storeMenu?storeId=" + re_storeId; 	
+			}else {
+				StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
+				List<MealsVO> menuListS = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
+				//計算平均評分 
+				double scoreAvg = storesVO.getTotalScore()/storesVO.getScorePeople();
+				scoreAvg=(int)(scoreAvg*10)/10;
+					   
+				model.addAttribute("menuListS", menuListS);
+				model.addAttribute("storeVO", storesVO);
+				model.addAttribute("storeId", storesVO.getStoreId());
+				model.addAttribute("storeName", storesVO.getStoreName());
+				model.addAttribute("storeAddress", storesVO.getStoreAddress());
+				model.addAttribute("storePhone", storesVO.getStorePhone());
+				model.addAttribute("openTime", storesVO.getOpenTime());	
+				model.addAttribute("scoreAvg", scoreAvg);		
+				model.addAttribute("menuListS", menuListS);
+				
+				if (storesVO == null) {
+					model.addAttribute("errorMessage", "無此店家");
+					return "cFunction/cEntrancePass";
+				}		
 			return "cFunction/storeMenu"; 	
+			}
+			
 		}
 	    
 	

@@ -87,19 +87,7 @@ public class StoreMenuController {
 	}
 	 model.addAttribute("customerId", customerVO.getCustomerId());
 	 model.addAttribute("customerVO", customerVO);
-   }
-   
-//	//登出
-//    @GetMapping("/logout")
-//    public String logout(HttpServletRequest req ,Model model) {
-//    	// 獲取 HttpSession，防止在會話不存在時創建新的會話。如果您確定會話一定存在，可以使用 getSession()。
-//        HttpSession session = req.getSession(false);
-//        if (session != null && session.getAttribute("customerLogin") != null) {
-//            session.removeAttribute("customerLogin");
-//        }
-//    	return "cEntrance"; //view
-//    }
-    
+   } 
   
   //喜好調整
     @GetMapping("/custMealDetail")
@@ -122,6 +110,7 @@ public class StoreMenuController {
 				
 				customizedDetailData.put(customizedItemsVO.getCustedName(), list) ;
 			}
+			model.addAttribute("storeId", storesVO.getStoreId());
 			model.addAttribute("storeName", storesVO.getStoreName());
 			model.addAttribute("storeAddress", storesVO.getStoreAddress());
 			model.addAttribute("storePhone", storesVO.getStorePhone());
@@ -147,13 +136,13 @@ public class StoreMenuController {
 			return customizedDetailSvc.getAll();
 		}
 
-		 @GetMapping("/")
-		 public String backStoreMenu(Model model) {
-			 String storeId= (String)model.getAttribute("storeId");
-			 System.out.println("storeId="+storeId);
-			 return  "redirect:/cFunction/storeMenu?storeId=" + storeId; 
-			    
-		 }
+//		 @GetMapping("")
+//		 public String backStoreMenu(Model model) {
+//			 String storeId= (String)model.getAttribute("storeId");
+//			 System.out.println("有storeId="+storeId);
+//			 return  "redirect:/cFunction/storeMenu?storeId=" + storeId; 
+//			    
+//		 }
 		 
 		 
 		 

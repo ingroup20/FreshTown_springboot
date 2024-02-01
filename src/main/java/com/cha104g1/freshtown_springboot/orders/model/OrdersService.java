@@ -49,6 +49,7 @@ public class OrdersService {
 	public List<OrdersVO> getAll(Map<String, String[]> map) {
 		return HibernateUtil_CompositeQuery_Orders.getAllC(map,sessionFactory.openSession());
 	}
+	
 
 	public List<OrdersVO> getAllByStore(Integer storeId) {
 		return repository.findAllByStoreId(storeId);

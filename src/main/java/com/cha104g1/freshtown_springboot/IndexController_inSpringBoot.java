@@ -172,10 +172,7 @@ public class IndexController_inSpringBoot {
 		return list;
 	}
 	
-    @GetMapping("/sFunction/orders/select_page")
-	public String select_pageS(Model model) {
-		return "sFunction/orders/select_page";
-	}
+
 
 
     //=========== stores  要使用的資料 ===================   

@@ -3,6 +3,7 @@ package com.cha104g1.freshtown_springboot.orders.controller;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
 @Validated
-@RequestMapping("/sFunction/manageOrders")
+@RequestMapping("sFunction/orders")
 public class SOrdersController {
 	
 	@Autowired
@@ -40,6 +41,17 @@ public class SOrdersController {
 
 	@Autowired
 	StoresService storesSvc;
+	
+	
+    @GetMapping("select_page")
+	public String orderselectpage(Model model) {	
+		return "sFunction/orders/select_page";
+	}
+	
+    @GetMapping("orderorders")
+	public String orderOrders(Model model) {
+		return "sFunction/orders/orderorders";
+	}
 	
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("orderId") String orderId, ModelMap model) {
@@ -75,15 +87,12 @@ public class SOrdersController {
 	
 	
 	//複合查詢
-	@PostMapping("listOrders_ByCompositeQuery")
-	public String listAllOrders(HttpServletRequest req, Model model) {
+	@PostMapping("storeListOrders_ByCompositeQuery")
+	public String storeListAllOrders(HttpServletRequest req, Model model) {
 		Map<String, String[]> map = req.getParameterMap();
 		List<OrdersVO> list = ordersSvc.getAll(map);
-		model.addAttribute("ordersListData", list); // for listAllEmp.html 第85行用
-		for(OrdersVO rs: list) {
-			System.out.println(rs.getOrderId());
-		}
-		return "sFunction/orders/listAllOrders";
+
+		return "redirect: /freshtown_springboot/sFunction/orders/select_page";
 	}
 
 	//==========================================
@@ -92,63 +101,24 @@ public class SOrdersController {
 	@ModelAttribute("ordersListDataS") // for select_page.html 第135行用
 	protected List<OrdersVO> getListData_OrdersS(HttpServletRequest req,Model model) {
 		HttpSession session = req.getSession();
-		Object object =session.getAttribute("storeEmpLogin");
-		System.out.println(object);
+		Object object =session.getAttribute("storeEmpLogin");	
+		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+		
+        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+        System.out.println(list.size());
+        return list;
 		 // 检查类型
-	    if (object instanceof StoreEmpVO) {
-	        // 强制转换为StoresVO类型
-	    	StoreEmpVO storeEmpVO = (StoreEmpVO) object;
-	        
-	        // 使用storesVO进行操作
-	        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
-	        System.out.println(list.size());
-	        return list;
-	    } else {
-	        // 如果类型不匹配，你可以选择采取适当的措施，例如返回空列表或者抛出异常
-	       System.out.println("xxx");
-	    	return Collections.emptyList();
-	    }
-	}
-	
-//    @GetMapping("/listAllOrders")
-//	public String listAllOrders(Model model) {
-//		return "sFunction/orders/listAllOrders";
-//	}
-	
-	//===================================================
-//	 @GetMapping("/orderOrders")
-//		public String orderOrders( ModelMap model) {
-//			ServerSocket sc = null;
-//			int count = 0;
-//			
-//			System.out.println("TcpServerM listening port 8888.......");
-//			try {
-//				sc = new ServerSocket(8888); // 在8888埠建立ServerSocket, 並等待客戶端的連結
-//			} catch (IOException ioe) {
-//				System.err.println("Could not listen on port: 1024.");
-//				return "-1";
-//			}	
-//			
-//			try {
-//				while (true) {//雖然是無窮迴圈創thread，但有accept方法會發生wait，等有client連進來時，才繼續執行
-//					 // 連線start()
-//					new ConnSocketThread(sc.accept(),++count).start();
-//
-//					
-//					
-//				}
-//			} catch (IOException ioe) {
-//				System.err.println("Exception" + ioe);
-//			}
-//			sc.close();
-//			
-//	
-//		 return "1";
-//	 }
-	
-	
-	
-	
-	
-	
+//		    if (object instanceof StoreEmpVO) {
+//		        // 强制转换为StoresVO类型
+//		    	StoreEmpVO storeEmpVO = (StoreEmpVO) object;   
+//		        // 使用storesVO进行操作
+//		        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+//		        System.out.println(list.size());
+//		        return list;
+//		    } else {
+//		        // 如果类型不匹配，你可以选择采取适当的措施，例如返回空列表或者抛出异常
+//		       System.out.println("xxx");
+//		    	return Collections.emptyList();
+//		    }
+		}
 }

@@ -8,6 +8,7 @@ package com.cha104g1.freshtown_springboot.orders.model;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
@@ -25,11 +26,12 @@ import java.time.LocalDateTime;
 
 public class HibernateUtil_CompositeQuery_Orders {
 
+	
 	public static Predicate get_aPredicate_For_AnyDB(CriteriaBuilder builder, Root<OrdersVO> root, String columnName, String value) {
 
 		Predicate predicate = null;
 		
-		if ("orderId".equals(columnName)||"orderState".equals(columnName)) // 用於Integer
+		if ("orderId".equals(columnName)||"orderState".equals(columnName)||"payState".equals(columnName)) // 用於Integer
 			predicate = builder.equal(root.get(columnName), Integer.valueOf(value));
 		else if ("remitState".equals(columnName)||"payMethod".equals(columnName)||"payState".equals(columnName)) // 用於varchar
 			predicate = builder.like(root.get(columnName), "%" + value + "%");
@@ -93,4 +95,6 @@ public class HibernateUtil_CompositeQuery_Orders {
 
 		return list;
 	}
+	
+	
 }

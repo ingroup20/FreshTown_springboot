@@ -21,31 +21,43 @@
 
 //====喜好選擇==================================================================
 
-$("button#sentMealOrder").click(function(){
-    let collectedValues = collectSelectValues();
-    $("input#selectDate").val(collectedValues.selectValues);
-    console.log($("input#selectDate").val());
+$(document).ready(function() {
+	
+	$("button#sentMealOrder").click(function(){
+	    let collectedValues = collectSelectValues();
+	    $("input#selectDate").val(collectedValues.selectValues);
+	    console.log($("input#selectDate").val());
+	});
+
+	function collectSelectValues() {
+	        var selectValues = [];
+	        // Iterate over all elements with class 'select-option'
+	        $('.select-option').each(function() {
+	            var selectedValue = $(this).val();
+	            selectValues.push(selectedValue);
+	        });
+	
+	        return { selectValues: selectValues };
+	    }
+	
+
+
+
+	function submitForm() {
+	    // Get the form element
+	    var form = document.getElementById("checkMealDetail");
+	    // Submit the form
+	    form.submit();
+	}
+	
+
+
+	$("#continue_button").click(function(){
+		submitForm() ;
+	});
+	
+	$("#next_button").click(function(){
+	    submitForm() ;
+	    window.location.href = '/freshtown_springboot/cFunction/cartPage';
+	});
 });
-
-function collectSelectValues() {
-        var selectValues = [];
-        // Iterate over all elements with class 'select-option'
-        $('.select-option').each(function() {
-            var selectedValue = $(this).val();
-            selectValues.push(selectedValue);
-        });
-        // Do something with the array of selected values
-        console.log("來過");
-        return { selectValues: selectValues };
-    }
-
-
-
-
-function submitForm() {
-    // Get the form element
-    var form = document.getElementById("checkMealDetail");
-    // Submit the form
-    form.submit();
-}
-
