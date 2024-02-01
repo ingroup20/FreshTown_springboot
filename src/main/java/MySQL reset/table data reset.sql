@@ -23,23 +23,23 @@ INSERT  p_emp (pEmpPw, pEmpName, pEmpEmail, pEmpAccount, pEmpPerm, pEmpState)
 VALUES  (	"dog"	, "狗哥" , "dog@mail", "dog",2,1 );
 
 -- 逸晉
-INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
+INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAccount, customerState)
 VALUES
-(CONCAT('pw_', FLOOR(RAND() * 1000)), LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
+(CONCAT('pw_', FLOOR(RAND() * 1000)), CONCAT('09',LPAD(FLOOR(RAND() * 100000000), 8, '0')), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
 ;
 -- 逸晉
-INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
+INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAccount, customerState)
 VALUES
-(CONCAT('pw_', FLOOR(RAND() * 1000)), LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
+(CONCAT('pw_', FLOOR(RAND() * 1000)), CONCAT('09',LPAD(FLOOR(RAND() * 100000000), 8, '0')), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
 ;
 -- 逸晉
-INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
+INSERT INTO Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAccount, customerState)
 VALUES
-(CONCAT('pw_', FLOOR(RAND() * 1000)), LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
+(CONCAT('pw_', FLOOR(RAND() * 1000)), CONCAT('09',LPAD(FLOOR(RAND() * 100000000), 8, '0')), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), CONCAT('Address_', FLOOR(RAND() * 1000)), FLOOR(RAND() * 3))
 ;
 
-INSERT  Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAddress, customerState)
-VALUES  ("cat", LPAD(FLOOR(RAND() * 10000000000), 10, '0'), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), "cat", FLOOR(RAND() * 3));
+INSERT  Customer (customerPw, customerMob, mobChecked, customerEmail, customerNic, customerAccount, customerState)
+VALUES  ("cat", CONCAT('09',LPAD(FLOOR(RAND() * 100000000), 8, '0')), IF(RAND() < 0.5, 'N', 'Y'), CONCAT('user', FLOOR(RAND() * 1000), '@example.com'), CONCAT('nic_', FLOOR(RAND() * 1000)), "cat", FLOOR(RAND() * 3));
 
 -- 旭東
 INSERT INTO meal_type VALUES (1,'飯');

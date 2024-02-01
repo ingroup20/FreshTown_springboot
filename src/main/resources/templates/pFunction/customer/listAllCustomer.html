@@ -90,7 +90,7 @@ body {
 				<th>會員暱稱</th>
 				<th>手機號碼</th>
 				<th>會員信箱</th>
-				<th>會員地址</th>
+				<th>會員帳號</th>
 				<th>會員狀態</th>
 				<th></th> 
 			</tr>
@@ -104,7 +104,7 @@ body {
 					<td th:text="${customerVO.customerNic}"></td>
 					<td th:text="${customerVO.customerMob}"></td>
 					<td th:text="${customerVO.customerEmail}"></td>
-					<td th:text="${customerVO.customerAddress}"></td>
+					<td th:text="${customerVO.customerAccount}"></td>
 					<td th:text="${customerVO.customerState}"></td>
 					<td>
 						<form method="post" th:action="@{/pFunction/customer/getOne_For_Update}"

@@ -10,8 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.service.model.model.ServiceVO;
 
 @Entity
@@ -38,6 +42,8 @@ public class PlatformEmpVO implements java.io.Serializable {
 	}
 	
 	@Column(name = "pEmpPw")
+	@NotEmpty(message="員工密碼: 請勿空白")
+	@Pattern(regexp = "^[a-zA-Z0-9_]{3,18}$", message = "密碼為3~18位大小寫英數字")
 	public String getpEmpPw() {
 		return pEmpPw;
 	}
@@ -46,6 +52,8 @@ public class PlatformEmpVO implements java.io.Serializable {
 	}
 	
 	@Column(name = "pEmpName")
+	@NotEmpty(message="員工姓名: 請勿空白")
+	@Pattern(regexp = "^[a-zA-Z\u4E00-\u9FFF_]+$", message = "暱稱只能包含繁體中文或英文")
 	public String getpEmpName() {
 		return pEmpName;
 	}
@@ -54,6 +62,9 @@ public class PlatformEmpVO implements java.io.Serializable {
 	}
 	
 	@Column(name = "pEmpEmail")
+	@NotEmpty(message="員工信箱: 請勿空白")
+	@Size(max = 100)
+    @Email
 	public String getpEmpEmail() {
 		return pEmpEmail;
 	}
@@ -62,6 +73,8 @@ public class PlatformEmpVO implements java.io.Serializable {
 	}
 	
 	@Column(name = "pEmpAccount")
+	@NotEmpty(message="員工帳號: 請勿空白")
+	@Pattern(regexp = "^[a-zA-Z0-9]{3,18}$", message = "帳號為6~18位大小寫英數字")
 	public String getpEmpAccount() {
 		return pEmpAccount;
 	}
@@ -70,6 +83,7 @@ public class PlatformEmpVO implements java.io.Serializable {
 	}
 	
 	@Column(name = "pEmpPerm")
+	@NotNull(message="員工權限: 請勿空白")
 	public Byte getpEmpPerm() {
 		return pEmpPerm;
 	}
@@ -78,6 +92,7 @@ public class PlatformEmpVO implements java.io.Serializable {
 	}
 	
 	@Column(name = "pEmpState")
+	@NotNull(message="員工狀態: 請勿空白")
 	public Byte getpEmpState() {
 		return pEmpState;
 	}

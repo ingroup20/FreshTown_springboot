@@ -13,7 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
@@ -50,6 +52,8 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "sEmpPw")
+		@NotEmpty(message="密碼: 請勿空白")
+		@Pattern(regexp = "^[a-zA-Z0-9_]{3,18}$", message = "密碼為3~18位大小寫英數字")
 		public String getsEmpPw() {
 			return sEmpPw;
 		}
@@ -58,6 +62,7 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "sEmpName")
+		@NotEmpty(message="員工姓名: 請勿空白")
 		public String getsEmpName() {
 			return sEmpName;
 		}
@@ -66,6 +71,7 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "invPerm")
+		@NotNull(message="庫存權限: 請勿空白")
 		public Byte getInvPerm() {
 			return invPerm;
 		}
@@ -74,6 +80,7 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "purPerm")
+		@NotNull(message="採購權限: 請勿空白")
 		public Byte getPurPerm() {
 			return purPerm;
 		}
@@ -82,6 +89,7 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "manuPerm")
+		@NotNull(message="餐點權限: 請勿空白")
 		public Byte getManuPerm() {
 			return manuPerm;
 		}
@@ -90,6 +98,7 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "orderPerm")
+		@NotNull(message="訂單權限: 請勿空白")
 		public Byte getOrderPerm() {
 			return orderPerm;
 		}
@@ -98,6 +107,7 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "modifyPerm")
+		@NotNull(message="修改權限: 請勿空白")
 		public Byte getModifyPerm() {
 			return modifyPerm;
 		}
@@ -105,19 +115,26 @@ public class StoreEmpVO {
 			this.modifyPerm = modifyPerm;
 		}
 
-		
+		@Column(name = "sEmpDeptno")
+		@NotEmpty(message="部門編號: 請勿空白")
 		public String getsEmpDeptno() {
 			return sEmpDeptno;
 		}
 		public void setsEmpDeptno(String sEmpDeptno) {
 			this.sEmpDeptno = sEmpDeptno;
 		}
+		
+		@Column(name = "sEmpTitle")
+		@NotEmpty(message="員工職稱: 請勿空白")
 		public String getsEmpTitle() {
 			return sEmpTitle;
 		}
 		public void setsEmpTitle(String sEmpTitle) {
 			this.sEmpTitle = sEmpTitle;
 		}
+		
+		@Column(name = "sEmpState")
+		@NotEmpty(message="員工狀態: 請勿空白")
 		public Byte getsEmpState() {
 			return sEmpState;
 		}
