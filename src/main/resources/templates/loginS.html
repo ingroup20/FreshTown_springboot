@@ -1,33 +1,208 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+class="light-style customizer-hide"
+ dir="ltr"
+ data-theme="theme-default"
+ data-template="vertical-menu-template-free"
+lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>店家登入-login</title>
+<meta name="description" content="" />
+<!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" type="image/png" th:href="@{/backhome/img/freshlogo.png}"/>
+  	    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" th:href="@{/backhome/css/boxicons.css}" />     
+	    <!-- Core CSS -->
+	<link rel="stylesheet" th:href="@{/backhome/css/core.css}"
+		class="template-customizer-core-css" />
+	<link rel="stylesheet" th:href="@{/backhome/css/theme-default.css}"
+		class="template-customizer-theme-css" />
+	<link rel="stylesheet" th:href="@{/backhome/css/demo.css}" />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" th:href="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.css}" />	
+    <!-- Page -->
+    <link rel="stylesheet" th:href="@{/backhome/css/page-auth.css}" />   
+
+<!--     <link rel="stylesheet" th:href="@{/backhome/css/styles.min.css}"/> -->
+
+		  <!-- Helpers -->
+    <script th:src="@{/backhome/js/helpers.js}"></script>
+    	    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+	<script th:src="@{/backhome/js/config.js}"></script>
+
 </head>
 <body>
-	<form action="loginS/loginhandlerS" method="post">
-		<table border=1>
-			<tr>
-				<td colspan=2>
-					<p align=center>
-						輸入(測試登入):<br> 
-						帳號:4<br> 
-						密碼:4<br>
-				</td>
-			</tr>
-			<tr>
-				<td><p align=right>account:</td>
-				<td><p><input type=text name="account" value="" size=15></td>
-			</tr>
-			<tr>
-				<td><p align=right>password:</td>
-				<td><p><input type=password name="password" value="" size=15></td>
-			</tr>
-			<tr>
-				<td colspan=2 align=center><input type=submit value="  ok   "></td>
-			</tr>
-		</table>
-	</form>
+ <!-- Content -->
 
+    <div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          <!-- Register -->
+          <div class="card">
+            <div class="card-body">
+
+              <h4 class="mb-2"><img th:src="@{/backhome/img/freshlogo.svg}" width="180" alt=""></h4>
+              <p class="mb-4">Welcome back to the platform back !
+                                  測試:帳號4/密碼:4</p>
+
+              <form id="formAuthentication" class="mb-3" action="loginS/loginhandlerS" method="post">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Account</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="account"
+                    name="account"
+                    placeholder=""
+                    autofocus
+                  />
+                </div>
+                <div class="mb-3 form-password-toggle">
+                  <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">Password</label>
+           			 <!--      
+            		  <a href="auth-forgot-password-basic.html">
+                      <small>Forgot Password?</small>
+                    </a>
+                   	 -->
+                  </div>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password"
+                    />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="remember-me" />
+                    <label class="form-check-label" for="remember-me"> Remember Me </label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                </div>
+              </form>
+<!--               <p class="text-center"> -->
+<!--                 <span>New on our platform?</span> -->
+<!--                 <a href="auth-register-basic.html"> -->
+<!--                   <span>Create an account</span> -->
+<!--                 </a> -->
+<!--               </p> -->
+            </div>
+          </div>
+          <!-- /Register -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- websocket -->
+    <script>
+	let inputUserAccount = document.getElementById("account");
+	inputUserName.focus();
+	
+	function sendAccount() {
+		let userAccount = inputUserAccount.value.trim();
+		if (userAccount === "") {
+			alert("Input a user account");
+			inputUserAccount.focus();
+			return;
+		} else {
+			document.getElementById("formAuthentication").submit();
+		}
+	}
+</script>
+
+    <!-- / Content -->
+<!--  <!--  Body Wrapper -->
+<!--   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" -->
+<!--     data-sidebar-position="fixed" data-header-position="fixed"> -->
+<!--     <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center"> -->
+<!--       <div class="d-flex align-items-center justify-content-center w-100"> -->
+<!--         <div class="row justify-content-center w-100"> -->
+<!--           <div class="col-md-5 col-lg-6 col-xxl-3"> -->
+<!--             <div class="card mb-0"> -->
+<!--               <div class="card-body"> -->
+<!--                 <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100"> -->
+<!--                   <img th:src="@{/backhome/img/freshlogo.svg}" width="180" alt=""> -->
+<!--                 </a> -->
+<!--                 <p class="text-center">Fresh Town Login <br> -->
+<!-- 					                         輸入(測試登入):<br> -->
+<!-- 											 帳號:dog<br> -->
+<!-- 											 密碼:dog<br> -->
+                
+<!--                 <form id="formAuthentication" class="mb-3" action="loginP/loginhandlerP" method="post"> -->
+<!--                 <div class="mb-3"> -->
+<!--                   <label for="email" class="form-label">Account</label> -->
+<!--                   <input -->
+<!--                     type="text" -->
+<!--                     class="form-control" -->
+<!--                     id="email" -->
+<!--                     name="email-username" -->
+<!--                     placeholder="" -->
+<!--                     autofocus -->
+<!--                   /> -->
+<!--                 </div> -->
+<!-- 	                <div class="mb-3 form-password-toggle"> -->
+<!-- 	                  <div class="d-flex justify-content-between"> -->
+<!-- 	                    <label class="form-label" for="password">Password</label> -->
+<!-- 	                    <a href="auth-forgot-password-basic.html" class="text-warning"> -->
+<!-- 	                      <small>Forgot Password?</small> -->
+<!-- 	                    </a> -->
+<!-- 	                  </div> -->
+<!-- 	                  <div class="input-group input-group-merge"> -->
+<!-- 	                    <input -->
+<!-- 	                      type="password" -->
+<!-- 	                      id="password" -->
+<!-- 	                      class="form-control" -->
+<!-- 	                      name="password" -->
+<!-- 	                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" -->
+<!-- 	                      aria-describedby="password" -->
+<!-- 	                    /> -->
+<!-- 	                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span> -->
+<!-- 	                  </div> -->
+<!-- 	                </div> -->
+<!-- 	                <div class="mb-3"> -->
+<!-- 	                  <div class="form-check"> -->
+<!-- 	                    <input class="form-check-input" type="checkbox" id="remember-me" /> -->
+<!-- 	                    <label class="form-check-label" for="remember-me"> Remember Me </label> -->
+<!-- 	                  </div> -->
+<!-- 	                </div> -->
+<!-- 	                <div class="mb-3"> -->
+<!-- 	                  <button class="btn btn-warning d-grid w-100" type="submit">Sign in</button> -->
+<!-- 	                </div> -->
+<!--               </form>             -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+ 
+		<!-- build:js assets/vendor/js/core.js -->
+	<script th:src="@{/backhome/libs/jquery/jquery.js}"></script>
+	<script th:src="@{/backhome/libs/popper/popper.js}"></script>
+	<script th:src="@{/backhome/js/bootstrap.js}"></script>
+	<script th:src="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+	
+	<script th:src="@{/backhome/js/menu.js}"></script>
+		       		<!-- Main JS -->
+	<script th:src="@{/backhome/js/main.js}"></script>
+		<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>

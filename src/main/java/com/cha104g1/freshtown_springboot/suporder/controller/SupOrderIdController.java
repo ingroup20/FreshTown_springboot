@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/sFunction/suporder")
@@ -28,6 +32,8 @@ public class SupOrderIdController {
 	
 	@Autowired
 	SupOrderService suporderSvc;
+	@Autowired
+	MaterialService materialSvc;
 
 	@GetMapping("addSupOrder")
 	public String addSupOrder(ModelMap model) {
@@ -45,6 +51,9 @@ public class SupOrderIdController {
 	        suporderSvc.addSupOrder(suporderVO);
 	        List<SupOrderVO> list = suporderSvc.getAll();
 	        model.addAttribute("supOrderListData", list);
+	        MaterialVO material = materialSvc.getOneMaterial(suporderVO.getMaterialVO().getItemNumber());
+	        material.setQuantityNot(material.getQuantityNot() + suporderVO.getAmount());
+	        materialSvc.updateMaterial(material);
 	        model.addAttribute("success", "- (新增成功)");
 	        return "sFunction/suporder/supOrderList";
 	    }
@@ -52,7 +61,6 @@ public class SupOrderIdController {
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("id") String Id, ModelMap model) {
 		SupOrderVO supOrderVO = suporderSvc.getOneSupOrder(Integer.valueOf(Id));
-		System.out.println("test");
 		model.addAttribute("supOrderVO", supOrderVO);
 		return "sFunction/suporder/updateSupOrder";
 	}
@@ -63,7 +71,44 @@ public class SupOrderIdController {
 			return "pFunction/suporder/updateSupOrder";
 		}
 		suporderVO.setId(Integer.valueOf(id));
-		suporderSvc.updateSupOrderVO(suporderVO);
+
+		switch (suporderVO.getoStatus()) {
+		case 7:
+//			MaterialVO stock = suporderSvc.getStock(suporderVO.getMaterialVO().getItemNumber());
+//			MaterialVO quantity = suporderSvc.getQuantity(suporderVO.getMaterialVO().getItemNumber());
+//			MaterialVO materials = suporderSvc.getMaterial(suporderVO.getMaterialVO().getItemNumber());
+//			System.out.println(String.valueOf(suporderVO.getMaterialVO().getStockQuantity()));
+//			System.out.println(String.valueOf(suporderVO.getMaterialVO().getItemNumber()));
+//			System.out.println(String.valueOf(material));
+//			System.out.print(material);
+////			suporderSvc.updateSupOrderVO(suporderVO);
+//			suporderVO.getMaterialVO().getStockQuantity();
+//			stock.setStockQuantity(suporderVO.getMaterialVO().getStockQuantity() + suporderVO.getAmount());
+//			quantity.setQuantityNot(suporderVO.getMaterialVO().getQuantityNot() - suporderVO.getAmount());
+			
+			MaterialVO material = materialSvc.getOneMaterial(suporderVO.getMaterialVO().getItemNumber());
+//System.out.println("-------------------------");	
+//
+//System.out.println("suporderVO.getMaterialVO()==null:"+material==null);	
+//System.out.println("suporderVO.getMaterialVO().getStockQuantity()="+material.getStockQuantity());	
+//System.out.println("suporderVO.getMaterialVO().getItemName()="+material.getItemName());	
+//
+//
+//System.out.println("-------------------------");			
+			material.setStockQuantity(material.getStockQuantity() + suporderVO.getAmount());
+			material.setQuantityNot(material.getQuantityNot() - suporderVO.getAmount());
+//			material.setStockQuantity(suporderVO.getMaterialVO().getStockQuantity() + suporderVO.getAmount());
+//			material.setQuantityNot(suporderVO.getMaterialVO().getQuantityNot() - suporderVO.getAmount());
+			materialSvc.updateMaterial(material);
+			break;
+		case 6:
+			MaterialVO materials = suporderSvc.getMaterial(suporderVO.getMaterialVO().getItemNumber());
+			materials.setQuantityNot(materials.getQuantityNot() - suporderVO.getAmount());
+			materialSvc.updateMaterial(materials);
+			break;
+		default:
+			suporderSvc.updateSupOrderVO(suporderVO);
+		}
 		model.addAttribute("success", "- (修改成功)");
 		suporderVO = suporderSvc.getOneSupOrder(Integer.valueOf(suporderVO.getId()));
 		model.addAttribute("supOrderVO", suporderVO);
@@ -81,5 +126,6 @@ public class SupOrderIdController {
 		}
 		return result;
 	}
+
 
 }
