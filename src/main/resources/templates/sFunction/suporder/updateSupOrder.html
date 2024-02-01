@@ -89,7 +89,16 @@
 			
 			<div>
 			<label>採購單狀態:</label>
-			<input type="number" th:field="*{oStatus}" onclick="hideContent('oStatus.errors');" /><br/>
+			<select th:field="*{oStatus}"  onclick="hideContent('oStatus.errors');">
+				<option value="1">審核中</option>
+		    	<option value="2">已確認訂單並與供應商接洽</option>
+		    	<option value="3">貨品檢驗</option>
+		    	<option value="4">審核未通過</option>
+		    	<option value="5">驗收未通過</option>
+		    	<option value="6">作廢</option>
+		    	<option value="7">結單</option>
+			</select>
+			<br/>
 			<span  th:if="${#fields.hasErrors('oStatus')}" th:errors="*{oStatus}" class="error" id="oStatus.errors"></span>
 			</div>
 			

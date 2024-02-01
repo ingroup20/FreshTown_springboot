@@ -31,6 +31,7 @@ public class SupOrderVO implements java.io.Serializable {
 	@ManyToOne
 	@JoinColumn(name="purNo",referencedColumnName ="itemNumber")
 	private MaterialVO materialVO;
+	
 	private Integer amount;
 	private Integer unitPrice;
 	private Date purDate;
