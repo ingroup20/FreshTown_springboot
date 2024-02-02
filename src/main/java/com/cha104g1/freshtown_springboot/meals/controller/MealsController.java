@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
@@ -52,13 +54,13 @@ public class MealsController {
 	}
 	
 	@PostMapping("insert")
-	public String insert(@Valid MealsVO mealsVO, BindingResult result, ModelMap model,
+	public String insert(@Valid MealsVO mealsVO, BindingResult result, HttpServletRequest req , ModelMap model,
 			@RequestParam("mealPicture") MultipartFile[] parts) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 		// 去除BindingResult中upFiles欄位的FieldError紀錄 --> 見第172行
 		result = removeFieldError(mealsVO, result, "mealPicture");
-
+	
 		if (parts[0].isEmpty()) { // 使用者未選擇要上傳的圖片時
 			model.addAttribute("errorMessage", "商品照片: 請上傳照片");
 		} else {
@@ -74,10 +76,19 @@ public class MealsController {
 		/*************************** 2.開始新增資料 *****************************************/
 		mealsSvc.addMealsVO(mealsVO);
 		/*************************** 3.新增完成,準備轉交(Send the Success view) **************/
-		List<MealsVO> list = mealsSvc.getAll();
-		model.addAttribute("mealsListData", list);
-		model.addAttribute("success", "- (新增成功)");
-		return "redirect:/sFunction/meals/listAllMeals"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+//		List<MealsVO> list = mealsSvc.getAll();
+//		model.addAttribute("mealsListData", list);
+//		model.addAttribute("success", "- (新增成功)");
+		Integer mealNo = mealsVO.getMealNo();
+		model.addAttribute("mealNo", mealNo);
+		model.addAttribute("mealsVO", mealsVO);
+
+		
+		HttpSession session =req.getSession();
+		session.setAttribute("mealNo", mealNo);
+		session.setAttribute("mealsVO", mealsVO);
+//		return "sFunction/customized/addCustomized";
+		return "redirect:/sFunction/customized/addCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
 	@PostMapping("getOne_For_Update")
@@ -142,13 +153,29 @@ public class MealsController {
 	@PostMapping("listMeals_ByCompositeQuery")
 	public String listAllMeals(HttpServletRequest req, Model model) {
 		Map<String, String[]> map = req.getParameterMap();
-		List<MealsVO> list = mealsSvc.getMealsVOByCompositeQuery(map);
+		for (Map.Entry<String, String[]> entry : map.entrySet()) {
+		    String key = entry.getKey();
+		    String[] values = entry.getValue();
+
+		    System.out.print("Key: " + key + ", Values: ");
+		    
+		    if (values != null) {
+		        for (String value : values) {
+		            System.out.print(value + " ");
+		        }
+		    }
+		    
+		    System.out.println(); // 换行
+		}
+
+		List<MealsVO> list = mealsSvc.getAll(map);
 		model.addAttribute("mealsListData", list); // for listAllEmp.html 第85行用
-//		for(MealsVO rs: list) {
-//			System.out.println(rs.getMealNo());
-//		}
+		for(MealsVO rs: list) {
+			System.out.println(rs.getMealNo());
+		}
 		return "sFunction/meals/listAllMeals";
 	}
+	
 	// 全資料一覽
 		@ModelAttribute("mealTypeListData2") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
 		protected List<MealTypeVO> referenceListData(Model model) {
@@ -163,4 +190,31 @@ public class MealsController {
 			List<StoresVO> list = storesSvc.getAll();
 			return list;
 		}
+		
+		@ModelAttribute("storesVO") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+		protected StoresVO storesVO(HttpServletRequest req , Model model) {
+			HttpSession session = req.getSession(false);
+			Object idVO =session.getAttribute("storeEmpLogin");
+			StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+			if (storeEmpVO == null) {
+				System.out.println("出現null啦");
+			}
+			StoresVO storesVO = storeEmpVO.getStoresVO();
+			return storesVO;
+		}
+		
+		@ModelAttribute("storeId") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+		protected Integer storeId(HttpServletRequest req , Model model) {
+			HttpSession session = req.getSession(false);
+			Object idVO =session.getAttribute("storeEmpLogin");
+			StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+			if (storeEmpVO == null) {
+				System.out.println("出現null啦");
+			}
+			Integer storeId = storeEmpVO.getStoresVO().getStoreId();
+			System.out.println(storeId);
+			return storeId;
+		}
+		
+		
 }

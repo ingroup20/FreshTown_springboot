@@ -82,8 +82,12 @@
 		
 			<div>
 			<label>餐點狀態:</label>
-			<input type="text" th:field="*{mealOnsale}" onclick="hideContent('mealOnsale.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('mealOnsale')}" th:errors="*{mealOnsale}" class="error" id="mealOnsale.errors"></span>
+			<select th:field="*{mealOnsale}">
+				<option th:value="0" th:text="準備中"></option>
+	            <option th:value="1" th:text="上架中"></option>
+	            <option th:value="2" th:text="已下架"></option>
+	        </select><br>
+	        <span  th:if="${#fields.hasErrors('mealOnsale')}" th:errors="*{mealOnsale}" class="error" id="mealOnsale.errors"></span>
 			</div>
 		
 			<div>

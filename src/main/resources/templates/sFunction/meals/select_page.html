@@ -301,20 +301,28 @@ xmlns:th="http://www.thymeleaf.org">
         輸入價格: 
         <input type="text" name="mealPrice" value=""><br>
     
-        輸入餐點分類: 
-        <input type="text" name="mealTypeVO.mealTypeNo" value=""><br>
+<!--         輸入餐點分類:  -->
+<!--         <input type="text" name="mealTypeVO.mealTypeNo" value=""><br> -->
     
-<!--         選擇餐點分類: -->
-<!--   		<select th:field="*{mealTypeVO.mealTypeNo}"> -->
-<!-- 			<option value=""> -->
-<!-- 			<option th:each="mealTypeVO : ${mealTypeListData2}" th:value="${mealTypeVO.mealTypeNo}" th:text="${mealTypeVO.mealTypeName}" /> -->
-<!-- 		</select><br> -->
+        選擇餐點分類:
+  		<select th:field="*{mealTypeVO.mealTypeNo}">
+			<option value="">
+			<option th:each="mealTypeVO : ${mealTypeListData2}" th:value="${mealTypeVO.mealTypeNo}" th:text="${mealTypeVO.mealTypeName}" />
+		</select><br>
 
-		輸入餐點狀態: 
-        <input type="text" name="mealOnsale" value=""><br>
+<!-- 		輸入餐點狀態:  -->
+<!--         <input type="text" name="mealOnsale" value="">(0準備中 1上架中 2已下架)<br> -->
     	
-        輸入店家: 
-        <input type="text" name="storesVO.storeId" value=""><br>
+    	選擇餐點狀態:
+    	<select name="mealOnsale">
+			<option value="">
+			<option value="0">準備中</option>
+            <option value="1">上架中</option>
+            <option value="2">已下架</option>
+	    </select><br>   
+	     	
+<!--         輸入店家:  -->
+        <input type="hidden" name="storeId" th:value="${storeId}" ><br>
     
 <!--         選擇店家:  -->
 <!--   		<select th:field="*{storesVO.storeId}"> -->

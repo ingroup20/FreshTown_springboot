@@ -50,6 +50,10 @@ INSERT INTO meal_type VALUES (3,'粥');
 INSERT INTO customized_items VALUES (1, '辣度');
 INSERT INTO customized_items VALUES (2, '加蔥');
 INSERT INTO customized_items VALUES (3, '加酸菜');
+INSERT INTO customized_items VALUES (4, '冰塊');
+INSERT INTO customized_items VALUES (5, '甜度');
+INSERT INTO customized_items VALUES (6, '餐具');
+
 -- 芯郁
 INSERT INTO items_class (itemClassName, storeId) VALUES ( '食材', 1);
 INSERT INTO items_class (itemClassName, storeId) VALUES ( '醬料', 2);
@@ -136,6 +140,13 @@ INSERT INTO customized_detail VALUES (6, 2, '不加蔥');
 INSERT INTO customized_detail VALUES (7, 2, '加蔥');
 INSERT INTO customized_detail VALUES (8, 3, '不加酸菜');
 INSERT INTO customized_detail VALUES (9, 3, '加酸菜');
+INSERT INTO customized_detail VALUES (10, 3, '加很多酸菜');
+INSERT INTO customized_detail VALUES (11, 4, '去冰');
+INSERT INTO customized_detail VALUES (12, 4, '少冰');
+INSERT INTO customized_detail VALUES (13, 5, '半糖');
+INSERT INTO customized_detail VALUES (14, 5, '無糖');
+INSERT INTO customized_detail VALUES (15, 6, '要');
+INSERT INTO customized_detail VALUES (16, 6, '不要');
 
 -- 承運
 INSERT INTO customized_order (orderDtlNo, custedDtlNo) VALUES
@@ -144,10 +155,24 @@ INSERT INTO customized_order (orderDtlNo, custedDtlNo) VALUES
 (3, 3);
 
 -- 雯馨
-  INSERT INTO customized VALUES (1, 1, 1); 
-  INSERT INTO customized VALUES (1, 2, 1);
-  INSERT INTO customized VALUES (1, 3, 0);
-
+INSERT INTO customized VALUES (1, 1, 1); 
+INSERT INTO customized VALUES (1, 2, 1);
+INSERT INTO customized VALUES (1, 3, 0);
+INSERT INTO customized VALUES (1, 4, 0);
+INSERT INTO customized VALUES (1, 5, 0);
+INSERT INTO customized VALUES (1, 6, 1);
+INSERT INTO customized VALUES (2, 1, 0); 
+INSERT INTO customized VALUES (2, 2, 1);
+INSERT INTO customized VALUES (2, 3, 1);
+INSERT INTO customized VALUES (2, 4, 0);
+INSERT INTO customized VALUES (2, 5, 0);
+INSERT INTO customized VALUES (2, 6, 1);
+INSERT INTO customized VALUES (3, 1, 1); 
+INSERT INTO customized VALUES (3, 2, 0);
+INSERT INTO customized VALUES (3, 3, 1);
+INSERT INTO customized VALUES (3, 4, 0);
+INSERT INTO customized VALUES (3, 5, 0);
+INSERT INTO customized VALUES (3, 6, 1);
  
   -- 中群
 INSERT   INTO  like_store	(	id	,	customerId	,	storeId	,	likeUnlike	)
