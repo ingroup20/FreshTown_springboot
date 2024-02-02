@@ -44,9 +44,11 @@
 			
 			
 			<div>
+			<!--
 			<label>採購單編號:</label>
 			<input type="hidden" th:field="*{id}" onclick="hideContent('id.errors');" /><br/>
 			<span  th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="error" id="id.errors"></span>
+			-->
 			</div>
 			
 			<div>
@@ -112,8 +114,11 @@
 			
 			<div>
 			<label>店家帳號:</label>
+			<!--
 			<input type="text" th:field="*{StoresVO.storeId}" onclick="hideContent('storeId.errors');" /><br/>
 			<span  th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
+			-->
+			<input type="hidden" name="storeId" th:value="${storeId}">
 			</div>
 			
 			

@@ -10,11 +10,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,8 @@ import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,12 +41,26 @@ public class SupOrderIdController {
 	@Autowired
 	MaterialService materialSvc;
 
+	@ModelAttribute
+	   public void whoareyou(HttpServletRequest req ,Model model) {
+
+		HttpSession session = req.getSession(false);
+		Object store =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)store;
+		if (storeEmpVO != null) {
+			System.out.println("身分暱稱="+storeEmpVO.getsEmpName());
+		}
+		 model.addAttribute("storeEmpId", storeEmpVO.getStoresVO().getStoreId());
+	   }
+	
 	@GetMapping("addSupOrder")
 	public String addSupOrder(HttpServletRequest req, ModelMap model) {
-		HttpSession session = req.getSession();
-		Object storeEmpLogin = session.getAttribute("storeEmpLogin");
-		model.addAttribute("storeEmpLogin", storeEmpLogin);
 		SupOrderVO suporderVO = new SupOrderVO();
+		HttpSession session = req.getSession(false);
+ 		Object store =session.getAttribute("storeEmpLogin");
+ 		StoreEmpVO storeEmpVO= (StoreEmpVO)store;
+ 		model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+ 		System.out.println("店家="+storeEmpVO.getStoresVO().getStoreId());
 		model.addAttribute("supOrderVO", suporderVO);
 		return "sFunction/suporder/supOrderAdd";
 	}
@@ -53,11 +71,15 @@ public class SupOrderIdController {
 	        if (result.hasErrors()) {
 	            return "sFunction/suporder/supOrderAdd";
 	        }
-	        HttpSession session = req.getSession();
-	        Object storeEmpLogin = session.getAttribute("storeEmpLogin");
-	        model.addAttribute("storeEmpLogin", storeEmpLogin);
-	        suporderSvc.addSupOrder(suporderVO);
-	        List<SupOrderVO> list = suporderSvc.getAll();
+	        HttpSession session = req.getSession(false);
+	 		Object store =session.getAttribute("storeEmpLogin");
+	 		StoreEmpVO storeEmpVO= (StoreEmpVO)store;
+	 		model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+	 		StoresVO storesVO = new StoresVO();
+	 	    storesVO.setStoreId(storeEmpVO.getStoresVO().getStoreId());
+	 	    suporderVO.setStoresVO(storesVO);
+	 		suporderSvc.addSupOrder(suporderVO);
+	 		List<SupOrderVO> list = suporderSvc.getAll();
 	        model.addAttribute("supOrderListData", list);
 	        MaterialVO material = materialSvc.getOneMaterial(suporderVO.getMaterialVO().getItemNumber());
 	        material.setQuantityNot(material.getQuantityNot() + suporderVO.getAmount());
@@ -108,11 +130,13 @@ public class SupOrderIdController {
 //			material.setStockQuantity(suporderVO.getMaterialVO().getStockQuantity() + suporderVO.getAmount());
 //			material.setQuantityNot(suporderVO.getMaterialVO().getQuantityNot() - suporderVO.getAmount());
 			materialSvc.updateMaterial(material);
+			suporderSvc.updateSupOrderVO(suporderVO);
 			break;
 		case 6:
 			MaterialVO materials = suporderSvc.getMaterial(suporderVO.getMaterialVO().getItemNumber());
 			materials.setQuantityNot(materials.getQuantityNot() - suporderVO.getAmount());
 			materialSvc.updateMaterial(materials);
+			suporderSvc.updateSupOrderVO(suporderVO);
 			break;
 		default:
 			suporderSvc.updateSupOrderVO(suporderVO);
