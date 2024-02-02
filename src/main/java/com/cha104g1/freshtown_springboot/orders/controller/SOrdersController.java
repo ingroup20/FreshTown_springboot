@@ -42,6 +42,31 @@ public class SOrdersController {
 	@Autowired
 	StoresService storesSvc;
 	
+	@ModelAttribute("ordersListDataS") // for select_page.html 第135行用
+	protected List<OrdersVO> getListData_OrdersS(HttpServletRequest req,Model model) {
+		HttpSession session = req.getSession();
+		Object object =session.getAttribute("storeEmpLogin");	
+		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+		
+        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+        System.out.println(list.size());
+        return list;
+		 // 检查类型
+//		    if (object instanceof StoreEmpVO) {
+//		        // 强制转换为StoresVO类型
+//		    	StoreEmpVO storeEmpVO = (StoreEmpVO) object;   
+//		        // 使用storesVO进行操作
+//		        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+//		        System.out.println(list.size());
+//		        return list;
+//		    } else {
+//		        // 如果类型不匹配，你可以选择采取适当的措施，例如返回空列表或者抛出异常
+//		       System.out.println("xxx");
+//		    	return Collections.emptyList();
+//		    }
+		}
+	
+	
 	
     @GetMapping("select_page")
 	public String orderselectpage(Model model) {	
@@ -98,27 +123,5 @@ public class SOrdersController {
 	//==========================================
 
     
-	@ModelAttribute("ordersListDataS") // for select_page.html 第135行用
-	protected List<OrdersVO> getListData_OrdersS(HttpServletRequest req,Model model) {
-		HttpSession session = req.getSession();
-		Object object =session.getAttribute("storeEmpLogin");	
-		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
-		
-        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
-        System.out.println(list.size());
-        return list;
-		 // 检查类型
-//		    if (object instanceof StoreEmpVO) {
-//		        // 强制转换为StoresVO类型
-//		    	StoreEmpVO storeEmpVO = (StoreEmpVO) object;   
-//		        // 使用storesVO进行操作
-//		        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
-//		        System.out.println(list.size());
-//		        return list;
-//		    } else {
-//		        // 如果类型不匹配，你可以选择采取适当的措施，例如返回空列表或者抛出异常
-//		       System.out.println("xxx");
-//		    	return Collections.emptyList();
-//		    }
-		}
+
 }

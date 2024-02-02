@@ -60,7 +60,7 @@
 	            <div class="section_item">
 	                <div class="card">
 	                    <!-- 圖片-->
-                        <div class="card_img"><img th:src="@{./images/store.png}"></div>
+                        <div class="card_img"><img th:src="@{/stores/DBGifReader} + '?storeId=' + ${storesVO.storeId}" ></div>
 	                    <!-- <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
                         <h4 th:text="${storesVO.storeName}">店家名稱</h4>
                         <!-- 評等-->

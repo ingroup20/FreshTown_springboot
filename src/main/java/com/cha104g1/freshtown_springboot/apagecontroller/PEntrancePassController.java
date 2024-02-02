@@ -2,6 +2,8 @@ package com.cha104g1.freshtown_springboot.apagecontroller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,9 +87,17 @@ public class PEntrancePassController {
 //	    }
 //	}
 //    
-  //==include店家搜尋=================== 
-
+  //==doget=================== 
 	
+	@GetMapping("logoutP")
+	public String logoutP(HttpSession session, Model model) {
+		System.out.println("登出");
+        if (session != null && session.getAttribute("platformEmpLogin") != null) {
+            session.removeAttribute("platformEmpLogin");
+        }
+		
+		return "/pFunction/pEntrancePass";
+	}
 	
 	
 	//=========== PlatformEmp  要使用的資料 ===================  

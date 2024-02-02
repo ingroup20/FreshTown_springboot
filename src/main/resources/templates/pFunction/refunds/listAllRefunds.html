@@ -82,7 +82,7 @@ body {
 		<th:block th:each="refundsVO : ${refundsListData}">
 			<tr>
 				<td th:text="${refundsVOStat.count}">計數</td>
-				<td th:text="${refundsVO.orderId}">訂單編號</td>
+				<td th:text="${refundsVO.ordersVO.orderId}">訂單編號</td>
 				<td th:text="${refundsVO.creationDate}">申請退款時間</td>
 				<td th:text="${refundsVO.refundDollar}">退款金額</td>
 				<td th:text="${refundsVO.refundState}">退款狀態</td>

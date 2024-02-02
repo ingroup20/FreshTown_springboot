@@ -36,13 +36,13 @@ public class RefundsVO implements java.io.Serializable{
 	private Integer id;
 	
 	//延遲載入
-//	@OneToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name="orderId", referencedColumnName="orderId")
+	@OneToOne
+	@JoinColumn(name="orderId", referencedColumnName="orderId")
 //	@NotNull(message="訂單編號: 請勿空白")
 //	@Pattern(regexp = "^(0-9)$", message = "訂單編號: 只能數字")
-//	private OrdersVO ordersVO;
-	@Column(name="orderId")
-	private Integer orderId;
+	private OrdersVO ordersVO;
+//	@Column(name="orderId")
+//	private Integer orderId;
 	
 	
 	@Column(name="refundState")
@@ -97,14 +97,14 @@ public class RefundsVO implements java.io.Serializable{
 	public String getRefundState() {
 		return refundState;
 	}
-	public Integer getOrderId() {
-		return orderId;
-	}
+//	public Integer getOrderId() {
+//		return orderId;
+//	}
 	
 	
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
+//	public void setOrderId(Integer orderId) {
+//		this.orderId = orderId;
+//	}
 	public void setRefundState(String refundState) {
 		this.refundState = refundState;
 	}
@@ -126,6 +126,14 @@ public class RefundsVO implements java.io.Serializable{
 	}
 	public void setRefundDate(Date refundDate) {
 		this.refundDate = refundDate;
+	}
+
+	public OrdersVO getOrdersVO() {
+		return ordersVO;
+	}
+
+	public void setOrdersVO(OrdersVO ordersVO) {
+		this.ordersVO = ordersVO;
 	}
 	
 	

@@ -26,7 +26,7 @@ public class DBGifReaderController {
 	@GetMapping("DBGifReader")
 	public void dBGifReader(@RequestParam("storeId") String storeId, HttpServletRequest req, HttpServletResponse res)
 			                                                                                          throws IOException {
-		res.setContentType("image/gif");
+		res.setContentType("image/png");
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
