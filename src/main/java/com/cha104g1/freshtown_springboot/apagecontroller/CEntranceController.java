@@ -84,9 +84,8 @@ public class CEntranceController {
 
 	@GetMapping
     public String gotoCEntrance(HttpServletRequest req ,Model model) {
-		// 獲取 HttpSession，防止在會話不存在時創建新的會話。如果您確定會話一定存在，可以使用 getSession()。
+		System.out.println("未登入首頁");
         HttpSession session = req.getSession(false);
-        // 檢查 HttpSession 是否存在，並且 platformEmpLogin 屬性是否存在
         if (session != null && session.getAttribute("customerLogin") != null) {
             session.removeAttribute("customerLogin");
         }
@@ -95,6 +94,7 @@ public class CEntranceController {
     
     @GetMapping("addStoreC")
     public String gotoAddStores(Model model) {
+    	System.out.println("店家註冊");
     	StoresVO storesVO = new StoresVO();
 		model.addAttribute("storesVO", storesVO);
 		System.out.println("轉交請求");
@@ -105,6 +105,7 @@ public class CEntranceController {
     
     @GetMapping("addCustomer")
     public String gotoAddustomer(Model model) {
+    	System.out.println("顧客註冊");
     	CustomerVO customerVO = new CustomerVO();
 		model.addAttribute("customerVO", customerVO);
 		System.out.println("轉交請求");
@@ -115,6 +116,7 @@ public class CEntranceController {
 	
     @GetMapping("/cFunction/cEntrancePass")
     public String gotoCEntrancePass(Model model) {
+    	System.out.println("登入首頁");
     	model.addAttribute("searchStores","ture");
     	CustomerVO customerVO =new CustomerVO();
     	model.addAttribute("customerVO",customerVO);
@@ -128,17 +130,19 @@ public class CEntranceController {
     
     @GetMapping("/sFunction/sEntrancePass")
     public String gotoSEntrancePass(Model model) {
+    	System.out.println("店家後台");
     	return "sFunction/sEntrancePass"; //view
     }
     
     @GetMapping("/pFunction/pEntrancePass")
     public String gotoPEntrancePass(Model model) {
-    	
+    	System.out.println("平台後台");
     	return "pFunction/pEntrancePass"; //view
     }
 	
     @GetMapping("getOneStoreMeal")
     public String getOneStoreMeal(@RequestParam("storeId") String storeId,Model model) {
+    	System.out.println("未登入查看菜單");
  	   List<MealsVO> menuListS = mealsSvc.getAllByStoreId(Integer.valueOf(storeId));
  	   StoresVO storesVO=storesSvc.getOneStores(Integer.valueOf(storeId));
  	  //計算平均評分 
@@ -156,41 +160,7 @@ public class CEntranceController {
  	   model.addAttribute("hasInsert", "true"); 
  	   return "cEntrance";
     }
-    
-
-// 	@GetMapping("cFunction/cartPage")
-// 	public String seeCart(HttpServletRequest req ,Model model) {
-// 		List<CartDetailVO> cartDetailListData = new ArrayList<>();
-// 		
-// 		HttpSession session = req.getSession(false);
-// 		Object idVO =session.getAttribute("customerLogin");
-// 		CustomerVO customerVO= (CustomerVO)idVO;
-// 		model.addAttribute("customerId", customerVO.getCustomerId());
-// 		
-// 		List<CartVO> list = new ArrayList<>();
-// 		list=cartSvc.findCart(customerVO.getCustomerId());		
-//// 		for(CartVO cartVO :list ) {
-//// 			System.out.println("getId"+cartVO.getId());
-//// 			System.out.println("getMealNo"+cartVO.getMealNo());
-//// 			System.out.println("getMealQty()"+cartVO.getMealQty());
-//// 			System.out.println("=============================");
-////             
-//// 		}
-// 		for(CartVO cartVO :list ) {
-// 			CartDetailVO cartDetailVO = new CartDetailVO();
-// 			cartDetailVO=cartSvc.toCartDetailVO(cartVO);
-// 			cartDetailListData.add(cartDetailVO);
-// 			System.out.println("3="+cartDetailVO.getMealsVO());
-// 		}
-// 		model.addAttribute("customerVO", customerVO);
-// 		model.addAttribute("cartListData",list);
-// 		model.addAttribute("cartDetailListData",cartDetailListData);
-// 		System.out.println("來自首頁");
-// 		return "cFunction/cart/cartPage";
-// 	}
-// 	
-    
-    
+      
     //==========================================================
  	
  	
@@ -201,9 +171,8 @@ public class CEntranceController {
     
     @PostMapping("addCustomer/insert")
     public String addCustomer(@Valid CustomerVO customerVO, BindingResult result, ModelMap model) throws IOException {
-
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
-
+    	System.out.println("新增顧客");
 		if (result.hasErrors()) {
 			System.out.println("資料有誤");
 			return "pFunction/customer/addCustomer";

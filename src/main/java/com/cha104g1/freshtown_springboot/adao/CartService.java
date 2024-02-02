@@ -88,9 +88,8 @@ public class CartService {
 		//進redis查
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.select(15);//資料第15區cart
-		System.out.println(jedis.ping());
-
-		
+//		System.out.println(jedis.ping());
+	
 		Set<String> keys = jedis.keys(customerIndex+":*");
 		int maxKeyValue=0;
 		if(keys!=null) {
@@ -127,12 +126,12 @@ public class CartService {
 	//查詢
 	public List<CartVO> findCart(Integer customerId) {
 //		String custCart = String.valueOf(customerId);
-		
+		System.out.println("查所有cart ");
 		List<CartVO> list = new ArrayList<>();
 		//叫用jedisS
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.select(15);//資料第15區cart
-		System.out.println(jedis.ping());
+//		System.out.println(jedis.ping());
 		
 		 // 找到所有以 customerId: 開頭的 key
         Set<String> keys = jedis.keys(customerId+":*");
@@ -148,7 +147,7 @@ public class CartService {
 	            Integer cartId =-1;
 	            if (parts.length == 2) {
 	            	cartId = Integer.parseInt(parts[1]);
-	            	 System.out.println("cartId: " + cartId);
+	            	 System.out.println("操作cartId: " + cartId);
 	            }
 		            
 	            // 輸出數據
@@ -199,7 +198,7 @@ public class CartService {
 		
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.select(15);//資料第15區cart
-		System.out.println(jedis.ping());
+//		System.out.println(jedis.ping());
 		
 		//轉換成文字	
 		String mealNo=String.valueOf(cartVO.getMealNo());
@@ -217,27 +216,25 @@ public class CartService {
 		
 		jedis.expire(cartKey, 1814400);//資料存活時間7天	
 		//全部印出瞧瞧
-		findCart(customerId);
-
+//		findCart(customerId);
 		jedis.close();
 		System.out.println("加入Redis成功");
 	}
 	
 	//jedis購物車刪除
 	public String deleteJedisCart(String cartId,String customerId) {
-		
+		System.out.println("刪除單筆redis");
 		String cartKey = customerId+":"+cartId;
 		
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.select(15);//資料第15區
-		System.out.println(jedis.ping());
-		System.out.println("到這~1");
-		//檢查jedis存在的cart(無論有無都向後+物件)
+//		System.out.println(jedis.ping());
+
 		if(jedis.hexists(cartKey,"mealNo")) {
 			jedis.del(cartKey);
-			System.out.println("刪除失敗");
-		}else
 			System.out.println("刪除成功");
+		}else
+			System.out.println("無物件可刪除");
 
 		jedis.close();
 		return "1";
@@ -256,10 +253,10 @@ public class CartService {
 	    	   jedis.del(key);
 	    }
         
-        if(findCart(Integer.valueOf(customerId))==null)
-        	System.out.println("全刪除成功");
+        if(findCart(Integer.valueOf(customerId)).isEmpty() || findCart(Integer.valueOf(customerId))==null )
+        	System.out.println("全刪除成功"+findCart(Integer.valueOf(customerId)));
         else
-			System.out.println("刪除失敗");
+			System.out.println("刪除失敗"+findCart(Integer.valueOf(customerId)));
 
 		jedis.close();
 
@@ -268,13 +265,13 @@ public class CartService {
 	
 	//訂單成立寫入sql
 	public Integer addSQL(String customerId,String storeId) {
-		
+		System.out.println("cart寫入sql");
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.select(15);//資料第15區
 		
 		//新增寫入sql-orders=======================================
        	OrdersVO ordersVO = new OrdersVO();
-       	ordersVO.setOrderState(0);
+       	ordersVO.setOrderState(1);
 	         // 取得當前的日期和時間
 	            LocalDateTime now = LocalDateTime.now();	
 	            // 將 LocalDateTime 轉換為 Timestamp
@@ -380,7 +377,7 @@ public class CartService {
 		if (customizedOrderNoList != null && !customizedOrderNoList.isEmpty()) {
 			// 解析逗號分隔的字符串
 		    String[] customizedOrderNo = customizedOrderNoList.split(",");
-		    System.out.println("喜好="+customizedOrderNo.toString());
+//		    System.out.println("喜好="+customizedOrderNo.toString());
 		    
 		    // 使用取得的數據進行其他操作
 		    for (int i=0;i<customizedOrderNo.length;i++) {

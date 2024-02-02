@@ -43,26 +43,70 @@ public class CartPageController {
 	
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
-
+//		System.out.println("取得身份");
 	HttpSession session = req.getSession(false);
 	Object idVO =session.getAttribute("customerLogin");
 	CustomerVO customerVO= (CustomerVO)idVO;
-	if (customerVO != null) {
-		System.out.println("身分暱稱="+customerVO.getCustomerNic());
-	}
+
 	 model.addAttribute("customerVO", customerVO);
 	 model.addAttribute("customerId", customerVO.getCustomerId());
    }
 	   
 	
+	@GetMapping
+ 	public String seeCart(HttpServletRequest req ,Model model) {
+ 		System.out.println("查看購物車");
+ 		List<CartDetailVO> cartDetailListData = new ArrayList<>();
+ 		Set<Integer> howManyStore =new HashSet<>();
+ 		List<CartDetailVO> separateCart=new ArrayList<>();
+ 		Map<Integer,List<CartDetailVO>> separateStoreCart = new HashMap<>();
+ 		
+ 		Integer totalPrice=0;
+ 		Integer totalQty=0;
+ 		
+ 		HttpSession session = req.getSession(false);
+ 		Object idVO =session.getAttribute("customerLogin");
+ 		CustomerVO customerVO= (CustomerVO)idVO;
+ 		model.addAttribute("customerId", customerVO.getCustomerId());
+ 		
+ 		List<CartVO> list = new ArrayList<>();
+ 		list=cartSvc.findCart(customerVO.getCustomerId());		
+		
+	 		for(CartVO cartVO :list ) {
+	 			CartDetailVO cartDetailVO = new CartDetailVO();
+	 			cartDetailVO=cartSvc.toCartDetailVO(cartVO);
+	 			cartDetailListData.add(cartDetailVO);
+	 		}
+	 		for(CartDetailVO cartDetailVO :cartDetailListData ) {
+	 			totalPrice += cartDetailVO.getQtyPrice();
+	 			totalQty += cartDetailVO.getMealQty();
+	 			howManyStore.add(cartDetailVO.getStoreId());	
+	 		}
+	 		for(Integer storeId :howManyStore ) {
+	 			for(CartDetailVO cartDetailVO :cartDetailListData ) {
+	 				if(cartDetailVO.getStoreId()==storeId) 
+	 					separateCart.add(cartDetailVO);	
+	 			}
+	 			separateStoreCart.put(storeId, separateCart);
+		 		//*********
+		 		model.addAttribute("storeId", separateCart.get(0).getStoreId());	
+	 		}		
+	 		model.addAttribute("totalPrice", totalPrice);
+	 		model.addAttribute("totalQty", totalQty);
+	 		model.addAttribute("customerVO", customerVO);
+	 		model.addAttribute("cartListData",list);
+	 		model.addAttribute("cartDetailListData",cartDetailListData);	 		
+
+// 		System.out.println("cartDetailListData.size="+cartDetailListData.size());//不知為何只要加上登入濾器就無法執行
+ 		return "cFunction/cart/cartPage";
+ 	}
+	
 	@GetMapping("deleteCart")
 	public String deleteCart(@RequestParam String cartId,Model model) {	
+		System.out.println("刪除購物車項目");
 		String customerId = String.valueOf(model.getAttribute("customerId"));
 		CustomerVO customerVO = (CustomerVO)(model.getAttribute("customerVO"));
-		System.out.println("到這~21");
-		cartSvc.deleteJedisCart(cartId, customerId);
-		System.out.println("到這~31");
-		
+		cartSvc.deleteJedisCart(cartId, customerId);	
 		//*****重取Jedis**************************
 		List<CartDetailVO> cartDetailListData = new ArrayList<>();
  		List<CartVO> list = new ArrayList<>();
@@ -81,7 +125,8 @@ public class CartPageController {
 	}
 	
 	@PostMapping("payingOrder")
-	public String payOrder(String totalPrice,String storeId,Model model) {	
+	public String payingOrder(String totalPrice,String storeId,Model model) {	
+		System.out.println("前往繳費");
 		String customerId = String.valueOf(model.getAttribute("customerId"));
 		Integer newOrderId=cartSvc.addSQL(customerId,storeId);
 		if(newOrderId!=null) 
@@ -92,64 +137,19 @@ public class CartPageController {
 	}
 
 	@PostMapping("paidOrder")
-	public String paidOrder(Model model) {	
-		OrdersVO ordersVO= (OrdersVO)model.getAttribute("ordersVO");
+	public String paidOrder(String payStatus,String orderId,Model model) {	
+		System.out.println("繳費作業");
+		OrdersVO ordersVO= ordersSvc.getOneOrders(Integer.valueOf(orderId));
 		ordersVO.setPayState(1);
 		ordersSvc.updateOrders(ordersVO);
-		
+		System.out.println("改PayState(1)");
 		//==order socket通知
-		orderSocketSvc.customerSideConn(String.valueOf(ordersVO.getOrderId()));
-		System.out.println("有執行socket");
-		return "cFunction/cEntrancePass";
+//		orderSocketSvc.customerSideConn(String.valueOf(ordersVO.getOrderId()));
+//		System.out.println("有執行socket");
+		return "redirect:/cFunction/cart/payPage";
 	}
 	
- 	@GetMapping
- 	public String seeCart(HttpServletRequest req ,Model model) {
- 		List<CartDetailVO> cartDetailListData = new ArrayList<>();
- 		
- 		HttpSession session = req.getSession(false);
- 		Object idVO =session.getAttribute("customerLogin");
- 		CustomerVO customerVO= (CustomerVO)idVO;
- 		model.addAttribute("customerId", customerVO.getCustomerId());
- 		
- 		List<CartVO> list = new ArrayList<>();
- 		list=cartSvc.findCart(customerVO.getCustomerId());		
-
- 		for(CartVO cartVO :list ) {
- 			CartDetailVO cartDetailVO = new CartDetailVO();
- 			cartDetailVO=cartSvc.toCartDetailVO(cartVO);
- 			cartDetailListData.add(cartDetailVO);
- 			
- 		}
- 		Set<Integer> howManyStore =new HashSet<>();
- 		Integer totalPrice=0;
- 		Integer totalQty=0;
- 		for(CartDetailVO cartDetailVO :cartDetailListData ) {
- 			totalPrice += cartDetailVO.getQtyPrice();
- 			totalQty += cartDetailVO.getMealQty();
- 			howManyStore.add(cartDetailVO.getStoreId());	
- 		}
- 		List<CartDetailVO> separateCart=new ArrayList<>();
- 		Map<Integer,List<CartDetailVO>> separateStoreCart = new HashMap<>();
- 		for(Integer storeId :howManyStore ) {
- 			for(CartDetailVO cartDetailVO :cartDetailListData ) {
- 				if(cartDetailVO.getStoreId()==storeId) 
- 					separateCart.add(cartDetailVO);	
- 			}
- 			separateStoreCart.put(storeId, separateCart);
- 		}
- 		
- 		
- 		//*********
- 		model.addAttribute("storeId", separateCart.get(0).getStoreId());
- 		//*********
- 		model.addAttribute("totalPrice", totalPrice);
- 		model.addAttribute("totalQty", totalQty);
- 		model.addAttribute("customerVO", customerVO);
- 		model.addAttribute("cartListData",list);
- 		model.addAttribute("cartDetailListData",cartDetailListData);
- 		return "cFunction/cart/cartPage";
- 	}
+ 	
  	
  	
  	

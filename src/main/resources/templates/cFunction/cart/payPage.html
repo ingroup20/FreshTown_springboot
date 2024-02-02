@@ -40,7 +40,9 @@
 			<span>付款狀態:</span><span>未付款</span><br/>
 			<span>總金額:</span><span th:text="${ordersVO.totalPrice}"></span><br/>
 	</div>
-	<form th:action="${paidOrder}">
+	<form id="paidOrder" method="post" th:action="@{/cFunction/cartPage/paidOrder}">
+	<input type="hidden" name="payStatus" value="payseccess">
+	<input type="hidden" name="orderId" th:value="${ordersVO.orderId}">
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >信用卡付款</button>
 	</form>
 	
@@ -70,7 +72,7 @@
 
 function submitForm() {
     // Get the form element
-    var form = document.getElementById("checkMealDetail");
+    var form = document.getElementById("paidOrder");
     // Submit the form
     form.submit();
 }

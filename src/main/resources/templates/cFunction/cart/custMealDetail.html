@@ -117,6 +117,7 @@
 		  	   	<input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">
 		  	   	<input type="hidden" id="selectDate" name="customizedOrderList" value=""> 
 			  	<input type="hidden" name="mealQty" th:value="${qty}"> 
+			  	<input type="hidden" id="towhere" name="towhere" value=""> 
 			  	<a id="cancel" th:href="@{/cFunction/storeMenu?storeId=__${mealsVO.storesVO.storeId}__}">取消</a>
 		        <button  id="sentMealOrder" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >送出</button>
      		</form>			

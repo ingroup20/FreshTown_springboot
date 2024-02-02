@@ -131,15 +131,23 @@ body {
 			</tr>
 		</th:block>
   </tbody>
+<!--   <tbody th:unless="${cartDetailListData != null}"> -->
+<!--     <p>購物車中無商品</p> -->
+<!-- </tbody> -->
 </table>
-
+<div th:if="${cartDetailListData != null and not cartDetailListData.isEmpty()}">
 <form method="post" th:action="@{/cFunction/cartPage/payingOrder}">
 	<div>總餐點:<span th:text="${totalQty}"></span> 總金額:<span th:text="${totalPrice}"></span></div>
 	<input type="hidden" name="totalPrice"  th:value="${totalPrice}">
 	<input type="hidden" name="storeId" th:value="${storeId}">
-	<button type="button"><a th:href="@{/cFunction/storeMenu}">繼續點餐</a></button> <button type="submit">結帳</button>
+	<button type="button"><a th:href="@{/cFunction/storeMenu}">繼續點餐</a></button>
+	 <button type="submit">結帳</button>
 </form>
-
+</div>
+<div th:if="${cartDetailListData == null or cartDetailListData.isEmpty()}">
+	<div>總餐點:<span th:text="${totalQty}"></span> 總金額:<span th:text="${totalPrice}"></span></div>
+	<button type="button"><a th:href="@{/cFunction/cEntrancePass}">回點餐</a></button>
+</div>
 			
 
 

@@ -78,13 +78,11 @@ public class StoreMenuController {
 
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
-
+//		System.out.println("取得身份");
 	HttpSession session = req.getSession(false);
 	Object idVO =session.getAttribute("customerLogin");
 	CustomerVO customerVO= (CustomerVO)idVO;
-	if (customerVO != null) {
-		System.out.println("身分暱稱="+customerVO.getCustomerNic());
-	}
+
 	 model.addAttribute("customerId", customerVO.getCustomerId());
 	 model.addAttribute("customerVO", customerVO);
    } 
@@ -96,7 +94,8 @@ public class StoreMenuController {
 			String quantity,
 			ModelMap model,
 			RedirectAttributes redirectAttributes) {
-    	/***************************1.接收請求↑ ************************/	
+    	/***************************1.接收請求↑ ************************/
+    	System.out.println("喜好調整");
 		/***************************2.查詢*********************************************/
 		List<CustomizedVO> customizedListData = customizedSvc.getAll(Integer.valueOf(mealNo));
 		MealsVO mealsVO = mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealNo));
@@ -135,17 +134,7 @@ public class StoreMenuController {
 		public List<CustomizedDetailVO> customizedListData(Model model){	
 			return customizedDetailSvc.getAll();
 		}
-
-//		 @GetMapping("")
-//		 public String backStoreMenu(Model model) {
-//			 String storeId= (String)model.getAttribute("storeId");
-//			 System.out.println("有storeId="+storeId);
-//			 return  "redirect:/cFunction/storeMenu?storeId=" + storeId; 
-//			    
-//		 }
-		 
-		 
-		 
+ 
 		 //====送出到購物車==============================	 
 			
 
@@ -154,10 +143,11 @@ public class StoreMenuController {
 			public String addOneInCart(@RequestParam("mealNo") String mealNo, 
 					@RequestParam("customizedOrderList") String customizedOrderList, 
 					String mealQty,
+					String towhere,
 					Model model,
 					HttpServletRequest req,
 					RedirectAttributes redirectAttributes) {
-			 
+			 System.out.println("新增點餐至購物車.");
 				HttpSession session = req.getSession(); 
 				CustomerVO customerVO = (CustomerVO) session.getAttribute("customerLogin");//
 				Integer customerId=customerVO.getCustomerId();
@@ -191,45 +181,49 @@ public class StoreMenuController {
 				
 				cartSvc.addCartToRedis(cartVO,customerId);
 				
-//				redirectAttributes.addAttribute("store",storesVO.getStoreId() );
-				return "redirect:/cFunction/storeMenu?storeId=" + storesVO.getStoreId(); 
-//				return "cFunction/cartPage";
+				System.out.println("towhere="+towhere);
+				if(towhere.equals("c"))
+					return "redirect:/cFunction/cartPage";
+				else
+					return "redirect:/cFunction/storeMenu?storeId=" + storesVO.getStoreId();
+
 		 }
 		 
 		 
-			@GetMapping("cFunction/cartPage")
-			public String seeCart(HttpServletRequest req ,Model model) {
-				List<CartDetailVO> cartDetailListData = new ArrayList<>();
-				
-				HttpSession session = req.getSession(false);
-				Object idVO =session.getAttribute("customerLogin");
-				CustomerVO customerVO= (CustomerVO)idVO;
-				model.addAttribute("customerId", customerVO.getCustomerId());
-				
-				List<CartVO> list = new ArrayList<>();
-				list=cartSvc.findCart(customerVO.getCustomerId());
-				
-				for(CartVO cartVO :list ) {
-					System.out.println("getId"+cartVO.getId());
-					System.out.println("getMealNo"+cartVO.getMealNo());
-					System.out.println("getMealQty()"+cartVO.getMealQty());
-					System.out.println("=============================");
-		            
-				}
-				
-				
-				
-				for(CartVO cartVO :list ) {
-					CartDetailVO cartDetailVO = new CartDetailVO();
-					cartDetailVO=cartSvc.toCartDetailVO(cartVO);
-					cartDetailListData.add(cartDetailVO);
-					System.out.println("3="+cartDetailVO.getMealsVO());
-				}
-				
-				model.addAttribute("cartListData",list);
-				model.addAttribute("cartDetailListData",cartDetailListData);
-				return "cFunction/cart/cartPage";
-			}
-			
+//			@GetMapping("cFunction/cartPage")
+//			public String seeCart(HttpServletRequest req ,Model model) {
+//				System.out.println("看購物車");
+//				List<CartDetailVO> cartDetailListData = new ArrayList<>();
+//				
+//				HttpSession session = req.getSession(false);
+//				Object idVO =session.getAttribute("customerLogin");
+//				CustomerVO customerVO= (CustomerVO)idVO;
+//				model.addAttribute("customerId", customerVO.getCustomerId());
+//				
+//				List<CartVO> list = new ArrayList<>();
+//				list=cartSvc.findCart(customerVO.getCustomerId());
+//				
+//				for(CartVO cartVO :list ) {
+//					System.out.println("getId"+cartVO.getId());
+//					System.out.println("getMealNo"+cartVO.getMealNo());
+//					System.out.println("getMealQty()"+cartVO.getMealQty());
+//					System.out.println("=============================");
+//		            
+//				}
+//				
+//				
+//				
+//				for(CartVO cartVO :list ) {
+//					CartDetailVO cartDetailVO = new CartDetailVO();
+//					cartDetailVO=cartSvc.toCartDetailVO(cartVO);
+//					cartDetailListData.add(cartDetailVO);
+//					System.out.println("3="+cartDetailVO.getMealsVO());
+//				}
+//				
+//				model.addAttribute("cartListData",list);
+//				model.addAttribute("cartDetailListData",cartDetailListData);
+//				return "cFunction/cart/cartPage";
+//			}
+//			
 
 }

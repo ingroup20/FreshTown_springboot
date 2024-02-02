@@ -53,11 +53,13 @@ $(document).ready(function() {
 
 
 	$("#continue_button").click(function(){
+		$("#towhere").val("b");
 		submitForm() ;
 	});
 	
 	$("#next_button").click(function(){
+		$("#towhere").val("c");
 	    submitForm() ;
-	    window.location.href = '/freshtown_springboot/cFunction/cartPage';
+//	    window.location.href = '/freshtown_springboot/cFunction/cartPage';
 	});
 });

@@ -68,12 +68,11 @@ public class CEntrancePassController {
 	
 	@ModelAttribute//每次進入controller都會叫用
    public void whoareyou(HttpServletRequest req ,Model model) {
+//		System.out.println("取得身份");
 	HttpSession session = req.getSession(false);
 	Object idVO =session.getAttribute("customerLogin");
 	CustomerVO customerVO= (CustomerVO)idVO;
-	if (customerVO != null) {
-		System.out.println("身分暱稱="+customerVO.getCustomerNic());
-	}
+
 	model.addAttribute("customerVO", customerVO);
 	model.addAttribute("customerId", customerVO.getCustomerId());
    }
@@ -81,13 +80,9 @@ public class CEntrancePassController {
 	//登出
     @GetMapping("cEntrance")
     public String logout(HttpServletRequest req ,Model model) {
-    	// 獲取 HttpSession，防止在會話不存在時創建新的會話。如果您確定會話一定存在，可以使用 getSession()。
+    	System.out.println("登出");
         HttpSession session = req.getSession(false);
-
-        // 檢查 HttpSession 是否存在，並且 platformEmpLogin 屬性是否存在
         if (session != null && session.getAttribute("customerLogin") != null) {
-            // 移除 platformEmpLogin 屬性
-//        	session.setAttribute("customerLogin", null);
             session.removeAttribute("customerLogin");
         }
     	return "cEntrance"; //view
@@ -99,7 +94,7 @@ public class CEntrancePassController {
 	@PostMapping("searchStores")
    	public String searchStore(HttpServletRequest req,ModelMap model) {
    		/***************************1.接收請求↑ ************************/
-
+		System.out.println("查看店家");
    		/***************************2.查詢*********************************************/
    		List<StoresVO> storesListData = storesSvc.getAll(); 	
    		model.addAttribute("storesListData", storesListData);     // for listOnePage.html 
@@ -114,6 +109,7 @@ public class CEntrancePassController {
 	@PostMapping("searchPersonalInfo")
    	public String searchPersonalInfo(HttpServletRequest req,ModelMap model) {
    		/***************************1.接收請求↑ ************************/
+		System.out.println("個人資料管理");
     	Object idVO = req.getAttribute("customerLogin");
     	CustomerVO customerVO= (CustomerVO)idVO;
    		/***************************2.查詢*********************************************/
@@ -131,6 +127,7 @@ public class CEntrancePassController {
 	@PostMapping("searchLikeStore")
    	public String searchLikeStore(HttpServletRequest req,ModelMap model) {
    		/***************************1.接收請求↑ ************************/
+		System.out.println("收藏店家");
 		Integer customerId = (Integer)(model.getAttribute("customerId"));
    		/***************************2.查詢*********************************************/
    		List<LikeStoreVO> likeStoreListData = likeStoreSvc.getAllByCustomer(customerId,"L");
@@ -148,6 +145,7 @@ public class CEntrancePassController {
 	@PostMapping("searchBlackStore")
    	public String searchBlackStore(HttpServletRequest req,ModelMap model) {
    		/***************************1.接收請求↑ ************************/
+		System.out.println("黑名單店家");
 		Integer customerId = (Integer)(model.getAttribute("customerId"));
 		/***************************2.查詢*********************************************/
    		List<LikeStoreVO> likeStoreListData = likeStoreSvc.getAllByCustomer(customerId,"U");
@@ -165,6 +163,7 @@ public class CEntrancePassController {
 	@PostMapping("searchOrderHistory")
    	public String searchOrderHistory(HttpServletRequest req,ModelMap model) {
    		/***************************1.接收請求↑ ************************/
+		System.out.println("下單紀錄");
 		Integer customerId = (Integer)(model.getAttribute("customerId"));
     	System.out.println("身分="+customerId);
    		/***************************2.查詢*********************************************/
@@ -182,34 +181,35 @@ public class CEntrancePassController {
 
 //========================================================================================		
 	    //==insert 加入購物車===================    
-		@PostMapping("checkMealDetail")
-		public String putInCart(@RequestParam("mealNo") String mealNo,@RequestParam("priceBought") String priceBought,@RequestParam("mealQty") String mealQty,ModelMap model) {
-			/***************************1.接收請求↑ ************************/
-			Integer oneTotalPrice = Integer.valueOf(priceBought) *Integer.valueOf(mealQty);//單項總金額
-			/***************************2.查詢*********************************************/
-			List<CustomizedVO> customizedListData = customizedSvc.getAll(Integer.valueOf(mealNo));
-			if(model.getAttribute("totalPrice")==null) {
-				Integer totalPrice=oneTotalPrice;	
-				model.addAttribute("totalPrice",totalPrice);
-			}else {
-				Integer totalPrice = (Integer)(model.getAttribute("totalPrice"));
-				totalPrice =totalPrice+oneTotalPrice;//整車總金額
-				model.addAttribute("totalPrice",totalPrice);
-			}
-			model.addAttribute("mealsVO",mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealNo)));
-			model.addAttribute("oneTotalPrice",oneTotalPrice);
-			model.addAttribute("customizedListData",customizedListData);
-			/***************************3.顯示*****************/
-			model.addAttribute("putInCart", "true"); // for cEnrance.html
-			return "cFunction/cEntrancePass"; 	
-		}
+//		@PostMapping("checkMealDetail")
+//		public String putInCart(@RequestParam("mealNo") String mealNo,@RequestParam("priceBought") String priceBought,@RequestParam("mealQty") String mealQty,ModelMap model) {
+//			/***************************1.接收請求↑ ************************/
+//			System.out.println("下單紀錄");
+//			Integer oneTotalPrice = Integer.valueOf(priceBought) *Integer.valueOf(mealQty);//單項總金額
+//			/***************************2.查詢*********************************************/
+//			List<CustomizedVO> customizedListData = customizedSvc.getAll(Integer.valueOf(mealNo));
+//			if(model.getAttribute("totalPrice")==null) {
+//				Integer totalPrice=oneTotalPrice;	
+//				model.addAttribute("totalPrice",totalPrice);
+//			}else {
+//				Integer totalPrice = (Integer)(model.getAttribute("totalPrice"));
+//				totalPrice =totalPrice+oneTotalPrice;//整車總金額
+//				model.addAttribute("totalPrice",totalPrice);
+//			}
+//			model.addAttribute("mealsVO",mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealNo)));
+//			model.addAttribute("oneTotalPrice",oneTotalPrice);
+//			model.addAttribute("customizedListData",customizedListData);
+//			/***************************3.顯示*****************/
+//			model.addAttribute("putInCart", "true"); // for cEnrance.html
+//			return "cFunction/cEntrancePass"; 	
+//		}
 	    
 //==include進入店家===================    
-		@SuppressWarnings("unused")
+//		@SuppressWarnings("unused")
 		@GetMapping("storeMenu")
 		public String getOneStoreMeal(@RequestParam("storeId") String storeId,ModelMap model) {
 			/***************************1.接收請求↑ ************************/
-			System.out.println("來過這");
+			System.out.println("進入店家看菜單");
 			if(model.getAttribute("storeId")!=null) {
 				String re_storeId= (String)model.getAttribute("storeId");
 				System.out.println("有storeId="+storeId);
@@ -242,59 +242,11 @@ public class CEntrancePassController {
 	    
 	
 //==========================================================================			
-		@GetMapping("cFunction/storeMenu")
-		public String seeMenu(Model model) {
-		System.out.println("轉2");
-			return "/cFunction/storeMenu";
-		}
-		
-		
-//		@GetMapping("cFunction/cart/cartPage")
-//		public String seeCart(Model model) {
-//			List<CartDetailVO> cartDetailListData = new ArrayList<>();
-//			
-//			List<CartVO> list = cartSvc.findCart((Integer)(model.getAttribute("customerId")));
-//			for(CartVO cartVO :list )
-//				cartDetailListData.add(cartSvc.toCartDetailVO(cartVO));
-//
-//			model.addAttribute("cartDetailListData",cartDetailListData);
-//			System.out.println("來自鄧入後首頁");
-//			return "cFunction/cart/cartPage";
+//		@GetMapping("cFunction/storeMenu")
+//		public String seeMenu(Model model) {
+//		System.out.println("轉2");
+//			return "/cFunction/storeMenu";
 //		}
-		
-//		@GetMapping("cFunction/cartPage")
-//		public String seeCart(HttpServletRequest req ,Model model) {
-//			List<CartDetailVO> cartDetailListData = new ArrayList<>();
-//			
-//			HttpSession session = req.getSession(false);
-//			Object idVO =session.getAttribute("customerLogin");
-//			CustomerVO customerVO= (CustomerVO)idVO;
-//			model.addAttribute("customerId", customerVO.getCustomerId());
-//			
-//			List<CartVO> list = new ArrayList<>();
-//			list=cartSvc.findCart(customerVO.getCustomerId());
-//			
-//			for(CartVO cartVO :list ) {
-//				System.out.println("getId"+cartVO.getId());
-//				System.out.println("getMealNo"+cartVO.getMealNo());
-//				System.out.println("getMealQty()"+cartVO.getMealQty());
-//				System.out.println("=============================");
-//	            
-//			}
-//			
-//			
-//			
-//			for(CartVO cartVO :list ) {
-//				CartDetailVO cartDetailVO = new CartDetailVO();
-//				cartDetailVO=cartSvc.toCartDetailVO(cartVO);
-//				cartDetailListData.add(cartDetailVO);
-//				System.out.println("3="+cartDetailVO.getMealsVO());
-//			}
-//			
-//			model.addAttribute("cartListData",list);
-//			model.addAttribute("cartDetailListData",cartDetailListData);
-//			return "cFunction/cart/cartPage";
-//		}
-		
+			
 		    
 }
