@@ -38,7 +38,8 @@ import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 @Table(name = "orders")
 public class OrdersVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
-		
+	
+
 	@Id
 	@Column(name = "orderId", updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -290,9 +291,17 @@ public class OrdersVO implements java.io.Serializable{
 	}
 	
 	
-//	@OneToOne(mappedBy="ordersVO",cascade= CascadeType.ALL, fetch = FetchType.LAZY)
-//	private Set<RefundsVO> refundsVO;
-//
+	@OneToOne(mappedBy="ordersVO",cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+	private RefundsVO refundsVO;
+
+	public RefundsVO getRefundsVO() {
+		return refundsVO;
+	}
+	public void setRefundsVO(RefundsVO refundsVO) {
+		this.refundsVO = refundsVO;
+	}
+
+	
 //
 //	public Set<RefundsVO> getRefundsVO() {
 //		return refundsVO;

@@ -79,19 +79,19 @@ xmlns:th="http://www.thymeleaf.org">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
               
               <li class="menu-item"> 
-                <a href="#" class="menu-link menu-toggle">
+                <a th:href="@{/pFunction/orders/select_page}" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-detail"></i>
                     <div data-i18n="store">查看訂單總表</div>
                  </a>
                  <ul class="menu-sub">
                   <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a th:href="@{/pFunction/atm/select_page}" class="menu-link">
                     <i class="menu-icon"></i>
                     <div data-i18n="store">匯款管理</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a th:href="@{/pFunction/refunds/select_page}" class="menu-link">
                     <i class="menu-icon"></i>
                     <div data-i18n="client">退款作業</div>
                    </a>
@@ -99,7 +99,7 @@ xmlns:th="http://www.thymeleaf.org">
                  </ul>
                </li>
                <li class="menu-item">
-                 <a href="#" class="menu-link">
+                 <a th:href="@{/pFunction/stores/select_page}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user-circle"></i>
                     <div data-i18n="store">店家會員管理</div>
                  </a>
@@ -137,7 +137,7 @@ xmlns:th="http://www.thymeleaf.org">
               <i class="menu-icon tf-icons bx bx-support"></i>
               <div data-i18n="Support">諮詢線上客服</div>
             </a>
-            <a href="#" class="menu-link">
+            <a th:href="@{logout}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-exit"></i>
               <div data-i18n="Exit">登出</div>
             </a>

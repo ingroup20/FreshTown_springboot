@@ -117,7 +117,8 @@
 		  	   	<input type="hidden" name="mealNo" th:value="${mealsVO.mealNo}">
 		  	   	<input type="hidden" id="selectDate" name="customizedOrderList" value=""> 
 			  	<input type="hidden" name="mealQty" th:value="${qty}"> 
-			  	<a id="cancel" th:href="@{/cFunction/storeMenu}">取消</a>
+			  	<input type="hidden" id="towhere" name="towhere" value=""> 
+			  	<a id="cancel" th:href="@{/cFunction/storeMenu?storeId=__${mealsVO.storesVO.storeId}__}">取消</a>
 		        <button  id="sentMealOrder" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >送出</button>
      		</form>			
      		
@@ -133,8 +134,8 @@
 			        操作成功
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="submitForm()">繼續點餐</button>
-			        <button type="button" class="btn btn-primary" onclick="submitForm()">前往購物車結帳</button>
+			        <button id="continue_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal" >繼續點餐</button>
+			        <button id="next_button" type="button" class="btn btn-primary" >前往購物車結帳</button>
 			      </div>
 			    </div>
 			  </div>

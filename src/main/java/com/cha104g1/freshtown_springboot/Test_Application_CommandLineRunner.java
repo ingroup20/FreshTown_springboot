@@ -1,5 +1,7 @@
 package com.cha104g1.freshtown_springboot;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,8 @@ import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 
 @SpringBootApplication
 public class Test_Application_CommandLineRunner implements CommandLineRunner {
@@ -42,7 +46,8 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 	OrdersService ordersSvc;
 	@Autowired
 	MealsService mealsSvc;
-
+	@Autowired
+	RefundsService refundsSvc;
 
 	public static void main(String[] args) {
         SpringApplication.run(Test_Application_CommandLineRunner.class);
@@ -56,9 +61,11 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
 //    	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
 
 
-
-//    	
-    	
+//		List<RefundsVO> refundsList = refundsSvc.getAll();
+//		for(RefundsVO id:refundsList) {
+//			System.out.println("id="+id.getId());
+//			System.out.println("id="+id.getOrdersVO().getOrderId());
+//		}  	
     	
 //    	List<RefundsVO> list = repository.findAll();
 
