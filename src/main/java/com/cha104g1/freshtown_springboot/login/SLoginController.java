@@ -33,7 +33,7 @@ public class SLoginController {
 	  protected boolean allowUserS(String account, String password) {
 		  if(account!=null && !account.equals("")) {
 			  storeEmpLogin = storeEmpSvc.getBySEmpId(Integer.valueOf(account));
-			  if ( storeEmpLogin != null && storeEmpLogin.getsEmpId().equals(Integer.valueOf(account ) ) && storeEmpLogin.getsEmpId().equals(Integer.valueOf( password) ) )
+			  if ( storeEmpLogin != null && storeEmpLogin.getsEmpId().equals(Integer.valueOf(account ) ) && storeEmpLogin.getsEmpPw().equals(password))
 				  return true;
 		  }
 		  System.out.println("帳密錯誤，或不存在");
