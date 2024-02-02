@@ -54,10 +54,10 @@ public class MealsNoController {
 		model.addAttribute("mealsListData", list);     // for select_page.html 第97 109行用
 		model.addAttribute("mealTypeVO", new MealTypeVO());  // for select_page.html 第133行用
 		List<MealTypeVO> list2 = mealTypeSvc.getAll();
-    	model.addAttribute("mealTypeListData",list2);    // for select_page.html 第135行用
+    	model.addAttribute("mealTypeListData2",list2);    // for select_page.html 第135行用
 		model.addAttribute("storesVO", new StoresVO());  // for select_page.html 第133行用
     	List<StoresVO> list3 = storesSvc.getAll();
-    	model.addAttribute("storesListData",list3);    // for select_page.html 第135行用
+    	model.addAttribute("storesListData2",list3);    // for select_page.html 第135行用
     	
 		if (mealsVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
@@ -71,7 +71,6 @@ public class MealsNoController {
 //		return "back-end/emp/listOneEmp";  // 查詢完成後轉交listOneEmp.html
 		return "/sFunction/meals/select_page"; // 查詢完成後轉交select_page.html由其第158行insert listOneEmp.html內的th:fragment="listOneEmp-div
 	}
-
 	
 	@ExceptionHandler(value = { ConstraintViolationException.class })
 	//@ResponseStatus(value = HttpStatus.BAD_REQUEST)

@@ -33,7 +33,30 @@ public class POrdersController {
 
 	@Autowired
 	StoresService storesSvc;
+	//==========================================
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//================================================
+	@GetMapping("orders/select_page")
+	public String selectOrders(Model model) {
+		return "/pFunction/orders/select_page";
+	}
+	
+	@GetMapping("atm/select_page")
+	public String selectATM(Model model) {
+		return "/pFunction/atm/select_page";
+	}
+	
+	//======================================================
+
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("orderId") String orderId, ModelMap model) {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/

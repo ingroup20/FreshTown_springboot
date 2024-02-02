@@ -10,22 +10,30 @@
 			<tr>
 				<td colspan=2>
 					<p align=center>
-						輸入(測試登入):<br> 
-						帳號:cat<br> 
-						密碼:cat<br>
+						輸入(測試登入):<br> 帳號:cat<br> 密碼:cat<br>
 				</td>
 			</tr>
 			<tr>
 				<td><p align=right>account:</td>
-				<td><p><input type=text name="account" value="" size=15></td>
+				<td><p>
+						<input type=text name="account" value="" size=15></td>
 			</tr>
 			<tr>
 				<td><p align=right>password:</td>
-				<td><p><input type=password name="password" value="" size=15></td>
+				<td><p>
+						<input type=password name="password" value="" size=15></td>
 			</tr>
 			<tr>
 				<td colspan=2 align=center><input type=submit value="  ok   "></td>
 			</tr>
+			<h4>
+				<span>會員登入</span>
+			</h4>
+			<ul>
+				<li><h5>
+						<a th:href="@{/registerC}">Add 會員註冊</a>
+					</h5></li>
+			</ul>
 		</table>
 	</form>
 

@@ -12,15 +12,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
-<!-- 	<welcome-file-list> -->
-<!-- 		<welcome-file>index.html</welcome-file> -->
-<!-- 		<welcome-file>index.htm</welcome-file> -->
-<!-- 		<welcome-file>index.jsp</welcome-file> -->
-<!-- 		<welcome-file>default.html</welcome-file> -->
-<!-- 		<welcome-file>default.htm</welcome-file> -->
-<!-- 		<welcome-file>default.jsp</welcome-file> -->
-<!-- 	</welcome-file-list> -->
 	
 	<resource-ref>
 	    <description>DB Connection</description>
@@ -45,33 +36,33 @@
   	
   	
 
-  	<filter> 
-    <filter-name>PloginFilter</filter-name>
-    <filter-class>filters.PLoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>PloginFilter</filter-name>
-    <url-pattern>/pFunction/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-    <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>ERROR</dispatcher>
-    <dispatcher>ASYNC</dispatcher>
-  </filter-mapping>
+<!--   	<filter>  -->
+<!--     <filter-name>PloginFilter</filter-name> -->
+<!--     <filter-class>filters.PLoginFilter</filter-class> -->
+<!--   </filter> -->
+<!--   <filter-mapping> -->
+<!--     <filter-name>PloginFilter</filter-name> -->
+<!--     <url-pattern>/pFunction/*</url-pattern> -->
+<!--     <dispatcher>REQUEST</dispatcher> -->
+<!--     <dispatcher>FORWARD</dispatcher> -->
+<!--     <dispatcher>INCLUDE</dispatcher> -->
+<!--     <dispatcher>ERROR</dispatcher> -->
+<!--     <dispatcher>ASYNC</dispatcher> -->
+<!--   </filter-mapping> -->
 
-  	<filter> 
-    <filter-name>loginFilter</filter-name>
-    <filter-class>filters.PLoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/pFunction/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-    <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>ERROR</dispatcher>
-    <dispatcher>ASYNC</dispatcher>
-  </filter-mapping>
+<!--   	<filter>  -->
+<!--     <filter-name>loginFilter</filter-name> -->
+<!--     <filter-class>filters.PLoginFilter</filter-class> -->
+<!--   </filter> -->
+<!--   <filter-mapping> -->
+<!--     <filter-name>loginFilter</filter-name> -->
+<!--     <url-pattern>/pFunction/*</url-pattern> -->
+<!--     <dispatcher>REQUEST</dispatcher> -->
+<!--     <dispatcher>FORWARD</dispatcher> -->
+<!--     <dispatcher>INCLUDE</dispatcher> -->
+<!--     <dispatcher>ERROR</dispatcher> -->
+<!--     <dispatcher>ASYNC</dispatcher> -->
+<!--   </filter-mapping> -->
 
   
    <filter> 

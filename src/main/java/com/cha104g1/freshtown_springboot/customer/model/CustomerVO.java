@@ -10,6 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
@@ -26,7 +31,7 @@ public class CustomerVO {
 	    private String mobChecked;
 	    private String customerEmail;
 	    private String customerNic;
-	    private String customerAddress;
+	    private String customerAccount;
 	    private Byte customerState;
 	    
 	    @Id
@@ -40,6 +45,8 @@ public class CustomerVO {
 		}
 		
 		@Column(name = "customerPw")
+		@NotEmpty(message="會員密碼: 請勿空白")
+		@Pattern(regexp = "^[a-zA-Z0-9_]{3,18}$", message = "密碼為3~18位大小寫英數字")
 		public String getCustomerPw() {
 			return customerPw;
 		}
@@ -48,6 +55,9 @@ public class CustomerVO {
 		}
 		
 		@Column(name = "customerMob")
+		@NotEmpty(message="手機號碼: 請勿空白")
+		@Pattern(regexp="09\\d{8}")
+	    @Size(min = 10, max = 10)
 		public String getCustomerMob() {
 			return customerMob;
 		}
@@ -56,6 +66,7 @@ public class CustomerVO {
 		}
 		
 		@Column(name = "mobChecked")
+		@NotEmpty(message="手機認證: 請勿空白")
 		public String getMobChecked() {
 			return mobChecked;
 		}
@@ -64,6 +75,9 @@ public class CustomerVO {
 		}
 		
 		@Column(name = "customerEmail")
+		@NotEmpty(message="會員信箱: 請勿空白")
+		@Size(max = 100)
+	    @Email
 		public String getCustomerEmail() {
 			return customerEmail;
 		}
@@ -72,6 +86,8 @@ public class CustomerVO {
 		}
 		
 		@Column(name = "customerNic")
+		@NotEmpty(message="會員暱稱: 請勿空白")
+		@Pattern(regexp = "^[a-zA-Z\u4E00-\u9FFF_]+$", message = "暱稱只能包含繁體中文或英文")
 		public String getCustomerNic() {
 			return customerNic;
 		}
@@ -79,15 +95,17 @@ public class CustomerVO {
 			this.customerNic = customerNic;
 		}
 		
-		@Column(name = "customerAddress")
-		public String getCustomerAddress() {
-			return customerAddress;
+		@Column(name = "customerAccount")
+		@NotEmpty(message="會員帳號: 請勿空白")
+		public String getCustomerAccount() {
+			return customerAccount;
 		}
-		public void setCustomerAddress(String customerAddress) {
-			this.customerAddress = customerAddress;
+		public void setCustomerAccount(String customerAccount) {
+			this.customerAccount = customerAccount;
 		}
 		
 		@Column(name = "customerState")
+		@NotNull(message="會員狀態: 請勿空白")
 		public Byte getCustomerState() {
 			return customerState;
 		}

@@ -15,8 +15,8 @@ public class JedisUtil {
 			synchronized(JedisUtil.class) {
 				if (pool == null) {
 					JedisPoolConfig config = new JedisPoolConfig();
-					config.setMaxTotal(8);
-					config.setMaxIdle(8);
+					config.setMaxTotal(50);
+					config.setMaxIdle(50);
 					config.setMaxWaitMillis(10000);
 					pool = new JedisPool(config, "localhost", 6379);
 				}

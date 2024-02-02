@@ -61,7 +61,8 @@ public class MealsVO implements java.io.Serializable{
 	private byte[] mealPicture;
 
 	@Column(name = "cookingTime")
-	@NotNull(message="餐點製作時間: 請勿空白")
+	@NotNull(message="餐點製作時間: 請勿空白, 且格式必需為HH:mm:ss")
+//	@Pattern(regexp = "^([0-5][0-9]|60):([0-5][0-9]|60):([0-5][0-9]|60)$", message = "餐點製作時間: 請勿空白 , 且格式必需為HH:mm:ss")
 //	@DateTimeFormat(pattern = "HH:mm:ss")
 	private Time cookingTime;
 	

@@ -76,7 +76,7 @@
 			
 			<div>
             <label>員工密碼:</label>
-            <input type="password" th:field="*{pEmpPw}" onclick="hideContent('pEmpPw.errors');" readonly /><br/>
+            <input type="password" th:field="*{pEmpPw}" onclick="hideContent('pEmpPw.errors');"  /><br/>
             <span th:if="${#fields.hasErrors('pEmpPw')}" th:errors="*{pEmpPw}" class="error" id="pEmpPw.errors"></span>
             </div>
 			

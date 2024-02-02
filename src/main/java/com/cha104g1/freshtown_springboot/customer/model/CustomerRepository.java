@@ -9,6 +9,6 @@ public interface CustomerRepository extends JpaRepository<CustomerVO, Integer>{
 	
 	//登入身分驗證用
 	@Transactional
-	@Query(value = "from CustomerVO where customerAddress =?1")
-	CustomerVO findByCustomerAddress( String customerAddress);
+	@Query(value = "from CustomerVO where customerAccount =?1")
+	CustomerVO findByCustomerAccount( String customerAccount);
 }

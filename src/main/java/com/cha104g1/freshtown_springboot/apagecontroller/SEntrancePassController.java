@@ -31,6 +31,8 @@ import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
+import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
+import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
@@ -79,6 +81,8 @@ public class SEntrancePassController {
 	CustomizedDetailService customizedDetailSvc;	
 	@Autowired
 	CustomizedItemsService customizedItemsSvc;
+	@Autowired
+	MealTypeService mealTypeSvc;
 	
 	@Autowired
 	CustomizedService customizedSvc;
@@ -93,16 +97,36 @@ public class SEntrancePassController {
 	PickingService pickingSvc;
 
 	@ModelAttribute//每次進入controller都會叫用
-   public void whoareyou(HttpServletRequest req ,Model model) {
-
-	HttpSession session = req.getSession(false);
-	Object idVO =session.getAttribute("storeEmpLogin");
-	StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
-	if (storeEmpVO == null) {
-		System.out.println("出現null啦");
-	}
-	System.out.println("身分暱稱="+storeEmpVO.getsEmpName());
-	 model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+   public void whoareyou(HttpServletRequest req ,Model model, HttpSession session) {
+		  if (session != null) {
+//			  Enumeration<String> attributeNames = session.getAttributeNames();
+//
+//		        // 遍歷所有屬性名稱，並將對應的值輸出到控制台
+//		        while (attributeNames.hasMoreElements()) {
+//		            String attributeName = attributeNames.nextElement();
+//		            Object attributeValue = session.getAttribute(attributeName);
+//		            System.out.println("Attribute Name: " + attributeName + ", Value: " + attributeValue);
+//		        }
+	        Object idVO = session.getAttribute("storeEmpLogin");
+		        System.out.println("idVO="+idVO);
+		        StoreEmpVO storeEmpVO = (StoreEmpVO) idVO;
+		        if (storeEmpVO == null) {
+		            System.out.println("出現 null 啦1");
+		        }
+		        System.out.println("身分暱稱=" + storeEmpVO.getsEmpName());
+		        model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+		    } else {
+		    	HttpSession session2 = req.getSession(false);
+		    	Object idVO =session2.getAttribute("storeEmpLogin");
+		    	StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		    	if (storeEmpVO == null) {
+		    		System.out.println("出現null啦2");
+		    	}
+		    	System.out.println("身分暱稱="+storeEmpVO.getsEmpName());
+		    	 model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+		    }
+		  
+	
    }
    
 	//登出
@@ -116,72 +140,8 @@ public class SEntrancePassController {
         }
     	return "sFunction/sEntrancePass"; //view
     }
-    
-
-  //==insert訂單管理=================== 
-	@PostMapping("manageOrders")
-   	public String manageOrders(HttpServletRequest req,ModelMap model) {
-   		/***************************1.接收請求↑ ************************/
-   		/***************************2.查詢*********************************************/
-//		Integer storeId = (Integer)model.getAttribute("storeId");
-//   		List<OrdersVO> ordersListData = ordersSvc.getAllByStore(storeId); 	
-//   		model.addAttribute("ordersListData", ordersListData);     // for listOnePage.html 
-   	
-   		/***************************3.顯示*****************/
-   		model.addAttribute("manageOrders", "true"); // for cEnrance.html
-   		
-   		return "sFunction/sEntrancePass"; 	
-   	}
-    
-	  //==insert訂單排程=================== 
-		@PostMapping("orderOrders")
-	   	public String orderOrders(HttpServletRequest req,ModelMap model) {
-	   		/***************************1.接收請求↑ ************************/
-	   		/***************************2.查詢*********************************************/
-			Integer storeId = (Integer)model.getAttribute("storeId");
-	   		List<OrdersVO> ordersListData = ordersSvc.getAllByStore(storeId); 	
-	   		model.addAttribute("ordersListData", ordersListData);     // for listOnePage.html 
-	   	
-	   		/***************************3.顯示*****************/
-	   		model.addAttribute("orderOrders", "true"); // for cEnrance.html
-	   		
-	   		return "sFunction/sEntrancePass"; 	
-	   	}
 		
-		//===
-				    @GetMapping("/listAllOrders")
-					public String listAllOrders(Model model) {
-						return "sFunction/orders/listAllOrders";
-					}
-				    @PostMapping("getOne_For_Display")
-					public String getOne_For_Display(
-						/***************************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-						@NotEmpty(message="訂單編號: 請勿空白")
-						@RequestParam("orderId") String orderId,
-						ModelMap model) {
-						
-						/***************************2.開始查詢資料*********************************************/
-						OrdersVO ordersVO = ordersSvc.getOneOrders(Integer.valueOf(orderId));
-						
-						List<OrdersVO> list = ordersSvc.getAll();
-						model.addAttribute("ordersListData", list);     // for select_page.html 第97 109行用
-			
-						if (ordersVO == null) {
-							model.addAttribute("errorMessage", "查無資料");
-							return "sFunction/manageOrders";
-						}
-						
-						/***************************3.查詢完成,準備轉交(Send the Success view)*****************/
-						model.addAttribute("ordersVO", ordersVO);
-						model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
-			
-						return "sFunction/manageOrders"; 
-					}
-				    
-	    
-	    
-	    
-   
+		
 		  //==insert店家資料=================== 
 			@PostMapping("storeInfo")
 		   	public String storeInfo(HttpServletRequest req,ModelMap model) {
@@ -295,8 +255,18 @@ public class SEntrancePassController {
 	}
 	
 	@ModelAttribute("mealsListData") // for select_page.html 第135行用
-	protected List<MealsVO> referenceListData_Meals(Model model) {
-		List<MealsVO> list = mealsSvc.getAll();
+	protected List<MealsVO> referenceListData_Meals(HttpServletRequest req , Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		List<MealsVO> list = mealsSvc.getAllByStoreId(storeEmpVO.getStoresVO().getStoreId());
+		return list;
+	}
+	
+	@ModelAttribute("mealTypeListData2") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected List<MealTypeVO> referenceListData(Model model) {
+		model.addAttribute("mealTypeVO", new MealTypeVO());
+		List<MealTypeVO> list = mealTypeSvc.getAll();
 		return list;
 	}
 	

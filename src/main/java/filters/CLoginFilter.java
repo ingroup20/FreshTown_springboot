@@ -38,7 +38,7 @@ public class CLoginFilter implements Filter{
 		Object account = session.getAttribute("customerLogin");
 		if (account == null) {
 //			session.setAttribute("location", req.getRequestURI());
-			session.setAttribute("location", req.getServletPath());
+			session.setAttribute("location", req.getServletPath()+"?"+req.getQueryString());
 			System.out.println(req.getContextPath());
 			res.sendRedirect(req.getContextPath() + "/loginC");
 			return;

@@ -71,7 +71,7 @@ CREATE TABLE customer (
     mobChecked CHAR(1) NOT NULL CHECK (mobChecked IN ('N', 'Y')),
     customerEmail VARCHAR(31) NOT NULL,
     customerNic VARCHAR(15) NOT NULL,
-    customerAddress VARCHAR(127) NOT NULL,
+    customerAccount VARCHAR(127) NOT NULL,
     customerState TINYINT NOT NULL CHECK (customerState IN (0, 1, 2))
 );
 
@@ -270,39 +270,39 @@ CREATE TABLE  service (
 
 -- ALTER TABLE items_class ADD CONSTRAINT items_class_storeid_fk FOREIGN KEY (storeId) REFERENCES stores(storeId);
 
--- ALTER TABLE store_emp ADD CONSTRAINT store_emp_storeId_fk FOREIGN KEY (storeId) REFERENCES Stores(storeId);
+ALTER TABLE store_emp ADD CONSTRAINT store_emp_storeId_fk FOREIGN KEY (storeId) REFERENCES Stores(storeId);
 
--- ALTER TABLE material ADD CONSTRAINT material_itemclassId_fk FOREIGN KEY (itemClassId) REFERENCES items_class(itemClassId);
--- ALTER TABLE material ADD CONSTRAINT material_storeid_fk FOREIGN KEY (storeId) REFERENCES stores(storeId);
+ALTER TABLE material ADD CONSTRAINT material_itemclassId_fk FOREIGN KEY (itemClassId) REFERENCES items_class(itemClassId);
+ALTER TABLE material ADD CONSTRAINT material_storeid_fk FOREIGN KEY (storeId) REFERENCES stores(storeId);
 
--- ALTER TABLE picking ADD CONSTRAINT picking_itemnumber_fk FOREIGN KEY (itemNumber) REFERENCES material(itemNumber);
---  ALTER TABLE picking ADD CONSTRAINT picking_storeid_fk FOREIGN KEY (storeId) REFERENCES stores(storeId);
---  ALTER TABLE picking ADD CONSTRAINT picking_sempid_fk FOREIGN KEY (sEmpId) REFERENCES store_emp(sEmpId);
+ALTER TABLE picking ADD CONSTRAINT picking_itemnumber_fk FOREIGN KEY (itemNumber) REFERENCES material(itemNumber);
+ ALTER TABLE picking ADD CONSTRAINT picking_storeid_fk FOREIGN KEY (storeId) REFERENCES stores(storeId);
+ ALTER TABLE picking ADD CONSTRAINT picking_sempid_fk FOREIGN KEY (sEmpId) REFERENCES store_emp(sEmpId);
 
---  ALTER TABLE sup_order ADD CONSTRAINT sup_sup_id_fk FOREIGN KEY (supId) REFERENCES supplier (supId);
+ ALTER TABLE sup_order ADD CONSTRAINT sup_sup_id_fk FOREIGN KEY (supId) REFERENCES supplier (supId);
 
--- ALTER TABLE meals ADD CONSTRAINT meals_mealTypeNo_fk FOREIGN KEY (mealTypeNo) REFERENCES meal_type (mealTypeNo);
--- ALTER TABLE meals ADD CONSTRAINT meals_storeId_fk FOREIGN KEY (storeId) REFERENCES stores (storeId);
+ALTER TABLE meals ADD CONSTRAINT meals_mealTypeNo_fk FOREIGN KEY (mealTypeNo) REFERENCES meal_type (mealTypeNo);
+ALTER TABLE meals ADD CONSTRAINT meals_storeId_fk FOREIGN KEY (storeId) REFERENCES stores (storeId);
 
--- ALTER TABLE  orders ADD CONSTRAINT orders_customerId_FK FOREIGN KEY(customerId)  REFERENCES customer(customerId);
--- ALTER TABLE  orders ADD CONSTRAINT orders_storeId_FK FOREIGN KEY(storeId)  REFERENCES stores(storeId);
+ALTER TABLE  orders ADD CONSTRAINT orders_customerId_FK FOREIGN KEY(customerId)  REFERENCES customer(customerId);
+ALTER TABLE  orders ADD CONSTRAINT orders_storeId_FK FOREIGN KEY(storeId)  REFERENCES stores(storeId);
 
--- ALTER TABLE refunds ADD CONSTRAINT refunds_orderId_Fk FOREIGN KEY(orderId) REFERENCES orders(orderId);
+ALTER TABLE refunds ADD CONSTRAINT refunds_orderId_Fk FOREIGN KEY(orderId) REFERENCES orders(orderId);
 
--- ALTER TABLE order_detail ADD  CONSTRAINT order_detail_mealNo_fk FOREIGN KEY (mealNo) REFERENCES meals(mealNo);
--- ALTER TABLE order_detail ADD  CONSTRAINT order_detail_orderId_fk FOREIGN KEY (orderId) REFERENCES orders(orderId);
+ALTER TABLE order_detail ADD  CONSTRAINT order_detail_mealNo_fk FOREIGN KEY (mealNo) REFERENCES meals(mealNo);
+ALTER TABLE order_detail ADD  CONSTRAINT order_detail_orderId_fk FOREIGN KEY (orderId) REFERENCES orders(orderId);
 
--- ALTER TABLE customized_detail ADD  CONSTRAINT customized_detail_custedItemsNo_fk FOREIGN KEY (custedItemsNo) REFERENCES customized_items (custedItemsNo);
+ALTER TABLE customized_detail ADD  CONSTRAINT customized_detail_custedItemsNo_fk FOREIGN KEY (custedItemsNo) REFERENCES customized_items (custedItemsNo);
 
--- ALTER TABLE customized_order ADD  CONSTRAINT customized_order_orderDtlNo_fk FOREIGN KEY (orderDtlNo) REFERENCES order_detail (orderDtlNo);
--- ALTER TABLE customized_order ADD  CONSTRAINT customized_order_custedDtlNo_fk FOREIGN KEY (custedDtlNo) REFERENCES customized_detail (custedDtlNo);
+ALTER TABLE customized_order ADD  CONSTRAINT customized_order_orderDtlNo_fk FOREIGN KEY (orderDtlNo) REFERENCES order_detail (orderDtlNo);
+ALTER TABLE customized_order ADD  CONSTRAINT customized_order_custedDtlNo_fk FOREIGN KEY (custedDtlNo) REFERENCES customized_detail (custedDtlNo);
 
--- ALTER TABLE customized ADD  CONSTRAINT customized_mealNo_fk FOREIGN KEY (mealNo) REFERENCES meals (mealNo);
--- ALTER TABLE customized ADD  CONSTRAINT customized_custedItemsNo_fk FOREIGN KEY (custedItemsNo) REFERENCES customized_items (custedItemsNo);
+ALTER TABLE customized ADD  CONSTRAINT customized_mealNo_fk FOREIGN KEY (mealNo) REFERENCES meals (mealNo);
+ALTER TABLE customized ADD  CONSTRAINT customized_custedItemsNo_fk FOREIGN KEY (custedItemsNo) REFERENCES customized_items (custedItemsNo);
 
--- ALTER TABLE like_store ADD CONSTRAINT like_store_customerId_FK FOREIGN KEY(customerId)  REFERENCES customer(customerId);
--- ALTER TABLE like_store ADD CONSTRAINT like_store_storeId_FK FOREIGN KEY(customerId)  REFERENCES customer(customerId);
+ALTER TABLE like_store ADD CONSTRAINT like_store_customerId_FK FOREIGN KEY(customerId)  REFERENCES customer(customerId);
+ALTER TABLE like_store ADD CONSTRAINT like_store_storeId_FK FOREIGN KEY(customerId)  REFERENCES customer(customerId);
 
--- ALTER TABLE service ADD CONSTRAINT service_pempid_fk FOREIGN KEY (pEmpId) REFERENCES p_emp(pEmpId);
--- ALTER TABLE service ADD CONSTRAINT service_storeid_fk FOREIGN KEY (storeId) REFERENCES stores(storeId);
--- ALTER TABLE service ADD CONSTRAINT service_customerid_fk FOREIGN KEY (customerId) REFERENCES customer(customerId);
+ALTER TABLE service ADD CONSTRAINT service_pempid_fk FOREIGN KEY (pEmpId) REFERENCES p_emp(pEmpId);
+ALTER TABLE service ADD CONSTRAINT service_storeid_fk FOREIGN KEY (storeId) REFERENCES stores(storeId);
+ALTER TABLE service ADD CONSTRAINT service_customerid_fk FOREIGN KEY (customerId) REFERENCES customer(customerId);

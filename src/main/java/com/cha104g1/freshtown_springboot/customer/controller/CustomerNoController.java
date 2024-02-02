@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
 @Controller
@@ -42,9 +43,11 @@ public class CustomerNoController {
 		/***************************2.開始查詢資料*********************************************/
 		CustomerVO customerVO = customerSvc.getOneCustomer(Integer.valueOf(customerId));
 		
+		     // for select_page.html 第97 109行用
+
 		List<CustomerVO> list = customerSvc.getAll();
 		model.addAttribute("customerListData", list);     // for select_page.html 第97 109行用
-
+		
 		if (customerVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
 			return "pFunction/customer/select_page";

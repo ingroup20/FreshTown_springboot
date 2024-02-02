@@ -60,11 +60,11 @@
 	            <div class="section_item">
 	                <div class="card">
 	                    <!-- 圖片-->
-                        <div class="card_img"><img th:src="@{./images/store.png}"></div>
+                        <div class="card_img"><img th:src="@{/stores/DBGifReader} + '?storeId=' + ${storesVO.storeId}" ></div>
 	                    <!-- <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
                         <h4 th:text="${storesVO.storeName}">店家名稱</h4>
                         <!-- 評等-->
-                        <p>評等:<span th:text="${storesVO.storeAddress}"></span>星</p>
+                        <p>評等:<span th:text="${storesVO.totalScore/(storesVO.scorePeople!=null&&storesVO.scorePeople!=0?storesVO.scorePeople:1)}"></span>星</p>
                         <p th:text="${storesVO.storeAddress}">店家地址</p>
                         <div><span th:text="${storesVO.pushUp}">營業中</span>營業時間:<span th:text="${storesVO.openTime}"></span></div>
                         <p >店休:<span th:text="${storesVO.restDay}"></span></p>

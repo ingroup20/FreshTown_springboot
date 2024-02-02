@@ -1,7 +1,7 @@
 package com.cha104g1.freshtown_springboot.orders.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 
 
 @Controller
@@ -31,19 +32,25 @@ public class SOrderIdController {
 	OrdersService ordersSvc;
 	
 
-	@PostMapping("getOne_For_Display")
-	public String getOne_For_Display(
+	@PostMapping("getOneOrderForStore")
+	public String getOneOrderForStore(
 		/***************************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 		@NotEmpty(message="訂單編號: 請勿空白")
 		@RequestParam("orderId") String orderId,
+		HttpServletRequest req,
 		ModelMap model) {
 		
 		/***************************2.開始查詢資料*********************************************/
-		OrdersVO ordersVO = ordersSvc.getOneOrders(Integer.valueOf(orderId));
+		OrdersVO ordersVO=null;
+		HttpSession session = req.getSession();
+		StoreEmpVO storeEmpVO = (StoreEmpVO)session.getAttribute("storeEmpLogin");
+		List<OrdersVO> storeOrderList = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+        
+		for(OrdersVO order:storeOrderList) {
+			if(order.getOrderId().equals(Integer.valueOf(orderId)))
+				ordersVO=order;				
+		}
 		
-		List<OrdersVO> list = ordersSvc.getAll();
-		model.addAttribute("ordersListData", list);     // for select_page.html 第97 109行用
-
 		if (ordersVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
 			return "sFunction/orders/select_page";
@@ -51,16 +58,15 @@ public class SOrderIdController {
 		
 		/***************************3.查詢完成,準備轉交(Send the Success view)*****************/
 		model.addAttribute("ordersVO", ordersVO);
-		model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
-
-		return "sFunction/orders/select_page"; 
+//		model.addAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.html的第156行 -->
+//		return "sFunction/orders/select_page"; 
+		return "redirect: /sFunction/orders/select_page";
 	}
 
 
 	
 	
 	@ExceptionHandler(value = { ConstraintViolationException.class })
-
 	public ModelAndView handleError(HttpServletRequest req,ConstraintViolationException e,Model model) {
 	    Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 	    StringBuilder strBuilder = new StringBuilder();

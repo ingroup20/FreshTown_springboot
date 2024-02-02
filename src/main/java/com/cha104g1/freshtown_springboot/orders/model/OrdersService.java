@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cha104g1.freshtown_springboot.refunds.model.HibernateUtil_CompositeQuery_Refunds;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,6 @@ public class OrdersService {
 
     @Autowired
     private OrdersRepository repository;
-    
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -49,6 +49,7 @@ public class OrdersService {
 	public List<OrdersVO> getAll(Map<String, String[]> map) {
 		return HibernateUtil_CompositeQuery_Orders.getAllC(map,sessionFactory.openSession());
 	}
+	
 
 	public List<OrdersVO> getAllByStore(Integer storeId) {
 		return repository.findAllByStoreId(storeId);
@@ -57,5 +58,12 @@ public class OrdersService {
 	public List<OrdersVO> getAllByCustomer(Integer CustomerId) {
 		return repository.findAllByCustomerId(CustomerId);
 	}
-    
+	
+	//==socket to new orederOrders============================================================
+	
+	private Socket socket = null;
+	int threadID;
+	
+
+	
 }

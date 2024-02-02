@@ -141,15 +141,10 @@ xmlns:th="http://www.thymeleaf.org">
 					<a th:href="@{/sFunction/orders/select_page}" class="menu-link"> 
 					    <i class="menu-icon tf-icons bx bx-receipt"></i>
 							<div data-i18n="orders">管理訂單</div>
-<!-- 							<div data-i18n="store"> -->
-<!-- 								<form class="menu-link" method="post" th:action="manageOrders"> -->
-<!-- 									<input type="submit" value=" 管理訂單"> -->
-<!-- 								</form> -->
-<!-- 							</div> -->
 					      </a> 
 					   </li>
                     <li class="menu-item">
-  					  <a href="#" class="menu-link" th:onclick="submitForm('orderOrders')">
+  					  <a th:href="@{/sFunction/orders/orderOrders}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-sort-up"></i>
                            <div data-i18n="store">顯示訂單排程</div>
                       </a>

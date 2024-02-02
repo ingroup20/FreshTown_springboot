@@ -37,9 +37,8 @@ public class CStoresController {
 	@PostMapping("insertC")
 	public String insertC(BindingResult result, ModelMap model,
 			@RequestParam("photo") MultipartFile[] parts) throws IOException {
-
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
-
+		System.out.println("新增店家");
 		/*************************** 2.開始新增資料 *****************************************/
 		StoresVO storesVO = new StoresVO();
 		model.addAttribute("storesVO", storesVO);
@@ -54,6 +53,7 @@ public class CStoresController {
 
 	// 去除BindingResult中某個欄位的FieldError紀錄
 	public BindingResult removeFieldErrorC(StoresVO storesVO, BindingResult result, String removedFieldname) {
+		System.out.println("輸入錯誤提示");
 		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
 				.filter(fieldname -> !fieldname.getField().equals(removedFieldname))
 				.collect(Collectors.toList());
@@ -70,6 +70,7 @@ public class CStoresController {
 	 */
 	@PostMapping("listStores_ByCompositeQueryC")
 	public String listAllStoresC(HttpServletRequest req, Model model) {
+		System.out.println("店家複合查詢");
 		Map<String, String[]> map = req.getParameterMap();
 		List<StoresVO> list = storesSvc.getAll(map);
 		model.addAttribute("storesListData", list); 
