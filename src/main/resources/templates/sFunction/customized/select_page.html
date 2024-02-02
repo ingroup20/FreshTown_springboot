@@ -80,7 +80,15 @@
 	  <ul>
 		<li><h5><a href='listAllCustomized'>List</a> all Customized. <br><br></h5></li>
 
-		
+	<li>
+		<form method="post" th:action="@{getOne_For_Display}">
+			輸入商品編號:
+			<input type="text" name="mealNo" th:value="${param.mealNo}" > <br>
+			輸入客製項目編號:
+			<input type="text" name="custedItemsNo" th:value="${param.custedItemsNo}" > 
+			<input type="submit" value="送出">
+		</form><br>
+	</li>
 		
 <!--  萬用複合查詢-以下欄位-可隨意增減 -->
   
