@@ -134,7 +134,7 @@ public class StoreEmpVO {
 		}
 		
 		@Column(name = "sEmpState")
-		@NotEmpty(message="員工狀態: 請勿空白")
+		@NotNull(message="員工狀態: 請勿空白")
 		public Byte getsEmpState() {
 			return sEmpState;
 		}

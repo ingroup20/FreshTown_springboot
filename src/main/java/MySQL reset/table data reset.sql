@@ -105,7 +105,7 @@ pickingStatus, pickingClass, pickingDate, marks) VALUES
 -- 旭東
 INSERT INTO sup_order VALUES (1,1,1,7414,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
 INSERT INTO sup_order VALUES (2,2,3,7414,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
-INSERT INTO sup_order VALUES (3,3,5,7414,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
+INSERT INTO sup_order VALUES (3,3,3,7414,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
 -- 雯馨
 INSERT INTO meals VALUES (1, '原汁牛肉麵', 145, 2, 2, 1, null, '00:30:00');
 INSERT INTO meals VALUES (2, '紅燒排骨飯', 120, 1, 2, 1, null, '00:25:00');

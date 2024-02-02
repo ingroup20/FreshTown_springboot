@@ -21,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
-import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
-import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
