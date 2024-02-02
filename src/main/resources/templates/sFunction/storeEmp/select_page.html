@@ -100,19 +100,7 @@
 			</form><br>
 		</li>
 
-		
-		
-		
-		<li><form method="post" th:action="@{getOne_For_Display}">
-				選擇員工編號:
-				<select name="sEmpId">
-				     <option th:each="storeEmpVO : ${storeEmpListData}" th:value="${storeEmpVO.sEmpId}" th:text="${storeEmpVO.sEmpId}" />
-			    </select>
-				<input type="submit" value="送出">
-			</form><br>
-		</li>
-		
-		
+	
 		
 		
 <!--  萬用複合查詢-以下欄位-可隨意增減 -->

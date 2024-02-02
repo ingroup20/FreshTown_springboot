@@ -79,11 +79,11 @@ public class MealsService implements MealsServiceIntf{
 		return 0;
 	}
 
-	@Override
-	public List<MealsVO> getMealsVOByCompositeQuery(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<MealsVO> getMealsVOByCompositeQuery(Map<String, String[]> map) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public List<MealsVO> getAllByStoreId(Integer storeId) {
@@ -91,6 +91,10 @@ public class MealsService implements MealsServiceIntf{
 		return list;
 	}
 
+	@Override
+	public List<MealsVO> getAll(Map<String, String[]> map) {
+		return HibernateUtil_CompositeQuery_Meals.getAllC(map, sessionFactory.openSession());
+	}
 	
 	
 }

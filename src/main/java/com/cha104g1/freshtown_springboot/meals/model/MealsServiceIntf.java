@@ -22,7 +22,9 @@ public interface MealsServiceIntf {
 	
 	int getPageTotal();
 	
-	List<MealsVO> getMealsVOByCompositeQuery(Map<String, String[]> map);
+//	List<MealsVO> getMealsVOByCompositeQuery(Map<String, String[]> map);
 	//店家菜單
 	List<MealsVO> getAllByStoreId(Integer storeId);
+	
+	List<MealsVO> getAll(Map<String, String[]> map);
 }

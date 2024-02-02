@@ -31,6 +31,8 @@ import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
+import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeService;
+import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
@@ -79,6 +81,8 @@ public class SEntrancePassController {
 	CustomizedDetailService customizedDetailSvc;	
 	@Autowired
 	CustomizedItemsService customizedItemsSvc;
+	@Autowired
+	MealTypeService mealTypeSvc;
 	
 	@Autowired
 	CustomizedService customizedSvc;
@@ -251,8 +255,18 @@ public class SEntrancePassController {
 	}
 	
 	@ModelAttribute("mealsListData") // for select_page.html 第135行用
-	protected List<MealsVO> referenceListData_Meals(Model model) {
-		List<MealsVO> list = mealsSvc.getAll();
+	protected List<MealsVO> referenceListData_Meals(HttpServletRequest req , Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		List<MealsVO> list = mealsSvc.getAllByStoreId(storeEmpVO.getStoresVO().getStoreId());
+		return list;
+	}
+	
+	@ModelAttribute("mealTypeListData2") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected List<MealTypeVO> referenceListData(Model model) {
+		model.addAttribute("mealTypeVO", new MealTypeVO());
+		List<MealTypeVO> list = mealTypeSvc.getAll();
 		return list;
 	}
 	

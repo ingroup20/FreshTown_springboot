@@ -53,7 +53,7 @@
 
 	<div align="center">
 		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{insert}" method="post" th:object="${mealsVO}" enctype="multipart/form-data">
+		<form th:action="@{/sFunction/meals/insert}" method="post" th:object="${mealsVO}" enctype="multipart/form-data">
 			
 		
 			<div>
@@ -78,18 +78,23 @@
 		
 			<div>
 			<label>餐點狀態:</label>
-			<input type="text" th:field="*{mealOnsale}" onclick="hideContent('mealOnsale.errors');" /><br/>
+			<select th:field="*{mealOnsale}">
+				<option th:value="0" th:text="準備中"></option>
+	            <option th:value="1" th:text="上架中"></option>
+	            <option th:value="2" th:text="已下架"></option>
+	        </select><br>			
 			<span  th:if="${#fields.hasErrors('mealOnsale')}" th:errors="*{mealOnsale}" class="error" id="mealOnsale.errors"></span>
 			</div>
 		
 			<div>
 			<label>店家:</label>
+<!-- 			<input type="hidden" th:field="*{storesVO}" th:value="${storesVO}" ><br> -->
 <!-- 			<input type="text" th:field="*{storesVO.storeName}" onclick="hideContent('storesVO.storeName.errors');" /><br/> -->
 <!-- 			<span  th:if="${#fields.hasErrors('storesVO.storeName')}" th:errors="*{storesVO.storeName}" class="error" id="storesVO.storeName.errors"></span> -->
 			<select th:field="*{storesVO.storeId}">
-				<option th:each="storesVO : ${storesListData2}" th:value="${storesVO.storeId}" th:text="${storesVO.storeName}" />
+				<option th:each="storesVO : ${storesVO}" th:value="${storesVO.storeId}" th:text="${storesVO.storeName}" />
 			</select>
-			<span  th:if="${#fields.hasErrors('storesVO.storeId')}" th:errors="*{storesVO.storeId}" class="error" id="storesVO.storeId.errors"></span>
+<!-- 			<span  th:if="${#fields.hasErrors('storesVO.storeId')}" th:errors="*{storesVO.storeId}" class="error" id="storesVO.storeId.errors"></span> -->
 			</div>
 		
 			<div>
@@ -109,7 +114,7 @@
 					
 			<div>
 				<div></div>
-				<div><button type="submit" id="submit"> 送出新增 </button></div>
+				<div><button type="submit" id="submit"> 送出新增 </button></div>				
 				<div></div>
 			</div>		
 		</form>
