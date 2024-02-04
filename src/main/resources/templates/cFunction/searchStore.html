@@ -32,15 +32,11 @@
 	                        <div class="card_info">
 	                            <h3 th:text="${storesVO.storeName}">店家名稱</h3>
 								<!-- 評等-->
-		                            <div class="star_area">
-		                                  	<span class="star" data-star="1"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="2"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="3"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="4"><i class="fas fa-star"></i></span>
-									        <span class="star" data-star="5"><i class="fas fa-star"></i></span>
-		                            </div>
-		                        <p>評等:<span th:text="${storesVO.storeAddress}"></span>星</p>
-								<p th:text="${storesVO.storeAddress}">店家地址</p>
+		                            <p>評等:<span th:text="${storesVO.totalScore/(storesVO.scorePeople!=null&&storesVO.scorePeople!=0?storesVO.scorePeople:1)}"></span>星</p>
+                        <p th:text="${storesVO.storeAddress}">店家地址</p>
+                        <div><span th:text="${storesVO.pushUp}">營業中</span>營業時間:<span th:text="${storesVO.openTime}"></span></div>
+                        <p >店休:<span class="restDay" th:text="${storesVO.restDay}"></span><span class="restDayRead"></span></p>
+						<p th:text="${storesVO.storeAddress}">店家地址</p>
 	                        </div>
 	                        
 	                    </div>

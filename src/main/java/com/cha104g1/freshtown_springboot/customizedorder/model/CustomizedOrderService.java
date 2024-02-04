@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
+
 @Service("CustomizedOrderService")
 public class CustomizedOrderService {
 
@@ -40,6 +42,9 @@ public class CustomizedOrderService {
 		return repository.findAll();
 	}
 
+	public List<CustomizedOrderVO> getAllByOrderDetail(OrderDetailVO orderDetailVO) {
+		return repository.findByOrderDetailVO(orderDetailVO);
+	}
 
 
 }

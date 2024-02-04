@@ -152,7 +152,7 @@ xmlns:th="http://www.thymeleaf.org">
                         <!-- Content -->
               <div class="container-xxl flex-grow-1 container-p-y">
 
-	<h4><span>資料查詢:</span></h4>
+	<h4><span>店家資料查詢:</span></h4>
 <nav>
 	<!-- 錯誤表列 -->
 	<div class="errorblock" th:utext="${errorMessage}">${errorMessage}</div><br>
@@ -160,35 +160,26 @@ xmlns:th="http://www.thymeleaf.org">
 	  <ul>
 		<li><h5><a href='listAllStores'>List</a> all refunds. <br><br></h5></li>
 
-		<li>
-			<form method="post" th:action="@{getOne_For_Display}">
-				輸入店家編號:
-				<input type="text" name="storeId" th:value="${param.storeId}" > 
-				<input type="submit" value="送出"> 
-			</form><br>
-		</li>
-
-			
 		<!--  萬用複合查詢-以下欄位-可隨意增減 -->
 		  
 		  <li>   
 		    <form method="post" th:action="@{listStores_ByCompositeQuery}">
 		        <font color=blue>萬用複合查詢:</font><br>
+		        店家流水號: 
+		        <input type="text" name="storeId" value="">
+		        
 		        店家帳號: 
-		        <input type="text" name="storeAccount" value=""><br>
+		        <input type="text" name="storeAccount" value="">
 		        
 		         店家名稱: 
 		        <input type="text" name="storeName" value=""><br>
 		           
 		        店家統一編號: 
-		        <input type="text" name="storeGui" value=""><br>
+		        <input type="text" name="storeGui" value="">
 		        
 		         店家電話: 
 		        <input type="text" name="storePhone" value=""><br>
-		        
-		         店家名稱: 
-		        <input type="text" name="storeName" value=""><br>
-		        
+		        	        
 		         店家狀態(0: 審核中 1: 審核未通過 2:帳號開通 3: 停權 4: 作廢帳號): 
 		        <input type="text" name="storeState" value=""><br>
 		        
@@ -200,32 +191,25 @@ xmlns:th="http://www.thymeleaf.org">
 		  
 		         付費日期: 
 		        <input type="Date" name="payDate"> ~ <input type="Date" name="payDate">
-		  
-		        
+		          
 		        平台開店: 
 		          <label for="pushUpAll"><input id="pushUpAll" type="radio" name="pushUp" value="">全部</label> 
 		        <label for="pushUp0"><input id=pushUp0 type="radio" name="pushUp" value="0">準備中</label> 
 		       <label for="pushUp1"><input id="pushUp1" type="radio" name="pushUp" value="1">開店</label> 
 		       <label for="pushUp2"><input id="pushUp2" type="radio" name="pushUp" value="2">店休</label><br>
 		
-		  		<hr>
-		  
+		  		<hr>		  
 		        店家負責人
-		        <input type="text" name="ownerName" value=""><br>
-		        
+		        <input type="text" name="ownerName" value="">		        
 		       負責人手機號碼:
-		        <input type="text" name="ownerMob" value=""><br>
-		        
+		        <input type="text" name="ownerMob" value="">
 		        身分證
-		        <input type="text" name="ownerId" value=""><br>
-		        
+		        <input type="text" name="ownerId" value=""><br>      
 		        負責人地址
-		        <input type="text" name="ownerAddress" value=""><br>
-		        
+		        <input type="text" name="ownerAddress" value="">	        
 		        EMAIL
-		        <input type="text" name="ownerEmail" value=""><br>
-		        
-		  
+		        <input type="text" name="ownerEmail" value="">
+	  
 		        <input type="submit" value="送出">
 		     
 		     </form>
@@ -238,17 +222,16 @@ xmlns:th="http://www.thymeleaf.org">
 	  <thead >
 		<tr style="background-color:#CCCCFF">
 			<th>項次</th>
-			<th>店家流水號</th>
-			<th>店家帳號</th>
+			<th>id</th>
+			<th>帳號</th>
 			<th>店家名稱</th>
-			<th>店家統一編號</th>
+			<th>統一編號</th>
 			<th>店家電話</th>
 			<th>店家狀態</th>
-			<th>店家等級</th>
 			<th>付費日期</th>
-			<th>平台開店</th>
-			<th>店家負責人</th>
-			<th>負責人手機號碼</th>
+			<th>營業狀態</th>
+			<th>負責人</th>
+			<th>手機號碼</th>
 			<th>EMAIL</th>	
 			<th>明細/修改</th>
 			
@@ -265,60 +248,173 @@ xmlns:th="http://www.thymeleaf.org">
 					<td th:text="${storesVO.storeGui}">店家統一編號</td>
 					<td th:text="${storesVO.storePhone}">店家電話</td>
 					<td th:text="${storesVO.storeState}">店家狀態</td>
-					<td th:text="${storesVO.storeLv}">店家等級</td>
 					<td th:text="${storesVO.payDate}">付費日期</td>
-					<td th:text="${storesVO.pushUp}">平台開店</td>
+					<td th:text="${storesVO.pushUp}">營業狀態</td>
 					<td th:text="${storesVO.ownerName}">店家負責人</td>
 					<td th:text="${storesVO.ownerMob}">負責人手機號碼</td>
 					<td th:text="${storesVO.ownerEmail}">EMAIL</td>
-					<td>		
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal_'+${storesVO.storeId}">
-					 	明細
-						</button>
-										<!--Modal -->
+					<td>	
+						<form method="post" th:action="@{/pFunction/stores/getOne_For_Update}" style="margin-bottom: 0px;">
+						     <input type="submit" value="修改">
+						     <input type="hidden" name="storeId" th:value="${storesVO.storeId}">
+				    	 </form>		
+<!-- 						<button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal_'+${storesVO.storeId}"> -->
+<!-- 					 	<a>明細</a> -->
+<!-- 						</button> -->
+								
+								<!--Modal -->
 									<div class="modal fade" th:id="'exampleModal_'+${storesVO.storeId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									  <div class="modal-dialog">
+									  <form method="post" th:object="${storesVO}" enctype="multipart/form-data" th:action="@{updateStore}">
 									    <div class="modal-content">
 									      <div class="modal-header">
 									        <h5 class="modal-title" id="exampleModalLabel">店家明細</h5>
 									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									      </div>
-									      <form method="post" th:action="updateStore">
 									      <div class="modal-body">
-											<span>店家流水號:</span><span th:text="${storesVO.storeId}"></span><br/>
-											<span>店家帳號</span><span th:text="${storesVO.storeAccount}"></span><br/>
-											<span>店家名稱</span><span th:text="${storesVO.storeName}"></span><br/>
-											<span>店家統一編號</span><span th:text="${storesVO.storeGui}"></span><br/>
-											<span>店家地址</span><span th:text="${storesVO.storeAddress}"></span><br/>
-											<span>店家電話</span><span th:text="${storesVO.storePhone}"></span><br/>
-											<span>店家狀態</span><span th:text="${storesVO.storeState}"></span><br/>
-											<span>店家等級</span><span th:text="${storesVO.storeLv}"></span><br/>
-											<span>開通時間</span><span th:text="${storesVO.createDate}"></span><br/>
-											<span>付費日期</span><span th:text="${storesVO.payDate}"></span><br/>
-											<span>平台開店</span><span th:text="${storesVO.pushUp}"></span><br/>
-											<span>店家負責人</span><span th:text="${storesVO.ownerName}"></span><br/>
-											<span>負責人手機號碼</span><span th:text="${storesVO.ownerMob}"></span><br/>
-											<span>身分證</span><span th:text="${storesVO.ownerId}"></span><br/>
-											<span>負責人地址</span><span th:text="${storesVO.ownerAddress}"></span><br/>
-											<span>EMAIL</span><span th:text="${storesVO.ownerEmail}"></span><br/>
-											<span>評分人數</span><span th:text="${storesVO.scorePeople}"></span><br/>
-											<span>總評分</span><span th:text="${storesVO.totalScore}"></span><br/>
-											<span>平均評分</span><span th:text="(${storesVO.totalScore})/(${storesVO.scorePeople})"></span><br/>
-<!-- 											<span>照片:</span><span><img th:src="@{/pFunction/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"></span><br/> -->
-<!-- 												<span> -->
-<!-- 													<input type="file"  name="photo" onclick="previewImage()" multiple="multiple" /> -->
-<!-- 													 可以不修改圖片 <span  th:if="${#fields.hasErrors('upFiles')}" th:errors="*{upFiles}" class="error" id="upFiles.errors"></span> -->
-<!-- 												</span> -->
-											<span>店家簡介</span><span th:text="${storesVO.storeDesc}"></span><br/>
+<!-- 														<dl> -->
+<!-- 															<dt>店家流水號 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span  th:text="${storesVO.storeId}"></span>    --> -->
+<!--   									      							<input  class="openEdit" type="text" th:field="*{storeId}" readonly/>   -->
+<!-- 																</dd> -->
+															
+<!-- 															<dt>店家帳號 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storeAccount}"></span>   --> -->
+<!-- 	  									      						<input class="openEdit" ype="text" th:field="*{storeAccount}" readonly/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家名稱 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storeName}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="text" th:field="*{storeName}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家統一編號 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storeGui}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="text" th:field="*{storeGui}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家地址 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storeAddress}"></span>   --> -->
+<!--   									      							<input  class="openEdit" type="text" th:field="*{storeAddress}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家電話 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storePhone}"></span>   --> -->
+<!--   									      							<input  class="openEdit" type="text" th:field="*{storePhone}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家狀態 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storeState}"></span>   --> -->
+<!--   									      							<input  class="openEdit" type="text" th:field="*{storeState}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家等級 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storeLv}"></span>   --> -->
+<!--   									      							<input  class="openEdit" type="text" th:field="*{storeLv}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>開通時間 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.createDate}"></span>   --> -->
+<!--   									      							<input  class="openEdit" type="text" th:field="*{createDate}" readonly/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>付費日期 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.payDate}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="date" th:field="*{payDate}" onclick="hideContent('payDate.errors');" /><br/>   -->
+<!-- 	  																<span  th:if="${#fields.hasErrors('payDate')}" th:errors="*{payDate}" class="error" id="payDate.errors"></span>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>平台開店 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.pushUp}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="text" th:field="*{pushUp}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家負責人 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.ownerName}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="text" th:field="*{ownerName}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>負責人手機號碼 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.ownerMob}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="text" th:field="*{ownerMob}"/> -- -->
+<!-- 																</dd> -->
+<!-- 															<dt>身分證 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.ownerId}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="text" th:field="*{ownerId}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>負責人地址 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.ownerAddress}"></span>   --> -->
+<!-- 	  									      						<input  class="openEdit" type="text" th:field="*{ownerAddress}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>EMAIL </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.ownerEmail}"></span>   --> -->
+<!-- 	  									      						<input class="openEdit" type="text" th:field="*{ownerEmail}"/>   -->
+<!-- 																</dd> -->
+															
+<!-- 															<dt>評分人數< </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.scorePeople}"></span>   --> -->
+<!-- 	  									      						<input class="openEdit" type="text" th:field="*{scorePeople}" />   -->
+<!-- 																</dd> -->
+<!-- 															<dt>總評分 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.totalScore}"></span>   --> -->
+<!-- 	  									      						<input class="openEdit" id="totalScore" type="text" th:field="*{totalScore}"/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>平均評分 </dt> -->
+<!-- 																<dd> -->
+<!-- 																	<span th:text="(${storesVO.totalScore})/(${storesVO.scorePeople})"></span>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>營業時段 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.openTime}"></span>   --> -->
+<!-- 	  									      						<input class="openEdit"  type="text" th:field="*{openTime}" readonly/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店休日 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.restDay}" ></span>   --> -->
+<!-- <!-- 	  									      						<span><span class="restDay" th:text="${storesVO.restDay}"></span><span class="restDayRead"></span>   --> -->
+<!-- <!-- 					  										      			<input class="op0" type="checkbox" type="text" th:id="${storesVO.storeId}+'_0'">   --> -->
+<!-- <!-- 					  										      			<input class="op1"  type="checkbox" type="text" th:id="${storesVO.storeId}+'_1'">   --> -->
+<!-- <!-- 															      			<input class="op2"  type="checkbox" type="text" th:id="${storesVO.storeId}+'_2'">   --> -->
+<!-- <!-- 					 										      			<input class="op3"  type="checkbox" type="text" th:id="${storesVO.storeId}+'_3'">   --> -->
+<!-- <!-- 					 										      			<input class="op4"  type="checkbox" type="text" th:id="${storesVO.storeId}+'_4'">   --> -->
+<!-- <!-- 					 										      			<input class="op5"  type="checkbox" type="text" th:id="${storesVO.storeId}+'_5'">   --> -->
+<!-- <!-- 					 										      			<input class="op6"  type="checkbox" type="text" th:id="${storesVO.storeId}+'_6'">   --> -->
+<!-- <!-- 	 									      						</span>   --> -->
+<!-- 	 									      						<input class="openEdit"  type="text" th:field="*{restDay}" readonly/>   -->
+<!-- 																</dd> -->
+<!-- 															<dt>店家照片 </dt> -->
+<!-- 																<dd> -->
+<!-- 																	<span id="blob_holder"><img th:src="@{/file/DBGifReader} + '?storeId=' + ${storesVO.storeId}" width="100px"></span>   -->
+<!--  									      							<span  th:if="${#fields.hasErrors('upFiles')}" th:errors="*{upFiles}" class="error" id="upFiles.errors"></span>   -->
+<!-- 									      							<input class="openEdit"  type="file" th:field="*{photo}" onclick="previewImage()" multiple="multiple" />   -->
+<!-- 																</dd> -->
+																
+<!-- 															<dt>店家簡介 </dt> -->
+<!-- 																<dd> -->
+<!-- <!-- 																	<span th:text="${storesVO.storeDesc}"></span>  --> -->
+<!-- 													      			<input class="openEdit"  type="text" th:field="*{storeDesc}"/> -->
+<!-- 																</dd> -->
+<!-- 														</dl> -->
+<!-- 														<input type="text" th:field="*{storePw}" readonly/>  -->
+<!-- 														<input type="text" th:field="*{storeLat}" readonly/> -->
+<!-- 														<input type="text" th:field="*{storeLag}" readonly/>	 -->
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									        <button type="submit" class="btn btn-primary">確認</button>
 									      </div>
-									      </form>
 									    </div>
+									    </form>
 									  </div>
 									</div>
+
 					</td>
 				</tr>
 			</th:block>
@@ -408,5 +504,71 @@ xmlns:th="http://www.thymeleaf.org">
 		}
 	}
 	</script>
+	<script>
+        $(document).ready(function () {
+        	$("span.restDay").each(function () {
+        		$("span.restDay").hide();
+                var number = $(this).text().trim();
+                var result = convertToText(number);
+                $(this).next().text(result);
+            });
+        	
+        });
+
+        function convertToText(number) {
+            var numberStr = number.toString().split('').reverse().join('');
+            var result = '';
+
+            for (var i = 0; i < numberStr.length; i++) {
+                var dayState = parseInt(numberStr.charAt(i));
+                if(dayState===0){
+                	switch(i){
+                		case(0):
+                			 var day="星期一,";
+								$(this).closest("span").find("input.op0").css("ckecked");
+								console.log(this);
+                			 continue;
+                		case(1):
+                   			 var day="星期二,";
+
+                			continue;
+                		case(2):
+                   			 var day="星期三,";
+
+                			continue;
+                		case(3):
+                   			 var day="星期四,";
+                			continue;
+                		case(4):
+                   			 var day="星期五,";
+                			continue;
+                		case(5):
+                   			 var day="星期六,";
+                			continue;
+                		case(6):
+                   			 var day="星期日";
+                		$(this).closest("span").find("input.op6").css("ckecked");
+                			continue;
+                		case(7):
+                  			 var day="";
+               			continue;
+                		}             	
+                }else{
+                	var day="";
+                }
+                
+                result += day;
+                if (i < numberStr.length - 1) {
+                    result += ' ';
+                }
+            }
+            return result;
+        }
+        
+        
+        function prechecked(number){
+        	
+        }
+    </script>
 </body>
 </html>

@@ -103,8 +103,14 @@ xmlns:th="http://www.thymeleaf.org">
 		padding : 0 !important;
 	}
 	
+	div.modal-dialog{
+	 max-width:800px ;
+	}
+	
 	</style>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+ 
 </head>
 <body>
     <!-- Layout wrapper -->
@@ -205,7 +211,7 @@ xmlns:th="http://www.thymeleaf.org">
 					      </a> 
 					   </li>
                     <li class="menu-item">
-  					  <a th:href="@{/sFunction/orders/orderOrders}" class="menu-link">
+  					  <a th:href="@{/sFunction/orders/orderorders}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-sort-up"></i>
                            <div data-i18n="store">顯示訂單排程</div>
                       </a>
@@ -320,33 +326,33 @@ xmlns:th="http://www.thymeleaf.org">
 				<table id="example" class="display" style="width: 100%">
 				  <thead >
 					<tr style="background-color:#CCCCFF">
-						<th>計數</th>
-						<th>訂單編號</th>
-						<th>訂單狀態</th>
-						<th>下單時間</th>
-						<th>完成時間</th>
-						<th>訂單總金額</th>	
-						<th>評分</th>	
-						<th>評論</th>	
-						<th>評論日期</th>		
-						<th>明細</th>
-						<th>退款申請</th>
+						<th style="border: 1px solid #dee2e6" >計數</th>
+						<th style="border: 1px solid #dee2e6" >訂單編號</th>
+						<th style="border: 1px solid #dee2e6" >訂單狀態</th>
+						<th style="border: 1px solid #dee2e6" >下單時間</th>
+						<th style="border: 1px solid #dee2e6" >完成時間</th>
+						<th style="border: 1px solid #dee2e6" >訂單總金額</th>	
+						<th style="border: 1px solid #dee2e6" >評分</th>	
+						<th style="border: 1px solid #dee2e6" >評論</th>	
+						<th style="border: 1px solid #dee2e6" >評論日期</th>		
+						<th style="border: 1px solid #dee2e6" >明細</th>
+						<th style="border: 1px solid #dee2e6" >退款申請</th>
 					</tr>
 				  </thead>			
 				  <tbody>
 
 						<th:block th:each="ordersVO : ${orderSearch!=null?orderSearch:ordersListDataS}">
 							<tr>
-								<td th:text="${ordersVOStat.count}">計數</td>
-								<td th:text="${ordersVO.orderId}">訂單編號</td>
-								<td th:text="${ordersVO.orderState}">訂單狀態</td>
-								<td th:text="${ordersVO.orderTime}">下單時間</td>
-								<td th:text="${ordersVO.finishTime}">完成時間</td>
-								<td th:text="${ordersVO.totalPrice}">總金額</td>
-								<td th:text="${ordersVO.comtVal}">評分</td>
-								<td th:text="${ordersVO.comtCont}">評論</td>
-								<td th:text="${ordersVO.comtTime}">評論日期</td>
-								<td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVOStat.count}">計數</td>
+								<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.orderId}">訂單編號</td>
+								<td class="orderState" style="border: 1px solid #dee2e6"><span class="orderState" th:text="${ordersVO.orderState}"></span><span class="orderStateMean" ></span></td>
+								<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.orderTime}"  data-toggle="tooltip">下單時間</td>
+								<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.finishTime}"  data-toggle="tooltip">完成時間</td>
+								<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.totalPrice}">總金額</td>
+								<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.comtVal}">評分</td>
+								<td class="text-ellipsis" style="border: 1px solid #dee2e6"  th:text="${ordersVO.comtCont}"  data-toggle="tooltip">評論</td>
+								<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.comtTime}"  data-toggle="tooltip">評論日期</td>
+								<td style="border: 1px solid #dee2e6" >
 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal_'+${ordersVO.orderId}">
 									 明細
 									</button>
@@ -358,7 +364,7 @@ xmlns:th="http://www.thymeleaf.org">
 									        <h5 class="modal-title" id="exampleModalLabel">訂單明細</h5>
 									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									      </div>
-									      <form th:action="editDelayDesc">
+									      <form method="post" th:action="@{editDelayDesc}">
 									      <div class="modal-body">
 									      	<table>
 													<tr style="background-color:#CCCCFF">
@@ -368,22 +374,22 @@ xmlns:th="http://www.thymeleaf.org">
 														<th>出餐時間</th>
 														<th>完成時間</th>
 														<th>超時紀錄時間</th>	
-														<th>超時/取消訂單備註</th>	
+<!-- 														<th>超時/取消訂單備註</th>	 -->
 													</tr>
 													<tr>
 														<td th:text="${ordersVO.orderId}">訂單編號</td>
-														<td th:text="${ordersVO.orderState}">訂單狀態</td>
+														<td class="orderState"><span class="orderState" th:text="${ordersVO.orderState}"></span><span class="orderStateMean" text=""></span></td>
 														<td th:text="${ordersVO.orderTime}">下單時間</td>
 														<td th:text="${ordersVO.doneTime}">出餐時間</td>
 														<td th:text="${ordersVO.finishTime}">完成時間</td>
 														<td th:text="${ordersVO.delayTime}">超時紀錄時間</td>
-														<td th:text="${ordersVO.delayDesc}">超時/取消訂單備註</td>
+<!-- 														<td th:text="${ordersVO.delayDesc}">超時/取消訂單備註</td> -->
 													</tr>
 												</table>
 												<input type="hidden" name="orderId" th:value="${ordersVO.orderId}">
 											<div>
 												<p>編輯超時/取消訂單備註</p>
-												<textarea id="delayDesc_message" name="message"></textarea>													
+												<textarea id="delayDesc_message" name="message" th:placeholder="${ordersVO.delayDesc}"></textarea>													
 								      		</div>
 									      </div>
 									      <div class="modal-footer">
@@ -396,10 +402,12 @@ xmlns:th="http://www.thymeleaf.org">
 									</div>
 								</td>
 								
-								<td>
+								<td style="border: 1px solid #dee2e6" >
+								<div th:if="${!(ordersVO.orderState==4 or ordersVO.orderState==5)}">
 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#refundOrder_'+${ordersVO.orderId}">
 									 退款
 									</button>
+									</div>
 									<!-- Modal -->
 									
 									<div class="modal fade" th:id="'refundOrder_'+${ordersVO.orderId}" tabindex="-1" aria-labelledby="refundOrderLabel" aria-hidden="true">
@@ -410,10 +418,10 @@ xmlns:th="http://www.thymeleaf.org">
 									        <h5 class="modal-title" id="refundOrderlLabel">退款說明</h5>
 									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>  
 									      </div>
-									      <form th:action="${refundOrder}">
+									      <form method="post" th:action="@{refundOrder}">
 									      <div class="modal-body">
-									      	<input type="hidden" name="payState" value="2">
-									      	<textarea id="refundOrder_message" name="refundMessage"></textarea>
+									      	<input type="hidden" name="orderId" th:value="${ordersVO.orderId}">
+									      	<textarea id="refundOrder_message" name="refundMessage" style="width:500px"></textarea>
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -516,6 +524,53 @@ xmlns:th="http://www.thymeleaf.org">
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+  // Enable tooltips
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+<script>
+        $(document).ready(function () {
+        	$("span.orderState").each(function () {
+        		
+                var number = $(this).text().trim();
+                var result = convertToText(number);
+                $(this).siblings(".orderStateMean").text(result);
+                console.log("Number: ", number);
+                console.log("Result: ", result);
+            });
+        });
+
+        function convertToText(number) {
+//             var result = '';
+				var mean='';
+                	switch(number){
+                		case(0):
+                			  mean="未成立";
+                			 break;
+                		case(1):
+                   			  mean="新訂單";
+                			break;
+                		case(2):
+                   			  mean="製作中 ";
+  	              			break;
+                		case(3):
+                   			  mean="待取餐";
+                			break;
+                		case(4):
+                   			  mean="結單";
+                			break;
+                		case(5):
+                   			  mean="取消訂單";
+                			break;
+                		}          
+                	console.log("mean: ", mean)
+            return  mean;
+        }
+    </script>
 </body>
 </html>

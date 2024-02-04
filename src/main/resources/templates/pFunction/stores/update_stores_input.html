@@ -1,20 +1,43 @@
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+class="light-style layout-menu-fixed"
+dir="ltr"
+data-theme="theme-default"
+data-template="vertical-menu-template-free"
+xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>店家修改 - update_stores_input.html</title>
+    <meta charset="UTF-8">
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <title>平台後台-首頁</title>
+    <meta name="description" content="" />
 
-<head ></head>
+    <!-- Freicon -->
+    <link rel="shortcut icon" type="image/png" th:href="@{/backhome/img/freshlogo.png}" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" th:href="@{/backhome/fonts/boxicons.css}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" th:href="@{/backhome/css/core.css}" class="template-customizer-core-css" />
+    <link rel="stylesheet" th:href="@{/backhome/css/theme-default.css}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" th:href="@{/backhome/css/demo.css}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" th:href="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
 <style type="text/css">
 	
 	button {
@@ -42,27 +65,142 @@
         margin-left: auto;
         margin-right: auto;
     }
+    
+
+</style>
+<style>
+   body input.notEdit{
+     background-color:gray ;
+     border:none;
+    }
 </style>
 </head>
 <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a th:href="@{index}" class="app-brand-link">
+              <img class="img-fluid" width="160" th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">            
+            </a>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
+          </div>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>店家資料修改 - update_stores_input.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/stores/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
-</nav>
+          <div class="menu-inner-shadow"></div>
 
+          <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item">
+              <a th:href="@{index}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">鮮城後台首頁</div>
+              </a>
+            </li>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Client</span>
+            </li>
+            
+            <li class="menu-item">
+
+                 <a th:href="@{/pFunction/customer/select_page}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="store">一般會員管理</div>
+                 </a>
+            </li>
+            <!-- Store -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
+              
+              <li class="menu-item"> 
+                <a th:href="@{/pFunction/orders/select_page}" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="store">查看訂單總表</div>
+                 </a>
+                 <ul class="menu-sub">
+                  <li class="menu-item">
+                    <a th:href="@{/pFunction/atm/select_page}" class="menu-link">
+                    <i class="menu-icon"></i>
+                    <div data-i18n="store">匯款管理</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a th:href="@{/pFunction/refunds/select_page}" class="menu-link">
+                    <i class="menu-icon"></i>
+                    <div data-i18n="client">退款作業</div>
+                   </a>
+                  </li>
+                 </ul>
+               </li>
+               <li class="menu-item">
+                 <a th:href="@{/pFunction/stores/select_page}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="store">店家會員管理</div>
+                 </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="store">店家帳號審核</div>
+                 </a>
+                </li>
+
+              <!-- <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                <div data-i18n="question-mark">忘記密碼</div>
+              </a>
+
+              <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-exit"></i>
+                <div data-i18n="Exit">店家登入</div>
+              </a> -->
+            
+            <!-- Fresh Town -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Fresh Town</span></li>
+
+            <li class="menu-item">
+              <a th:href="@{/pFunction/platformEmp/select_page}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Account Settings">員工帳號管理</div>
+              </a>
+              <!-- <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div data-i18n="Authentications">設定權限</div>
+              </a> -->
+              <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-support"></i>
+              <div data-i18n="Support">諮詢線上客服</div>
+            </a>
+            <a th:href="@{/pFunction/logoutP}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-exit"></i>
+              <div data-i18n="Exit">登出</div>
+            </a>
+            </li>
+          </ul>
+        </aside>
+        
+                        <!-- Layout container -->
+        <div class="layout-page">
+         <!-- Content wrapper -->
+          <div class="content-wrapper">
+                        <!-- Content -->
+              <div class="container-xxl flex-grow-1 container-p-y">
+
+<div align="center" th:fragment="updatestore-div"> 
 	<div align="center">
-		<h3><b>資料要全部輸入</b></h3>
+		<h3><b>店家資料修改</b></h3>
 		<form th:action="@{update}" method="post" th:object="${storesVO}" enctype="multipart/form-data">
 
 				<div>
 				<label>店家流水號:</label>
-				<input type="text" th:field="*{storeId}" readonly/>
+				<input calss="notEdit" type="text" th:field="*{storeId}" style="background-color:lightgray" readonly/>
 				</div>
 				
 				<div>
 				<label>店家帳號:</label>
-				<input type="text" th:field="*{storeAccount}" readonly/>
+				<input calss="notEdit" type="text" th:field="*{storeAccount}" style="background-color:lightgray" readonly/>
 				</div>
 				<div>
 				<label>店家名稱:</label>
@@ -90,7 +228,7 @@
 				</div>
 				<div>
 				<label>開通時間:</label>
-				<input type="text" th:field="*{createDate}" readonly/>
+				<input calss="notEdit" type="text" th:field="*{createDate}"  style="background-color:lightgray" readonly/>
 				</div>
 					
 			<div>
@@ -126,32 +264,33 @@
 				
 				<div>
 				<label>評分:</label>
-				<input type="text" th:field="*{totalScore}" readonly/>
+				<input calss="notEdit" type="text" th:field="*{totalScore}"  style="background-color:lightgray" readonly/>
 				</div>
 				
 				<div>
 				<label>評分人數:</label>
-				<input type="text" th:field="*{scorePeople}" readonly/>
+				<input calss="notEdit" type="text" th:field="*{scorePeople}"  style="background-color:lightgray" readonly/>
 				</div>
 							
 			<div>
 			<label>照片:</label>
+			<div id="blob_holder"><img th:src="@{/stores/DBGifReader} + '?storeId=' + ${storesVO.storeId}" width="100px"></div>
 			<input type="file" th:field="*{photo}" onclick="previewImage()" multiple="multiple" />
             <!-- 可以不修改圖片 <span  th:if="${#fields.hasErrors('upFiles')}" th:errors="*{upFiles}" class="error" id="upFiles.errors"></span> -->
-			<div id="blob_holder"><img th:src="@{/stores/DBGifReader} + '?storeId=' + ${storesVO.storeId}" width="100px"></div>
 			</div>
 
 				<div>
 				<label>店家簡介:</label>
-				<input type="text" th:field="*{storeDesc}"/>
+				<textarea type="text" th:field="*{storeDesc}"/>
+				
 				</div>
 			
 			<div>
-			<input type="text" th:field="*{storePw}" readonly/>
-			<input type="text" th:field="*{storeLat}" readonly/>
-			<input type="text" th:field="*{storeLag}" readonly/>
-			<input type="text" th:field="*{openTime}" readonly/>
-			<input type="text" th:field="*{restDay}" readonly/>
+			<input calss="notEdit" type="hidden" th:field="*{storePw}" readonly/>
+			<input calss="notEdit" type="hidden" th:field="*{storeLat}" readonly/>
+			<input calss="notEdit" type="hidden" th:field="*{storeLag}" readonly/>
+			<input calss="notEdit" type="hidden" th:field="*{openTime}" readonly/>
+			<input calss="notEdit" type="hidden" th:field="*{restDay}" readonly/>
 			</div>
 			
 			
@@ -163,8 +302,44 @@
 		</form>
 	
 	</div>
+</div>
 
+	
+    </div>
+    </div>
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
 
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+    
+        <!-- Helpers -->
+    <script th:src="@{/backhome/js/helpers.js}"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script th:src="@{/backhome/js/config.js}"></script>
+    <!-- build:js assets/vendor/js/core.js -->
+    <script th:src="@{/backhome/libs/jquery/jquery.js}"></script>
+    <script th:src="@{/backhome/libs/popper/popper.js}"></script>
+    <script th:src="@{/backhome/js/bootstrap.js}"></script>
+    <script th:src="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+    <script th:src="@{/backhome/js/menu.js}"></script>
+
+    <!-- Main JS -->
+    <script th:src="@{/backhome/js/main.js}"></script>
+
+    <!-- Page JS -->
+
+    <script th:src="@{/backhome/js/form-basic-inputs.js}"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
 <!-- JavaScript part -->
 <script type="text/javascript">
 //清除提示信息
