@@ -19,8 +19,10 @@
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
                     <ul class="dropdown_menu ">
                        <li class="li_item ">
+<!--                        		<a href='searchPersonalInfo'>個人資料管理</a> -->
                             <form method="post" th:action="searchPersonalInfo">
-                                <input class="li_item " type="submit" value="個人資料管理"> 
+                                <input class="li_item " type="submit" value="個人資料管理">
+                                <input type="hidden" name="customerId" th:value="${customerVO.customerId}"> 
                             </form><br>
                         </li>
                         <li class="li_item ">
@@ -101,7 +103,7 @@
     <!-- include內容 ======================================-->
  
     <main class="main" th:if="${searchPersonalInfo}">
-        <div th:insert="~{/cFunction/customer/showallpage :: showallpage-div}"></div>
+        <div th:insert="~{/cFunction/customer/listOneCustomer :: listOneCustomer-div}"></div>
     </main>
     <main class="main" th:if="${searchLikeStore}">
         <div th:insert="~{/cFunction/likestore/listAllLikeStore :: listAllLikeStore-div}"></div>

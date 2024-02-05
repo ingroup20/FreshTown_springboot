@@ -1,0 +1,55 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>會員資料 - listOneCustomer.html</title>
+<style type="text/css">
+	
+    span {
+		display: inline-block;
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>會員個人資料 - listOneCustomer.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/cFunction/cEntrancePass}"><img th:src="@{/images/back1.gif}" alt="返回">回查詢頁<label th:text="${success}"></label></a></h3></div>
+</nav>
+
+	<div align="center" th:fragment="listOneCustomer-div"> <!-- 此div被select_page.html第128行insert用 -->
+		<br><br><br><br><br>
+<!-- 		<span>會員編號:</span><span th:text="${customerVO.customerId}"></span><br/> -->
+		<span>會員暱稱:</span><span th:text="${customerVO.customerNic}"></span><br/>
+		<span>會員帳號:</span><span th:text="${customerVO.customerAccount}"></span><br/>
+		<span>手機號碼:</span><span th:text="${customerVO.customerMob}"></span><br/>
+		<span>手機認證:</span><span th:text="${customerVO.mobChecked}"></span><br/>
+		<span>會員信箱:</span><span th:text="${customerVO.customerEmail}"></span><br/>
+		<div th:switch="${customerVO.customerState}">
+			<span>會員狀態:</span>
+		    <span th:case="0">正常</span>
+		    <span th:case="1">停權</span>
+		    <span th:case="2">已註銷</span>
+		</div><br/>
+		<form method="post" th:action="@{/cFunction/customer/getOne_For_Update}" style="margin-bottom: 0px;">
+			<input type="submit" value="修改"> 
+			<input type="hidden" name="customerId" th:value="${customerVO.customerId}">
+		</form>		
+	</div>
+
+
+</body>
+</html>
