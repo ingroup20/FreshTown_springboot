@@ -25,6 +25,10 @@ import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.mealtype.model.MealTypeVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
 import com.cha104g1.freshtown_springboot.picking.service.PickingService;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpService;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresService;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
 @Validated
@@ -36,6 +40,12 @@ public class PickingNoController {
 	
 	@Autowired
 	MaterialService materialSvc;
+	
+	@Autowired
+	StoreEmpService storeEmpSvc;
+	
+	@Autowired
+	StoresService storesSvc;
 	
 	@PostMapping("getOne_For_Display")
 	public String getOne_For_Display(
@@ -53,7 +63,13 @@ public class PickingNoController {
 		model.addAttribute("materialVO", new MaterialVO());
 		List<MaterialVO> list2 = materialSvc.getAll();
     	model.addAttribute("materialListData",list2);    // for select_page.html 第135行用
-		if (pickingVO == null) {
+    	model.addAttribute("storeEmpVO", new StoresVO());  // for select_page.html 第133行用
+    	List<StoreEmpVO> list3 = storeEmpSvc.getAll();
+    	model.addAttribute("storeEmpListData2",list3);    // for select_page.html 第135行用
+    	model.addAttribute("storesVO", new StoresVO());  // for select_page.html 第133行用
+    	List<StoresVO> list4 = storesSvc.getAll();
+    	model.addAttribute("storesListData2",list4);    // for select_page.html 第135行用
+    	if (pickingVO == null) {
 			model.addAttribute("errorMessage", "查無資料");
 			return "sFunction/picking/select_page";
 		}
@@ -79,6 +95,11 @@ public class PickingNoController {
 			model.addAttribute("materialVO", new MaterialVO());  // for select_page.html 第133行用
 			List<MaterialVO> list2 = materialSvc.getAll();
 	    	model.addAttribute("materialListData",list2); 
+	    	model.addAttribute("storeEmpVO", new StoreEmpVO());  // for select_page.html 第133行用
+	    	List<StoreEmpVO> list3 = storeEmpSvc.getAll();
+	    	model.addAttribute("storeEmpListData2",list3);    // for select_page.html 第135行用
+	    	List<StoresVO> list4 = storesSvc.getAll();
+	    	model.addAttribute("storesListData2",list4);    // for select_page.html 第135行用
 	    	
 			String message = strBuilder.toString();
 		    return new ModelAndView("sFunction/picking/select_page", "errorMessage", "請修正以下錯誤:<br>"+message);

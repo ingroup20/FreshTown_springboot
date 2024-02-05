@@ -57,10 +57,10 @@
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a th:href="@{index}" class="app-brand-link"> <img
+					<a th:href="@{/sFunction/sEntrancePass}" class="app-brand-link"> <img
 						class="img-fluid" width="160"
 						th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">
-					</a> <a href="javascript:void(0);"
+					</a> <a th:href="@{/sFunction/sEntrancePass}"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 						<i class="bx bx-chevron-left bx-sm align-middle"></i>
 					</a>
@@ -219,7 +219,7 @@
 												<label for="defaultSelect" class="form-label">物料分類編號</label>
 												<select id="defaultSelect" class="form-select"
 													th:field="*{itemsClassVO.itemClassId}">
-													<option value=""></option>
+<!-- 													<option value=""></option> -->
 													<option th:each="itemsClassVO : ${itemsClassListData}"
 														th:value="${itemsClassVO.itemClassId}"
 														th:text="${itemsClassVO.itemClassId} + ${itemsClassVO.itemClassName}" />
@@ -283,19 +283,20 @@
 												<label for="defaultFormControlInput" class="form-label">採購需求送出日期</label>
 												<input type="date" th:field="*{purDate}"
 													class="form-control" id="defaultFormControlInput"
-													placeholder="" onclick="hideContent('purDate.errors');" />
+													placeholder="" onclick="hideContent('purDate.errors');" 
+													th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"/>
 												<span th:if="${#fields.hasErrors('purDate')}"
 													th:errors="*{purDate}" class="error" id="purDate.errors"></span>
 											</div>
 
 											<div class="mb-3">
-												<label for="defaultFormControlInput" class="form-label">店家流水號</label>
-												<input type="text" th:field="*{storesVO.storeId}"
-													class="form-control" id="defaultFormControlInput"
-													placeholder="" /> <span
-													th:if="${#fields.hasErrors('storesVO.storeId')}"
-													th:errors="*{storesVO.storeId}" class="error"
-													id="storesVO.storeId.errors"></span>
+												<label for="defaultSelect" class="form-label">店家</label>
+												<select id="defaultSelect" class="form-select"
+													th:field="*{storesVO.storeId}">
+													<option th:each="storesVO : ${storesVO}"
+														th:value="${storesVO.storeId}"
+														th:text="${storesVO.storeId} + ${storesVO.storeName}"/>
+												</select>
 											</div>
 											<button type="submit" class="btn btn-primary">送出</button>
 										</form>

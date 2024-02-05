@@ -34,8 +34,8 @@ span {
 		</h3>
 		<span>領料編號:</span><span th:text="${pickingVO.pickingNo}"></span><br />
 		<span>物料編號:</span><span th:text="${pickingVO.materialVO.itemNumber}"></span><br />
-		<span>店家流水號:</span><span th:text="${pickingVO.storesVO.storeId}"></span><br />
-		<span>店家員工編號:</span><span th:text="${pickingVO.storeEmpVO.sEmpId}"></span><br />
+		<span>店家:</span><span th:text="${pickingVO.storesVO.storeId}+ '-[' + ${pickingVO.storesVO.storeName}+ ']'"></span><br />
+		<span>領料人員:</span><span th:text="${pickingVO.storeEmpVO.sEmpId}+ '-[' + ${pickingVO.storeEmpVO.sEmpName}+ ']'"></span><br />
 		<span>領料數量:</span><span th:text="${pickingVO.pickingQuantity}"></span><br />
 		<span>領料單位:</span><span th:text="${pickingVO.pickingUnit}"></span><br />
 		<span>領料狀態:</span><span th:text="${pickingVO.pickingStatus}"></span><br />

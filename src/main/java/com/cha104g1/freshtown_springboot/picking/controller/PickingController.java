@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.picking.service.PickingService;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpService;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresService;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
+import com.cha104g1.freshtown_springboot.meals.model.MealsVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
 
 @Controller
@@ -36,6 +43,12 @@ public class PickingController {
 
 	@Autowired
 	MaterialService materialSvc;
+	
+	@Autowired
+	StoresService storesSvc;
+	
+	@Autowired
+	StoreEmpService storeEmpSvc;
 
 	@GetMapping("addPicking")
 	public String addPicking(ModelMap model) {
@@ -106,7 +119,6 @@ public class PickingController {
 				
 				materialSvc.updateMaterial(materialVO);
 				System.out.println("庫存數量=" + materialVO.getStockQuantity());
-//				System.out.println("庫存數量=" + pickingVO.getMaterialVO().getStockQuantity()); 取不到
 				System.out.println("庫存數量=" + pickingVO.getPickingUnit());
 			} else {
 				pickingSvc.updatePicking(pickingVO);
@@ -131,18 +143,24 @@ public class PickingController {
 		List<MaterialVO> list = materialSvc.getAll();
 		return list;
 	}
+	
+	@ModelAttribute("storeEmpListData2") 
+	protected List<StoreEmpVO> referenceListData2(Model model) {
+		List<StoreEmpVO> list = storeEmpSvc.getAll();
+		return list;
+	}
 
 	/*
 	 * 【 第二種作法 】 Method used to populate the Map Data in view. 如 : <form:select
 	 * path="deptno" id="deptno" items="${depMapData}" />
 	 */
-	@ModelAttribute("pickingStatusMapData") //
-	protected Map<Integer, String> referenceMapData() {
-		Map<Integer, String> map = new LinkedHashMap<Integer, String>();
-		map.put(0, "審核中");
-		map.put(1, "已領取");
-		return map;
-	}
+//	@ModelAttribute("pickingStatusMapData") 
+//	protected Map<Integer, String> referenceMapData() {
+//		Map<Integer, String> map = new LinkedHashMap<Integer, String>();
+//		map.put(0, "審核中");
+//		map.put(1, "已領取");
+//		return map;
+//	}
 
 	// 去除BindingResult中某個欄位的FieldError紀錄
 	public BindingResult removeFieldError(PickingVO pickingVO, BindingResult result, String removedFieldname) {
@@ -162,13 +180,29 @@ public class PickingController {
 	@PostMapping("listPicking_ByCompositeQuery")
 	public String listAllPicking(HttpServletRequest req, Model model) {
 		Map<String, String[]> map = req.getParameterMap();
+		for (Map.Entry<String, String[]> entry : map.entrySet()) {
+		    String key = entry.getKey();
+		    String[] values = entry.getValue();
+
+		    System.out.print("Key: " + key + ", Values: ");
+		    
+		    if (values != null) {
+		        for (String value : values) {
+		            System.out.print(value + " ");
+		        }
+		    }	    
+		    System.out.println(); // 换行
+		}
 		List<PickingVO> list = pickingSvc.getAll(map);
 		model.addAttribute("pickingListData", list);
-		return "sFunction/picking/listAllPicking";
+		for(PickingVO rs: list) {
+			System.out.println(rs.getPickingNo());
 	}
+	return "sFunction/picking/listAllPicking";
+}
 
 	// 全資料一覽
-	@ModelAttribute("pickingListData") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	@ModelAttribute("pickingListData")
 	protected List<PickingVO> referenceListData(Model model) {
 
 		List<PickingVO> list = pickingSvc.getAll();
@@ -179,4 +213,32 @@ public class PickingController {
 	public String listAllPicking(Model model) {
 		return "sFunction/picking/listAllPicking";
 	}
+	
+	
+	@ModelAttribute("storesVO") 
+	protected StoresVO storesVO(HttpServletRequest req , Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		if (storeEmpVO == null) {
+			System.out.println("出現null啦");
+		}
+		StoresVO storesVO = storeEmpVO.getStoresVO();
+		return storesVO;
+	}
+	
+	@ModelAttribute("storeId") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected Integer storeId(HttpServletRequest req , Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		if (storeEmpVO == null) {
+			System.out.println("出現null啦");
+		}
+		Integer storeId = storeEmpVO.getStoresVO().getStoreId();
+		System.out.println(storeId);
+		return storeId;
+	}
+	
+	
 }

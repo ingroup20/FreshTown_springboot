@@ -8,12 +8,15 @@ public class State {
 	private String user;
 	// total users
 	private Set<String> users;
+	
+	private String timestamp;
 
-	public State(String type, String user, Set<String> users) {
+	public State(String type, String user, Set<String> users, String timestamp) {
 		super();
 		this.type = type;
 		this.user = user;
 		this.users = users;
+		this.timestamp = timestamp;
 	}
 
 	public String getType() {
@@ -39,5 +42,15 @@ public class State {
 	public void setUsers(Set<String> users) {
 		this.users = users;
 	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+	
+	
 
 }

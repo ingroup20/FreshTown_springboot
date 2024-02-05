@@ -56,10 +56,10 @@ xmlns:th="http://www.thymeleaf.org">
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 	          <div class="app-brand demo">
-		            <a th:href="@{index}" class="app-brand-link">
+		            <a th:href="@{/sFunction/sEntrancePass}" class="app-brand-link">
 		              <img class="img-fluid" width="160" th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">            
 		            </a>
-		            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+		            <a th:href="@{/sFunction/sEntrancePass}" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 		              <i class="bx bx-chevron-left bx-sm align-middle"></i>
 		            </a>
 	          </div>
@@ -217,6 +217,18 @@ xmlns:th="http://www.thymeleaf.org">
                     <div class="errorblock" th:utext="${errorMessage}">${errorMessage}</div>
                     <div class="card-body">
                     <form method="post" th:action="@{listMaterial_ByCompositeQuery}">
+                    
+                     <div>          
+                        <input
+                          type="hidden"
+                          name="storeId"
+                          class="form-control"
+                          id="defaultFormControlInput"
+                          placeholder=""
+                          th:value="${storeId}"
+                        />
+                        <br>
+                      </div>
                       <div>
                         <label for="defaultFormControlInput" class="form-label">物料名稱</label>
                         <input
@@ -244,6 +256,7 @@ xmlns:th="http://www.thymeleaf.org">
                       <div class="mb-3">
                         <label for="defaultSelect" class="form-label">選擇物料狀態</label>
                         <select id="defaultSelect" class="form-select" name="itemStatus">
+                          <option value=""></option>
                           <option value="0">數量足夠</option>
                           <option value="1">低於安全庫存</option>
                           <option value="2">作廢</option>

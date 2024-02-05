@@ -14,7 +14,7 @@ public class JedisPoolUtil {
 			synchronized (JedisPoolUtil.class) {
 				if (pool == null) {
 					JedisPoolConfig config = new JedisPoolConfig();
-					config.setMaxTotal(8);//可以設30、50
+					config.setMaxTotal(30);//可以設30、50
 					config.setMaxIdle(8);
 					config.setMaxWaitMillis(10000);
 					pool = new JedisPool(config, "localhost", 6379);

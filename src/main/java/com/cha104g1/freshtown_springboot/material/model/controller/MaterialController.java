@@ -1,12 +1,15 @@
 package com.cha104g1.freshtown_springboot.material.model.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +32,8 @@ import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
 import com.cha104g1.freshtown_springboot.picking.service.PickingService;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
@@ -42,6 +48,9 @@ public class MaterialController {
 	
 	@Autowired
 	PickingService pickingSvc;
+	
+	@Autowired
+	StoresService storesSvc;
 
 	@GetMapping("addMaterial")
 	public String addMaterial(ModelMap model) {
@@ -66,7 +75,7 @@ public class MaterialController {
 		List<MaterialVO> list = materialSvc.getAll();
 		model.addAttribute("materialListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:sFunction/material/listAllMaterial"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		return "sFunction/material/listAllMaterial"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 	}
 	
 
@@ -88,6 +97,10 @@ public class MaterialController {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 
 		if (result.hasErrors()) {
+			for (ObjectError error: result.getAllErrors()) {
+				System.out.println(error.toString());
+			}
+			
 			System.out.println("資料不全");
 			return "sFunction/material/update_material_input";
 		}
@@ -118,14 +131,14 @@ public class MaterialController {
 	 * 【 第二種作法 】 Method used to populate the Map Data in view. 如 : <form:select
 	 * path="deptno" id="deptno" items="${depMapData}" />
 	 */
-	@ModelAttribute("itemStatusMapData") //
-	protected Map<Integer, String> referenceMapData() {
-		Map<Integer, String> map = new LinkedHashMap<Integer, String>();
-		map.put(0, "低於安全庫存");
-		map.put(1, "數量足夠");
-		map.put(2, "作廢");
-		return map;
-	}
+//	@ModelAttribute("itemStatusMapData") 
+//	protected Map<Integer, String> referenceMapData() {
+//		Map<Integer, String> map = new LinkedHashMap<Integer, String>();
+//		map.put(0, "低於安全庫存");
+//		map.put(1, "數量足夠");
+//		map.put(2, "作廢");
+//		return map;
+//	}
 	
 	// 去除BindingResult中某個欄位的FieldError紀錄
 	public BindingResult removeFieldError(MaterialVO materialVO, BindingResult result, String removedFieldname) {
@@ -146,20 +159,67 @@ public class MaterialController {
 	@PostMapping("listMaterial_ByCompositeQuery")
 	public String listAllMaterial(HttpServletRequest req, Model model) {
 		Map<String, String[]> map = req.getParameterMap();
-		List<MaterialVO> list = materialSvc.getAll(map);
+		for (Map.Entry<String, String[]> entry : map.entrySet()) {
+		    String key = entry.getKey();
+		    String[] values = entry.getValue();
+
+		    System.out.print("Key: " + key + ", Values: ");
+		    
+		    if (values != null) {
+		        for (String value : values) {
+		            System.out.print(value + " ");
+		        }
+		    }	    
+		    System.out.println(); // 换行
+		}
+		List<MaterialVO> list = materialSvc.getAll(map);	
 		model.addAttribute("materialListData", list); 
+		for(MaterialVO rs: list) {
+			System.out.println(rs.getItemNumber());
+	}
 		return "sFunction/material/listAllMaterial";
 	}
 
 	// 全資料一覽
 	@ModelAttribute("materialListData") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
 	protected List<MaterialVO> referenceListData(Model model) {
-
+		//符合要什麼給什麼
+//		model.addAttribute("itemsClassVO", new ItemsClassVO());
 		List<MaterialVO> list = materialSvc.getAll();
 		return list;
 	}
 	
+	@ModelAttribute("storesListData2") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected List<StoresVO> referenceListData1(Model model) {
+		
+		List<StoresVO> list = storesSvc.getAll();
+		return list;
+	}
 	
+	@ModelAttribute("storesVO") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected StoresVO storesVO(HttpServletRequest req , Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		if (storeEmpVO == null) {
+			System.out.println("出現null啦");
+		}
+		StoresVO storesVO = storeEmpVO.getStoresVO();
+		return storesVO;
+	}
+	
+	@ModelAttribute("storeId") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected Integer storeId(HttpServletRequest req , Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		if (storeEmpVO == null) {
+			System.out.println("出現null啦");
+		}
+		Integer storeId = storeEmpVO.getStoresVO().getStoreId();
+		System.out.println(storeId);
+		return storeId;
+	}
 	
 	
 }

@@ -135,10 +135,10 @@
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a th:href="@{index}" class="app-brand-link"> <img
+					<a th:href="@{/sFunction/sEntrancePass}" class="app-brand-link"> <img
 						class="img-fluid" width="160"
 						th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">
-					</a> <a href="javascript:void(0);"
+					</a> <a th:href="@{/sFunction/sEntrancePass}"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 						<i class="bx bx-chevron-left bx-sm align-middle"></i>
 					</a>
@@ -293,8 +293,8 @@
 										<tr>
 											<th>領料編號</th>
 											<th>物料編號</th>
-											<th>店家流水號</th>
-											<th>店家員工編號</th>
+											<th>店家</th>
+											<th>領料人員</th>
 											<th>領料數量</th>
 											<th>領料單位</th>
 											<th>領料狀態</th>
@@ -311,8 +311,8 @@
 												<td th:text="${pickingVO.pickingNo}"><i
 													class="fab fa-angular fa-lg text-danger me-3"></i></td>
 												<td th:text="${pickingVO.materialVO.itemNumber}+ '-[' +  ${pickingVO.materialVO.itemName} + ']'"></td>
-												<td th:text="${pickingVO.storesVO.storeId}"></td>
-												<td th:text="${pickingVO.storeEmpVO.sEmpId}"></td>
+												<td th:text="${pickingVO.storesVO.storeId}+ '-[' + ${pickingVO.storesVO.storeName}+ ']'"></td>
+												<td th:text="${pickingVO.storeEmpVO.sEmpId}+ '-[' + ${pickingVO.storeEmpVO.sEmpName}+ ']'"></td>
 												<td th:text="${pickingVO.pickingQuantity}"></td>
 												<td th:text="${pickingVO.pickingUnit}"></td>
 												<td><span class="badge bg-label-info me-1"
