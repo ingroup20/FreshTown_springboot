@@ -287,7 +287,7 @@
 							<span class="text-muted fw-light">店家後台首頁 /</span>採購單管理
 						</h4>
 					<div class="row">
-						<form method="post" th:action="@{listSupOrder_ByCompositeQuery}" class="horizontal-form" onsubmit="reloadData(event)">
+						<form method="post" th:action="@{listSupOrder_ByCompositeQuery}" class="horizontal-form">
 				             <div class="form-row">
 					            請輸入採購單編號: 
 						        <input type="number" name="id" value=""><br>
@@ -450,20 +450,6 @@
 
         document.body.appendChild(form);
         form.submit();
-    }
-    function reloadData(event) {
-        event.preventDefault();
-
-        $.ajax({
-            type: 'POST',
-            url: '/sFunction/suporder/listSupOrder_ByCompositeQuery',
-            success: function(data) {
-                $('#center tbody').html(data);
-            },
-            error: function() {
-                alert('載入資料失敗');
-            }
-        });
     }
 
     </script>
