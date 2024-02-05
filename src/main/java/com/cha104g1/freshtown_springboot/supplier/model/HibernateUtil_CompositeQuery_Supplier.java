@@ -26,6 +26,8 @@ public class HibernateUtil_CompositeQuery_Supplier {
 			predicate = builder.equal(root.get(columnName), Integer.valueOf(value));
 		else if ("supplierName".equals(columnName)||"supplierContact".equals(columnName)||"supplierPhone".equals(columnName)||"storeId".equals(columnName))
 			predicate = builder.like(root.get(columnName), "%" + value + "%");
+		else if ("storeId".equals(columnName))
+			predicate = builder.equal(root.get("storesVO").get("storeId"), value);
 		else if ("supplierState".equals(columnName)) {
 		    predicate = builder.equal(root.get(columnName), Integer.valueOf(value));
 		}
@@ -47,6 +49,8 @@ public class HibernateUtil_CompositeQuery_Supplier {
 			Root<SupVO> root = criteriaQuery.from(SupVO.class);
 
 			List<Predicate> predicateList = new ArrayList<Predicate>();
+//			String storeId = map.get("storeId")[0];
+//			predicateList.add(get_aPredicate_For_AnyDB(builder, root, "storeId", storeId));
 			
 			Set<String> keys = map.keySet();
 			int count = 0;

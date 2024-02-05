@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
 import com.cha104g1.freshtown_springboot.supplier.model.SupService;
 import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 
@@ -45,6 +48,27 @@ public class SupController {
 //		model.addAttribute("listSupplier_ByCompositeQuery", "true"); 
 //        return "pFunction/supplier/supOne";
 //    }
+	@ModelAttribute
+	   public void whoareyou(HttpServletRequest req ,Model model) {
+
+		HttpSession session = req.getSession(false);
+		Object store =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)store;
+		 model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+		 System.out.println("whoareyou method triggered. storeId: " + storeEmpVO.getStoresVO().getStoreId());
+	   }
+	
+//	@PostMapping("listSupplier_ByCompositeQuery")
+//	public String listAllSupplier(HttpServletRequest req, Model model) {
+//		Map<String, String[]> map = req.getParameterMap();
+//		HttpSession session = req.getSession(false);
+//		Object store =session.getAttribute("storeEmpLogin");
+//		StoreEmpVO storeEmpVO= (StoreEmpVO)store;
+//		model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+//		List<SupVO> list = supSvc.getAll(map);
+//		model.addAttribute("supListData", list);
+//		return "sFunction/supplier/supList";
+//	}
 	
 	@PostMapping("listSupplier_ByCompositeQuery")
 	public String listAllSupplier(HttpServletRequest req, Model model) {
@@ -56,7 +80,12 @@ public class SupController {
 	
 	//全都要
 	@ModelAttribute("supListData")
-	protected List<SupVO> referenceListData() {
+	protected List<SupVO> referenceListData(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession(false);
+		Object store =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)store;
+		model.addAttribute("storeId", storeEmpVO.getStoresVO().getStoreId());
+		
 		List<SupVO> list = supSvc.getAll();
 		return list;
 	}
