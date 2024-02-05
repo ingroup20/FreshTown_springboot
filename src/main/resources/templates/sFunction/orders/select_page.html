@@ -323,7 +323,7 @@ xmlns:th="http://www.thymeleaf.org">
             </nav>
             <!-- main -->
             <main>
-				<table id="example" class="display" style="width: 100%">
+				<table id="example" class="display text-center " style="width: 100%">
 				  <thead >
 					<tr style="background-color:#CCCCFF">
 						<th style="border: 1px solid #dee2e6" >計數</th>
@@ -377,12 +377,12 @@ xmlns:th="http://www.thymeleaf.org">
 <!-- 														<th>超時/取消訂單備註</th>	 -->
 													</tr>
 													<tr>
-														<td th:text="${ordersVO.orderId}">訂單編號</td>
-														<td class="orderState"><span class="orderState" th:text="${ordersVO.orderState}"></span><span class="orderStateMean" text=""></span></td>
-														<td th:text="${ordersVO.orderTime}">下單時間</td>
-														<td th:text="${ordersVO.doneTime}">出餐時間</td>
-														<td th:text="${ordersVO.finishTime}">完成時間</td>
-														<td th:text="${ordersVO.delayTime}">超時紀錄時間</td>
+														<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.orderId}">訂單編號</td>
+														<td style="border: 1px solid #dee2e6"  class="orderState"><span class="orderState" th:text="${ordersVO.orderState}"></span><span class="orderStateMean" text=""></span></td>
+														<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.orderTime}">下單時間</td>
+														<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.doneTime}">出餐時間</td>
+														<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.finishTime}">完成時間</td>
+														<td style="border: 1px solid #dee2e6"  th:text="${ordersVO.delayTime}">超時紀錄時間</td>
 <!-- 														<td th:text="${ordersVO.delayDesc}">超時/取消訂單備註</td> -->
 													</tr>
 												</table>
@@ -536,7 +536,7 @@ xmlns:th="http://www.thymeleaf.org">
 <script>
         $(document).ready(function () {
         	$("span.orderState").each(function () {
-        		
+        		 $(this).hide();
                 var number = $(this).text().trim();
                 var result = convertToText(number);
                 $(this).siblings(".orderStateMean").text(result);
@@ -546,31 +546,31 @@ xmlns:th="http://www.thymeleaf.org">
         });
 
         function convertToText(number) {
-//             var result = '';
 				var mean='';
                 	switch(number){
-                		case(0):
-                			  mean="未成立";
+                		case "0":
+                			  mean ="未成立";
                 			 break;
-                		case(1):
-                   			  mean="新訂單";
+                		case "1":
+                   			  mean ="新訂單";
                 			break;
-                		case(2):
-                   			  mean="製作中 ";
+                		case "2":
+                   			  mean ="製作中 ";
   	              			break;
-                		case(3):
+                		case "3":
                    			  mean="待取餐";
                 			break;
-                		case(4):
+                		case "4":
                    			  mean="結單";
                 			break;
-                		case(5):
-                   			  mean="取消訂單";
+                		case "5":
+                   			  mean ="取消訂單";
                 			break;
                 		}          
-                	console.log("mean: ", mean)
             return  mean;
         }
+        
+       
     </script>
 </body>
 </html>

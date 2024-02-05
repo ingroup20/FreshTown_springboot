@@ -16,12 +16,12 @@ a{
 
 
 /* 響應式設定========================== */
-@media (max-width:767.98 ){
+/* @media (max-width:767.98 ){ */
 
-}
+/* } */
 
 /* 區塊內布局=========================== */
-.-none{  display: none;}
+.-none{display: none;}
 
 .center_side{
     position: absolute;
@@ -30,6 +30,7 @@ a{
     z-index: 10;
     transform: translate(-50%, -50%);
 }
+
 
 
 /* 顏色區============================== */
@@ -247,7 +248,8 @@ div.section{
 div.section_item{
     width: calc((100% - 90px)/4);
     /* border: 2px solid orange; */
-    height: 350px;
+/*     height: 350px; */
+height: 100%;
     margin: 10px 30px 10px 0;
     border-radius: 2rem;
 }
@@ -269,6 +271,9 @@ div.card{
         -2px -2px 5px 0px orange, /* 左上方向 */
         2px -2px 5px 0px orange, /* 右上方向 */
         -2px 2px 5px 0px orange; /* 左下方向 */;
+}
+div.prd_card_ing{
+	height:130px;
 }
 
 div.card_img{
@@ -321,11 +326,12 @@ section.section_oneStore  div.section{
 section.section_oneStore  div.section_item{
     width: calc((100% - 100px)/5);
     /* border: 2px solid orange; */
-    height: 270px;
+/*     height: 400px; */
     margin: 10px 20px 10px 0;    
 }
 section.section_oneStore  div.section_shadow{
     border-radius: 1rem;
+    height:350px;
     overflow:hidden;
     box-shadow:  
          2px 2px 5px 0px orange, /* 右下方向 */

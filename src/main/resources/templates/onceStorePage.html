@@ -36,7 +36,7 @@
             <div class="section_item">
                 <div class="section_shadow">
 	                <div class="prd_card">        
-	                    <div class="prd_card_ing"><img class="card_img_top" th:src="@{/file/mealGifReader} + '?mealNo=' + ${mealVO.mealNo}" alt="圖片載入中" /></div>           
+	                    <div class="prd_card_ing"><img class="card_img_top" th:src="@{/file/mealGifReader} + '?mealNo=' + ${mealsVO.mealNo}" alt="圖片載入中" /></div>           
 	                    <div class="prd_info">
 	                        <h2 th:text="${mealsVO.mealName}">商品名</h2>
 	                        <h3>售價: $<span th:text="${mealsVO.mealPrice}"></span></h3>                      

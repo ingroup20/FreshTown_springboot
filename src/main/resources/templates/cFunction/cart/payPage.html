@@ -40,10 +40,10 @@
 			<span>付款狀態:</span><span>未付款</span><br/>
 			<span>總金額:</span><span th:text="${ordersVO.totalPrice}"></span><br/>
 	</div>
-	<form id="paidOrder" method="post" th:action="@{/cFunction/cartPage/paidOrder}">
+	<form align="center" id="paidOrder" method="post" th:action="@{/cFunction/cartPage/paidOrder}">
 	<input type="hidden" name="payStatus" value="payseccess">
 	<input type="hidden" name="orderId" th:value="${ordersVO.orderId}">
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >信用卡付款</button>
+		<button align="center" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >信用卡付款</button>
 	</form>
 	
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

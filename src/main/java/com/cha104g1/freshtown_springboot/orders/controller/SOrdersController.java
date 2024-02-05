@@ -131,9 +131,52 @@ public class SOrdersController {
 	
     @GetMapping("orderorders")
 	public String orderOrders(Model model) {
-		return "sFunction/orders/orderorders";
+    	model.addAttribute("newOrder",true);
+    	return "sFunction/orders/orderorders";
 	}
 	
+    @GetMapping("newOrder")
+	public String orderNewOrder(Model model) {
+    	model.addAttribute("newOrder",true);
+    	model.addAttribute("making",false);
+    	model.addAttribute("taking",false);
+    	model.addAttribute("finish",false);
+    	System.out.println("進入newOrder");	
+		return "sFunction/orders/orderorders";
+	}
+    
+    @GetMapping("making")
+	public String makingOrders(Model model) {
+    	model.addAttribute("making",true);
+    	model.addAttribute("newOrder",false);
+    	model.addAttribute("taking",false);
+    	model.addAttribute("finish",false);
+    	System.out.println("進入making");
+    	return "sFunction/orders/orderorders";
+	}
+    
+    @GetMapping("taking")
+	public String takingOrders(Model model) {
+    	model.addAttribute("taking",true);
+    	model.addAttribute("newOrder",false);
+    	model.addAttribute("making",false);
+    	model.addAttribute("finish",false);
+    	System.out.println("進入taking");
+    	return "sFunction/orders/orderorders";
+	}
+    
+    @GetMapping("finish")
+	public String orderFinish(Model model) {
+    	model.addAttribute("finish",true);
+    	model.addAttribute("newOrder",false);
+    	model.addAttribute("taking",false);
+    	model.addAttribute("making",false);
+    	System.out.println("進入finish");
+    	return "sFunction/orders/orderorders";
+	}
+    
+    
+    //============================================
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("orderId") String orderId, ModelMap model) {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/

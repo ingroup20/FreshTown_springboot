@@ -229,7 +229,7 @@ p.header{
 /*===============section=============*/
 section.section,section.section_oneStore {
     /* border: 1px solid red; */
-    min-height: 700px;
+    min-height: 1000px;
    
 }
 
@@ -310,7 +310,7 @@ input#entrance{
 
 section.section{
     border: 1px solid red;
-    min-height: 700px;
+    min-height: 1000px;
    
 }
 

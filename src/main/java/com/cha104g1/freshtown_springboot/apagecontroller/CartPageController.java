@@ -146,7 +146,7 @@ public class CartPageController {
 		//==order socket通知
 //		orderSocketSvc.customerSideConn(String.valueOf(ordersVO.getOrderId()));
 //		System.out.println("有執行socket");
-		return "redirect:/cFunction/cart/payPage";
+		return "redirect: /freshtown_springboot/cFunction/cartPage";
 	}
 	
  	
