@@ -54,10 +54,10 @@ xmlns:th="http://www.thymeleaf.org">
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 	          <div class="app-brand demo">
-		            <a th:href="@{index}" class="app-brand-link">
+		            <a th:href="@{/sFunction/sEntrancePass}" class="app-brand-link">
 		              <img class="img-fluid" width="160" th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">            
 		            </a>
-		            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+		            <a th:href="@{/sFunction/sEntrancePass}" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 		              <i class="bx bx-chevron-left bx-sm align-middle"></i>
 		            </a>
 	          </div>
@@ -259,10 +259,10 @@ xmlns:th="http://www.thymeleaf.org">
 	                            <td><span class="badge bg-label-primary me-1"></span>採購需求送出日期</td>                          
 	                             <td><span th:text="${materialVO.purDate}"></span></td>
 					          </tr>
-					          <tr> 
-	                            <td><span class="badge bg-label-primary me-1"></span>店家流水號</td>                          
-	                             <td><span th:text="${materialVO.storesVO.storeId}"></span></td>
-					          </tr>
+<!-- 					          <tr>  -->
+<!-- 	                            <td><span class="badge bg-label-primary me-1"></span>店家</td>                           -->
+<!-- 	                             <td><span th:text="${materialVO.storesVO.storeId} + ${materialVO.storesVO.storeName}"></span></td> -->
+<!-- 					          </tr> -->
 					       </tbody>
 					      </table>		
 				        </div>

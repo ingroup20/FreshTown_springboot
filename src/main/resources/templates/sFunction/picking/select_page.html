@@ -219,37 +219,32 @@ xmlns:th="http://www.thymeleaf.org">
                     <form method="post" th:action="@{listPicking_ByCompositeQuery}">
                     
                       <div>          
-                        <label for="defaultFormControlInput" class="form-label">店家流水號</label>
                         <input
-                          type="text"
-                          name="storesVO.storeId"
+                          type="hidden"
+                          name="storeId"
                           class="form-control"
                           id="defaultFormControlInput"
                           placeholder=""
-                          value=""
-                          aria-describedby="defaultFormControlHelp"
+                          th:value="${storeId}"
                         />
-                        <div id="defaultFormControlHelp" class="form-text">
-                          店家流水號查詢.
-                        </div>
                         <br>
                       </div>
-                      <div>          
-                        <label for="defaultFormControlInput" class="form-label">店家員工編號</label>
-                        <input
-                          type="text"
-                          name="storeEmpVO.sEmpId"
-                          class="form-control"
-                          id="defaultFormControlInput"
-                          placeholder=""
-                          value=""
-                          aria-describedby="defaultFormControlHelp"
-                        />
-                        <div id="defaultFormControlHelp" class="form-text">
-                          店家員工編號查詢.
-                        </div>
-                        <br>
-                      </div>
+<!--                       <div>           -->
+<!--                         <label for="defaultFormControlInput" class="form-label">店家員工編號</label> -->
+<!--                         <input -->
+<!--                           type="text" -->
+<!--                           name="storeEmpVO.sEmpId" -->
+<!--                           class="form-control" -->
+<!--                           id="defaultFormControlInput" -->
+<!--                           placeholder="" -->
+<!--                           value="" -->
+<!--                           aria-describedby="defaultFormControlHelp" -->
+<!--                         /> -->
+<!--                         <div id="defaultFormControlHelp" class="form-text"> -->
+<!--                           店家員工編號查詢. -->
+<!--                         </div> -->
+<!--                         <br> -->
+<!--                       </div> -->
              
                       <div class="mb-3">
                         <label for="defaultSelect" class="form-label">選擇領料名稱</label>
@@ -260,7 +255,7 @@ xmlns:th="http://www.thymeleaf.org">
                       </div>
                       <br>
                       
-                                            <div>          
+                       <div>          
                         <label for="defaultFormControlInput" class="form-label">領料數量</label>
                         <input
                           type="text"

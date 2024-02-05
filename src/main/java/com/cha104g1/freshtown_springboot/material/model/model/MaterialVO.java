@@ -1,6 +1,10 @@
 package com.cha104g1.freshtown_springboot.material.model.model;
 
 import java.io.Serializable;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +21,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -25,7 +32,10 @@ import javax.validation.constraints.Pattern;
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
 import com.cha104g1.freshtown_springboot.picking.model.PickingVO;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
+import com.cha104g1.freshtown_springboot.material.model.service.UniqueItemNameValidator;
+
 
 
 @Entity
@@ -38,9 +48,10 @@ public class MaterialVO implements Serializable{
 	@Column(name = "itemNumber", updatable = false)
 	private Integer itemNumber;
 	
-	@Column(name = "itemName")
+	@Column(name = "itemName",  unique = true)
 	@NotEmpty(message="物料名稱: 請勿空白")
 	@Pattern(regexp = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$", message = "物料名稱: 只能是中、英文字母、數字和_ , 且長度必需在1到10之間")
+	@UniqueItemName
 	private String itemName;
 	
 	@ManyToOne
@@ -71,12 +82,15 @@ public class MaterialVO implements Serializable{
 //	@Pattern(regexp = "^[012]$", message = "物料狀態: 只能是數字(0: 低於安全庫存 1: 數量足夠 2:作廢")
 	private Integer itemStatus;
 	
-	@Column(name = "purDate", nullable = true)
+	@Column(name = "purDate")
+	@NotNull(message="日期: 請勿空白")
 	private Date purDate;
 	
 	@ManyToOne
 	@JoinColumn(name="storeId",referencedColumnName ="storeId")
 	private StoresVO storesVO;
+	
+//	private StoreEmpVO storeEmpVO;
 	
 	
 	@OneToMany(mappedBy = "materialVO",cascade= CascadeType.ALL)
@@ -177,5 +191,23 @@ public class MaterialVO implements Serializable{
 	public void setStoresVO(StoresVO storesVO) {
 		this.storesVO = storesVO;
 	}
+	
+	@Constraint(validatedBy = UniqueItemNameValidator.class)
+	@Target(ElementType.FIELD)
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface UniqueItemName {
+	    String message() default "此物料名稱已有建立";
+	    Class<?>[] groups() default { };
+	    Class<? extends Payload>[] payload() default { };
+	}
+
+//	public StoreEmpVO getStoreEmpVO() {
+//		return storeEmpVO;
+//	}
+//	public void setStoreEmpVO(StoreEmpVO storeEmpVO) {
+//		this.storeEmpVO = storeEmpVO;
+//	}
+	
+	
 
 }

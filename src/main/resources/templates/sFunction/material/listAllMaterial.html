@@ -83,7 +83,7 @@
         $(function () {
             var $table = $("table");
             var currentPage = 0; //當前頁默認值為0  
-            var pageSize = 3; //每一頁顯示的數目  
+            var pageSize = 5; //每一頁顯示的數目  
             $table.bind('paging', function () {
                 $table.find('tbody tr').hide().slice(currentPage * pageSize, (currentPage + 1) * pageSize).show();
             });
@@ -135,10 +135,10 @@
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a th:href="@{index}" class="app-brand-link"> <img
+					<a th:href="@{/sFunction/sEntrancePass}" class="app-brand-link"> <img
 						class="img-fluid" width="160"
 						th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">
-					</a> <a href="javascript:void(0);"
+					</a> <a th:href="@{/sFunction/sEntrancePass}"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 						<i class="bx bx-chevron-left bx-sm align-middle"></i>
 					</a>
@@ -193,7 +193,7 @@
 									<div data-i18n="store">查詢物料</div>
 							</a></li>
 							<li class="menu-item"><a
-								th:href="@{/sFunction/itemsclass/select_page}" class="menu-link">
+								th:href="@{/sFunction/itemsclass/listAllItemsClass}" class="menu-link">
 									<i class="menu-icon"></i>
 									<div data-i18n="store">管理物料分類</div>
 							</a></li>
@@ -275,6 +275,13 @@
 						<h4 class="fw-bold py-3 mb-4">
 							<span class="text-muted fw-light">店家後台首頁 /</span>管理物料
 						</h4>
+						
+<!-- 						<div align="right"> -->
+<!-- 						 <form method="post" th:action="@{/sFunction/material/insert}"> -->
+<!-- 							<button type="submit" class="btn btn-outline-dark">新增物料</button> -->
+<!-- 							<input type="hidden" name="itemNumber" th:value="${materialVO.itemNumber}"> -->
+<!-- 						</form> 		  -->
+<!-- 						</div> -->
 						<!-- 頁數 -->
 						<div align="left">
 							<b><font color=#F17228>第<label id="currentPage">1</label>/<label
@@ -283,7 +290,7 @@
 								th:text="${materialListData.size}"></font> 筆
 							</b>
 						</div>
-
+					
 						<!-- Material Table -->
 						<div class="card">
 							<!--                               <h5 class="card-header">Material Basic</h5> -->
@@ -300,7 +307,7 @@
 											<th>安全庫存線</th>
 											<th>物料狀態</th>
 											<th>採購需求送出日期</th>
-											<th>店家流水號</th>
+											<th>店家</th>
 											<th>採取動作</th>
 
 										</tr>
@@ -326,7 +333,7 @@
 													class="badge bg-label-success me-1"
 													th:if="${materialVO.itemStatus == 2}">作廢</span></td>
 												<td th:text="${materialVO.purDate}"></td>
-												<td th:text="${materialVO.storesVO.storeId}"></td>
+												<td th:text="${materialVO.storesVO.storeId}+ ${materialVO.storesVO.storeName}"></td>
 												<td>
 													<div class="dropdown">
 														<button type="button"
@@ -343,11 +350,11 @@
 																<input type="hidden" name="itemNumber"
 																	th:value="${materialVO.itemNumber}">
 															</form>
-															  <div>
+															<div>
 																<i class=" dropdown-item bx bx-message-square-add me-1">
 																	<a href='addMaterial'>新增</a>
 																</i>
-															  </div>                                     
+															</div>                                    
 														</div>
 													</div>
 												</td>

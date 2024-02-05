@@ -18,6 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.Query; //Hibernate 5 開始 取代原 org.hibernate.Query 介面
 
 import com.cha104g1.freshtown_springboot.itemsclass.model.model.ItemsClassVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 public class HibernateUtil_CompositeQuery_Material {
 
@@ -35,8 +36,11 @@ public class HibernateUtil_CompositeQuery_Material {
 			ItemsClassVO itemsClassVO = new ItemsClassVO();
 			itemsClassVO.setItemClassId(Integer.valueOf(value));
 			predicate = builder.equal(root.get("itemsClassVO"), itemsClassVO);
+		}else if("storeId".equals(columnName)){
+			StoresVO storesVO= new StoresVO();
+			storesVO.setStoreId(Integer.valueOf(value));
+			predicate = builder.equal(root.get("storesVO"), storesVO);
 		}
-
 		return predicate;
 	}
 

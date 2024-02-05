@@ -265,6 +265,7 @@ public class SEntrancePassController {
 		List<MealsVO> list = mealsSvc.getAllByStoreId(storeEmpVO.getStoresVO().getStoreId());
 		return list;
 	}
+
 	
 	@ModelAttribute("mealTypeListData2") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
 	protected List<MealTypeVO> referenceListData(Model model) {
@@ -302,12 +303,19 @@ public class SEntrancePassController {
 	}
     
 	@ModelAttribute("materialListData") // for select_page.html 第135行用
-	protected List<MaterialVO> referenceListData_Material(Model model) {
+	protected List<MaterialVO> referenceListData_Material(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;	
 		//符合要什麼給什麼
 		model.addAttribute("itemsClassVO", new ItemsClassVO());
-		List<MaterialVO> list = materialSvc.getAll();
+		List<MaterialVO> list = materialSvc.getAllByStoreId(storeEmpVO.getStoresVO().getStoreId());
+		
 		return list;
 	}
+	
+	
+
 	
 	//=========== picking  要使用的資料 =================== 
     @GetMapping("/picking/select_page")
@@ -320,12 +328,23 @@ public class SEntrancePassController {
 		return "sFunction/picking/listAllPicking";
 	}
     
+//	@ModelAttribute("pickingListData") // for select_page.html 第135行用
+//	protected List<PickingVO> referenceListData_Picking(Model model) {
+//		model.addAttribute("materialVO", new MaterialVO());
+//		List<PickingVO> list = pickingSvc.getAll();
+//		return list;
+//	}
 	@ModelAttribute("pickingListData") // for select_page.html 第135行用
-	protected List<PickingVO> referenceListData_Picking(Model model) {
+	protected List<PickingVO> referenceListData_Picking(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		List<PickingVO> list = pickingSvc.getAllByStoreId(storeEmpVO.getStoresVO().getStoreId());
 		model.addAttribute("materialVO", new MaterialVO());
-		List<PickingVO> list = pickingSvc.getAll();
 		return list;
 	}
+
+	
 	
 	//=========== itemsclass  要使用的資料 =================== 
     @GetMapping("/itemsclass/select_page")
