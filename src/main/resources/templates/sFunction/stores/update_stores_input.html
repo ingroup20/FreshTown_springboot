@@ -1,0 +1,221 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>店家修改 - update_stores_input.html</title>
+
+<head ></head>
+<style type="text/css">
+	
+	button {
+		padding: 5px;
+	}
+	form {
+		display: table;
+	}
+	form div {
+		display: table-row;
+	}
+	label, input, span, select {
+		display: table-cell;
+		margin: 5px;
+		text-align: left;		
+	}
+	input[type=text], input[type=password], select, textarea {
+		width: 200px;
+		margin: 5px;
+	}
+	form div div {
+		display: table-cell;
+	}
+	.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
+		 <div align="center"> <h2>店家資料修改 - update_stores_input.html</h2>
+		 <h3><a class="navbar-brand" th:href="@{/stores/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
+</nav>
+
+	<div align="center">
+		<h3><b>資料要全部輸入</b></h3>
+		<form th:action="@{update}" method="post" th:object="${storesVO}" enctype="multipart/form-data">
+
+				<div>
+				<label>店家流水號:</label>
+				<input type="text" th:field="*{storeId}" readonly/>
+				</div>
+				
+				<div>
+				<label>店家帳號:</label>
+				<input type="text" th:field="*{storeAccount}" readonly/>
+				</div>
+				<div>
+				<label>店家名稱:</label>
+				<input type="text" th:field="*{storeName}"/>
+				</div>
+				<div>
+				<label>店家統一編號:</label>
+				<input type="text" th:field="*{storeGui}"/>
+				</div>
+				<div>
+				<label>店家地址:</label>
+				<input type="text" th:field="*{storeAddress}"/>
+				</div>
+				<div>
+				<label>店家電話:</label>
+				<input type="text" th:field="*{storePhone}"/>
+				</div>
+				<div>
+				<label>店家狀態:</label>
+				<input type="text" th:field="*{storeState}"/>
+				</div>
+				<div>
+				<label>店家等級:</label>
+				<input type="text" th:field="*{storeLv}"/>
+				</div>
+				<div>
+				<label>開通時間:</label>
+				<input type="text" th:field="*{createDate}" readonly/>
+				</div>
+					
+			<div>
+			<label>付費日期:</label>
+			<input type="date" th:field="*{payDate}" onclick="hideContent('payDate.errors');" /><br/>
+			<span  th:if="${#fields.hasErrors('payDate')}" th:errors="*{payDate}" class="error" id="payDate.errors"></span>
+			</div>
+		
+				<div>
+				<label>平台開店:</label>
+				<input type="text" th:field="*{pushUp}"/>
+				</div>
+				<div>
+				<label>店家負責人:</label>
+				<input type="text" th:field="*{ownerName}"/>
+				</div>
+				<div>
+				<label>負責人手機號碼:</label>
+				<input type="text" th:field="*{ownerMob}"/>
+				</div>
+				<div>
+				<label>身分證:</label>
+				<input type="text" th:field="*{ownerId}"/>
+				</div>
+				<div>
+				<label>負責人地址:</label>
+				<input type="text" th:field="*{ownerAddress}"/>
+				</div>
+				<div>
+				<label>EMAIL:</label>
+				<input type="text" th:field="*{ownerEmail}"/>
+				</div>
+				
+				<div>
+				<label>評分:</label>
+				<input type="text" th:field="*{totalScore}" readonly/>
+				</div>
+				
+				<div>
+				<label>評分人數:</label>
+				<input type="text" th:field="*{scorePeople}" readonly/>
+				</div>
+							
+			<div>
+			<label>照片:</label>
+			<input type="file" th:field="*{photo}" onclick="previewImage()" multiple="multiple" />
+            <!-- 可以不修改圖片 <span  th:if="${#fields.hasErrors('upFiles')}" th:errors="*{upFiles}" class="error" id="upFiles.errors"></span> -->
+			<div id="blob_holder"><img th:src="@{/stores/DBGifReader} + '?storeId=' + ${storesVO.storeId}" width="100px"></div>
+			</div>
+
+				<div>
+				<label>店家簡介:</label>
+				<input type="text" th:field="*{storeDesc}"/>
+				</div>
+			
+			<div>
+			<input type="text" th:field="*{storePw}" readonly/>
+			<input type="text" th:field="*{storeLat}" readonly/>
+			<input type="text" th:field="*{storeLag}" readonly/>
+			<input type="text" th:field="*{openTime}" readonly/>
+			<input type="text" th:field="*{restDay}" readonly/>
+			</div>
+			
+			
+			<div>
+				<div></div>
+				<div><button type="submit" id="submit"> 送出修改 </button></div>
+				<div></div>
+			</div>		
+		</form>
+	
+	</div>
+
+
+<!-- JavaScript part -->
+<script type="text/javascript">
+//清除提示信息
+function hideContent(d) {
+     document.getElementById(d).style.display = "none";
+}
+
+//照片上傳-預覽用
+var filereader_support = typeof FileReader != 'undefined';
+if (!filereader_support) {
+	alert("No FileReader support");
+}
+acceptedTypes = {
+		'image/png' : true,
+		'image/jpeg' : true,
+		'image/gif' : true
+};
+function previewImage() {
+	var upfile1 = document.getElementById("upFiles");
+	upfile1.addEventListener("change", function(event) {
+		var files = event.target.files || event.dataTransfer.files;
+		for (var i = 0; i < files.length; i++) {
+			previewfile(files[i])
+		}
+	}, false);
+}
+function previewfile(file) {
+	if (filereader_support === true && acceptedTypes[file.type] === true) {
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			var image = new Image();
+			image.src = event.target.result;
+			image.width = 100;
+			image.height = 75;
+			image.border = 2;
+			if (blob_holder.hasChildNodes()) {
+				blob_holder.removeChild(blob_holder.childNodes[0]);
+			}
+			blob_holder.appendChild(image);
+		};
+		reader.readAsDataURL(file);
+		document.getElementById('submit').disabled = false;
+	} else {
+		blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
+				+ "<br>" + "● ContentTyp: " + file.type
+				+ "<br>" + "● size: " + file.size + "bytes"
+				+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
+		document.getElementById('submit').disabled = true;
+	}
+}
+</script>
+
+</body>
+</html>

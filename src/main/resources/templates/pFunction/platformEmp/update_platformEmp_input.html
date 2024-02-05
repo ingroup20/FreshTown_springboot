@@ -58,19 +58,19 @@
 			<div>
 			<!--pk -->
 			<label>員工編號:</label>
-			<input type="number" th:field="*{pEmpId}" onclick="hideContent('pEmpId.errors');" readonly /><br/>
+			<input type="number" th:field="*{pEmpId}" style="border:0px ; font-weight: bold;" readonly /><br/>
 			<span th:if="${#fields.hasErrors('pEmpId')}" th:errors="*{pEmpId}" class="error" id="pEmpId.errors"></span>
 			</div>
 			
 			<div>
 			<label>員工姓名:</label>
-			<input type="text" th:field="*{pEmpName}"  onclick="hideContent('pEmpPerm.errors');" readonly /><br/>
+			<input type="text" th:field="*{pEmpName}"  onclick="hideContent('pEmpPerm.errors');"  /><br/>
 			<span th:if="${#fields.hasErrors('pEmpName')}" th:errors="*{pEmpName}" class="error" id="pEmpName.errors"></span>
 			</div>
 			
 			<div>
 			<label>員工帳號:</label>
-			<input type="text" th:field="*{pEmpAccount}" onclick="hideContent('pEmpAccount.errors');" readonly /><br/>
+			<input type="text" th:field="*{pEmpAccount}" style="border:0px ; font-weight: bold;" readonly /><br/>
 			<span th:if="${#fields.hasErrors('pEmpAccount')}" th:errors="*{pEmpAccount}" class="error" id="pEmpAccount.errors"></span>
 			</div>
 			
@@ -82,7 +82,7 @@
 			
 			<div>
 			<label>員工信箱:</label>
-			<input type="text" th:field="*{pEmpEmail}" onclick="hideContent('pEmpEmail.errors');" readonly /><br/>
+			<input type="text" th:field="*{pEmpEmail}" onclick="hideContent('pEmpEmail.errors');"  /><br/>
 			<span th:if="${#fields.hasErrors('pEmpEmail')}" th:errors="*{pEmpEmail}" class="error" id="pEmpEmail.errors"></span>
 			</div>
 			

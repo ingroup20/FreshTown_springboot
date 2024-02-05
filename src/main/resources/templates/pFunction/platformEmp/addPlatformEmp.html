@@ -55,12 +55,7 @@
 		<h3><b>所有欄位皆為必填欄位</b></h3>
 		<form th:action="@{insert}" method="post" th:object="${platformEmpVO}" enctype="multipart/form-data">
 			
-			<div>
-			<!--pk -->
-			<label>員工編號:</label>
-			<input type="number" th:field="*{pEmpId}" onclick="hideContent('supId.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('pEmpId')}" th:errors="*{pEmpId}" class="error" id="pEmpId.errors"></span>
-			</div>
+			
 			
 			<div>
 			<label>員工姓名:</label>
