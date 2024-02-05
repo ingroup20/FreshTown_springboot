@@ -87,7 +87,7 @@ public class CustomerVO {
 		
 		@Column(name = "customerNic")
 		@NotEmpty(message="會員暱稱: 請勿空白")
-		@Pattern(regexp = "^[a-zA-Z\u4E00-\u9FFF_]+$", message = "暱稱只能包含繁體中文或英文")
+		@Pattern(regexp = "^[a-zA-Z0-9_\u4E00-\u9FFF_]+$", message = "暱稱只能包含繁體中文或英文")
 		public String getCustomerNic() {
 			return customerNic;
 		}

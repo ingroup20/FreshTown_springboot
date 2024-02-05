@@ -1,31 +1,34 @@
 package com.cha104g1.freshtown_springboot.stores.controller;
 
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
-import com.cha104g1.freshtown_springboot.stores.model.StoresService;
-import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
-
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresService;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 @Controller
 @RequestMapping("/pFunction/stores")
@@ -56,6 +59,7 @@ public class StoresController {
 	}
 	
 	
+
 	
 	//=====================================================
 	/*
@@ -155,6 +159,7 @@ public class StoresController {
 		System.out.println("修改差轉跳");
 		return "pFunction/stores/listOneStores"; // 修改成功後轉交listOneStores.html
 	}
+	
 
 
 	@ModelAttribute("storeStateMapData") //

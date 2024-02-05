@@ -174,6 +174,9 @@ public class SEntrancePassController {
 				return list;
 			}
 			
+			
+			
+			
 	//=========== supplier  要使用的資料 ===================   
     @GetMapping("/supplier/supplierMain")
 	public String supplierMain(Model model) {
@@ -338,6 +341,23 @@ public class SEntrancePassController {
 	@ModelAttribute("itemsClassListData") 
 	protected List<ItemsClassVO> referenceListData_ItemsClass(Model model) {
 		List<ItemsClassVO> list = itemsClassSvc.getAll();
+		return list;
+	}
+	
+	//=========== Stores  要使用的資料 ===================   
+	@GetMapping("/stores/select_page")
+	public String select_page8(Model model) {
+		return "/sFunction/stores/select_page";
+	}
+	
+	@GetMapping("/stores/listAllStores")
+	public String listAllStores(Model model) {
+		return "/sFunction/stores/listAllStores";
+	}
+	
+	@ModelAttribute("storesListData") // for select_page.html 第135行用
+	protected List<StoresVO> referenceListData_Store(Model model) {
+		List<StoresVO> list = storesSvc.getAll();
 		return list;
 	}
 	

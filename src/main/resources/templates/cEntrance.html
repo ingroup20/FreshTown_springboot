@@ -19,10 +19,14 @@
                 <!-- <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li> -->
                 <li class="nav_item li_item menu">
                     <a class="nav_link title " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">註冊專區</a>
-                    <ul class="dropdown_menu -none">
-                        <li class="li_item "><form method="get"  th:action="@{addCustomer}"><button style="background:transparent;border:none" type="submit" >點餐會員註冊</button></form></li>
+
+                    <ul class="dropdown_menu ">
+                        <li class="li_item "><a th:href="@{/registerC}"><button type="submit" >點餐會員註冊</button></a></li>
+
                         <li><hr class="dropdown_divider" /></li>
-                        <li class="li_item "><form method="get"  th:action="@{addStoreC}"><button style="background:transparent;border:none"  type="submit" >合作店家申請</button></form></li>
+
+                        <li class="li_item "><a th:href="@{/registerS}"><button type="submit" >合作店家申請</button></a></li>
+
                     </ul>
                 </li>
                 <li class="nav_item li_item">

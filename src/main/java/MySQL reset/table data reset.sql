@@ -60,9 +60,9 @@ INSERT INTO items_class (itemClassName, storeId) VALUES ( '醬料', 2);
 INSERT INTO items_class (itemClassName, storeId) VALUES ( '餐具', 3);
 
 -- 旭東
-INSERT INTO supplier VALUES (1,'Ti','帥哥','034251108',1,1);
-INSERT INTO supplier VALUES (2,'Ba','handsome','0227120589',2,1);
-INSERT INTO supplier VALUES (3,'Me','阿格麗','034506333',3,1);
+INSERT INTO supplier VALUES (1,'Ti','帥','034251108',1,1);
+INSERT INTO supplier VALUES (1,'Ba','梅亭','0227120589',2,1);
+INSERT INTO supplier VALUES (1,'Me','全家','034506333',3,1);
 
 -- 逸晉
  INSERT INTO store_emp (sEmpPw, sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)
@@ -103,10 +103,10 @@ pickingStatus, pickingClass, pickingDate, marks) VALUES
 ( 3, 3, 1, 5,'個', 0, 1, '2023-12-13 00:00:00', '食材過期');
 
 -- 旭東
-INSERT INTO sup_order VALUES (1,1,1,7414,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
-INSERT INTO sup_order VALUES (2,2,3,7414,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
+INSERT INTO sup_order VALUES (1,1,1,1111,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
+INSERT INTO sup_order VALUES (2,2,3,2222,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
 
-INSERT INTO sup_order VALUES (3,3,3,7414,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
+INSERT INTO sup_order VALUES (3,3,3,3333,54,'2023-12-13','2023-12-14',7,'2023-12-15','',1);
 
 -- 雯馨
 INSERT INTO meals VALUES (1, '原汁牛肉麵', 145, 2, 2, 1, null, '00:30:00');

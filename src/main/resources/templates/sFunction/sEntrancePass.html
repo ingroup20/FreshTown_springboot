@@ -166,7 +166,7 @@ xmlns:th="http://www.thymeleaf.org">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
 
              <li class="menu-item">
-                  <a href="#" class="menu-link" th:onclick="submitForm('storeInfo')">                 
+                  <a th:href="@{/sFunction/stores/listAllStores}" class="menu-link" th:onclick="submitForm('storeInfo')">                 
 	                   <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
 	                   <div data-i18n="store">店家資料管理</div>
                  </a>

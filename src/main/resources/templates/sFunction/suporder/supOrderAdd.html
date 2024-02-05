@@ -44,23 +44,24 @@
 			
 			
 			<div>
-			<!--
-			<label>採購單編號:</label>
-			<input type="hidden" th:field="*{id}" onclick="hideContent('id.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="error" id="id.errors"></span>
-			-->
 			</div>
 			
 			<div>
-			<label>供應商編號:</label>
-			<input type="number" th:field="*{supVO.supId}" onclick="hideContent('supVO.supId.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('supVO.supId')}" th:errors="*{supVO.supId}" class="error" id="supVO.supId.errors"></span>
+			    <label>供應商名稱:</label>
+			    <select th:field="*{supVO.supId}" onclick="hideContent('supVO.supId.errors');">
+			        <option th:each="supplier : ${allSuppliers}" th:value="${supplier.supId}" th:text="${supplier.supplierName}"></option>
+			    </select>
+			    <br/>
+			    <span th:if="${#fields.hasErrors('supVO.supId')}" th:errors="*{supVO.supId}" class="error" id="supVO.supId.errors"></span>
 			</div>
 			
 			<div>
-			<label>物料編號:</label>
-			<input type="number" th:field="*{materialVO.itemNumber}" onclick="hideContent('materialVO.itemNumber.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('materialVO.itemNumber')}" th:errors="*{materialVO.itemNumber}" class="error" id="materialVO.itemNumber.errors"></span>
+			    <label>物料名稱:</label>
+			    <select th:field="*{materialVO.itemNumber}" onclick="hideContent('materialVO.itemNumber.errors');">
+			        <option th:each="material : ${allMaterials}" th:value="${material.itemNumber}" th:text="${material.itemName}"></option>
+			    </select>
+			    <br/>
+			    <span th:if="${#fields.hasErrors('materialVO.itemNumber')}" th:errors="*{materialVO.itemNumber}" class="error" id="materialVO.itemNumber.errors"></span>
 			</div>
 			
 			<div>
@@ -113,11 +114,6 @@
 			</div>
 			
 			<div>
-			<label>店家帳號:</label>
-			<!--
-			<input type="text" th:field="*{StoresVO.storeId}" onclick="hideContent('storeId.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
-			-->
 			<input type="hidden" name="storeId" th:value="${storeId}">
 			</div>
 			
@@ -133,11 +129,55 @@
 
 
 <!-- JavaScript part -->
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 //清除提示信息
 function hideContent(d) {
      document.getElementById(d).style.display = "none";
 }
+
+
+/*<![CDATA[*/
+function validateForm() {
+    var purDate = document.getElementById('purDate').value;
+    var preDate = document.getElementById('preDate').value;
+    var deliDate = document.getElementById('deliDate').value;
+
+    // 檢查採購日期是否為空
+    if (purDate === '') {
+        alert('採購日期不能為空！');
+        return false;
+    }
+
+    // 檢查預計交期是否為空
+    if (preDate === '') {
+        alert('預計交期不能為空！');
+        return false;
+    }
+
+    // 檢查到貨日期是否為空
+    if (deliDate === '') {
+        alert('到貨日期不能為空！');
+        return false;
+    }
+
+    // 檢查預計交期是否在採購日期之後
+    if (new Date(preDate) <= new Date(purDate)) {
+        alert('預計交期不能在採購日期之前！');
+        return false;
+    }
+
+    // 檢查到貨日期是否在預計交期之後和採購日期之後
+    if (new Date(deliDate) <= new Date(preDate) || new Date(deliDate) <= new Date(purDate)) {
+        alert('到貨日期不能再在預計交期和採購日期之前！');
+        return false;
+    }
+
+    // 其他檢查邏輯...
+
+    return true; // 如果通過所有驗證，則返回 true 提交表單
+}
+/*]]>*/
+
 </script>
 
 </body>

@@ -53,7 +53,7 @@ public class PlatformEmpVO implements java.io.Serializable {
 	
 	@Column(name = "pEmpName")
 	@NotEmpty(message="員工姓名: 請勿空白")
-	@Pattern(regexp = "^[a-zA-Z\u4E00-\u9FFF_]+$", message = "暱稱只能包含繁體中文或英文")
+	@Pattern(regexp = "^[a-zA-Z0-9_\u4E00-\u9FFF_]+$", message = "暱稱只能包含繁體中文或英文")
 	public String getpEmpName() {
 		return pEmpName;
 	}
