@@ -71,7 +71,7 @@ public class SupController {
 //	}
 	
 	@PostMapping("listSupplier_ByCompositeQuery")
-	public String listAllSupOrder(HttpServletRequest req, Model model) {
+	public String listAllSupplier(HttpServletRequest req, Model model) {
 		Map<String, String[]> map = req.getParameterMap();
 		List<SupVO> list = supSvc.getAll(map);
 		model.addAttribute("supListData", list); 
