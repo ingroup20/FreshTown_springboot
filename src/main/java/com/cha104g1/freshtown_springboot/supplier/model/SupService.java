@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.stores.model.HibernateUtil_CompositeQuery_Stores;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
@@ -34,13 +35,25 @@ public class SupService {
 		return optional.orElse(null);
 	}
 	
-    public List<SupVO> listSupByCompositeQuery(String supplierName, String supplierContact, Integer supplierState) {
-        return repository.findSupplierByCompositeQuery(supplierName, supplierContact, supplierState);
+    public List<SupVO> listSupByCompositeQuery(
+//    		String storeId,
+    		String supplierName, String supplierContact, Integer supplierState) {
+        return repository.findSupplierByCompositeQuery(
+//        		storeId, 
+        		supplierName, supplierContact, supplierState);
     }
     
 	public List<SupVO> getAll(){
 		return repository.findAll();
 	}
+	
+	public List<SupVO> getAllSup(String storeId){
+		return repository.findAllSup(storeId);
+	}
+	
+	public List<SupVO> getAllSuppliers() {
+        return repository.findAll();
+    }
 	
 	public List<SupVO> getAll(Map<String, String[]> map) {
 		return HibernateUtil_CompositeQuery_Supplier.getAllC(map,sessionFactory.openSession());

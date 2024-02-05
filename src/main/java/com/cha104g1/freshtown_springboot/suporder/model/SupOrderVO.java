@@ -10,6 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
@@ -32,11 +40,24 @@ public class SupOrderVO implements java.io.Serializable {
 	@JoinColumn(name="purNo",referencedColumnName ="itemNumber")
 	private MaterialVO materialVO;
 	
+	@NotNull(message="數量不能空白")
+	@Min(value = 1, message = "數量: 不能小於{value}")
+	@Max(value = 99999, message = "數量: 不能超過{value}")
 	private Integer amount;
+	
+	@NotNull(message="價格不能空白")
+	@Min(value = 1, message = "數量: 不能小於{value}")
+	@Max(value = 999999, message = "數量: 不能超過{value}")
 	private Integer unitPrice;
+	
+	@Column(name = "PURDATE")
 	private Date purDate;
+	
+	@Column(name = "PREDATE")
 	private Date preDate;
 	private Integer oStatus;
+	
+	@Column(name = "DELIDATE")
 	private Date deliDate;
 	private String marks;
 	

@@ -60,9 +60,9 @@ INSERT INTO items_class (itemClassName, storeId) VALUES ( '醬料', 2);
 INSERT INTO items_class (itemClassName, storeId) VALUES ( '餐具', 3);
 
 -- 旭東
-INSERT INTO supplier VALUES (1,'Ti','帥哥','034251108',1,1);
-INSERT INTO supplier VALUES (2,'Ba','handsome','0227120589',2,1);
-INSERT INTO supplier VALUES (3,'Me','阿格麗','034506333',3,1);
+INSERT INTO supplier VALUES (1,'Ti','帥','034251108',1,1);
+INSERT INTO supplier VALUES (1,'Ba','梅亭','0227120589',2,1);
+INSERT INTO supplier VALUES (1,'Me','全家','034506333',3,1);
 
 -- 逸晉
  INSERT INTO store_emp (sEmpPw, sEmpName, invPerm, purPerm, manuPerm, orderPerm, modifyPerm, storeId, sEmpDeptno, sEmpTitle, sEmpState)

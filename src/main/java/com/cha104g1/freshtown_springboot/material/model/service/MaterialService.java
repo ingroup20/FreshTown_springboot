@@ -37,7 +37,9 @@ public class MaterialService {
 		return optional.orElse(null);//原本是null
 	}
 	
-	
+	public List<MaterialVO> getAllMaterials() {
+        return repository.findAll();
+    }
 
 	public List<MaterialVO> getAll() {
 		return repository.findAll();

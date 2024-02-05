@@ -266,6 +266,11 @@
 <!--			<artifactId>FreshTown</artifactId>-->
 <!--			<version>0.0.1-SNAPSHOT</version>-->
 <!--		</dependency>-->
+		<dependency>
+			<groupId>com.cha104g1</groupId>
+			<artifactId>FreshTown</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

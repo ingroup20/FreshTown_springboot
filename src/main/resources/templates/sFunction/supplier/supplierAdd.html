@@ -43,11 +43,7 @@
 			
 			
 			
-			<div>
-			<label>供應商編號:</label>
-			<input type="number" th:field="*{supId}" onclick="hideContent('supId.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('supId')}" th:errors="*{supId}" class="error" id="supId.errors"></span>
-			</div>
+			
 			
 			<div>
 			<label>供應商名稱:</label>
@@ -68,14 +64,16 @@
 			</div>
 			
 			<div>
-			<label>店家帳號:</label>
-			<input type="number" th:field="*{StoresVO.storeId}" onclick="hideContent('StoresVO.storeId.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
+			<input type="hidden" name="storeId" th:value="${storeId}">
 			</div>
 			
 			<div>
 			<label>供應商狀態:</label>
-			<input type="number" th:field="*{supplierState}" onclick="hideContent('supplierState.errors');" /><br/>
+			<select th:field="*{supplierState}"  onclick="hideContent('supplierState.errors');">
+				<option value="0">不使用</option>
+		    	<option value="1">正在使用</option>
+			</select>
+			<br/>
 			<span  th:if="${#fields.hasErrors('supplierState')}" th:errors="*{supplierState}" class="error" id="supplierState.errors"></span>
 			</div>
 			

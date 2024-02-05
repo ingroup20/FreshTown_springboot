@@ -286,6 +286,7 @@
 						<h4 class="fw-bold py-3 mb-4">
 							<span class="text-muted fw-light">店家後台首頁 /</span>供應商管理
 						</h4>
+					<div class="row">
 						<form method="post" th:action="@{listSupplier_ByCompositeQuery}" class="horizontal-form">
 				             <div class="form-row">
 					            <label for="supplierName">請輸入供應商名稱:</label>
@@ -304,12 +305,18 @@
 					                <option value="1">正在使用</option>
 					            </select>
 					        </div>
+					        <!-- 
+					        <div>
+								<input type="hidden" name="storeId" th:value="${storeId}">
+							</div>
+					         -->
 					
 					        <div class="form-row">
 					            <input type="submit" value="送出">
 					        </div>
 				        </form>
 				        
+				        <a href="supList">顯示所有採購清單</a>
 				        <a href="addSup">新增供應商</a>
 				        <div class="card">
 							<!--                               <h5 class="card-header">Material Basic</h5> -->
@@ -317,7 +324,6 @@
 								<table class="table" id="center">
 									<thead>
 										<tr>
-											<th>計數</th>
 											<th>供應商名稱</th>
 											<th>聯絡人</th>
 											<th>電話</th>
@@ -327,8 +333,7 @@
 									</thead>
 									<tbody class="table-border-bottom-0">
 										<th:block th:each="supVO : ${supListData}">
-											<tr>
-												<td th:text="${supVOStat.count}"></td>
+											<tr th:if="${supVO.storesVO.storeId == storeId}">
 												<td th:text="${supVO.supplierName}"></td>
 												<td th:text="${supVO.supplierContact}"></td>
 												<td th:text="${supVO.supplierPhone}"></td>
@@ -353,6 +358,7 @@
 				</div>
 			</div>
 			</div>
+
 			
 
 			
