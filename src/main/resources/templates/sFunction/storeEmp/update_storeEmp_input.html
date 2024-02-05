@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>平台員工狀態修改 - update_platformEmp_input.html</title>
+<title>平台員工狀態修改 - update_storeEmp_input.html</title>
 
 <head ></head>
 <style type="text/css">
@@ -48,7 +48,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>平台員工資料修改 - update_platformEmp_input.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/pFunction/platformEmp/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
+		 <h3><a class="navbar-brand" th:href="@{/pFunction/storeEmp/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
 </nav>
 
 	<div align="center">
@@ -58,13 +58,13 @@
 			<div>
 			<!--pk -->
 			<label>員工編號:</label>
-			<input type="text" th:field="*{sEmpId}" onclick="hideContent('sEmpId.errors');" readonly />
+			<input type="text" th:field="*{sEmpId}" style="border:0px ; font-weight: bold;" readonly />
 			<span th:if="${#fields.hasErrors('sEmpId')}" th:errors="*{sEmpId}" class="error" id="sEmpId.errors"></span>
 			</div>
 			
 			<div>
 			<label>員工姓名:</label>
-			<input type="text" th:field="*{sEmpName}"  onclick="hideContent('sEmpPerm.errors');" readonly /><br/>
+			<input type="text" th:field="*{sEmpName}"  onclick="hideContent('sEmpPerm.errors');"  /><br/>
 			<span th:if="${#fields.hasErrors('sEmpName')}" th:errors="*{sEmpName}" class="error" id="sEmpName.errors"></span>
 			</div>
 						
@@ -122,7 +122,7 @@
 			
 			<div>
 			<label>店家編號:</label>
-			<input type="text" th:field="*{StoresVO.storeId}" onclick="hideContent('StoresVO.storeId.errors');" readonly />
+			<input type="text" th:field="*{StoresVO.storeId}" style="border:0px ; font-weight: bold;" readonly />
 			<span th:if="${#fields.hasErrors('StoresVO.storeId')}" th:errors="*{StoresVO.storeId}" class="error" id="StoresVO.storeId.errors"></span>
 			</div>
 			

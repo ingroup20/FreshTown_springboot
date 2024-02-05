@@ -2,7 +2,9 @@ package com.cha104g1.freshtown_springboot.customer.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cha104g1.freshtown_springboot.customer.model.CustomerService;
 import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
+
 
 
 
@@ -89,9 +92,9 @@ public class CustomerController {
 		model.addAttribute("customerVO", customerVO);
 		return "pFunction/customer/listOneCustomer"; // 修改成功後轉交listOneEmp.html
 	}
+	
+	
 
-	
-	
 
 	// 全資料一覽
 	@ModelAttribute("customerListData") // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
