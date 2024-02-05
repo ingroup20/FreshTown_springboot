@@ -1,174 +1,497 @@
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+class="light-style layout-menu-fixed"
+dir="ltr"
+data-theme="theme-default"
+data-template="vertical-menu-template-free"
+xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>商品修改 - update_meals_input.html</title>
+    <meta charset="UTF-8">
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <title>店家後台-首頁</title>
+    <meta name="description" content="" />
 
-<head ></head>
-<style type="text/css">
-	
-	button {
-		padding: 5px;
-	}
-	form {
-		display: table;
-	}
-	form div {
-		display: table-row;
-	}
-	label, input, span, select {
-		display: table-cell;
-		margin: 5px;
-		text-align: left;		
-	}
-	input[type=text], input[type=password], select, textarea {
-		width: 200px;
-		margin: 5px;
-	}
-	form div div {
-		display: table-cell;
-	}
-	.center {
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
+    <!-- Freicon -->
+    <link rel="shortcut icon" type="image/png" th:href="@{/backhome/img/freshlogo.png}" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" th:href="@{/backhome/fonts/boxicons.css}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" th:href="@{/backhome/css/core.css}" class="template-customizer-core-css" />
+    <link rel="stylesheet" th:href="@{/backhome/css/theme-default.css}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" th:href="@{/backhome/css/demo.css}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" th:href="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
 </head>
 <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+	            <a th:href="@{index}" class="app-brand-link">
+	              <img class="img-fluid" width="160" th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">            
+	            </a>
+	            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+	              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+	            </a>
+          </div>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>商品修改 - update_meals_input.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/sFunction/meals/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
-</nav>
+          <div class="menu-inner-shadow"></div>
 
-	<div align="center">
-		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{update}" method="post" th:object="${mealsVO}" enctype="multipart/form-data">
-			
-			<div>
-			<label>商品編號:</label>
-			<input type="text" th:field="*{mealNo}" style="border:0px ; font-weight: bold;" readonly />
-			</div>
-			
-			<div>
-			<label>商品名稱:</label>
-			<input type="text" th:field="*{mealName}" onclick="hideContent('mealName.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('mealName')}" th:errors="*{mealName}" class="error" id="mealName.errors"></span>
-			</div>
-		
-			<div>
-			<label>價格:</label>
-			<input type="text" th:field="*{mealPrice}" onclick="hideContent('mealPrice.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('mealPrice')}" th:errors="*{mealPrice}" class="error" id="mealPrice.errors"></span>
-			</div>
-		
-			<div>
-			<label>餐點分類:</label>
-			<select th:field="*{mealTypeVO.mealTypeNo}">
-				<option th:each="mealTypeVO : ${mealTypeListData2}" th:value="${mealTypeVO.mealTypeNo}" th:text="${mealTypeVO.mealTypeName}" />
-			</select>
-			<span  th:if="${#fields.hasErrors('mealTypeVO.mealTypeNo')}" th:errors="*{mealTypeVO.mealTypeNo}" class="error" id="mealTypeVO.mealTypeNo.errors"></span>
-			</div>
-		
-			<div>
-			<label>餐點狀態:</label>
-			<select th:field="*{mealOnsale}">
-				<option th:value="0" th:text="準備中"></option>
-	            <option th:value="1" th:text="上架中"></option>
-	            <option th:value="2" th:text="已下架"></option>
-	        </select><br>
-	        <span  th:if="${#fields.hasErrors('mealOnsale')}" th:errors="*{mealOnsale}" class="error" id="mealOnsale.errors"></span>
-			</div>
-		
-			<div>
-<!-- 			<label>店家:</label> -->
-			<input type="hidden" th:field="*{storesVO.storeId}" readonly /><br/>
-			</div>
-		
-			<div>
-			<label>餐點圖片:</label>
-			<input type="file" th:field="*{mealPicture}" onclick="previewImage()" multiple="multiple" /><br/>
-<!-- 		可以不修改圖片	<span  th:if="${#fields.hasErrors('mealPicture')}" th:errors="*{mealPicture}" class="error" id="mealPicture.errors"></span> -->
-			<div id="blob_holder"><img th:src="@{/meals/DBGifReader2} + '?mealNo=' + ${mealsVO.mealNo}" width="100px"></div>
-			</div>
-		
-			<div>
-			<label>預估製作時間:</label>
-			<input type="text" th:field="*{cookingTime}" onclick="hideContent('cookingTime.errors');" /><br/>
-			<span  th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}" class="error" id="cookingTime.errors"></span>
-			</div>
-		
-			<div>
-				<div></div>
-				<div><button type="submit" id="submit"> 下一步，調整客製化選項 </button></div>
-				<div></div>
-			</div>		
-		</form>
-	
-	</div>
+          <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item">
+              <a th:href="@{/sFunction/sEntrancePass}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">店家後台首頁</div>
+              </a>
+            </li>
+
+            <!-- Inventory & Purchasing -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Inventory&Purchasing</span></li>
+              
+              <li class="menu-item"> 
+		                <a href="#" class="menu-link menu-toggle">
+		                   <i class="menu-icon tf-icons bx bx-store"></i>
+		                   <div data-i18n="store">採購作業</div>
+		                </a>
+                <ul class="menu-sub">
+                  	<li class="menu-item">
+	                    <a th:href="@{/sFunction/suporder/supOrderMain}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">管理採購單</div>
+	                    </a>
+                  	</li>
+                  	<li class="menu-item">
+	                    <a th:href="@{/sFunction/supplier/supplierMain}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="client">管理供應商</div>
+	                   </a>
+                  	</li>
+                 </ul>
+               </li>
+
+               <li class="menu-item"> 
+	                <a href="#" class="menu-link menu-toggle">
+	                    <i class="menu-icon tf-icons bx bx-package"></i>
+	                    <div data-i18n="store">庫存作業</div>
+	                 </a>
+                <ul class="menu-sub">
+                   <li class="menu-item">
+	                  <a th:href="@{/sFunction/material/listAllMaterial}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">管理物料</div>
+	                  </a>
+                   </li>
+                     <li class="menu-item">
+	                  <a th:href="@{/sFunction/material/select_page}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">查詢物料</div>
+	                  </a>
+                   </li>
+                    <li class="menu-item">
+	                    <a th:href="@{/sFunction/itemsclass/listAllItemsClass}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">管理物料分類</div>
+	                   </a>
+                   </li>
+                   <li class="menu-item">
+	                    <a th:href="@{/sFunction/picking/listAllPicking}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">領料申請</div>
+	                   </a>
+                   </li>
+                     <li class="menu-item">
+	                    <a th:href="@{/sFunction/picking/select_page}" class="menu-link">
+	                    <i class="menu-icon"></i>
+	                    <div data-i18n="store">查詢領料表</div>
+	                   </a>
+                   </li>
+<!--                    <li class="menu-item"> -->
+<!-- 	                    <a href="#" class="menu-link"> -->
+<!-- 	                    <i class="menu-icon"></i> -->
+<!-- 	                    <div data-i18n="client">查詢庫存異動紀錄</div> -->
+<!-- 	                   </a> -->
+<!--                    </li> -->
+                 </ul>
+               </li>
+              <!-- Order-->
+               <li class="menu-header small text-uppercase"><span class="menu-header-text">Order</span></li>
+
+ <!--管理訂單        -->             
+				<li class="menu-item">
+					<a th:href="@{/sFunction/orders/select_page}" class="menu-link"> 
+					    <i class="menu-icon tf-icons bx bx-receipt"></i>
+							<div data-i18n="orders">管理訂單</div>
+					      </a> 
+					   </li>
+                    <li class="menu-item">
+  					  <a th:href="@{/sFunction/orders/orderOrders}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-sort-up"></i>
+                           <div data-i18n="store">顯示訂單排程</div>
+                      </a>
+                   </li>
+              
+                  
+             <!-- Meals-->
+              <li class="menu-header small text-uppercase"> <span class="menu-header-text">Meals</span></li>
+              
+              <li class="menu-item">
+	                <a th:href="@{/sFunction/meals/select_page}" class="menu-link">
+	                <i class="menu-icon tf-icons bx bx-restaurant"></i>
+	                <div data-i18n="Authentications">管理餐點</div>
+	                </a>
+              </li>
+
+      
+            <!-- Store -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
+
+             <li class="menu-item">
+                  <a href="#" class="menu-link" th:onclick="submitForm('storeInfo')">                 
+	                   <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+	                   <div data-i18n="store">店家資料管理</div>
+                 </a>
+<!--                         <form class="menu-link" method="post" th:action="storeInfo">  -->
+<!--                           <input type="submit" value=" 店家資料管理">  -->
+<!--                         </form> -->
+             </li>
+              <li class="menu-item">
+	              <a href="#" class="menu-link">
+	                <i class="menu-icon tf-icons bx bx-message-dots"></i>
+	                <div data-i18n="Account Settings">查看評論</div>
+	              </a>
+              </li>
+
+             <li class="menu-item">
+	               <a th:href="@{/sFunction/storeEmp/select_page}" class="menu-link">
+	                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
+	                 <div data-i18n="store">店家員工帳號管理</div>
+	              </a>
+             </li>
+             <li class="menu-item">
+	              <a href="#" class="menu-link">
+	              <i class="menu-icon tf-icons bx bx-support"></i>
+	              <div data-i18n="Support">諮詢線上客服</div>
+	              </a>
+             </li>
+             <li class="menu-item">
+	              <a href="#" class="menu-link">
+	                <i class="menu-icon tf-icons bx bx-exit"></i>
+	              <div data-i18n="Exit">登出</div>
+	              </a>
+              </li>
+        </aside>
+        
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+
+			<!-- Content wrapper -->
+          	<div class="content-wrapper">
+				
+<!-- Content -->
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">店家後台首頁 /</span> 餐點管理</h4>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-pills flex-column flex-md-row mb-3">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/sFunction/meals/select_page}"> 查詢</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href='listAllMeals'> 商品列表</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href='addMeals'> 新增商品</a>
+          </li>
+        </ul>
+        <div class="card mb-4">
+          <h5 class="card-header">商品修改</h5>
+          <h5 class="card-header">所有欄位皆為必填欄位</h5>
+          <!-- Meals -->
+          <div class="card-body">
+            <form method="post" th:action="@{update}" th:object="${mealsVO}" enctype="multipart/form-data">
+              <div class="row">
+                <div class="mb-3">
+                    <!-- <label class="form-label">商品編號:</label> -->
+                    <input
+                      class="form-control"
+                      type="hidden"
+                      th:field="*{mealNo}"
+                      readonly                    
+                    />
+                </div>
+                <div class="mb-3">
+                  <label for="mealName" class="form-label">商品名稱:</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="mealName"
+                    th:field="*{mealName}"
+                    onclick="hideContent('mealName.errors');"                    
+                  />
+                  <span  th:if="${#fields.hasErrors('mealName')}" th:errors="*{mealName}" class="error" id="mealName.errors"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="mealPrice" class="form-label">價格:</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="mealPrice"
+                      th:field="*{mealPrice}"
+                      onclick="hideContent('mealPrice.errors');"                    
+                    />
+                    <span  th:if="${#fields.hasErrors('mealPrice')}" th:errors="*{mealPrice}" class="error" id="mealPrice.errors"></span>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">選擇餐點分類:</label>
+                  <select class="select2 form-select" th:field="*{mealTypeVO.mealTypeNo}">
+                    <option value="">
+                    <option th:each="mealTypeVO : ${mealTypeListData2}" th:value="${mealTypeVO.mealTypeNo}" th:text="${mealTypeVO.mealTypeName}" />
+                  </select>
+                  <span  th:if="${#fields.hasErrors('mealTypeVO.mealTypeNo')}" th:errors="*{mealTypeVO.mealTypeNo}" class="error" id="mealTypeVO.mealTypeNo.errors"></span>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">選擇餐點狀態:</label>
+                  <select class="select2 form-select" name="mealOnsale">
+                    <option value="0">準備中</option>
+                    <option value="1">上架中</option>
+                    <option value="2">已下架</option>
+                  </select>
+                  <span  th:if="${#fields.hasErrors('mealOnsale')}" th:errors="*{mealOnsale}" class="error" id="mealOnsale.errors"></span>
+                </div>
+                <div class="mb-3">
+                    <!-- <label class="form-label">店家:</label> -->
+                    <input
+                      class="form-control"
+                      type="hidden"
+                      th:field="*{storesVO.storeId}"
+                      readonly                    
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="mealPicture" class="form-label">餐點圖片:</label>
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="mealPicture"
+                      th:field="*{mealPicture}"
+                      onclick="previewImage()" 
+                      multiple="multiple" 
+                      onchange="hideContent('mealPicture.errors');"                    
+                    />
+                    <span class="error" th:utext="${errorMessage}" id="mealPicture.errors">${errorMessage}</span>
+			        <div id="blob_holder"><img th:src="@{/meals/DBGifReader2} + '?mealNo=' + ${mealsVO.mealNo}" width="100px"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="cookingTime" class="form-label">預估製作時間:</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="cookingTime"
+                      th:field="*{cookingTime}"
+                      onclick="hideContent('cookingTime.errors');" 
+                      pattern="^\d{2}:(?:[0-5]\d|59):(?:[0-5]\d|59)$"
+                      title="餐點製作時間: 請勿空白 , 且格式必需為HH:mm:ss" 
+                      required                   
+                    />
+                    <span  th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}" class="error" id="cookingTime.errors"></span>
+                </div>
+              </div>
+              <div class="mt-2">
+                <button type="submit" class="btn btn-primary me-2">下一步，調整客製化選項</button>
+                <button type="reset" class="btn btn-outline-secondary">重填</button>
+              </div>
+            </form>
+          </div>
+          <!-- /Meals -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / Content -->
+
+          
+          <!-- Content wrapper置換插入內容======================================================================================== -->
+			<!--訂單管理 -->
+           <div class="content-wrapper" th:if="${manageOrders}">
+           		<div th:insert="~{/sFunction/orders/select_page :: select_page-div}">
+           </div>
+           <!--訂單排程 -->
+<!--            <div class="content-wrapper" th:if="${orderOrders}"> -->
+<!--            		<div th:insert="~{/sFunction/orders/making_page :: making_page-div}"> -->
+<!--            </div> -->
+           <!--店家資料 -->
+           <div class="content-wrapper" th:if="${storeInfo}">
+           		<div th:insert="~{/sFunction/stores/select_page :: select_page-div}">
+           </div>
+          </div>
+       </div>
+
+   
+     
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+	                  ©
+	                  <script>
+	                    document.write(new Date().getFullYear());
+	                  </script>
+	                  , made with ❤️ by
+<!--                   <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder"> -->
+                  	Tibame Cha104 Team1
+<!--                   </a> -->
+                </div>
+              </div>
+            </footer>
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+         <!-- Overlay -->
+       <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    </div>
+    <!-- / Layout wrapper -->
 
 
-<!-- JavaScript part -->
-<script type="text/javascript">
-//清除提示信息
-function hideContent(d) {
-     document.getElementById(d).style.display = "none";
-}
 
-//照片上傳-預覽用
-var filereader_support = typeof FileReader != 'undefined';
-if (!filereader_support) {
-	alert("No FileReader support");
-}
-acceptedTypes = {
-		'image/png' : true,
-		'image/jpeg' : true,
-		'image/gif' : true
-};
-function previewImage() {
-	var upfile1 = document.getElementById("mealPicture");
-	upfile1.addEventListener("change", function(event) {
-		var files = event.target.files || event.dataTransfer.files;
-		for (var i = 0; i < files.length; i++) {
-			previewfile(files[i])
-		}
-	}, false);
-}
-function previewfile(file) {
-	if (filereader_support === true && acceptedTypes[file.type] === true) {
-		var reader = new FileReader();
-		reader.onload = function(event) {
-			var image = new Image();
-			image.src = event.target.result;
-			image.width = 100;
-			image.height = 75;
-			image.border = 2;
-			if (blob_holder.hasChildNodes()) {
-				blob_holder.removeChild(blob_holder.childNodes[0]);
-			}
-			blob_holder.appendChild(image);
-		};
-		reader.readAsDataURL(file);
-		document.getElementById('submit').disabled = false;
-	} else {
-		blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
-				+ "<br>" + "● ContentTyp: " + file.type
-				+ "<br>" + "● size: " + file.size + "bytes"
-				+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
-		document.getElementById('submit').disabled = true;
-	}
-}
-</script>
 
+           
+           
+           
+           
+           
+           
+<!-- ======================================================================================== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Helpers -->
+    <script th:src="@{/backhome/js/helpers.js}"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script th:src="@{/backhome/js/config.js}"></script>  
+    <!-- build:js assets/vendor/js/core.js -->
+    <script th:src="@{/backhome/libs/jquery/jquery.js}"></script>
+    <script th:src="@{/backhome/libs/popper/popper.js}"></script>
+    <script th:src="@{/backhome/js/bootstrap.js}"></script>
+    <script th:src="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+    <script th:src="@{/backhome/js/menu.js}"></script>
+ 	<!-- Vendors JS -->
+<!--     <script src="@{/backhome/libs/apex-charts/apexcharts.js}"></script> -->
+    <!-- Main JS -->
+    <script th:src="@{/backhome/js/main.js}"></script>
+    <!-- Page JS -->
+    <script th:src="@{/backhome/js/form-basic-inputs.js}"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+   <script th:inline="javascript"> 
+    function submitForm(action) {
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', action);
+        
+        var hiddenField = document.createElement('input');
+        hiddenField.setAttribute('type', 'hidden');
+        hiddenField.setAttribute('name', 'parameterName'); // Replace 'parameterName' with your actual parameter name
+        hiddenField.setAttribute('value', 'parameterValue'); // Replace 'parameterValue' with your actual parameter value
+        form.appendChild(hiddenField);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    </script>
+    
+    <!-- JavaScript part -->
+	<script type="text/javascript">
+    //清除提示信息
+    function hideContent(d) {
+         document.getElementById(d).style.display = "none";
+    }
+    
+    //照片上傳-預覽用
+    var filereader_support = typeof FileReader != 'undefined';
+    if (!filereader_support) {
+        alert("No FileReader support");
+    }
+    acceptedTypes = {
+            'image/png' : true,
+            'image/jpeg' : true,
+            'image/gif' : true
+    };
+    function previewImage() {
+        var upfile1 = document.getElementById("mealPicture");
+        upfile1.addEventListener("change", function(event) {
+            var files = event.target.files || event.dataTransfer.files;
+            for (var i = 0; i < files.length; i++) {
+                previewfile(files[i])
+            }
+        }, false);
+    }
+    function previewfile(file) {
+        if (filereader_support === true && acceptedTypes[file.type] === true) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var image = new Image();
+                image.src = event.target.result;
+                image.width = 100;
+                image.height = 75;
+                image.border = 2;
+                if (blob_holder.hasChildNodes()) {
+                    blob_holder.removeChild(blob_holder.childNodes[0]);
+                }
+                blob_holder.appendChild(image);
+            };
+            reader.readAsDataURL(file);
+            document.getElementById('submit').disabled = false;
+        } else {
+            blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
+                    + "<br>" + "● ContentTyp: " + file.type
+                    + "<br>" + "● size: " + file.size + "bytes"
+                    + "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
+            document.getElementById('submit').disabled = true;
+        }
+    }
+    </script>
+    
 </body>
 </html>
