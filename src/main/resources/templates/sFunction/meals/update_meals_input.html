@@ -268,7 +268,6 @@ xmlns:th="http://www.thymeleaf.org">
                 <div class="mb-3">
                   <label class="form-label">選擇餐點分類:</label>
                   <select class="select2 form-select" th:field="*{mealTypeVO.mealTypeNo}">
-                    <option value="">
                     <option th:each="mealTypeVO : ${mealTypeListData2}" th:value="${mealTypeVO.mealTypeNo}" th:text="${mealTypeVO.mealTypeName}" />
                   </select>
                   <span  th:if="${#fields.hasErrors('mealTypeVO.mealTypeNo')}" th:errors="*{mealTypeVO.mealTypeNo}" class="error" id="mealTypeVO.mealTypeNo.errors"></span>

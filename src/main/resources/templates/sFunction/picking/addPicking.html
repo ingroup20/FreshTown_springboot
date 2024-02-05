@@ -205,37 +205,14 @@
 
 
 											<div class="mb-3">
-												<label for="defaultSelect" class="form-label">選擇物料名稱</label>
+												<label for="defaultSelect" class="form-label">選擇領取物料</label>
 												<select id="defaultSelect" class="form-select"
 													th:field="*{materialVO.itemNumber}">
-													<option value=""></option>
 													<option th:each="materialVO : ${materialListData}"
 														th:value="${materialVO.itemNumber}"
 														th:text="${materialVO.itemName}" />
 												</select> 
 											</div>
-											
-											<div class="mb-3">
-												<label for="defaultFormControlInput" class="form-label">店家流水號</label>
-												<input type="text" th:field="*{storesVO.storeId}"
-													class="form-control" id="defaultFormControlInput"
-													placeholder="" /> <span
-													th:if="${#fields.hasErrors('storesVO.storeId')}"
-													th:errors="*{storesVO.storeId}" class="error"
-													id="storesVO.storeId.errors"></span>
-											</div>
-											
-											<div class="mb-3">
-												<label for="defaultFormControlInput" class="form-label">店家員工編號</label>
-												<input type="text" 
-												        th:field="*{storeEmpVO.sEmpId}"
-													    class="form-control" id="defaultFormControlInput"
-													    placeholder="" 
-													    onclick="hideContent('storeEmpVO.sEmpId.errors');" />
-													  <span th:if="${#fields.hasErrors('storeEmpVO.sEmpId')}"
-														th:errors="*{storeEmpVO.sEmpId}" class="error"
-														id="storeEmpVO.sEmpId.errors"></span>  
-											   </div>
 											
 											<div class="mb-3">
 												<label for="defaultFormControlInput" class="form-label">領料數量</label>
@@ -296,6 +273,25 @@
 													請輸入報廢原因.</div>
 												<span th:if="${#fields.hasErrors('marks')}"
 													th:errors="*{marks}" class="error" id="marks.errors"></span>
+											</div>
+											
+                                             <div class="mb-3">
+												<label for="defaultSelect" class="form-label">領料人員</label>
+												<select id="defaultSelect" class="form-select"
+													th:field="*{storeEmpVO.sEmpId}">
+													<option th:each="storeEmpVO : ${storeEmpListData2}"
+														th:value="${storeEmpVO.sEmpId}"
+														th:text="${storeEmpVO.sEmpId} + ${storeEmpVO.sEmpName}"/>
+												</select>
+											</div>
+                                             <div class="mb-3">
+												<label for="defaultSelect" class="form-label">店家</label>
+												<select id="defaultSelect" class="form-select"
+													th:field="*{storesVO.storeId}">
+													<option th:each="storesVO : ${storesVO}"
+														th:value="${storesVO.storeId}"
+														th:text="${storesVO.storeId} + ${storesVO.storeName}"/>
+												</select>
 											</div>
 											<button type="submit" class="btn btn-primary">送出</button>
 										</form>

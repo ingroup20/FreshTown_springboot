@@ -18,6 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.Query; //Hibernate 5 開始 取代原 org.hibernate.Query 介面
 
 import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
+import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
 
 public class HibernateUtil_CompositeQuery_Picking {
@@ -34,13 +35,16 @@ public class HibernateUtil_CompositeQuery_Picking {
 		else if ("pickingDate".equals(columnName)) // 用於date
 			predicate = builder.equal(root.get(columnName), java.sql.Date.valueOf(value));
 		else if ("itemNumber".equals(columnName)) {
-//			MaterialVO materialVO = new MaterialVO();
-//			materialVO.setItemNumber(Integer.valueOf(value));
-//			predicate = builder.equal(root.get("materialVO"), materialVO);
-			Integer itemNumber = Integer.valueOf(value);
-		    predicate = builder.equal(root.get("materialVO").get("itemNumber"), itemNumber);
+			MaterialVO materialVO = new MaterialVO();
+			materialVO.setItemNumber(Integer.valueOf(value));
+			predicate = builder.equal(root.get("materialVO"), materialVO);
+//			Integer itemNumber = Integer.valueOf(value);
+//		    predicate = builder.equal(root.get("materialVO").get("itemNumber"), itemNumber);
+		}else if("storeId".equals(columnName)){
+			StoresVO storesVO= new StoresVO();
+			storesVO.setStoreId(Integer.valueOf(value));
+			predicate = builder.equal(root.get("storesVO"), storesVO);
 		}
-
 		return predicate;
 	}
 

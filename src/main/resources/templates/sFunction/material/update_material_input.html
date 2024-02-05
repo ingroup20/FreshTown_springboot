@@ -56,10 +56,10 @@
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a th:href="@{index}" class="app-brand-link"> <img
+					<a th:href="@{/sFunction/sEntrancePass}" class="app-brand-link"> <img
 						class="img-fluid" width="160"
 						th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">
-					</a> <a href="javascript:void(0);"
+					</a> <a th:href="@{/sFunction/sEntrancePass}"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 						<i class="bx bx-chevron-left bx-sm align-middle"></i>
 					</a>
@@ -214,12 +214,7 @@
 												<label for="defaultFormControlInput" class="form-label">物料名稱</label>
 												<input type="text" th:field="*{itemName}"
 													class="form-control" id="defaultFormControlInput"
-													placeholder="" onclick="hideContent('itemName.errors');"
-													aria-describedby="defaultFormControlHelp" />
-												<div id="defaultFormControlHelp" class="form-text">
-													請輸入修改物料名稱.</div>
-												<span th:if="${#fields.hasErrors('itemName')}"
-													th:errors="*{itemName}" class="error" id="itemName.errors"></span>
+													readonly/>
 											</div>
 
 											<div class="mb-3">
@@ -296,15 +291,17 @@
 											</div>
 
 											<div class="mb-3">
-												<label for="defaultFormControlInput" class="form-label">店家流水號</label>
-												<input type="text" th:field="*{storesVO.storeId}"
+												<label for="defaultFormControlInput" class="form-label"></label>
+												<input type="hidden" th:field="*{storesVO}"
 													class="form-control" id="defaultFormControlInput"
 													placeholder="" readonly />
-												<!-- 					                   <span -->
-												<!-- 										th:if="${#fields.hasErrors('storesVO.storeId')}" -->
-												<!-- 										th:errors="*{storesVO.storeId}" class="error" -->
-												<!-- 										id="storesVO.storeId.errors"></span> -->
 											</div>
+<!-- 											<div class="mb-3"> -->
+<!-- 												<label for="defaultFormControlInput" class="form-label"></label> -->
+<!-- 												<input type="hidden" th:field="*{storeEmpVO.sEmpId}" -->
+<!-- 													class="form-control" id="defaultFormControlInput" -->
+<!-- 													placeholder="" readonly /> -->
+<!-- 											</div>									 -->
 											<button type="submit" class="btn btn-primary">送出</button>
 										</form>
 									</div>
