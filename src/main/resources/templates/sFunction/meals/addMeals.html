@@ -108,13 +108,15 @@
 		
 			<div>
 			<label>預估製作時間:</label>
-			<input type="text" th:field="*{cookingTime}" onclick="hideContent('cookingTime.errors');" /><br/>
+			<input type="text" th:field="*{cookingTime}" onclick="hideContent('cookingTime.errors');" 
+				pattern="^\d{2}:(?:[0-5]\d|59):(?:[0-5]\d|59)$"
+				title="餐點製作時間: 請勿空白 , 且格式必需為HH:mm:ss" required /><br/>
 			<span  th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}" class="error" id="cookingTime.errors"></span>
 			</div>
 					
 			<div>
 				<div></div>
-				<div><button type="submit" id="submit"> 送出新增 </button></div>				
+				<div><button type="submit" id="submit"> 下一步，設定客製化選項 </button></div>				
 				<div></div>
 			</div>		
 		</form>
