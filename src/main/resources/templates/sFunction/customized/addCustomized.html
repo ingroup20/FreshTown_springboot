@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>商品可客製選項資料新增 - addCustomized.html</title>
+<title>商品可客製選項資料</title>
 
 <head ></head>
 <style type="text/css">
@@ -47,8 +47,9 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>商品可客製選項資料新增 - addCustomized.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/sFunction/customized/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3></div>
+		 <div align="center"> <h2>商品可客製選項資料</h2>
+<!-- 		 <h3><a class="navbar-brand" th:href="@{/sFunction/customized/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁</a></h3> -->
+		 </div>
 </nav>
 
 	<div align="center">
@@ -87,7 +88,7 @@
 <!-- 			</select> -->
 <!-- 			<span th:if="${#fields.hasErrors('custedStatus')}" th:errors="*{custedStatus}" class="error" id="custedStatus.errors"></span> -->
 <!-- 			</div>			 -->
-<!-- -->
+<!--
 			<div align="center">
 				<table id="example" class="display" style="width: 100%">
 				  <thead >
@@ -101,7 +102,7 @@
 						<th:block th:each="customizedItemsVO : ${customizedItemsListData}">
 						    <form th:action="@{insert}" method="post" th:object="${customizedVO}" enctype="multipart/form-data">
 						        <tr>
-						            <!-- 其他表格行的內容 -->
+						            <!-- 其他表格行的內容
 						            <td th:value="${customizedItemsVO.custedItemsNo}" th:text="${customizedItemsVO.custedName}"></td>
 						            
 						            <td>
@@ -132,6 +133,39 @@
            			 <button type="button" id="submitAllForms" onclick="submitAllForms()"> 送出新增 </button>
 				<div></div>
 			</div>		
+  -->		
+ 
+ 		<div align="center">
+		    <form th:action="@{batchInsert}" method="post" th:object="${requestParams}" enctype="multipart/form-data">
+		        <table id="example" class="display" style="width: 100%">
+		            <thead>
+		                <tr style="background-color:#CCCCFF">
+		                    <th>客製選項</th>
+		                    <th>有無此可客製選項</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <th:block th:each="customizedItemsVO : ${customizedItemsListData}">
+		                    <tr>
+		                        <!-- 其他表格行的內容 -->
+		                        <td th:value="${customizedItemsVO.custedItemsNo}" th:text="${customizedItemsVO.custedName}"></td>
+		
+		                        <td>
+		                            <input type="hidden" th:name="mealNo" th:value="${mealNo}" />
+		                            <input type="hidden" th:name="${customizedItemsVO.custedItemsNo}" th:value="${customizedItemsVO.custedItemsNo}" />
+		
+		                            <select th:name="'custedStatus_' + ${customizedItemsVO.custedItemsNo}">
+		                                <option value="0" th:text="商品無此可客製選項"></option>
+		                                <option value="1" th:text="商品有此可客製選項"></option>
+		                            </select>
+		                        </td>
+		                    </tr>
+		                </th:block>
+		            </tbody>
+		        </table>
+		        <button type="submit" class="submit-btn"> 送出 </button>
+		    </form>
+		</div>
  		
  
 	
@@ -169,6 +203,8 @@ function hideContent(d) {
     }
 </script>
  -->
+
+
 
 </body>
 </html>

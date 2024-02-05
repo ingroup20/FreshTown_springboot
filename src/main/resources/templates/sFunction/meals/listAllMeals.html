@@ -68,7 +68,7 @@ body {
   <thead >
 	<tr style="background-color:#CCCCFF">
 		<th>計數</th>
-		<th>商品編號</th>
+<!-- 		<th>商品編號</th> -->
 		<th>商品名稱</th>		
 		<th>價格</th>		
 		<th>餐點分類</th>		
@@ -84,11 +84,15 @@ body {
 		<th:block th:each="mealsVO : ${mealsListData}">
 			<tr>
 				<td th:text="${mealsVOStat.count}"></td>
-				<td th:text="${mealsVO.mealNo}"></td>
+<!-- 				<td th:text="${mealsVO.mealNo}"></td> -->
 				<td th:text="${mealsVO.mealName}"></td>
 				<td th:text="${mealsVO.mealPrice}"></td>
 				<td th:text="${mealsVO.mealTypeVO.mealTypeName}"></td>
-				<td th:text="${mealsVO.mealOnsale}"></td>
+				<td th:switch="${mealsVO.mealOnsale}">
+					<span th:case="0">準備中</span>
+				    <span th:case="1">上架中</span>
+				    <span th:case="2">已下架</span>
+				</td>
 				<td th:text="${mealsVO.storesVO.storeName}"></td>
 				<td><img th:src="@{/meals/DBGifReader2} + '?mealNo=' + ${mealsVO.mealNo}" width="100px"></td>
 				<td th:text="${mealsVO.cookingTime}"></td>
