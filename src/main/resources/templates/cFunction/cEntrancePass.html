@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Homepage - 鮮城 FreshTown</title>
     <link rel="stylesheet" th:href="@{/cFunction/css/allBase.css} ">
+	<script th:src="@{/js/allBase.js}"></script>
+	<script th:src="@{/js/mealMenu.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body class="body">
     <nav class="nav ">
@@ -15,27 +18,31 @@
             <ul class="nav">
                <li class="nav_item li_item"><a class="title" th:href="@{/cFunction/cEntrancePass}">找店家</a></li>
 <!--                      <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> --> 
-               <li class="nav_item li_item">
+               <li class="nav_item li_item menu">
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
-                    <ul class="dropdown_menu ">
+                    <ul class="dropdown_menu  -none">
                        <li class="li_item ">
+<!--                        		<a href='searchPersonalInfo'>個人資料管理</a> -->
                             <form method="post" th:action="searchPersonalInfo">
-                                <input class="li_item " type="submit" value="個人資料管理"> 
+
+                                <input class="li_item " type="submit" value="個人資料管理">
+                                <input type="hidden" name="customerId" th:value="${customerVO.customerId}"> 
+
                             </form><br>
                         </li>
                         <li class="li_item ">
                             <form method="post" th:action="searchLikeStore">
-                                 <input class="li_item " type="submit" value="收藏店家"> 
+                                 <input style="background:transparent;border:none"   class="li_item " type="submit" value="收藏店家"> 
                             </form><br>
                         </li>
                         <li class="li_item ">
                             <form method="post" th:action="searchBlackStore">
-                                <input class="li_item " type="submit" value=" 黑名單店家"> 
+                                <input style="background:transparent;border:none"   class="li_item " type="submit" value=" 黑名單店家"> 
                             </form><br>
                         </li>
                         <li class="li_item ">
                             <form method="post" th:action="searchOrderHistory"> 
-                                <input class="li_item " type="submit" value=" 下單紀錄"> 
+                                <input style="background:transparent;border:none"   class="li_item " type="submit" value=" 下單紀錄"> 
                             </form><br>
                         </li>                      
                     </ul>
@@ -73,15 +80,15 @@
 	            <div class="section_item">
 	                <div class="card">
 	                    <!-- 圖片-->
-                        <div class="card_img"><img th:src="@{/images/store.png}"></div>
+                        <div class="card_img"><img th:src="@{/file/DBGifReader} + '?storeId=' + ${storesVO.storeId}" ></div>
 	                    <!-- <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
                         <h4 class="cardfont" th:text="${storesVO.storeName}">店家名稱</h4>
                         <!-- 評等-->
                         <p class="cardfont">評等:<span class="cardfont" th:text="${storesVO.totalScore/(storesVO.scorePeople!=null&&storesVO.scorePeople!=0?storesVO.scorePeople:1)}"></span>星</p>
                         <p class="cardfont" th:text="${storesVO.storeAddress}">店家地址</p>
-                        <div class="cardfont"><span class="cardfont" th:text="${storesVO.pushUp}">營業中</span>營業時間:<span class="cardfont" th:text="${storesVO.openTime}"></span></div>
-                        <p class="cardfont">店休:<span th:text="${storesVO.restDay}"></span></p>
-						<!-- 控制項-->
+                        <div class="cardfont"><span class="cardfont openState" th:text="${storesVO.pushUp}">營業中</span><span class="openStateView"></span>營業時間:<span class="cardfont" th:text="${storesVO.openTime}"></span></div>
+                        <p class="cardfont" >店休:<span class="restDay" th:text="${storesVO.restDay}"></span><span class="restDayRead"></span></p>
+<!-- 控制項-->
                         <div class="card_footer title">
                             <form id="entrance" method="get" th:action="@{storeMenu}" > 
                                   <input class="cardfont" id="entrance" type="submit" value="看菜單"> 
@@ -101,7 +108,7 @@
     <!-- include內容 ======================================-->
  
     <main class="main" th:if="${searchPersonalInfo}">
-        <div th:insert="~{/cFunction/customer/showallpage :: showallpage-div}"></div>
+        <div th:insert="~{/cFunction/customer/listOneCustomer :: listOneCustomer-div}"></div>
     </main>
     <main class="main" th:if="${searchLikeStore}">
         <div th:insert="~{/cFunction/likestore/listAllLikeStore :: listAllLikeStore-div}"></div>
@@ -118,15 +125,15 @@
     <!-- Content wrapper置換插入內容======================================================================================== -->
 			<!--訂單管理 -->
            <div class="content-wrapper" th:if="${manageOrders}">
-           		<div th:insert="~{/sFunction/orders/select_page :: select_page-div}">
+           		<div th:insert="~{/sFunction/orders/select_page :: select_page-div}"> </div>
            </div>
            <!--訂單排程 -->
 <!--            <div class="content-wrapper" th:if="${orderOrders}"> -->
-<!--            		<div th:insert="~{/sFunction/orders/making_page :: making_page-div}"> -->
+<!--            		<div th:insert="~{/sFunction/orders/making_page :: making_page-div}"> </div>
 <!--            </div> -->
            <!--店家資料 -->
            <div class="content-wrapper" th:if="${storeInfo}">
-           		<div th:insert="~{/sFunction/stores/select_page :: select_page-div}">
+           		<div th:insert="~{/sFunction/stores/select_page :: select_page-div}"> </div>
            </div>
   
  
@@ -139,7 +146,100 @@
         <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
         <p><a th:href="@{/sFunction}">後台入口</a></p>
     </footer>
-
+	<script th:src="@{/js/allBase.js}"></script>
+	<script th:src="@{/js/mealMenu.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+        $(document).ready(function () {
+        	$("span.restDay").each(function () {
+        		$("span.restDay").hide();
+                var number = $(this).text().trim();
+                var result = convertToText(number);
+                $(this).next().text(result);
+
+            });
+        	
+        });
+
+        function convertToText(number) {
+            var numberStr = number.toString().split('').reverse().join('');
+            var result = '';
+
+            for (var i = 0; i < numberStr.length; i++) {
+                var dayState = parseInt(numberStr.charAt(i));
+                if(dayState===0){
+                	switch(i){
+                		case(0):
+                			 var day="星期一,";
+                			result += day;
+                			 continue;
+                		case(1):
+                   			 var day="星期二,";
+                		result += day;
+                			continue;
+                		case(2):
+                   			 var day="星期三,";
+                		result += day;
+                			continue;
+                		case(3):
+                   			 var day="星期四,";
+                			continue;
+                		case(4):
+                   			 var day="星期五,";
+                			continue;
+                		case(5):
+                   			 var day="星期六,";
+                			continue;
+                		case(6):
+                   			 var day="星期日";
+                		result += day;
+                			continue;
+                		case(7):
+                  			 var day="";
+               			continue;
+                		}             	
+                }else{
+                	var day="";
+                }
+                
+                result += day;
+                if (i < numberStr.length - 1) {
+                    result += ' ';
+                }
+            }
+            return result;
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+        	$("span.openState").each(function () {
+        		$("span.openState").hide();
+                var number2 = $(this).text().trim();
+                var result2 = convertToText2(number2);
+                $(this).next().text(result2);
+
+            });
+        	
+        });
+
+        function convertToText2(number2) {
+            var result2 = '';
+
+                	switch(number2){
+                		case "0":
+                			result2="準備中";
+                			break;
+                		case "1":
+                			result2="開店";
+                   			break;
+                		case(2):
+                			result2="店休";
+                			break;
+                		}             	
+                	return result2;
+            }
+            
+        
+    </script>
 </body>
 </html>

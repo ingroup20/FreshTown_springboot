@@ -110,16 +110,21 @@ public class CEntrancePassController {
    	public String searchPersonalInfo(HttpServletRequest req,ModelMap model) {
    		/***************************1.接收請求↑ ************************/
 		System.out.println("個人資料管理");
-    	Object idVO = req.getAttribute("customerLogin");
-    	CustomerVO customerVO= (CustomerVO)idVO;
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("customerLogin");
+		CustomerVO customerVO= (CustomerVO)idVO;
+//   		System.out.println("111");
    		/***************************2.查詢*********************************************/
    		if (customerVO == null) {
+//   	   		System.out.println("222");
+
    			model.addAttribute("errorMessage", "未登入");
    			return "cFunction/cEntrancePass";
    		}
    		/***************************3.顯示*****************/
    		model.addAttribute("customerVO", customerVO);
    		model.addAttribute("searchPersonalInfo", "true"); // for cEnrance.html
+   		System.out.println(customerVO.getCustomerId());
    		return "cFunction/cEntrancePass"; 	
    	}
     

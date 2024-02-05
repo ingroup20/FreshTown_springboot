@@ -39,6 +39,11 @@ a{
 
 }
 
+.hovercolor {
+    background-color: rgb(255, 95, 3);
+}
+
+
 /* 字體區============================== */
 .title{
     color: black;

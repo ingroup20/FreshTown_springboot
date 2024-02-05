@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.cha104g1.freshtown_springboot.customized.model.CustomizedService;
 import com.cha104g1.freshtown_springboot.customized.model.CustomizedVO;
 import com.cha104g1.freshtown_springboot.customizeditems.model.CustomizedItemsService;
@@ -60,9 +62,13 @@ public class CustomizedController {
 
 		return "sFunction/customized/addCustomized";
 	}
+
+	// 在Controller中维护一个状态，表示当前表单的索引
+	private int currentIndex = 0;
 	
 	@PostMapping("insert")
-	public String insert(@Valid CustomizedVO customizedVO, BindingResult result, ModelMap model) throws IOException {
+//	@ResponseBody
+	public String insert(@Valid CustomizedVO customizedVO, BindingResult result, HttpServletRequest req , ModelMap model) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
 
@@ -83,36 +89,78 @@ public class CustomizedController {
 		List<CustomizedVO> list = customizedSvc.getAll();
 		model.addAttribute("customizedListData", list);
 		model.addAttribute("success", "- (新增成功)");
-		return "redirect:/sFunction/customized/listAllCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		
+		Integer mealNo = customizedVO.getMealNo();
+		model.addAttribute("mealNo", mealNo);
+		HttpSession session =req.getSession();
+		session.setAttribute("mealNo", mealNo);
+		
+//		return "sFunction/customized/addCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		currentIndex++; // 递增索引
+		
+		List<CustomizedItemsVO> list2 = customizedItemsSvc.getAll();
+		int totalNumberOfForms = list2.size();
+		System.out.println(totalNumberOfForms);
+
+	    if (currentIndex < totalNumberOfForms) {
+	        // 还有下一个表单需要提交
+	    	System.out.println(currentIndex);
+	        return "sFunction/customized/addCustomized";
+	    } else {
+	        // 所有表单已提交完成，重置索引，并跳转到指定页面
+	        currentIndex = 0;
+	        return "redirect:/sFunction/customized/listAllCustomized";
+	    }
 	}
 	
 
-//	@PostMapping("insert")
-//	public String insert(@Valid @ModelAttribute("customizedList") List<CustomizedVO> customizedList, BindingResult result, ModelMap model, HttpSession session) throws IOException {
-//	    if (result.hasErrors()) {
-//	        System.out.println("資料有誤");
-//	        return "sFunction/customized/addCustomized";
-//	    }
-//
-//	    // 獲取 mealNo
-//	    Integer mealNo = (Integer) session.getAttribute("mealNo");
-//
-//	    // 遍歷 CustomizedVO 列表，逐個插入資料庫
-//	    for (CustomizedVO customizedVO : customizedList) {
-//	        // 設定 mealNo
-//	        customizedVO.setMealNo(mealNo);
-//
-//	        // 開始新增資料
-//	        customizedSvc.addCustomizedVO(customizedVO);
-//	    }
-//
-//	    // 其他處理邏輯...
-//
-//	    List<CustomizedVO> list = customizedSvc.getAll();
-//	    model.addAttribute("customizedListData", list);
-//	    model.addAttribute("success", "- (新增成功)");
+	@PostMapping("batchInsert")
+	public String batchInsert(@RequestParam Map<String, String> requestParams, HttpSession session, ModelMap model) throws IOException {
+
+		Integer mealNo = (Integer) session.getAttribute("mealNo");
+		// 日誌輸出
+	    for (Map.Entry<String, String> entry : requestParams.entrySet()) {
+	        System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+	    }
+	    
+	    List<CustomizedVO> customizedVOList = new ArrayList<>();
+
+	    // 根据表单数量循环获取数据
+	    for (Map.Entry<String, String> entry : requestParams.entrySet()) {
+//	    	System.out.println("111");
+	        
+	        if (entry.getKey().startsWith("custedStatus_")) {
+	        	
+	            CustomizedVO customizedVO = new CustomizedVO();
+	            
+	            String custedItemsNo = entry.getKey().replace("custedStatus_", "");
+	            String custedStatus = entry.getValue();
+								
+	            customizedVO.setMealNo(mealNo);
+	            customizedVO.setCustedItemsNo(Integer.parseInt(custedItemsNo));
+	            customizedVO.setCustedStatus(Integer.parseInt(custedStatus));
+
+	            // 添加其他需要设置的属性
+
+	            customizedVOList.add(customizedVO);
+	        }
+	    }
+	    for (CustomizedVO customizedVO : customizedVOList) {
+	        System.out.println("MealNo: " + customizedVO.getMealNo() + ", CustedItemsNo: " + customizedVO.getCustedItemsNo() + ", CustedStatus: " + customizedVO.getCustedStatus());
+	    }
+
+	    // 批量新增
+	    for (CustomizedVO customizedVO : customizedVOList) {
+	        // 执行新增操作，你的新增逻辑
+	        System.out.println(customizedVO.getCustedItemsNo());
+	        customizedSvc.addCustomizedVO(customizedVO);
+	    }
+
+	    // 重定向到指定页面
 //	    return "redirect:/sFunction/customized/listAllCustomized";
-//	}
+	    return "redirect:/sFunction/meals/listAllMeals";
+	}
+
 
 
 

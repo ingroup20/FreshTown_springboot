@@ -152,7 +152,7 @@ xmlns:th="http://www.thymeleaf.org">
                         <!-- Content -->
               <div class="container-xxl flex-grow-1 container-p-y">
 <nav> 
-	<h4><span>資料查詢:</span></h4>
+	<h4><span>退款資料查詢:</span></h4>
 	<!-- 錯誤表列 -->
 	<div class="errorblock" th:utext="${errorMessage}">${errorMessage}</div><br>
 	<div class="a">
@@ -239,13 +239,13 @@ xmlns:th="http://www.thymeleaf.org">
   <tbody>
 		<th:block th:each="refundsVO : ${refundsListData}">
 			<tr>
-				<td th:text="${refundsVOStat.count}">計數</td>
-				<td th:text="${refundsVO.ordersVO.orderId}">訂單編號</td>
-				<td th:text="${refundsVO.creationDate}">申請退款時間</td>
-				<td th:text="${refundsVO.refundDollar}">退款金額</td>
-				<td th:text="${refundsVO.refundState}">退款狀態</td>
-				<td th:text="${refundsVO.refundDate!=null?refundsVO.refundDate:''}">退款時間</td>
-				<td>
+				<td style="border: 1px solid #dee2e6"  th:text="${refundsVOStat.count}">計數</td>
+				<td style="border: 1px solid #dee2e6"  th:text="${refundsVO.ordersVO.orderId}">訂單編號</td>
+				<td style="border: 1px solid #dee2e6" th:text="${refundsVO.creationDate}">申請退款時間</td>
+				<td style="border: 1px solid #dee2e6"  th:text="${refundsVO.refundDollar}">退款金額</td>
+				<td style="border: 1px solid #dee2e6"  th:text="${refundsVO.refundState}">退款狀態</td>
+				<td style="border: 1px solid #dee2e6"  th:text="${refundsVO.refundDate!=null?refundsVO.refundDate:''}">退款時間</td>
+				<td style="border: 1px solid #dee2e6" >
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal_'+${refundsVO.ordersVO.orderId}">
 					 訂單明細
 					</button>
@@ -258,30 +258,69 @@ xmlns:th="http://www.thymeleaf.org">
 									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									      </div>
 									      <div class="modal-body">
-											<span>店家流水號:</span><span th:text="${refundsVO.ordersVO.storesVO.storeId}+'-'+${refundsVO.ordersVO.storesVO.storeName}"></span><br/>
-											<span>訂單編號:</span><span th:text="${refundsVO.ordersVO.orderId}"></span><br/>
-											<span>訂餐狀態:</span><span th:text="${refundsVO.ordersVO.orderState}"></span><br/>
-											<span>下單時間:</span><span th:text="${refundsVO.ordersVO.orderTime}"></span><br/>
-											<span>出餐時間:</span><span th:text="${refundsVO.ordersVO.doneTime}"></span><br/>
-											<span>完成時間:</span><span th:text="${refundsVO.ordersVO.finishTime}"></span><br/>
-											<span>超時紀錄時間:</span><span th:text="${refundsVO.ordersVO.delayTime}"></span><br/>
-											<span>超時/取消訂單備註:</span><span th:text="${refundsVO.ordersVO.delayDesc}"></span><br/>
-											<span>評分:</span><span th:text="${refundsVO.ordersVO.comtVal}"></span><br/>
-											<span>評論:</span><span th:text="${refundsVO.ordersVO.comtCont}"></span><br/>
-											<span>評論日期:</span><span th:text="${refundsVO.ordersVO.comtTime}"></span><br/>
-											<span>線上付款時間:</span><span th:text="${refundsVO.ordersVO.payDate}"></span><br/>
-											<span>付款方式:</span><span th:text="${refundsVO.ordersVO.payMethod}"></span><br/>
-											<span>付款狀態:</span><span th:text="${refundsVO.ordersVO.payState}" ></span><br/>
-											<span>會員流水號:</span><span th:text="${refundsVO.ordersVO.customerVO.customerId}"></span><br/>
-											<span>總金額:</span><span th:text="${refundsVO.ordersVO.totalPrice}"></span><br/>
-											<span>匯款狀態:</span><span th:text="${refundsVO.ordersVO.remitState}"></span><br/>
-											<span>匯款日期:</span><span th:text="${refundsVO.ordersVO.remitDate}"></span><br/>
-
+<!-- 									      <table> -->
+<!-- 									      	<thead><th>項目</th><th>內容</th></thead> -->
+<!-- 									      <tbody> -->
+<!-- 									      	<tr> -->
+<!-- <!-- 										      	<td>店家流水號:</td><td><span th:text="${refundsVO.ordersVO.storesVO.storeId}+'-'+${refundsVO.ordersVO.storesVO.storeName}"></span></td> --> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>訂單編號:</td><td><span th:text="${refundsVO.ordersVO.orderId}"></span></td> -->
+<!-- 										      	</tr> -->
+<!-- 										    <tr> -->
+<!-- 										    	<td>訂餐狀態:</td><td><span th:text="${refundsVO.ordersVO.orderState}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										    	<td>下單時間:</td><td><span th:text="${refundsVO.ordersVO.orderTime}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>出餐時間:</td><td><span th:text="${refundsVO.ordersVO.doneTime}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>完成時間:</td><td><span th:text="${refundsVO.ordersVO.finishTime}"></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>超時紀錄時間:</td><td><span th:text="${refundsVO.ordersVO.delayTime}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>超時/取消訂單備註:</td><td><span th:text="${refundsVO.ordersVO.delayDesc}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>評分:</td><td><span th:text="${refundsVO.ordersVO.comtVal}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>評論:</td><td><span th:text="${refundsVO.ordersVO.comtCont}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>評論日期:</td><td><span th:text="${refundsVO.ordersVO.comtTime}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr>  	 -->
+<!-- 										    	<td>線上付款時間:</td><td><span th:text="${refundsVO.ordersVO.payDate}"></span></td> -->
+<!-- 										   </tr> -->
+<!-- 										    <tr>	 -->
+<!-- 										      	<td>付款方式:</td><td><span th:text="${refundsVO.ordersVO.payMethod}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										    	<td>付款狀態:</td><td><span th:text="${refundsVO.ordersVO.payState}" ></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>會員流水號:</td><td><span th:text="${refundsVO.ordersVO.customerVO.customerId}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>總金額:</td><td><span th:text="${refundsVO.ordersVO.totalPrice}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										      	<td>匯款狀態:</td><td><span th:text="${refundsVO.ordersVO.remitState}"></span></td> -->
+<!-- 										    </tr> -->
+<!-- 										    <tr> -->
+<!-- 										    	<td>匯款日期:</td><td><span th:text="${refundsVO.ordersVO.remitDate}"></span></td> -->
+<!-- 									      	</tr> -->
+<!-- 									      </tbody> -->
+<!-- 									      </table> -->
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">確認</button>
-<!-- 									        <button type="submit" class="btn btn-primary">確認</button> -->
-									      </div>
+										 </div>
 									    </div>
 									  </div>
 									</div>

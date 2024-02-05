@@ -105,7 +105,7 @@ public class MealsController {
 	}
 
 	@PostMapping("update")
-	public String update(@Valid MealsVO mealsVO, BindingResult result, ModelMap model,
+	public String update(@Valid MealsVO mealsVO, BindingResult result, HttpServletRequest req, ModelMap model,
 			@RequestParam("mealPicture") MultipartFile[] parts) throws IOException {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
@@ -134,7 +134,15 @@ public class MealsController {
 		model.addAttribute("success", "- (修改成功)");
 		mealsVO = mealsSvc.getMealsVOByMealNo(Integer.valueOf(mealsVO.getMealNo()));
 		model.addAttribute("mealsVO", mealsVO);
-		return "sFunction/meals/listOneMeals"; // 修改成功後轉交listOneEmp.html
+//		return "sFunction/meals/listOneMeals"; // 修改成功後轉交listOneEmp.html
+		HttpSession session = req.getSession(false);
+		Object idVO =session.getAttribute("storeEmpLogin");
+		StoreEmpVO storeEmpVO= (StoreEmpVO)idVO;
+		List<MealsVO> list = mealsSvc.getAllByStoreId(storeEmpVO.getStoresVO().getStoreId());
+		model.addAttribute("mealsListData", list);
+//		return "sFunction/meals/listAllMeals";
+		return "redirect:/sFunction/customized/addCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+
 	}
 	
 	// 去除BindingResult中某個欄位的FieldError紀錄

@@ -12,9 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>會員資料新增 - addEmp.html</title>
+<title>會員狀態修改 - update_customer_input.html</title>
 
-
+<head ></head>
 <style type="text/css">
 	
 	button {
@@ -47,24 +47,23 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>會員註冊 - addCustomer.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/loginC}"><img th:src="@{/images/back1.gif}">回上一頁</a></h3></div>
+		 <div align="center"> <h2>會員資料修改 - update_customer_input.html</h2>
+<!-- 		 <h3><a class="navbar-brand" th:href="@{/cFunction/cEntrancePass}"><img th:src="@{/images/back1.gif}">回前頁</a></h3></div> -->
 </nav>
 
 	<div align="center">
-		<h3><b>所有欄位皆為必填欄位</b></h3>
-		<form th:action="@{insertC}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
+		<form th:action="@{update}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
 			
-<!--	    <div>  -->
+<!-- 			<div> -->
 			<!--pk -->
-<!--			<label>會員編號:</label>
-			<input type="number" th:field="*{customerId}" onclick="hideContent('customerId.errors');"/><br/>
-			<span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="error" id="customerId.errors"></span>
-			</div> -->
+<!-- 			<label>會員編號:</label> -->
+			<input type="hidden" th:field="*{customerId}" readonly /><br/>
+<!-- 			<span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="error" id="customerId.errors"></span> -->
+<!-- 			</div> -->
 			
 			<div>
 			<label>會員暱稱:</label>
-			<input type="text" th:field="*{customerNic}"  onclick="hideContent('customerNic.errors');"  /><br/>
+			<input type="text" th:field="*{customerNic}"  onclick="hideContent('customerNic.errors');" /><br/>
 			<span th:if="${#fields.hasErrors('customerNic')}" th:errors="*{customerNic}" class="error" id="customerNic.errors"></span>
 			</div>
 			
@@ -82,16 +81,13 @@
 			
 			<div>
 			<label>手機號碼:</label>
-			<input type="number" th:field="*{customerMob}" onclick="hideContent('customerMob.errors');"  /><br/>
+			<input type="text" th:field="*{customerMob}" style="border:0px ; font-weight: bold;" readonly /><br/>
 			<span th:if="${#fields.hasErrors('customerMob')}" th:errors="*{customerMob}" class="error" id="customerMob.errors"></span>
 			</div>
 			
 			<div>
             <label>手機認證:</label>
-            <select th:field="*{mobChecked}">
-            <option th:value="'N'" th:text="N"></option>
-            <option th:value="'Y'" th:text="Y"></option>
-            </select>
+			<input type="text" th:field="*{mobChecked}" style="border:0px ; font-weight: bold;" readonly /><br/>
             <span th:if="${#fields.hasErrors('mobChecked')}" th:errors="*{mobChecked}" class="error" id="mobChecked.errors"></span>
             </div>
 			
@@ -102,24 +98,20 @@
 			</div>
 			
 			
-			
 			<div>
 			<label>會員狀態:</label>
-			<select th:field="*{customerState}">
-				<option  th:value="0" th:text="正常" ></option>
-				<option  th:value="1" th:text="停權" ></option>
-				<option  th:value="2" th:text="已註銷" ></option>
-			</select>
+			<div th:switch="${customerVO.customerState}" style="text-align: left;">
+			    <span th:case="0" style="border:0px ; font-weight: bold;"> 正常</span>
+			    <span th:case="1" style="border:0px ; font-weight: bold;"> 停權</span>
+			    <span th:case="2" style="border:0px ; font-weight: bold;"> 已註銷</span>
+			</div>
+			<input type="hidden" th:field="*{customerState}" onclick="hideContent('customerState.errors');" readonly /><br/>
 			<span th:if="${#fields.hasErrors('customerState')}" th:errors="*{customerState}" class="error" id="customerState.errors"></span>
 			</div>
-			
-			
-			
-			</div>
-			
+		
 			<div>
 				<div></div>
-				<div><button type="submit" id="submit"> 送出新增 </button></div>
+				<div><button type="submit" id="submit"> 送出修改 </button></div>
 				<div></div>
 			</div>		
 		</form>

@@ -12,6 +12,14 @@ public interface SupRepository extends JpaRepository<SupVO, Integer>{
 //    
 //    Optional<SupVO> findBySupplierContact(String supplierContact);
     
-    @Query("SELECT sup FROM SupVO sup WHERE sup.supplierName like %:supplierName% OR sup.supplierContact LIKE %:supplierContact% OR sup.supplierState = :supplierState")
-    List<SupVO> findSupplierByCompositeQuery(@Param("supplierName") String supplierName, @Param("supplierContact") String supplierContact, @Param("supplierState") Integer supplierState);
+    @Query("SELECT sup FROM SupVO sup WHERE "
+//    		+ "sup.storesVO.storeId = :storeId or "
+    		+ "sup.supplierName like %:supplierName% OR sup.supplierContact LIKE %:supplierContact% OR sup.supplierState = :supplierState")
+    List<SupVO> findSupplierByCompositeQuery(
+//    		@Param("storeId") String storeId, 
+    		@Param("supplierName") String supplierName, @Param("supplierContact") String supplierContact, @Param("supplierState") Integer supplierState);
+
+    
+    @Query("SELECT sup FROM SupVO sup WHERE sup.storesVO.storeId = :storeId")
+    List<SupVO> findAllSup(@Param("storeId") String storeId);
 }

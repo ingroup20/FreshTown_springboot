@@ -63,8 +63,11 @@ public class MaterialService implements MaterialServiceIntf{
 		return optional.orElse(null);//原本是null
 	}
 	
-	
-    @Override
+
+	public List<MaterialVO> getAllMaterials() {
+        return repository.findAll();
+    }
+
 	public List<MaterialVO> getAll() {
 		return repository.findAll();
 	}

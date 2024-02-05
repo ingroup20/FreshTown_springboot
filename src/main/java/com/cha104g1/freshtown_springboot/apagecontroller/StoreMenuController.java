@@ -104,10 +104,11 @@ public class StoreMenuController {
 		if(customizedListData != null) {
 			Map<String,List<CustomizedDetailVO>> customizedDetailData =new HashMap<>();
 			for(CustomizedVO customizedVO: customizedListData) {
-				CustomizedItemsVO customizedItemsVO=customizedItemsSvc.getCustomizedItemsVOByCustedItemsNo(customizedVO.getCustedItemsNo());
-				List<CustomizedDetailVO> list=customizedDetailSvc.getAllByCustedItemsNo(customizedItemsVO.getCustedItemsNo());
-				
-				customizedDetailData.put(customizedItemsVO.getCustedName(), list) ;
+				if(customizedVO.getCustedStatus().equals(1)) {
+					CustomizedItemsVO customizedItemsVO=customizedItemsSvc.getCustomizedItemsVOByCustedItemsNo(customizedVO.getCustedItemsNo());
+					List<CustomizedDetailVO> list=customizedDetailSvc.getAllByCustedItemsNo(customizedItemsVO.getCustedItemsNo());
+					customizedDetailData.put(customizedItemsVO.getCustedName(), list) ;
+				}
 			}
 			model.addAttribute("storeId", storesVO.getStoreId());
 			model.addAttribute("storeName", storesVO.getStoreName());

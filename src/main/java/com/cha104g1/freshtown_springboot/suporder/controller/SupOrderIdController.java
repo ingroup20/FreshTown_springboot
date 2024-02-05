@@ -26,6 +26,8 @@ import com.cha104g1.freshtown_springboot.material.model.model.MaterialVO;
 import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderService;
 import com.cha104g1.freshtown_springboot.suporder.model.SupOrderVO;
+import com.cha104g1.freshtown_springboot.supplier.model.SupService;
+import com.cha104g1.freshtown_springboot.supplier.model.SupVO;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
 
@@ -40,6 +42,8 @@ public class SupOrderIdController {
 	SupOrderService suporderSvc;
 	@Autowired
 	MaterialService materialSvc;
+	@Autowired
+	SupService supSvc;
 
 	@ModelAttribute
 	   public void whoareyou(HttpServletRequest req ,Model model) {
@@ -85,7 +89,7 @@ public class SupOrderIdController {
 	        material.setQuantityNot(material.getQuantityNot() + suporderVO.getAmount());
 	        materialSvc.updateMaterial(material);
 	        model.addAttribute("success", "- (新增成功)");
-	        return "sFunction/suporder/supOrderList";
+	        return "redirect:/sFunction/suporder/supOrderList";
 	    }
 	
 	@PostMapping("getOne_For_Update")
@@ -93,6 +97,16 @@ public class SupOrderIdController {
 		SupOrderVO supOrderVO = suporderSvc.getOneSupOrder(Integer.valueOf(Id));
 		model.addAttribute("supOrderVO", supOrderVO);
 		return "sFunction/suporder/updateSupOrder";
+	}
+	
+	@ModelAttribute("allMaterials")
+	public List<MaterialVO> getAllMaterials() {
+	    return materialSvc.getAllMaterials();
+	}
+
+	@ModelAttribute("allSuppliers")
+	public List<SupVO> getAllSuppliers() {
+	    return supSvc.getAllSuppliers();
 	}
 	
 	@PostMapping("update")

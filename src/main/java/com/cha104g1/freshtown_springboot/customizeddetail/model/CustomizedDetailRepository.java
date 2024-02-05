@@ -17,6 +17,8 @@ public interface CustomizedDetailRepository extends JpaRepository<CustomizedDeta
 	@Transactional
 	@Query(value = "FROM CustomizedDetailVO c WHERE c.customizedItemsVO.custedItemsNo = ?1")
 	List<CustomizedDetailVO> findByCustedItemsNo(Integer custedItemsNo);
+	
+	
 //
 //	@Transactional
 //	@Modifying
