@@ -196,39 +196,57 @@ xmlns:th="http://www.thymeleaf.org">
 				<div>
 				<label>店家流水號:</label>
 				<input calss="notEdit" type="text" th:field="*{storeId}" style="background-color:lightgray" readonly/>
+				<span  th:if="${#fields.hasErrors('storeId')}" th:errors="*{storeId}" class="error" id="storeId.errors"></span>
+			
 				</div>
 				
 				<div>
 				<label>店家帳號:</label>
 				<input calss="notEdit" type="text" th:field="*{storeAccount}" style="background-color:lightgray" readonly/>
+				<span  th:if="${#fields.hasErrors('storeAccount')}" th:errors="*{storeAccount}" class="error" id="storeAccount.errors"></span>
+			
 				</div>
 				<div>
 				<label>店家名稱:</label>
 				<input type="text" th:field="*{storeName}"/>
+				<span  th:if="${#fields.hasErrors('storeName')}" th:errors="*{storeName}" class="error" id="storeName.errors"></span>
+			
 				</div>
 				<div>
 				<label>店家統一編號:</label>
 				<input type="text" th:field="*{storeGui}"/>
+				<span  th:if="${#fields.hasErrors('storeGui')}" th:errors="*{storeGui}" class="error" id="storeGui.errors"></span>
+			
 				</div>
 				<div>
 				<label>店家地址:</label>
 				<input type="text" th:field="*{storeAddress}"/>
+				<span  th:if="${#fields.hasErrors('storeAddress')}" th:errors="*{storeAddress}" class="error" id="storeAddress.errors"></span>
+			
 				</div>
 				<div>
 				<label>店家電話:</label>
 				<input type="text" th:field="*{storePhone}"/>
+				<span  th:if="${#fields.hasErrors('storePhone')}" th:errors="*{storePhone}" class="error" id="storePhone.errors"></span>
+			
 				</div>
 				<div>
 				<label>店家狀態:</label>
 				<input type="text" th:field="*{storeState}"/>
+				<span  th:if="${#fields.hasErrors('storeState')}" th:errors="*{storeState}" class="error" id="storeState.errors"></span>
+			
 				</div>
 				<div>
 				<label>店家等級:</label>
 				<input type="text" th:field="*{storeLv}"/>
+				<span  th:if="${#fields.hasErrors('storeLv')}" th:errors="*{storeLv}" class="error" id="storeLv.errors"></span>
+			
 				</div>
 				<div>
 				<label>開通時間:</label>
 				<input calss="notEdit" type="text" th:field="*{createDate}"  style="background-color:lightgray" readonly/>
+				<span  th:if="${#fields.hasErrors('createDate')}" th:errors="*{createDate}" class="error" id="createDate.errors"></span>
+			
 				</div>
 					
 			<div>
@@ -240,36 +258,52 @@ xmlns:th="http://www.thymeleaf.org">
 				<div>
 				<label>平台開店:</label>
 				<input type="text" th:field="*{pushUp}"/>
+				<span  th:if="${#fields.hasErrors('pushUp')}" th:errors="*{pushUp}" class="error" id="pushUp.errors"></span>
+			
 				</div>
 				<div>
 				<label>店家負責人:</label>
 				<input type="text" th:field="*{ownerName}"/>
+				<span  th:if="${#fields.hasErrors('ownerName')}" th:errors="*{ownerName}" class="error" id="ownerName.errors"></span>
+			
 				</div>
 				<div>
 				<label>負責人手機號碼:</label>
 				<input type="text" th:field="*{ownerMob}"/>
+				<span  th:if="${#fields.hasErrors('ownerMob')}" th:errors="*{ownerMob}" class="error" id="ownerMob.errors"></span>
+			
 				</div>
 				<div>
 				<label>身分證:</label>
 				<input type="text" th:field="*{ownerId}"/>
+				<span  th:if="${#fields.hasErrors('ownerId')}" th:errors="*{ownerId}" class="error" id="ownerId.errors"></span>
+			
 				</div>
 				<div>
 				<label>負責人地址:</label>
 				<input type="text" th:field="*{ownerAddress}"/>
+				<span  th:if="${#fields.hasErrors('ownerAddress')}" th:errors="*{ownerAddress}" class="error" id="ownerAddress.errors"></span>
+			
 				</div>
 				<div>
 				<label>EMAIL:</label>
 				<input type="text" th:field="*{ownerEmail}"/>
+				<span  th:if="${#fields.hasErrors('ownerEmail')}" th:errors="*{ownerEmail}" class="error" id="ownerEmail.errors"></span>
+			
 				</div>
 				
 				<div>
 				<label>評分:</label>
 				<input calss="notEdit" type="text" th:field="*{totalScore}"  style="background-color:lightgray" readonly/>
+				<span  th:if="${#fields.hasErrors('totalScore')}" th:errors="*{totalScore}" class="error" id="totalScore.errors"></span>
+			
 				</div>
 				
 				<div>
 				<label>評分人數:</label>
 				<input calss="notEdit" type="text" th:field="*{scorePeople}"  style="background-color:lightgray" readonly/>
+				<span  th:if="${#fields.hasErrors('scorePeople')}" th:errors="*{scorePeople}" class="error" id="scorePeople.errors"></span>
+			
 				</div>
 							
 			<div>
@@ -282,7 +316,8 @@ xmlns:th="http://www.thymeleaf.org">
 				<div>
 				<label>店家簡介:</label>
 				<textarea type="text" th:field="*{storeDesc}"/>
-				
+				<span  th:if="${#fields.hasErrors('storeDesc')}" th:errors="*{storeDesc}" class="error" id="storeDesc.errors"></span>
+			
 				</div>
 			
 			<div>

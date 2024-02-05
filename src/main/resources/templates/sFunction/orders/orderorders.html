@@ -299,25 +299,27 @@ xmlns:th="http://www.thymeleaf.org">
 						<th>訂單編號</th>
 						<th>下單時間</th>
 						<th>訂單狀態</th>
-						<th>總份數</th>
+<!-- 						<th>總份數</th> -->
 						<th>總金額</th>
 						<th style="width:500px">餐點</th>	
 					</tr>
 				  </thead>			
 				  <tbody>
-				  <th:block th:each="ordersVO : ${orderDetailList.entrySet()}">			  			
+				  <th:block th:each="ordersVO : ${orderDetailList.entrySet()}" th:sort="${ordersVO.key.orderId}">			  			
 							
-							<tr th:if="${newOrder} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState == 1}">
+							<tr id="step1"  th:if="${newOrder} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState == 1}">
 								<td style="border: 1px solid #dee2e6">  
-									<form method="get" th:action="@{/cFunction/cartPage/updateStep}" style="margin-bottom: 0px;">
+									<form method="get" th:action="@{/sFunction/orders/updateStep}" style="margin-bottom: 0px;">
 										    <input type="hidden" name="orderId" th:value="${ordersVO.key.orderId}">
 										    <input type="hidden" name="orderState" th:value="2">
 										     <button type="submit">製作</button>
 									</form>	</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderState}">訂單狀態</td>
-								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單時間</td>
+								<td style="border: 1px solid #dee2e6" >
+									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
+								</td>
+<!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
 									<div class="mealArea" >
@@ -334,17 +336,19 @@ xmlns:th="http://www.thymeleaf.org">
 								</td>
 							</tr>
 				  			
-							<tr th:if="${making} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState == 2}">
+							<tr id="step2"  th:if="${making} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState == 2}">
 								<td style="border: 1px solid #dee2e6">  
-									<form method="get" th:action="@{/cFunction/cartPage/updateStep}" style="margin-bottom: 0px;">
+									<form method="get" th:action="@{/sFunction/orders/updateStep}" style="margin-bottom: 0px;">
 										    <input type="hidden" name="orderId" th:value="${ordersVO.key.orderId}">
 										    <input type="hidden" name="orderState" th:value="3">
 										     <button type="submit" >出餐</button>
 									</form>	</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderState}">訂單狀態</td>
-								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td>
+								<td style="border: 1px solid #dee2e6" >
+									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
+								</td>
+								<!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
 									<div class="mealArea" >
@@ -362,17 +366,19 @@ xmlns:th="http://www.thymeleaf.org">
 								</td>
 							</tr>
 				  
-							<tr th:if="${taking} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState == 3}">
+							<tr id="step3" th:if="${taking} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState == 3}">
 								<td style="border: 1px solid #dee2e6">  
-									<form method="get" th:action="@{/cFunction/cartPage/updateStep}" style="margin-bottom: 0px;">
+									<form method="get" th:action="@{/sFunction/orders/updateStep}" style="margin-bottom: 0px;">
 										    <input type="hidden" name="orderId" th:value="${ordersVO.key.orderId}">
 										    <input type="hidden" name="orderState" th:value="4">
 										     <button type="submit">結單</button>
 									</form>	</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderState}">訂單狀態</td>
-								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td>
+								<td style="border: 1px solid #dee2e6" >
+									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
+								</td>
+								<!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
 									<div class="mealArea" >
@@ -390,12 +396,14 @@ xmlns:th="http://www.thymeleaf.org">
 								</td>
 							</tr>
 			  			
-							<tr th:if="${finish} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState >= 4}">
-								<td style="border: 1px solid #dee2e6"  th:text="${ordersVOStat.count}">計數</td>
+							<tr id="step4" th:if="${finish} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState >= 4}">
+								<td style="border: 1px solid #dee2e6">結單</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderState}">訂單狀態</td>
-								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td>
+								<td style="border: 1px solid #dee2e6" >
+									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
+								</td>
+								<!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
 									<div class="mealArea" >
@@ -498,5 +506,44 @@ xmlns:th="http://www.thymeleaf.org">
     	});
     });
 </script>
+<script>
+        $(document).ready(function () {
+        	$("span.orderState").each(function () {
+        		 $(this).hide();
+                var number = $(this).text().trim();
+                var result = convertToText(number);
+                $(this).siblings(".orderStateMean").text(result);
+                console.log("Number: ", number);
+                console.log("Result: ", result);
+            });
+        });
+
+        function convertToText(number) {
+				var mean='';
+                	switch(number){
+                		case "0":
+                			  mean ="未成立";
+                			 break;
+                		case "1":
+                   			  mean ="新訂單";
+                			break;
+                		case "2":
+                   			  mean ="製作中 ";
+  	              			break;
+                		case "3":
+                   			  mean="待取餐";
+                			break;
+                		case "4":
+                   			  mean="結單";
+                			break;
+                		case "5":
+                   			  mean ="取消訂單";
+                			break;
+                		}          
+            return  mean;
+        }
+        
+       
+    </script>
 </body>
 </html>

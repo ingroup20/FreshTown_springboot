@@ -130,51 +130,96 @@ public class SOrdersController {
 	}
 	
     @GetMapping("orderorders")
-	public String orderOrders(Model model) {
-    	model.addAttribute("newOrder",true);
+	public String orderOrders(HttpServletRequest req,Model model) {
+    	HttpSession session=req.getSession();
+    	
+    	model.addAttribute("newOrder",session.getAttribute("newOrder"));
+    	if(model.getAttribute("newOrder")==null ){
+    		session.setAttribute("newOrder",true);
+    	}
+	
+    		model.addAttribute("newOrder",session.getAttribute("newOrder"));
+    		model.addAttribute("making",session.getAttribute("making"));
+        	model.addAttribute("taking",session.getAttribute("taking"));
+        	model.addAttribute("finish",session.getAttribute("finish"));
+    	
+  
     	return "sFunction/orders/orderorders";
 	}
 	
     @GetMapping("newOrder")
-	public String orderNewOrder(Model model) {
+	public String orderNewOrder(HttpServletRequest req,Model model) {
+    	HttpSession session=req.getSession();
+    	session.setAttribute("newOrder",true);
+    	session.setAttribute("making",false);
+    	session.setAttribute("taking",false);
+    	session.setAttribute("finish",false);
+
     	model.addAttribute("newOrder",true);
     	model.addAttribute("making",false);
     	model.addAttribute("taking",false);
     	model.addAttribute("finish",false);
     	System.out.println("進入newOrder");	
-		return "sFunction/orders/orderorders";
+		return "redirect: /freshtown_springboot/sFunction/orders/orderorders";
 	}
     
     @GetMapping("making")
-	public String makingOrders(Model model) {
+	public String makingOrders(HttpServletRequest req,Model model) {
+    	HttpSession session=req.getSession();
+    	session.setAttribute("newOrder",false);
+    	session.setAttribute("making",true);
+    	session.setAttribute("taking",false);
+    	session.setAttribute("finish",false);
+    	
     	model.addAttribute("making",true);
     	model.addAttribute("newOrder",false);
     	model.addAttribute("taking",false);
     	model.addAttribute("finish",false);
     	System.out.println("進入making");
-    	return "sFunction/orders/orderorders";
+    	return "redirect: /freshtown_springboot/sFunction/orders/orderorders";
 	}
     
     @GetMapping("taking")
-	public String takingOrders(Model model) {
+	public String takingOrders(HttpServletRequest req,Model model) {
+    	HttpSession session=req.getSession();
+    	session.setAttribute("newOrder",false);
+    	session.setAttribute("making",false);
+    	session.setAttribute("taking",true);
+    	session.setAttribute("finish",false);
+    	
     	model.addAttribute("taking",true);
     	model.addAttribute("newOrder",false);
     	model.addAttribute("making",false);
     	model.addAttribute("finish",false);
     	System.out.println("進入taking");
-    	return "sFunction/orders/orderorders";
+    	return "redirect: /freshtown_springboot/sFunction/orders/orderorders";
 	}
     
     @GetMapping("finish")
-	public String orderFinish(Model model) {
+	public String orderFinish(HttpServletRequest req,Model model) {
+    	HttpSession session=req.getSession();
+    	session.setAttribute("newOrder",false);
+    	session.setAttribute("making",false);
+    	session.setAttribute("taking",false);
+    	session.setAttribute("finish",true);
+    	
+    	
     	model.addAttribute("finish",true);
     	model.addAttribute("newOrder",false);
     	model.addAttribute("taking",false);
     	model.addAttribute("making",false);
     	System.out.println("進入finish");
-    	return "sFunction/orders/orderorders";
+    	return "redirect: /freshtown_springboot/sFunction/orders/orderorders";
 	}
     
+    @GetMapping("updateStep")
+	public String updateStep(String orderState,String orderId,Model model) {
+    	System.out.println("進入updateStep");
+    	OrdersVO ordersVO=ordersSvc.getOneOrders(Integer.valueOf(orderId));
+    	ordersVO.setOrderState(Integer.valueOf(orderState));
+    	ordersSvc.updateOrders(ordersVO);
+    	return "redirect: /freshtown_springboot/sFunction/orders/orderorders";
+	}
     
     //============================================
 	@PostMapping("getOne_For_Update")
