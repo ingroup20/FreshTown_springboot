@@ -36,6 +36,10 @@ public class OrderDetailService {
 		return optional.orElse(null);
 	}
 	
+	public List<OrderDetailVO> getAllByOrderId(Integer orderId){
+		return repository.findByOrderId(orderId);
+	}
+	
 
 	public List<OrderDetailVO> getAll() {
 		return repository.findAll();

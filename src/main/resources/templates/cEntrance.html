@@ -17,12 +17,16 @@
             <ul class="nav">
                 <li class="nav_item li_item"><a class="title" th:href="@{/}">找店家</a></li>
                 <!-- <li class="nav_item "><a class="title" href="#!">地圖搜尋</a></li> -->
-                <li class="nav_item li_item">
+                <li class="nav_item li_item menu">
                     <a class="nav_link title " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">註冊專區</a>
+
                     <ul class="dropdown_menu ">
                         <li class="li_item "><a th:href="@{/registerC}"><button type="submit" >點餐會員註冊</button></a></li>
+
                         <li><hr class="dropdown_divider" /></li>
+
                         <li class="li_item "><a th:href="@{/registerS}"><button type="submit" >合作店家申請</button></a></li>
+
                     </ul>
                 </li>
                 <li class="nav_item li_item">
@@ -60,14 +64,13 @@
 	            <div class="section_item">
 	                <div class="card">
 	                    <!-- 圖片-->
-                        <div class="card_img"><img th:src="@{/stores/DBGifReader} + '?storeId=' + ${storesVO.storeId}" ></div>
-	                    <!-- <img th:src="@{/stores/DBGifReader} + '?storesId=' + ${storesVO.storesId}" width="100px"> -->
-                        <h4 th:text="${storesVO.storeName}">店家名稱</h4>
+                        <div class="card_img"><img th:src="@{/file/DBGifReader} + '?storeId=' + ${storesVO.storeId}" ></div>
+	                    <h4 th:text="${storesVO.storeName}">店家名稱</h4>
                         <!-- 評等-->
                         <p>評等:<span th:text="${storesVO.totalScore/(storesVO.scorePeople!=null&&storesVO.scorePeople!=0?storesVO.scorePeople:1)}"></span>星</p>
                         <p th:text="${storesVO.storeAddress}">店家地址</p>
                         <div><span th:text="${storesVO.pushUp}">營業中</span>營業時間:<span th:text="${storesVO.openTime}"></span></div>
-                        <p >店休:<span th:text="${storesVO.restDay}"></span></p>
+                        <p >店休:<span class="restDay" th:text="${storesVO.restDay}"></span><span class="restDayRead"></span></p>
 
                         <div class="card_footer title">
                             <form id="entrance" method="get" th:action="@{getOneStoreMeal}" > 
@@ -104,6 +107,66 @@
 	<script th:src="@{/js/allBase.js}"></script>
 	<script th:src="@{/js/mealMenu.js}"></script>
 	
+	<script>
+        $(document).ready(function () {
+        	$("span.restDay").each(function () {
+        		$("span.restDay").hide();
+                var number = $(this).text().trim();
+                var result = convertToText(number);
+                $(this).next().text(result);
 
+            });
+        	
+        });
+
+        function convertToText(number) {
+            var numberStr = number.toString().split('').reverse().join('');
+            var result = '';
+
+            for (var i = 0; i < numberStr.length; i++) {
+                var dayState = parseInt(numberStr.charAt(i));
+                if(dayState===0){
+                	switch(i){
+                		case(0):
+                			 var day="星期一,";
+                			result += day;
+                			 continue;
+                		case(1):
+                   			 var day="星期二,";
+                		result += day;
+                			continue;
+                		case(2):
+                   			 var day="星期三,";
+                		result += day;
+                			continue;
+                		case(3):
+                   			 var day="星期四,";
+                			continue;
+                		case(4):
+                   			 var day="星期五,";
+                			continue;
+                		case(5):
+                   			 var day="星期六,";
+                			continue;
+                		case(6):
+                   			 var day="星期日";
+                		result += day;
+                			continue;
+                		case(7):
+                  			 var day="";
+               			continue;
+                		}             	
+                }else{
+                	var day="";
+                }
+                
+                result += day;
+                if (i < numberStr.length - 1) {
+                    result += ' ';
+                }
+            }
+            return result;
+        }
+    </script>
 </body>
 </html>

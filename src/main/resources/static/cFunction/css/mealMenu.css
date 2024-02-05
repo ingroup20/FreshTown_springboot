@@ -234,7 +234,7 @@ div.card_map{
 /*===============section=============*/
 section.section{
     /* border: 1px solid red; */
-    min-height:500px;
+    min-height:1000px;
 }
 div.section{
     width: calc(100% - 100px);
@@ -245,7 +245,7 @@ div.section{
     flex-wrap: wrap;
 }
 div.section_item{
-    width: calc((100% - 100px)/5);
+    width: calc((100% - 100px)/4);
     /* border: 2px solid orange; */
     height: 270px;
     margin: 10px 20px 10px 0;    
@@ -260,7 +260,7 @@ div.section_shadow{
         -2px 2px 5px 0px orange; /* 左下方向 */;
 }
 
-div.section_item:nth-child(5n){
+div.section_item:nth-child(4n){
     margin-right:0 ;
 }
 

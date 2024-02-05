@@ -3,8 +3,10 @@ package com.cha104g1.freshtown_springboot.orders.controller;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,8 +27,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailService;
+import com.cha104g1.freshtown_springboot.customizeddetail.model.CustomizedDetailVO;
+import com.cha104g1.freshtown_springboot.customizedorder.model.CustomizedOrderService;
+import com.cha104g1.freshtown_springboot.customizedorder.model.CustomizedOrderVO;
+import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailService;
+import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailVO;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
+import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpVO;
 import com.cha104g1.freshtown_springboot.stores.model.StoresService;
 import com.cha104g1.freshtown_springboot.stores.model.StoresVO;
@@ -41,7 +51,15 @@ public class SOrdersController {
 
 	@Autowired
 	StoresService storesSvc;
-	
+	@Autowired
+	RefundsService refundsSvc;
+	@Autowired
+	OrderDetailService orderDetailSvc;
+	@Autowired
+	CustomizedOrderService customizedOrderSvc;
+	@Autowired
+	CustomizedDetailService customizedDetailSvc;
+	 
 	@ModelAttribute("ordersListDataS") // for select_page.html 第135行用
 	protected List<OrdersVO> getListData_OrdersS(HttpServletRequest req,Model model) {
 		HttpSession session = req.getSession();
@@ -66,7 +84,45 @@ public class SOrdersController {
 //		    }
 		}
 	
+	@ModelAttribute("orderDetailList") // for select_page.html 第135行用
+	protected Map<OrdersVO,List<OrderDetailVO>> getOrderDetailList(HttpServletRequest req,Model model) {
+		HttpSession session = req.getSession();
+		Object object =session.getAttribute("storeEmpLogin");	
+		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+		
+		Map<OrdersVO,List<OrderDetailVO>> orderDetailList = new HashMap<>();
+
+        List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+        for(OrdersVO ordersVO :list) {
+        	List<OrderDetailVO> oDetailVOList = orderDetailSvc.getAllByOrderId(ordersVO.getOrderId());
+        	orderDetailList.put(ordersVO, oDetailVOList);
+
+        }
+        System.out.println(list.size());
+        return orderDetailList;
+	}
 	
+//	@ModelAttribute("customizedOrderList") // for select_page.html 第135行用
+//	protected Map<CustomizedOrderVO,List<CustomizedDetailVO>> getCustomizedOrderList(HttpServletRequest req,Model model) {
+//		HttpSession session = req.getSession();
+//		Object object =session.getAttribute("storeEmpLogin");	
+//		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+//		
+//		Map<CustomizedOrderVO,List<CustomizedDetailVO>> customizedOrderList = new HashMap<>();
+//
+//        List<CustomizedOrderVO> list = customizedOrderSvc.getAll();
+////        for(CustomizedOrderVO customizedOrderVO :list) {
+////        	if(customizedOrderVO.getOrderDetailVO())
+////        	List<CustomizedDetailVO> cDetailVOList = customizedDetailSvc.getAll();
+////        	orderDetailList.put(ordersVO, oDetailVOList);
+////
+////        }
+//        System.out.println(list.size());
+//        return orderDetailList;
+//	}
+	
+	
+	//=====================================
 	
     @GetMapping("select_page")
 	public String orderselectpage(Model model) {	
@@ -75,9 +131,52 @@ public class SOrdersController {
 	
     @GetMapping("orderorders")
 	public String orderOrders(Model model) {
-		return "sFunction/orders/orderorders";
+    	model.addAttribute("newOrder",true);
+    	return "sFunction/orders/orderorders";
 	}
 	
+    @GetMapping("newOrder")
+	public String orderNewOrder(Model model) {
+    	model.addAttribute("newOrder",true);
+    	model.addAttribute("making",false);
+    	model.addAttribute("taking",false);
+    	model.addAttribute("finish",false);
+    	System.out.println("進入newOrder");	
+		return "sFunction/orders/orderorders";
+	}
+    
+    @GetMapping("making")
+	public String makingOrders(Model model) {
+    	model.addAttribute("making",true);
+    	model.addAttribute("newOrder",false);
+    	model.addAttribute("taking",false);
+    	model.addAttribute("finish",false);
+    	System.out.println("進入making");
+    	return "sFunction/orders/orderorders";
+	}
+    
+    @GetMapping("taking")
+	public String takingOrders(Model model) {
+    	model.addAttribute("taking",true);
+    	model.addAttribute("newOrder",false);
+    	model.addAttribute("making",false);
+    	model.addAttribute("finish",false);
+    	System.out.println("進入taking");
+    	return "sFunction/orders/orderorders";
+	}
+    
+    @GetMapping("finish")
+	public String orderFinish(Model model) {
+    	model.addAttribute("finish",true);
+    	model.addAttribute("newOrder",false);
+    	model.addAttribute("taking",false);
+    	model.addAttribute("making",false);
+    	System.out.println("進入finish");
+    	return "sFunction/orders/orderorders";
+	}
+    
+    
+    //============================================
 	@PostMapping("getOne_For_Update")
 	public String getOne_For_Update(@RequestParam("orderId") String orderId, ModelMap model) {
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
@@ -110,6 +209,61 @@ public class SOrdersController {
 		return "sFunction/orders/listOneOrders"; // 修改成功後轉交listOneEmp.html
 	}
 	
+	@PostMapping("refundOrder")
+	public String creatRefundOrder(HttpServletRequest req,String orderId, ModelMap model) throws IOException {
+		System.out.println("進入1");
+		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
+		OrdersVO ordersVO =ordersSvc.getOneOrders(Integer.valueOf(orderId));
+		/*************************** 2.開始修改資料 *****************************************/
+		ordersVO.setPayState(2);
+		ordersVO.setOrderState(5);
+		ordersSvc.updateOrders(ordersVO);
+		System.out.println("修改成功2");
+		
+		RefundsVO refundsVO = new RefundsVO();
+		refundsVO.setOrdersVO(ordersVO);
+		refundsVO.setRefundState("N");
+		refundsVO.setRefundDollar(ordersVO.getTotalPrice());
+		
+		 LocalDate currentDate = LocalDate.now();
+         // 將 LocalDate 轉換為 java.sql.Date
+         java.sql.Date Date = java.sql.Date.valueOf(currentDate);
+		refundsVO.setCreationDate(Date);
+		try {
+			refundsSvc.addRefunds(refundsVO);
+		}catch(Exception e) {
+			System.err.println("e");
+		}
+		/*************************** 3.修改完成,準備轉交(Send the Success view) **************/
+		model.addAttribute("success", "- (申請成功)");
+		HttpSession session = req.getSession();
+		Object object =session.getAttribute("storeEmpLogin");	
+		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+		List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+		model.addAttribute("ordersListDataS",list);
+		return "sFunction/orders/select_page"; // 修改成功後轉交listOneEmp.html
+	}
+	
+	
+	@PostMapping("editDelayDesc")
+	public String editDelayDesc(HttpServletRequest req,String orderId,String message, ModelMap model) throws IOException {
+		System.out.println("進入21");
+		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 ************************/
+		OrdersVO ordersVO =ordersSvc.getOneOrders(Integer.valueOf(orderId));
+		/*************************** 2.開始修改資料 *****************************************/
+		ordersVO.setDelayDesc(message);
+		ordersSvc.updateOrders(ordersVO);
+		System.out.println("修改成功2");
+		
+		/*************************** 3.修改完成,準備轉交(Send the Success view) **************/
+		model.addAttribute("success", "- (申請成功)");
+		HttpSession session = req.getSession();
+		Object object =session.getAttribute("storeEmpLogin");	
+		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+		List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+		model.addAttribute("ordersListDataS",list);
+		return "sFunction/orders/select_page"; // 修改成功後轉交listOneEmp.html
+	}
 	
 	//複合查詢
 	@PostMapping("storeListOrders_ByCompositeQuery")

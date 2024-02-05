@@ -28,8 +28,8 @@
 <script>
 	$(document).ready(function() {
 		$('#example').DataTable({
-			"lengthMenu": [3 ,5, 10, 20, 50, 100],
-			"searching": true,  //搜尋功能, 預設是開啟
+			"lengthMenu": [5, 10, 20, 50, 100],
+			"searching": false,  //搜尋功能, 預設是開啟
 		    "paging": true,     //分頁功能, 預設是開啟
 		    "ordering": true,   //排序功能, 預設是開啟
 		    "language": {
@@ -70,7 +70,7 @@ body {
 <!-- 		 <h3><a class="navbar-brand" th:href="@{/cFunction/cEntrancePass}"><img th:src="@{/images/back1.gif}">to index<label th:text="${success}"></label></a></h3></div> -->
 <!-- </nav> -->
 
-<table id="example" class="display" style="width: 100%">
+<table id="example" class="display " style="width: 100% ;" >
   <thead >
 	<tr style="background-color:#CCCCFF">
 		<th>項次</th>
@@ -92,11 +92,11 @@ body {
 				<td th:text="${cartDetailVO.mealsVO.mealPrice}">單價</td>
 				<td th:text="${cartDetailVO.mealQty}">數量</td>
 				<td>
-					<button  th:if="${cartDetailVO.customizedDetailList}!=null" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<button  th:if="${cartDetailVO.customizedDetailList}!=null" type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal_'+${cartDetailVO.id}">
 					 明細
 					</button> 		
 									<!--彈窗明細 -->
-														<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal fade" th:id="'exampleModal_'+${cartDetailVO.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														  <div class="modal-dialog">
 														    <div class="modal-content">
 														      <div class="modal-header">
@@ -141,7 +141,7 @@ body {
 	<input type="hidden" name="totalPrice"  th:value="${totalPrice}">
 	<input type="hidden" name="storeId" th:value="${storeId}">
 	<button type="button"><a th:href="@{/cFunction/storeMenu}">繼續點餐</a></button>
-	 <button type="submit">結帳</button>
+	 <button th:if="${totalQty > 0}" type="submit">結帳</button>
 </form>
 </div>
 <div th:if="${cartDetailListData == null or cartDetailListData.isEmpty()}">
