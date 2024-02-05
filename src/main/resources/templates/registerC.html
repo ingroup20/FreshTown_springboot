@@ -55,12 +55,12 @@
 		<h3><b>所有欄位皆為必填欄位</b></h3>
 		<form th:action="@{insertC}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
 			
-			<div>
+<!--	    <div>  -->
 			<!--pk -->
-			<label>會員編號:</label>
+<!--			<label>會員編號:</label>
 			<input type="number" th:field="*{customerId}" onclick="hideContent('customerId.errors');"/><br/>
 			<span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="error" id="customerId.errors"></span>
-			</div>
+			</div> -->
 			
 			<div>
 			<label>會員暱稱:</label>

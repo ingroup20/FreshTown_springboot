@@ -58,13 +58,13 @@
 			<div>
 			<!--pk -->
 			<label>會員編號:</label>
-			<input type="number" th:field="*{customerId}" onclick="hideContent('customerId.errors');" readonly /><br/>
+			<input type="number" th:field="*{customerId}" style="border:0px ; font-weight: bold;" readonly /><br/>
 			<span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="error" id="customerId.errors"></span>
 			</div>
 			
 			<div>
 			<label>會員暱稱:</label>
-			<input type="text" th:field="*{customerNic}"  onclick="hideContent('customerNic.errors');" readonly /><br/>
+			<input type="text" th:field="*{customerNic}"  style="border:0px ; font-weight: bold;" readonly /><br/>
 			<span th:if="${#fields.hasErrors('customerNic')}" th:errors="*{customerNic}" class="error" id="customerNic.errors"></span>
 			</div>
 			
@@ -76,13 +76,13 @@
 			
 			<div>
             <label>會員密碼:</label>
-            <input type="password" th:field="*{customerPw}" onclick="hideContent('customerPw.errors');" readonly /><br/>
+            <input type="password" th:field="*{customerPw}" onclick="hideContent('customerPw.errors');"  /><br/>
             <span th:if="${#fields.hasErrors('customerPw')}" th:errors="*{customerPw}" class="error" id="customerPw.errors"></span>
             </div>
 			
 			<div>
 			<label>手機號碼:</label>
-			<input type="text" th:field="*{customerMob}" onclick="hideContent('customerMob.errors');" readonly /><br/>
+			<input type="text" th:field="*{customerMob}" style="border:0px ; font-weight: bold;" readonly /><br/>
 			<span th:if="${#fields.hasErrors('customerMob')}" th:errors="*{customerMob}" class="error" id="customerMob.errors"></span>
 			</div>
 			
