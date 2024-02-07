@@ -22,6 +22,11 @@
 		font-weight: bold;
 	}
 </style>
+<link rel="stylesheet" th:href="@{/cFunction/css/allBase.css} ">
+<link rel="stylesheet" th:href="@{/cFunction/css/mealMenu.css}">
+<script th:src="@{/js/allBase.js}"></script>
+<script th:src="@{/js/mealMenu.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -30,8 +35,18 @@
 		 <h3><a class="navbar-brand" th:href="@{/cFunction/cEntrancePass}"><img th:src="@{/images/back1.gif}" alt="返回">回查詢頁<label th:text="${success}"></label></a></h3></div>
 </nav>
 
+
 	<div align="center" th:fragment="listOneCustomer-div"> <!-- 此div被select_page.html第128行insert用 -->
-		<br><br><br><br><br>
+		<div class="header" style="background-color:#FFA500;"> 
+			<h1 class="header" align="center">會員資料</h1>
+		</div>
+		
+		<div class="section_item" align="center">
+		<div class="section_shadow">
+		
+		<div class="prd_card">
+		<br><br>	
+		<div class="prd_info">
 <!-- 		<span>會員編號:</span><span th:text="${customerVO.customerId}"></span><br/> -->
 		<span>會員暱稱:</span><span th:text="${customerVO.customerNic}"></span><br/>
 		<span>會員帳號:</span><span th:text="${customerVO.customerAccount}"></span><br/>
@@ -44,10 +59,21 @@
 		    <span th:case="1">停權</span>
 		    <span th:case="2">已註銷</span>
 		</div><br/>
-		<form method="post" th:action="@{/cFunction/customer/getOne_For_Update}" style="margin-bottom: 0px;">
-			<input type="submit" value="修改"> 
-			<input type="hidden" name="customerId" th:value="${customerVO.customerId}">
-		</form>		
+		</div>		
+		</div>		
+		
+        <div class="prd_card_footer">
+			<form method="post" th:action="@{/cFunction/customer/getOne_For_Update}" style="margin-bottom: 0px;">
+				<input type="hidden" name="customerId" th:value="${customerVO.customerId}">
+				<button type="submit" id="buyit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+                        修改
+                </button>
+			</form>	
+		</div>
+		
+		</div>
+		</div>		
+			
 	</div>
 
 
