@@ -1,173 +1,160 @@
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>會員狀態修改 - update_customer_input.html</title>
-
-<head ></head>
-<style type="text/css">
-	
-	button {
-		padding: 5px;
-	}
-	form {
-		display: table;
-	}
-	form div {
-		display: table-row;
-	}
-	label, input, span, select {
-		display: table-cell;
-		margin: 5px;
-		text-align: left;		
-	}
-	input[type=text], input[type=password], select, textarea {
-		width: 200px;
-		margin: 5px;
-	}
-	form div div {
-		display: table-cell;
-	}
-	.center {
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Homepage - 鮮城 FreshTown</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">     
+    <link rel="stylesheet" th:href="@{/cFunction/css/allBase.css} ">
+	<link rel="stylesheet" th:href="@{/cFunction/css/mealMenu.css}">
+	<script th:src="@{/js/allBase.js}"></script>
+	<script th:src="@{/js/mealMenu.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body class="body">
+    <nav class="nav ">
+        <div  class="nav ">
+           <span><a th:href="@{/cFunction/cEntrancePass}"><img id="logo" th:src="@{/images/logo.png}"></a></span>
+           <a class="logo title " th:href="@{/cFunction/cEntrancePass}">鮮城 FreshTown</a>
+            <button class="phone-btn">行動版導覽按鈕</button>
+            <ul class="nav">
+               <li class="nav_item li_item"><a class="title" th:href="@{/cFunction/cEntrancePass}">找店家</a></li>
+<!--                      <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> --> 
+               <li class="nav_item li_item menu">
+                    <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
+                    <ul class="dropdown_menu  -none">
+                       <li class="li_item ">
+<!--                        		<a href='searchPersonalInfo'>個人資料管理</a> -->
+                            <form method="post" th:action="searchPersonalInfo">
 
-<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>會員資料修改 - update_customer_input.html</h2>
-<!-- 		 <h3><a class="navbar-brand" th:href="@{/cFunction/cEntrancePass}"><img th:src="@{/images/back1.gif}">回前頁</a></h3></div> -->
-</nav>
+                                <input class="li_item " type="submit" value="個人資料管理">
+                                <input type="hidden" name="customerId" th:value="${customerVO.customerId}"> 
 
+                            </form><br>
+                        </li>
+                        <li class="li_item ">
+                            <form method="post" th:action="searchLikeStore">
+                                 <input style="background:transparent;border:none"   class="li_item " type="submit" value="收藏店家"> 
+                            </form><br>
+                        </li>
+                        <li class="li_item ">
+                            <form method="post" th:action="searchBlackStore">
+                                <input style="background:transparent;border:none"   class="li_item " type="submit" value=" 黑名單店家"> 
+                            </form><br>
+                        </li>
+                        <li class="li_item ">
+                            <form method="post" th:action="searchOrderHistory"> 
+                                <input style="background:transparent;border:none"   class="li_item " type="submit" value=" 下單紀錄"> 
+                            </form><br>
+                        </li>                      
+                    </ul>
+                </li>
+            </ul>
+            <div class="loginPart">
+
+	            <p><span th:text="${customerVO.customerNic}"></span>  您好!</p>
+	            <!--登出-->
+	            <button id="logout"  type="button">
+	                <a th:href="@{/}">登出</a>
+	            </button>
+					
+	            <!--購物車-->
+	            <div class="cart">
+               		 <a th:href="@{/cFunction/cartPage}">購物車</a>
+                </div>
+            </div>
+            <div class="nav_footer"></div>
+        </div>   
+    </nav>
+
+	<div class="header" style="background-color:#FFA500;"> 
+		<h1 class="header" align="center">會員資料修改</h1>
+	</div>
+
+
+    <section class="section">
 	<div align="center">
+	<div class="section_item" align="center">
+	<div class="section_shadow">
+		
+		<div class="prd_card">
+		<br>	
 		<form th:action="@{update}" method="post" th:object="${customerVO}" enctype="multipart/form-data">
+		<div class="prd_info">
 			
-<!-- 			<div> -->
 			<!--pk -->
 <!-- 			<label>會員編號:</label> -->
 			<input type="hidden" th:field="*{customerId}" readonly /><br/>
-<!-- 			<span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="error" id="customerId.errors"></span> -->
-<!-- 			</div> -->
 			
 			<div>
 			<label>會員暱稱:</label>
 			<input type="text" th:field="*{customerNic}"  onclick="hideContent('customerNic.errors');" /><br/>
-			<span th:if="${#fields.hasErrors('customerNic')}" th:errors="*{customerNic}" class="error" id="customerNic.errors"></span>
+			<label th:if="${#fields.hasErrors('customerNic')}" th:errors="*{customerNic}" class="error" id="customerNic.errors" style="color:red;"></label>
 			</div>
 			
 			<div>
 			<label>會員帳號:</label>
 			<input type="text" th:field="*{customerAccount}" onclick="hideContent('customerAccount.errors');" /><br/>
-			<span th:if="${#fields.hasErrors('customerAccount')}" th:errors="*{customerAccount}" class="error" id="customerAccount.errors"></span>
+			<label th:if="${#fields.hasErrors('customerAccount')}" th:errors="*{customerAccount}" class="error" id="customerAccount.errors" style="color:red;"></label>
 			</div>
 			
 			<div>
             <label>會員密碼:</label>
             <input type="password" th:field="*{customerPw}" onclick="hideContent('customerPw.errors');" /><br/>
-            <span th:if="${#fields.hasErrors('customerPw')}" th:errors="*{customerPw}" class="error" id="customerPw.errors"></span>
+            <label th:if="${#fields.hasErrors('customerPw')}" th:errors="*{customerPw}" id="customerPw.errors" style="color:red;"></label>
             </div>
 			
 			<div>
 			<label>手機號碼:</label>
 			<input type="text" th:field="*{customerMob}" style="border:0px ; font-weight: bold;" readonly /><br/>
-			<span th:if="${#fields.hasErrors('customerMob')}" th:errors="*{customerMob}" class="error" id="customerMob.errors"></span>
 			</div>
 			
 			<div>
             <label>手機認證:</label>
 			<input type="text" th:field="*{mobChecked}" style="border:0px ; font-weight: bold;" readonly /><br/>
-            <span th:if="${#fields.hasErrors('mobChecked')}" th:errors="*{mobChecked}" class="error" id="mobChecked.errors"></span>
             </div>
 			
 			<div>
 			<label>會員信箱:</label>
 			<input type="text" th:field="*{customerEmail}" onclick="hideContent('customerEmail.errors');" /><br/>
-			<span th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" class="error" id="customerEmail.errors"></span>
+			<label th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" class="error" id="customerEmail.errors" style="color:red;"></label>
 			</div>
 			
-			
-			<div>
-			<label>會員狀態:</label>
-			<div th:switch="${customerVO.customerState}" style="text-align: left;">
-			    <span th:case="0" style="border:0px ; font-weight: bold;"> 正常</span>
-			    <span th:case="1" style="border:0px ; font-weight: bold;"> 停權</span>
-			    <span th:case="2" style="border:0px ; font-weight: bold;"> 已註銷</span>
+						
+			<div th:switch="${customerVO.customerState}">
+		    <label>會員狀態:</label>
+			<input th:case="0" type="text" th:value="正常" style="border:0px ; font-weight: bold;" readonly />
+			<input th:case="1" type="text" th:value="停權" style="border:0px ; font-weight: bold;" readonly />
+			<input th:case="2" type="text" th:value="已註銷" style="border:0px ; font-weight: bold;" readonly />
+		    <input type="hidden" th:field="*{customerState}" onclick="hideContent('customerState.errors');" readonly />
 			</div>
-			<input type="hidden" th:field="*{customerState}" onclick="hideContent('customerState.errors');" readonly /><br/>
-			<span th:if="${#fields.hasErrors('customerState')}" th:errors="*{customerState}" class="error" id="customerState.errors"></span>
+			
+			<br>
 			</div>
 		
-			<div>
-				<div></div>
-				<div><button type="submit" id="submit"> 送出修改 </button></div>
-				<div></div>
+			<div class="prd_card_footer">
+				<button type="submit" id="buyit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+					送出修改
+				</button>
 			</div>		
 		</form>
+		</div>		
 	
 	</div>
+	</div>
+	</div>
+    </section>
 
+<footer class="footer">
+    <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
+    <p><a th:href="@{/sFunction}">後台入口</a></p>
+</footer>
 
 <!-- JavaScript part -->
 <script type="text/javascript">
 //清除提示信息
 function hideContent(d) {
      document.getElementById(d).style.display = "none";
-}
-
-//照片上傳-預覽用
-var filereader_support = typeof FileReader != 'undefined';
-if (!filereader_support) {
-	alert("No FileReader support");
-}
-acceptedTypes = {
-		'image/png' : true,
-		'image/jpeg' : true,
-		'image/gif' : true
-};
-function previewImage() {
-	var upfile1 = document.getElementById("upFiles");
-	upfile1.addEventListener("change", function(event) {
-		var files = event.target.files || event.dataTransfer.files;
-		for (var i = 0; i < files.length; i++) {
-			previewfile(files[i])
-		}
-	}, false);
-}
-function previewfile(file) {
-	if (filereader_support === true && acceptedTypes[file.type] === true) {
-		var reader = new FileReader();
-		reader.onload = function(event) {
-			var image = new Image();
-			image.src = event.target.result;
-			image.width = 100;
-			image.height = 75;
-			image.border = 2;
-			if (blob_holder.hasChildNodes()) {
-				blob_holder.removeChild(blob_holder.childNodes[0]);
-			}
-			blob_holder.appendChild(image);
-		};
-		reader.readAsDataURL(file);
-		document.getElementById('submit').disabled = false;
-	} else {
-		blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
-				+ "<br>" + "● ContentTyp: " + file.type
-				+ "<br>" + "● size: " + file.size + "bytes"
-				+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
-		document.getElementById('submit').disabled = true;
-	}
 }
 </script>
 
