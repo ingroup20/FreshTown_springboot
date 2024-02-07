@@ -1,52 +1,109 @@
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>員工資料 - listOneEmp.html</title>
-
-<head></head>
 <style type="text/css">
-	
-    span {
-		display: inline-block;
-		width: 150px;
-		text-align: left;
-		font-weight: bold;
-	}
+    body {
+        font-family: Arial, sans-serif;
+        margin-top: 60px; /* Adjust top margin to ensure navbar does not overlap content */
+    }
+    table {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.1);
+    }
+    th, td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .navbar {
+        background-color: #4CAF50;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        text-align: center;
+        z-index: 1000;
+    }
+    .navbar h2, .navbar h3 a {
+        color: white;
+        text-decoration: none;
+    }
+    .navbar h3 a:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>員工個人資料 - listOneEmp.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/sFunction/storeEmp/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3></div>
+    <div align="center">
+        <h2>員工個人資料 - listOneEmp.html</h2>
+        <h3><a class="navbar-brand" th:href="@{/sFunction/storeEmp/select_page}"><img th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a></h3>
+    </div>
 </nav>
 
-	<div align="center" th:fragment="listOneStoreEmp-div"> <!-- 此div被select_page.html第128行insert用 -->
-		<h3><span>查詢結果 :</span></h3>
-		<span>員工編號:</span><span th:text="${storeEmpVO.sEmpId}"></span><br/>
-		<span>員工姓名:</span><span th:text="${storeEmpVO.sEmpName}"></span><br/>
-		<span>庫存權限:</span><span th:text="${storeEmpVO.invPerm}"></span><br/>
-		<span>採購權限:</span><span th:text="${storeEmpVO.purPerm}"></span><br/>
-		<span>餐點權限:</span><span th:text="${storeEmpVO.manuPerm}"></span><br/>
-		<span>訂單權限:</span><span th:text="${storeEmpVO.orderPerm}"></span><br/>
-		<span>修改權限許可:</span><span th:text="${storeEmpVO.modifyPerm}"></span><br/>
-		<span>員工部門:</span><span th:text="${storeEmpVO.sEmpDeptno}"></span><br/>
-		<span>員工職稱:</span><span th:text="${storeEmpVO.sEmpTitle}"></span><br/>
-		<span>店家員工狀態:</span><span th:text="${storeEmpVO.sEmpState}"></span><br/>
-		
-	</div>
-
+<div align="center" th:fragment="listOneStoreEmp-div">
+    <h3>查詢結果 :</h3>
+    <table>
+        <tr>
+            <th>項目</th>
+            <th>資料</th>
+        </tr>
+        <tr>
+            <td>員工編號:</td>
+            <td th:text="${storeEmpVO.sEmpId}"></td>
+        </tr>
+        <tr>
+            <td>員工姓名:</td>
+            <td th:text="${storeEmpVO.sEmpName}"></td>
+        </tr>
+        <tr>
+            <td>庫存權限:</td>
+            <td th:text="${storeEmpVO.invPerm}"></td>
+        </tr>
+        <tr>
+            <td>採購權限:</td>
+            <td th:text="${storeEmpVO.purPerm}"></td>
+        </tr>
+        <tr>
+            <td>餐點權限:</td>
+            <td th:text="${storeEmpVO.manuPerm}"></td>
+        </tr>
+        <tr>
+            <td>訂單權限:</td>
+            <td th:text="${storeEmpVO.orderPerm}"></td>
+        </tr>
+        <tr>
+            <td>修改權限許可:</td>
+            <td th:text="${storeEmpVO.modifyPerm}"></td>
+        </tr>
+        <tr>
+            <td>員工部門:</td>
+            <td th:text="${storeEmpVO.sEmpDeptno}"></td>
+        </tr>
+        <tr>
+            <td>員工職稱:</td>
+            <td th:text="${storeEmpVO.sEmpTitle}"></td>
+        </tr>
+        <tr>
+            <td>店家員工狀態:</td>
+            <td th:text="${storeEmpVO.sEmpState}"></td>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>
