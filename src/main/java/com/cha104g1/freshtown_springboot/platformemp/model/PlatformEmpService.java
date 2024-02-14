@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cha104g1.freshtown_springboot.customer.model.CustomerVO;
+
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreRepository;
 import com.cha104g1.freshtown_springboot.likestore.model.LikeStoreVO;
 import com.cha104g1.freshtown_springboot.suporder.model.HibernateUtil_CompositeQuery_SupOrder;
@@ -65,9 +65,16 @@ public class PlatformEmpService implements PlatformEmpServiceIntf{
 		return null;
 	}
 	
+	@Override
 	public PlatformEmpVO getOnePlatformEmp(Integer pEmpId) {
 		Optional<PlatformEmpVO> optional = repository.findById(pEmpId);
 		return optional.orElse(null); 
+	}
+	
+	
+	@Override
+	public List<PlatformEmpVO> getPlatformEmpAll(Map<String, String[]> map) {
+		return HibernateUtil_CompositeQuery_PlatformEmp.getAllC(map, sessionFactory.openSession());
 	}
 	
 	public List<SupOrderVO> getAll(Map<String, String[]> map) {
@@ -81,5 +88,5 @@ public class PlatformEmpService implements PlatformEmpServiceIntf{
 		PlatformEmpVO  platformEmpLogin =repository.findByPEmpAccount(pEmpAccount);
 		return platformEmpLogin; 
 	}
-	
+
 }

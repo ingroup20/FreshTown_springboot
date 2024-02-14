@@ -1,120 +1,257 @@
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr"
+	data-theme="theme-default" data-template="vertical-menu-template-free"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>所有員工資料 - listAllEmp.html</title>
-<script th:src="@{/js/jquery-1.11.3.min.js}"></script>
-<!-- 左側jquery為table分頁用 -->
-<head></head>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<!-- ●●js  for jquery datatables 用 -->
-<script
-	src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-<!-- ●●js  for jquery datatables 用 -->
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.13.5/css/dataTables.jqueryui.min.css" />
-<!-- ●●css for jquery datatables 用 -->
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<title>平台後台-首頁</title>
+<meta name="description" content="" />
 
-<!-- ●● jquery datatables 設定 -->
-<script>
-	$(document)
-			.ready(
-					function() {
-						$('#example')
-								.DataTable(
-										{
-											"lengthMenu" : [ 3, 5, 10, 20, 50,
-													100 ],
-											"searching" : true, //搜尋功能, 預設是開啟
-											"paging" : true, //分頁功能, 預設是開啟
-											"ordering" : true, //排序功能, 預設是開啟
-											"language" : {
-												"processing" : "處理中...",
-												"loadingRecords" : "載入中...",
-												"lengthMenu" : "顯示 _MENU_ 筆結果",
-												"zeroRecords" : "沒有符合的結果",
-												"info" : "顯示第 _START_ 至 _END_ 筆結果，共<font color=red> _TOTAL_ </font>筆",
-												"infoEmpty" : "顯示第 0 至 0 筆結果，共 0 筆",
-												"infoFiltered" : "(從 _MAX_ 筆結果中過濾)",
-												"infoPostFix" : "",
-												"search" : "搜尋:",
-												"paginate" : {
-													"first" : "第一頁",
-													"previous" : "上一頁",
-													"next" : "下一頁",
-													"last" : "最後一頁"
-												},
-												"aria" : {
-													"sortAscending" : ": 升冪排列",
-													"sortDescending" : ": 降冪排列"
-												}
-											}
-										});
-					});
-</script>
-<style type="text/css">
-body {
-	margin: 1rem 12rem 2rem 12rem;
-}
-</style>
+<!-- Freicon -->
+<link rel="shortcut icon" type="image/png"
+	th:href="@{/backhome/img/freshlogo.png}" />
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
+	rel="stylesheet">
+
+<!-- Icons. Uncomment required icon fonts -->
+<link rel="stylesheet" th:href="@{/backhome/fonts/boxicons.css}" />
+
+<!-- Core CSS -->
+<link rel="stylesheet" th:href="@{/backhome/css/core.css}"
+	class="template-customizer-core-css" />
+<link rel="stylesheet" th:href="@{/backhome/css/theme-default.css}"
+	class="template-customizer-theme-css" />
+<link rel="stylesheet" th:href="@{/backhome/css/demo.css}" />
+
+<!-- Vendors CSS -->
+<link rel="stylesheet"
+	th:href="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
 </head>
 <body>
+	<!-- Layout wrapper -->
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
+			<aside id="layout-menu"
+				class="layout-menu menu-vertical menu bg-menu-theme">
+				<div class="app-brand demo">
+					<a th:href="@{index}" class="app-brand-link"> <img
+						class="img-fluid" width="160"
+						th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">
+					</a> <a href="javascript:void(0);"
+						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+						<i class="bx bx-chevron-left bx-sm align-middle"></i>
+					</a>
+				</div>
 
-	<nav
-		class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		<div align="center">
-			<h2>所有員工資料 - listAllEmp.html</h2>
-			<h3>
-				<a class="navbar-brand" th:href="@{/pFunction/platformEmp/select_page}"><img
-					th:src="@{/images/back1.gif}">回查詢頁<label th:text="${success}"></label></a>
-			</h3>
+				<div class="menu-inner-shadow"></div>
+
+				<ul class="menu-inner py-1">
+					<!-- Dashboard -->
+					<li class="menu-item"><a th:href="@{index}" class="menu-link">
+							<i class="menu-icon tf-icons bx bx-home-circle"></i>
+							<div data-i18n="Analytics">鮮城後台首頁</div>
+					</a></li>
+					<li class="menu-header small text-uppercase"><span
+						class="menu-header-text">Client</span></li>
+
+					<li class="menu-item"><a
+						th:href="@{/pFunction/customer/select_page}" class="menu-link">
+							<i class="menu-icon tf-icons bx bx-user-circle"></i>
+							<div data-i18n="store">一般會員管理</div>
+					</a></li>
+					<!-- Store -->
+					<li class="menu-header small text-uppercase"><span
+						class="menu-header-text">Store</span></li>
+
+					<li class="menu-item"><a
+						th:href="@{/pFunction/orders/select_page}"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons bx bx-detail"></i>
+							<div data-i18n="store">查看訂單總表</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								th:href="@{/pFunction/atm/select_page}" class="menu-link"> <i
+									class="menu-icon"></i>
+									<div data-i18n="store">匯款管理</div>
+							</a></li>
+							<li class="menu-item"><a
+								th:href="@{/pFunction/refunds/select_page}" class="menu-link">
+									<i class="menu-icon"></i>
+									<div data-i18n="client">退款作業</div>
+							</a></li>
+						</ul></li>
+					<li class="menu-item"><a
+						th:href="@{/pFunction/stores/select_page}" class="menu-link">
+							<i class="menu-icon tf-icons bx bx-user-circle"></i>
+							<div data-i18n="store">店家會員管理</div>
+					</a></li>
+					<li class="menu-item"><a href="#" class="menu-link"> <i
+							class="menu-icon tf-icons bx bx-dock-top"></i>
+							<div data-i18n="store">店家帳號審核</div>
+					</a></li>
+
+					<!-- <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                <div data-i18n="question-mark">忘記密碼</div>
+              </a>
+
+              <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-exit"></i>
+                <div data-i18n="Exit">店家登入</div>
+              </a> -->
+
+					<!-- Fresh Town -->
+					<li class="menu-header small text-uppercase"><span
+						class="menu-header-text">Fresh Town</span></li>
+
+					<li class="menu-item"><a
+						th:href="@{/pFunction/customer/select_page}" class="menu-link">
+							<i class="menu-icon tf-icons bx bx-user-circle"></i>
+							<div data-i18n="Account Settings">員工帳號管理</div>
+					</a> <!-- <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div data-i18n="Authentications">設定權限</div>
+              </a> --> <a href="#" class="menu-link"> <i
+							class="menu-icon tf-icons bx bx-support"></i>
+							<div data-i18n="Support">諮詢線上客服</div>
+					</a> <a th:href="@{logout}" class="menu-link"> <i
+							class="menu-icon tf-icons bx bx-exit"></i>
+							<div data-i18n="Exit">登出</div>
+					</a></li>
+				</ul>
+			</aside>
+			<!-- / Menu -->
+
+			<!-- Layout container -->
+			<div class="layout-page">
+
+				<!-- Content wrapper -->
+				<div class="content-wrapper">
+
+					<!-- Content -->
+
+					<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span class="text-muted fw-light">店家後台首頁 /</span> 店家員工管理
+						</h4>
+
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-pills flex-column flex-md-row mb-3">
+									<li class="nav-item"><a class="nav-link"
+										th:href="@{/pFunction/platformEmp/select_page}"> 查詢</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href='listAllPlatformEmp'> 員工列表</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href='addPlatformEmp'> 新增員工</a></li>
+								</ul>
+								<div class="card">
+									<div class="table-responsive text-nowrap">
+										<table class="table table-striped" id="example">
+											<thead>
+												<tr>
+													<th>員工編號</th>
+													<th>員工姓名</th>
+													<th>員工信箱</th>
+													<th>員工權限</th>
+													<th>員工狀態</th>
+
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<th:block th:each="platformEmpVO : ${platformEmpListData}">
+													<tr>
+														<td th:text="${platformEmpVO.pEmpId}"></td>
+														<td th:text="${platformEmpVO.pEmpName}"></td>
+														<td th:text="${platformEmpVO.pEmpEmail}"></td>
+														<td th:text="${platformEmpVO.pEmpPerm}"></td>
+														<td th:text="${platformEmpVO.pEmpState}"></td>
+
+														<td>
+															<form method="post"
+																th:action="@{/pFunction/platformEmp/getOne_For_Update}"
+																style="margin-bottom: 0px;">
+																<input type="submit" value="修改"> <input
+																	type="hidden" name="pEmpId"
+																	th:value="${platformEmpVO.pEmpId}">
+															</form>
+														</td>
+													</tr>
+												</th:block>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!--/ Striped Rows -->
+							</div>
+						</div>
+					</div>
+					<!-- / Content -->
+
+
+					<!-- Footer -->
+					<footer class="content-footer footer bg-footer-theme">
+						<div
+							class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+							<div class="mb-2 mb-md-0">
+								©
+								<script>
+									document.write(new Date().getFullYear());
+								</script>
+								, made with ❤️ by <a href="https://themeselection.com"
+									target="_blank" class="footer-link fw-bolder">Tibame Cha104
+									Team1</a>
+							</div>
+						</div>
+					</footer>
+					<!-- / Footer -->
+
+					<div class="content-backdrop fade"></div>
+				</div>
+				<!-- Content wrapper -->
+			</div>
+			<!-- / Layout page -->
+
+			<!-- Overlay -->
+			<div class="layout-overlay layout-menu-toggle"></div>
 		</div>
-	</nav>
+		<!-- / Layout wrapper -->
 
-	<table id="example" class="display" style="width: 100%">
-		<thead>
-			<tr style="background-color: #CCCCFF">
-				<th>計數</th>
-				<th>員工編號</th>
-				<th>員工姓名</th>
-				<th>員工信箱</th>
-				<th>員工權限</th>
-				<th>員工狀態</th>
-				<th></th> 
-			</tr>
-		</thead>
+		<!-- Helpers -->
+		<script th:src="@{/backhome/js/helpers.js}"></script>
+		<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+		<script th:src="@{/backhome/js/config.js}"></script>
+		<!-- build:js assets/vendor/js/core.js -->
+		<script th:src="@{/backhome/libs/jquery/jquery.js}"></script>
+		<script th:src="@{/backhome/libs/popper/popper.js}"></script>
+		<script th:src="@{/backhome/js/bootstrap.js}"></script>
+		<script
+			th:src="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
 
-		<tbody>
-			<th:block th:each="platformEmpVO, platformEmpVOStat : ${platformEmpListData}">
-				<tr>
-					<td th:text="${platformEmpVOStat.count}"></td>
-					<td th:text="${platformEmpVO.pEmpId}"></td>
-					<td th:text="${platformEmpVO.pEmpName}"></td>
-					<td th:text="${platformEmpVO.pEmpEmail}"></td>
-					<td th:text="${platformEmpVO.pEmpPerm}"></td>
-					<td th:text="${platformEmpVO.pEmpState}"></td>
-					<td>
-						<form method="post" th:action="@{/pFunction/platformEmp/getOne_For_Update}"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden"
-								name="pEmpId" th:value="${platformEmpVO.pEmpId}">
-						</form>
-					</td>
-				</tr>
-			</th:block>
-		</tbody>
-	</table>
+		<script th:src="@{/backhome/js/menu.js}"></script>
 
+		<!-- Main JS -->
+		<script th:src="@{/backhome/js/main.js}"></script>
+
+		<!-- Page JS -->
+
+		<script th:src="@{/backhome/js/form-basic-inputs.js}"></script>
+
+		<!-- Place this tag in your head or just before your close body tag. -->
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
