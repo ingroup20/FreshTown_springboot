@@ -21,4 +21,6 @@ public interface StoreEmpServiceIntf {
 
 	List<StoreEmpVO> getStoreEmpVOsByCompositeQuery(Map<String, String[]> map);
 
+	List<StoreEmpVO> getAll(Map<String, String[]> map);
+
 }

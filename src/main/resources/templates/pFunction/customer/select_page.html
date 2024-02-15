@@ -11,7 +11,7 @@ xmlns:th="http://www.thymeleaf.org">
     name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-    <title>店家後台-首頁</title>
+    <title>平台後台-首頁</title>
     <meta name="description" content="" />
 
     <!-- Freicon -->
@@ -46,12 +46,12 @@ xmlns:th="http://www.thymeleaf.org">
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-	            <a th:href="@{index}" class="app-brand-link">
-	              <img class="img-fluid" width="160" th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">            
-	            </a>
-	            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-	              <i class="bx bx-chevron-left bx-sm align-middle"></i>
-	            </a>
+            <a th:href="@{index}" class="app-brand-link">
+              <img class="img-fluid" width="160" th:src="@{/backhome/img/freshlogo1.png}" alt="Icon">            
+            </a>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
           </div>
 
           <div class="menu-inner-shadow"></div>
@@ -59,261 +59,191 @@ xmlns:th="http://www.thymeleaf.org">
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a th:href="@{/sFunction/sEntrancePass}" class="menu-link">
+              <a th:href="@{index}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">店家後台首頁</div>
+                <div data-i18n="Analytics">鮮城後台首頁</div>
               </a>
             </li>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Client</span>
+            </li>
+            
+            <li class="menu-item">
 
-            <!-- Inventory & Purchasing -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Inventory&Purchasing</span></li>
-              
-              <li class="menu-item"> 
-		                <a href="#" class="menu-link menu-toggle">
-		                   <i class="menu-icon tf-icons bx bx-store"></i>
-		                   <div data-i18n="store">採購作業</div>
-		                </a>
-                <ul class="menu-sub">
-                  	<li class="menu-item">
-	                    <a th:href="@{/sFunction/suporder/supOrderMain}" class="menu-link">
-	                    <i class="menu-icon"></i>
-	                    <div data-i18n="store">管理採購單</div>
-	                    </a>
-                  	</li>
-                  	<li class="menu-item">
-	                    <a th:href="@{/sFunction/supplier/test}" class="menu-link">
-	                    <i class="menu-icon"></i>
-	                    <div data-i18n="client">管理供應商</div>
-	                   </a>
-                  	</li>
-                 </ul>
-               </li>
-
-               <li class="menu-item"> 
-	                <a href="#" class="menu-link menu-toggle">
-	                    <i class="menu-icon tf-icons bx bx-package"></i>
-	                    <div data-i18n="store">庫存作業</div>
-	                 </a>
-                <ul class="menu-sub">
-                   <li class="menu-item">
-	                  <a href="#" class="menu-link">
-	                    <i class="menu-icon"></i>
-	                    <div data-i18n="store">管理物料</div>
-	                  </a>
-                   </li>
-                   <li class="menu-item">
-	                    <a href="#" class="menu-link">
-	                    <i class="menu-icon"></i>
-	                    <div data-i18n="client">領取庫存</div>
-	                   </a>
-                   </li>
-                   <li class="menu-item">
-	                    <a href="#" class="menu-link">
-	                    <i class="menu-icon"></i>
-	                    <div data-i18n="client">查詢庫存異動紀錄</div>
-	                   </a>
-                   </li>
-                 </ul>
-               </li>
-              <!-- Order-->
-               <li class="menu-header small text-uppercase"><span class="menu-header-text">Order</span></li>
-
- <!--管理訂單        -->             
-				<li class="menu-item">
-					<a th:href="@{/sFunction/orders/select_page}" class="menu-link"> 
-					    <i class="menu-icon tf-icons bx bx-receipt"></i>
-							<div data-i18n="orders">管理訂單</div>
-<!-- 							<div data-i18n="store"> -->
-<!-- 								<form class="menu-link" method="post" th:action="manageOrders"> -->
-<!-- 									<input type="submit" value=" 管理訂單"> -->
-<!-- 								</form> -->
-<!-- 							</div> -->
-					      </a> 
-					   </li>
-                    <li class="menu-item">
-  					  <a href="#" class="menu-link" th:onclick="submitForm('orderOrders')">
-                        <i class="menu-icon tf-icons bx bx-sort-up"></i>
-                           <div data-i18n="store">顯示訂單排程</div>
-                      </a>
-                   </li>
-              
-                  
-             <!-- Meals-->
-              <li class="menu-header small text-uppercase"> <span class="menu-header-text">Meals</span></li>
-              
-              <li class="menu-item">
-	                <a th:href="@{/sFunction/meals/select_page}" class="menu-link">
-	                <i class="menu-icon tf-icons bx bx-restaurant"></i>
-	                <div data-i18n="Authentications">管理餐點</div>
-	                </a>
-              </li>
-
-      
+                 <a th:href="@{/pFunction/customer/select_page}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="store">一般會員管理</div>
+                 </a>
+            </li>
             <!-- Store -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Store</span></li>
-
-             <li class="menu-item">
-                  <a href="#" class="menu-link" th:onclick="submitForm('storeInfo')">                 
-	                   <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
-	                   <div data-i18n="store">店家資料管理</div>
+              
+              <li class="menu-item"> 
+                <a th:href="@{/pFunction/orders/select_page}" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="store">查看訂單總表</div>
                  </a>
-<!--                         <form class="menu-link" method="post" th:action="storeInfo">  -->
-<!--                           <input type="submit" value=" 店家資料管理">  -->
-<!--                         </form> -->
-             </li>
-              <li class="menu-item">
-	              <a href="#" class="menu-link">
-	                <i class="menu-icon tf-icons bx bx-message-dots"></i>
-	                <div data-i18n="Account Settings">查看評論</div>
-	              </a>
-              </li>
+                 <ul class="menu-sub">
+                  <li class="menu-item">
+                    <a th:href="@{/pFunction/atm/select_page}" class="menu-link">
+                    <i class="menu-icon"></i>
+                    <div data-i18n="store">匯款管理</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a th:href="@{/pFunction/refunds/select_page}" class="menu-link">
+                    <i class="menu-icon"></i>
+                    <div data-i18n="client">退款作業</div>
+                   </a>
+                  </li>
+                 </ul>
+               </li>
+               <li class="menu-item">
+                 <a th:href="@{/pFunction/stores/select_page}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="store">店家會員管理</div>
+                 </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="store">店家帳號審核</div>
+                 </a>
+                </li>
 
-             <li class="menu-item">
-	               <a href="@{/sFunction/storeEmp/select_page}" class="menu-link">
-	                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-	                 <div data-i18n="store">店家員工帳號管理</div>
-	              </a>
-             </li>
-             <li class="menu-item">
-	              <a href="#" class="menu-link">
-	              <i class="menu-icon tf-icons bx bx-support"></i>
-	              <div data-i18n="Support">諮詢線上客服</div>
-	              </a>
-             </li>
-             <li class="menu-item">
-	              <a href="#" class="menu-link">
-	                <i class="menu-icon tf-icons bx bx-exit"></i>
-	              <div data-i18n="Exit">登出</div>
-	              </a>
-              </li>
+              <!-- <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                <div data-i18n="question-mark">忘記密碼</div>
+              </a>
+
+              <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-exit"></i>
+                <div data-i18n="Exit">店家登入</div>
+              </a> -->
+            
+            <!-- Fresh Town -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Fresh Town</span></li>
+
+            <li class="menu-item">
+              <a th:href="@{/pFunction/customer/select_page}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Account Settings">員工帳號管理</div>
+              </a>
+              <!-- <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div data-i18n="Authentications">設定權限</div>
+              </a> -->
+              <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-support"></i>
+              <div data-i18n="Support">諮詢線上客服</div>
+            </a>
+            <a th:href="@{logout}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-exit"></i>
+              <div data-i18n="Exit">登出</div>
+            </a>
+            </li>
+          </ul>
         </aside>
-        
         <!-- / Menu -->
 
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
-<!--          <nav -->
-<!--             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" -->
-<!--             id="layout-navbar" -->
-<!--           > -->
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
-              </a>
-            </div>
+       <!-- Layout container -->
+			<div class="layout-page">
 
-<!--             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse"> -->
-              <!-- Search -->
-<!--               <div class="navbar-nav align-items-center"> -->
-<!--                 <div class="nav-item d-flex align-items-center"> -->
-<!--                   <i class="bx bx-search fs-4 lh-0"></i> -->
-<!--                   <input -->
-<!--                     type="text" -->
-<!--                     class="form-control border-0 shadow-none" -->
-<!--                     placeholder="Search..." -->
-<!--                     aria-label="Search..." -->
-<!--                   /> -->
-<!--                 </div> -->
-<!--               </div> -->
-              <!-- /Search -->
-<!--               <ul class="navbar-nav flex-row align-items-center ms-auto"> -->
-                <!-- User -->
-<!--                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"> -->
-<!--                     <div class="avatar avatar-online"> -->
-<!--                        <img th:src="@{/backhome/img/user-profile.png}" class="w-px-40 h-auto rounded-circle" /> -->
-<!--                     </div> -->
-<!--                  </a>            -->
-                <!--/ User -->
-<!--               </ul> -->
-<!--             </div> -->
-<!--           </nav> -->
+				<!-- Content wrapper -->
+				<div class="content-wrapper">
 
-          <!-- / Navbar -->
-                 <!-- Content wrapper首頁${defaultPage}======================================================================================== -->
+					<!-- Content -->
 
-          <div class="content-wrapper"> 
-<!--           th:if="${defaultPage} -->
-                        <!-- Content -->
-<!-- <div th:fragment="select_page-div"> -->
-<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
-		 <div align="center"> <h2>會員資料管理 - select_page.html</h2>
-		 <h3><a class="navbar-brand" th:href="@{/}"><img th:src="@{/images/back1.gif}">回index.html</a></h3></div>
-</nav>
+					<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span class="text-muted fw-light">店家後台首頁 /</span> 店家員工管理
+						</h4>
 
-	<h4><span>資料查詢:</span></h4>
-	<!-- 錯誤表列 -->
-	<div class="errorblock" th:utext="${errorMessage}">${errorMessage}</div><br>
-	<div class="a">
-	  <ul>
-		<li><h5><a href='listAllCustomer'>List</a> all Customer. <br><br></h5></li>
-
-		<li>
-			<form method="post" th:action="@{getOne_For_Display}">
-				輸入會員編號:
-				<input type="text" name="customerId" th:value="${param.customerId}" > 
-				<input type="submit" value="送出"> 
-			</form><br>
-		</li>
-
-		
-		
-		
-		<li><form method="post" th:action="@{getOne_For_Display}">
-				選擇會員編號:
-				<select name="customerId">
-				     <option th:each="customerVO : ${customerListData}" th:value="${customerVO.customerId}" th:text="${customerVO.customerId}" />
-			    </select>
-				<input type="submit" value="送出">
-			</form><br>
-		</li>
-		
-		
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-pills flex-column flex-md-row mb-3">
+									<li class="nav-item"><a class="nav-link active"
+										href="javascript:void(0);"> 查詢</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href='listAllCustomer'> 會員列表</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href='addCustomer'> 新增會員</a></li>
+								</ul>
+								<div class="card mb-4">
+									<!-- Customer -->
+									<div class="card-body">
 
 
-		
-		
-		
-		
-<!--  萬用複合查詢-以下欄位-可隨意增減 -->
-  
-  <li>   
-    <form method="post" th:action="@{listCustomer_ByCompositeQuery}">
-        <font color=blue>萬用複合查詢:</font><br>
-        輸入會員編號: 
-        <input type="text" name="customerId" th:value="${param.customerId}" > 
-        輸入會員姓暱稱: 
-        <input type="text" name="customerNic" value="nic_91"><br>
-        <input type="submit" value="送出"> 
-           
-        
-     
-     </form>
-  </li>
-</ul>	
-	
-      <h4><span>會員管理</span></h4>
-	  <ul>
-		  <li><h5><a href='addCustomer'>Add</a> a new Customer.</h5></li>
-	  </ul>
-	</div>
-    
-    <!-- 旗標getOne_For_Display見EmpnoController.java的第74行 -->
-    <div class="b" th:if="${getOne_For_Display}">
-        <!--使用listOneEmp.html網頁的listOneEmp-div片段--> <!-- 見listOneEmp.html的第35行的th:fragment="listOneEmp-div" --> <!-- 使用th:replace也可 -->
-        <div th:insert="~{/pFunction/customer/listOneCustomer :: listOneCustomer-div}"></div>
-    </div>
-   
-     
+										<div class="mb-3">
+											<li>
+												<form method="post" th:action="@{getOne_For_Display}">
+													輸入員工編號: <input type="number" name="customerId"
+														th:value="${param.customerId}"> <input type="submit"
+														value="送出">
+												</form> <br>
+											</li>
+
+
+
+
+											<li>
+												<form method="post" th:action="@{getOne_For_Display}">
+													選擇會員編號: <select name="customerId">
+														<option th:each="CustomerVO : ${CustomerListData}"
+															th:value="${CustomerVO.customerId}"
+															th:text="${CustomerVO.customerId}" />
+													</select> <input type="submit" value="送出">
+												</form> <br>
+											</li>
+										</div>
+										<div class="mb-3">
+											<!--  萬用複合查詢-以下欄位-可隨意增減 -->
+
+											
+											<li>
+												<form method="post"
+													th:action="@{listCustomer_ByCompositeQuery}">
+													<font color=blue>萬用複合查詢:</font><br> 輸入會員編號: <input
+														type="text" name="customerId" value="1"><br>
+													輸入會員暱稱: <input type="text" name="customerNic" value=""><br>
+													<input type="submit" value="送出">
+
+												</form>
+											</li>
+											</ul>
+
+											
+										</div>
+
+										<!-- 旗標getOne_For_Display見EmpnoController.java的第74行 -->
+										<div class="b" th:if="${getOne_For_Display}">
+											<!--使用listOneEmp.html網頁的listOneEmp-div片段-->
+											<!-- 見listOneEmp.html的第35行的th:fragment="listOneEmp-div" -->
+											<!-- 使用th:replace也可 -->
+											<div
+												th:insert="~{/pFunction/customer/listOneCustomer :: listOneCustomer-div}"></div>
+										</div>
+									</div>
+
+
+								</div>
+								<!-- /customer -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- / Content -->
+                    
+
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
-	                  ©
-	                  <script>
-	                    document.write(new Date().getFullYear());
-	                  </script>
-	                  , made with ❤️ by
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with ❤️ by
                   <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Tibame Cha104 Team1</a>
                 </div>
               </div>
@@ -325,71 +255,32 @@ xmlns:th="http://www.thymeleaf.org">
           <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
-         <!-- Overlay -->
-       <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
-
-
-
-           
-           
-           
-           
-           
-           
-<!-- ======================================================================================== -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Helpers -->
+    
+        <!-- Helpers -->
     <script th:src="@{/backhome/js/helpers.js}"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script th:src="@{/backhome/js/config.js}"></script>  
+    <script th:src="@{/backhome/js/config.js}"></script>
     <!-- build:js assets/vendor/js/core.js -->
     <script th:src="@{/backhome/libs/jquery/jquery.js}"></script>
     <script th:src="@{/backhome/libs/popper/popper.js}"></script>
     <script th:src="@{/backhome/js/bootstrap.js}"></script>
     <script th:src="@{/backhome/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
     <script th:src="@{/backhome/js/menu.js}"></script>
- 	<!-- Vendors JS -->
-<!--     <script src="@{/backhome/libs/apex-charts/apexcharts.js}"></script> -->
+
     <!-- Main JS -->
     <script th:src="@{/backhome/js/main.js}"></script>
+
     <!-- Page JS -->
+
     <script th:src="@{/backhome/js/form-basic-inputs.js}"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-   <script th:inline="javascript"> 
-    function submitForm(action) {
-        var form = document.createElement('form');
-        form.setAttribute('method', 'post');
-        form.setAttribute('action', action);
-        
-        var hiddenField = document.createElement('input');
-        hiddenField.setAttribute('type', 'hidden');
-        hiddenField.setAttribute('name', 'parameterName'); // Replace 'parameterName' with your actual parameter name
-        hiddenField.setAttribute('value', 'parameterValue'); // Replace 'parameterValue' with your actual parameter value
-        form.appendChild(hiddenField);
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-    </script>
-    
 </body>
 </html>

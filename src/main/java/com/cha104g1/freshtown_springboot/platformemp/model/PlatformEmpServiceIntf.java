@@ -23,4 +23,6 @@ public interface PlatformEmpServiceIntf {
 
 	List<PlatformEmpVO> getPlatformEmpVOsByCompositeQuery(Map<String, String[]> map);
 
+	List<PlatformEmpVO> getPlatformEmpAll(Map<String, String[]> map);
+
 }

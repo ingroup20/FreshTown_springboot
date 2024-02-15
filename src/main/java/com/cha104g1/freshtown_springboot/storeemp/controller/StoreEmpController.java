@@ -2,14 +2,19 @@ package com.cha104g1.freshtown_springboot.storeemp.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +28,11 @@ import com.cha104g1.freshtown_springboot.storeemp.model.StoreEmpService;
 
 @Controller
 @RequestMapping("/sFunction/storeEmp")
-public class StoreEmpcontroller {
+public class StoreEmpController {
 	
 	@Autowired
 	StoreEmpService storeEmpSvc;
-	private String sEmpId;
+
 	
 	
 	@GetMapping("addStoreEmp")
@@ -88,6 +93,46 @@ public class StoreEmpcontroller {
 		model.addAttribute("storeEmpVO", storeEmpVO);
 		return "sFunction/storeEmp/listOneStoreEmp"; // 修改成功後轉交listOneEmp.html
 	}
+	
+	
+	// 去除BindingResult中某個欄位的FieldError紀錄
+			public BindingResult removeFieldError(StoreEmpVO storeEmpVO, BindingResult result, String removedFieldname) {
+				List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
+						.filter(fieldname -> !fieldname.getField().equals(removedFieldname))
+						.collect(Collectors.toList());
+				result = new BeanPropertyBindingResult(storeEmpVO, "storeEmpVO");
+				for (FieldError fieldError : errorsListToKeep) {
+					result.addError(fieldError);
+				}
+				return result;
+			}
+			
+			//複合查詢
+			@PostMapping("listStoreEmp_ByCompositeQuery")
+			public String listAllStoreEmp(HttpServletRequest req, Model model) {
+				Map<String, String[]> map = req.getParameterMap();
+				for (Map.Entry<String, String[]> entry : map.entrySet()) {
+				    String key = entry.getKey();
+				    String[] values = entry.getValue();
+
+				    System.out.print("Key: " + key + ", Values: ");
+				    
+				    if (values != null) {
+				        for (String value : values) {
+				            System.out.print(value + " ");
+				        }
+				    }
+				    
+				    System.out.println(); // 换行
+				}
+
+				List<StoreEmpVO> list = storeEmpSvc.getAll(map);
+				model.addAttribute("storeEmpListData", list); // for listAllEmp.html 第85行用
+				for(StoreEmpVO rs: list) {
+					System.out.println(rs.getsEmpId());
+				}
+				return "sFunction/storeEmp/listAllStoreEmp";
+			}
 
 	
 	
