@@ -129,7 +129,7 @@ public class OrdersVO implements java.io.Serializable{
 //	@Future(message="日期必須是在今日(不含)之後")
 //	@Past(message="日期必須是在今日(含)之前")
 //	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
-	private Date payDate;
+	private Timestamp payDate;
 	
 	@Column(name="payMethod")
 //	@NotEmpty(message="付款方式: 請勿空白")
@@ -243,10 +243,10 @@ public class OrdersVO implements java.io.Serializable{
 	public void setRemitState(String remitState) {
 		this.remitState = remitState;
 	}
-	public Date getPayDate() {
+	public Timestamp getPayDate() {
 		return payDate;
 	}
-	public void setPayDate(Date payDate) {
+	public void setPayDate(Timestamp payDate) {
 		this.payDate = payDate;
 	}
 	public Integer getPayMethod() {

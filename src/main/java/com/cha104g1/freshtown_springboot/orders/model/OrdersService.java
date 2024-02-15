@@ -55,6 +55,10 @@ public class OrdersService {
 		return repository.findAllByStoreId(storeId);
 	}
 	
+	public List<OrdersVO> getAllTodayByStore(Integer storeId) {
+		return repository.findAllTodayByStoreId(storeId);
+	}
+	
 	public List<OrdersVO> getAllByCustomer(Integer CustomerId) {
 		return repository.findAllByCustomerId(CustomerId);
 	}

@@ -20,7 +20,7 @@
 <!--                 <li class="nav_item "><input class="title" th:action="${searchStores}" value="地圖搜尋"></li> -->
                 <li class="nav_item ">
                     <a class="nav_link title" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
-                    <ul class="dropdown_menu ">
+                    <ul class="dropdown_menu -none">
                         <li>
                             <form method="post" th:action="searchPersonalInfo">
                                 <input type="submit" value="個人資料管理"> 
@@ -127,10 +127,10 @@
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">加入購物車</h5>
+			        <h5 class="modal-title" id="staticBackdropLabel" style="font-size:2.5rem">加入購物車</h5>
 <!-- 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
 			      </div>
-			      <div class="modal-body">
+			      <div class="modal-body" style="font-size:2rem">
 			        操作成功
 			      </div>
 			      <div class="modal-footer">

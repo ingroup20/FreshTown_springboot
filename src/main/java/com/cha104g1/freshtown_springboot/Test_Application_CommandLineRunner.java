@@ -15,6 +15,7 @@ import com.cha104g1.freshtown_springboot.material.model.service.MaterialService;
 import com.cha104g1.freshtown_springboot.meals.model.MealsService;
 import com.cha104g1.freshtown_springboot.orderdetail.model.OrderDetailService;
 import com.cha104g1.freshtown_springboot.orders.model.OrdersService;
+import com.cha104g1.freshtown_springboot.orders.model.OrdersVO;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsService;
 import com.cha104g1.freshtown_springboot.refunds.model.RefundsVO;
 
@@ -57,26 +58,15 @@ public class Test_Application_CommandLineRunner implements CommandLineRunner {
     public void run(String...args) throws Exception {
 
 
-
-//    	List<LikeStoreVO> likeStoreList = likeStoreSvc.getAllByCustomer(1,"L");
-
-
-//		List<RefundsVO> refundsList = refundsSvc.getAll();
-//		for(RefundsVO id:refundsList) {
-//			System.out.println("id="+id.getId());
-//			System.out.println("id="+id.getOrdersVO().getOrderId());
+//
+//    	List<OrdersVO> likeStoreList = ordersSvc.getAllTodayByStore(1);
+//
+//
+//		for(OrdersVO id:likeStoreList) {
+//			System.out.println("id="+id.getOrderId());
 //		}  	
+//    	
     	
-//    	List<RefundsVO> list = repository.findAll();
-
-//
-//    	for (LikeStoreVO refunds : likeStoreList) {
-//			System.out.print(refunds.getLikeUnlike() + ",");
-//			System.out.print(refunds.getClass() + ",");
-//			System.out.print(refunds.getCustomerVO() + ",");
-//			System.out.print(refunds.getStoresVO() + ",");
-//
-//    	}
 
     	
     	

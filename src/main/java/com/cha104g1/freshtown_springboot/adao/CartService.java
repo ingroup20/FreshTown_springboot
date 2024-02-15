@@ -285,11 +285,11 @@ public class CartService {
        			StoresVO storesVO = storesSvc.getOneStores(Integer.valueOf(storeId));
        	ordersVO.setStoresVO(storesVO);
        	ordersVO.setRemitState("N");
-	           	// 取得當前的日期（不包含時間）
-	            LocalDate currentDate = LocalDate.now();
-	            // 將 LocalDate 轉換為 java.sql.Date
-	            java.sql.Date Date = java.sql.Date.valueOf(currentDate);
-       	ordersVO.setPayDate(Date);
+//	           	// 取得當前的日期（不包含時間）
+//	            LocalDate currentDate = LocalDate.now();
+//	            // 將 LocalDate 轉換為 java.sql.Date
+//	            java.sql.Date Date = java.sql.Date.valueOf(currentDate);
+       	ordersVO.setPayDate(timestamp);
        	ordersVO.setPayMethod(1);
        	ordersVO.setPayState(0);
       //物件寫入sql

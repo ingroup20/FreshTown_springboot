@@ -74,7 +74,7 @@
 				</div>
 				<div>
 				<label>店家統一編號:</label>
-				<input type="text" th:field="*{storeGui}" onclick="hideContent('storeGui.errors');" /><br/>
+				<input type="text" th:field="*{storeGui}" th:value="00000000" onclick="hideContent('storeGui.errors');" /><br/>
 				<span  th:if="${#fields.hasErrors('storeGui')}" th:errors="*{storeGui}" class="error" id="storeGui.errors"></span>
 				</div>
 				<div>
@@ -84,14 +84,14 @@
 				</div>
 				
 				<div>
-				<label>店家經度:</label>
-				<input type="text" th:field="*{storeLag}" onclick="hideContent('storeLag.errors');" /><br/>
+<!-- 				<label>店家經度:</label> -->
+				<input type="hidden" th:field="*{storeLag}"  th:value="1" onclick="hideContent('storeLag.errors');" />
 				<span  th:if="${#fields.hasErrors('storeLag')}" th:errors="*{storeLag}" class="error" id="storeLag.errors"></span>
 				</div>
 				
 				<div>
-				<label>店家緯度:</label>
-				<input type="text" th:field="*{storeLat}" onclick="hideContent('storeLat.errors');" /><br/>
+<!-- 				<label>店家緯度:</label> -->
+				<input type="hidden" th:field="*{storeLat}" th:value="1" onclick="hideContent('storeLat.errors');" />
 				<span  th:if="${#fields.hasErrors('storeLat')}" th:errors="*{storeLat}" class="error" id="storeLat.errors"></span>
 				</div>
 				
@@ -103,38 +103,44 @@
 				</div>
 				
 				<div>
-				<label>店家狀態:</label>
-				<select th:field="*{storeState}">
-				<option  th:value="0" th:text="審核中" ></option>
-			    </select>
+<!-- 				<label>店家狀態:</label> -->
+				<input type="hidden" th:field="*{storeState}" th:value="0" onclick="hideContent('storeState.errors');" />
+				
+<!-- 				<select th:field="*{storeState}"> -->
+<!-- 				<option  th:value="0" th:text="審核中" ></option> -->
+<!-- 			    </select> -->
 				<span  th:if="${#fields.hasErrors('storeState')}" th:errors="*{storeState}" class="error" id="storeState.errors"></span>
 				</div>
 				
 				<div>
-				<label>店家等級:</label>
-				<select th:field="*{storeLv}">
-				<option  th:value="0" th:text="初始-餐點功能" ></option>
-			    </select>
+<!-- 				<label>店家等級:</label> -->
+<input type="hidden" th:field="*{storeLv}" value="0" onclick="hideContent('storeLv.errors');" />
+				
+<!-- 				<select th:field="*{storeLv}"> -->
+<!-- 				<option  th:value="0" th:text="初始-餐點功能" ></option> -->
+<!-- 			    </select> -->
 				<span  th:if="${#fields.hasErrors('storeLv')}" th:errors="*{storeLv}" class="error" id="storeLv.errors"></span>
 				</div>
 				<div>
 				
-				<label>開通時間:</label>
-				<input type="date" th:field="*{createDate}"  onclick="hideContent('createDate.errors');" /><br/>
+<!-- 				<label>開通時間:</label> -->
+				<input type="hidden" th:field="*{createDate}" th:value="2024-01-01" onclick="hideContent('createDate.errors');" />
 				<span  th:if="${#fields.hasErrors('createDate')}" th:errors="*{createDate}" class="error" id="createDate.errors"></span>
 				</div>
 					
 			<div>
-			<label>付費日期:</label>
-			<input type="date" th:field="*{payDate}" onclick="hideContent('payDate.errors');" /><br/>
+<!-- 			<label>付費日期:</label> -->
+			<input type="hidden" th:field="*{payDate}" th:value="2024-01-01" onclick="hideContent('payDate.errors');" />
 			<span  th:if="${#fields.hasErrors('payDate')}" th:errors="*{payDate}" class="error" id="payDate.errors"></span>
 			</div>
 		
 				<div>
-				<label>平台開店:</label>
-				<select th:field="*{pushUp}">
-				<option  th:value="0" th:text="準備中" ></option>
-			    </select>
+<!-- 				<label>平台開店:</label> -->
+<input type="hidden" th:field="*{pushUp}" th:value="0" onclick="hideContent('payDate.errors');" />
+			
+<!-- 				<select th:field="*{pushUp}"> -->
+<!-- 				<option  th:value="0" th:text="準備中" ></option> -->
+<!-- 			    </select> -->
 				<span  th:if="${#fields.hasErrors('pushUp')}" th:errors="*{pushUp}" class="error" id="pushUp.errors"></span>
 				</div>
 				<div>
@@ -164,14 +170,14 @@
 				</div>
 				
 				<div>
-				<label>評分:</label>
-				<input type="text" th:field="*{totalScore}"  onclick="hideContent('totalScore.errors');" /><br/>
+<!-- 				<label>評分:</label> -->
+				<input type="hidden" th:field="*{totalScore}"  th:value="0" onclick="hideContent('totalScore.errors');" />
 				<span  th:if="${#fields.hasErrors('totalScore')}" th:errors="*{totalScore}" class="error" id="totalScore.errors"></span>
 				</div>
 				
 				<div>
-				<label>評分人數:</label>
-				<input type="text" th:field="*{scorePeople}"  onclick="hideContent('scorePeople.errors');" /><br/>
+<!-- 				<label>評分人數:</label> -->
+				<input type="hidden" th:field="*{scorePeople}" th:value="0" onclick="hideContent('scorePeople.errors');" /><br/>
 				<span  th:if="${#fields.hasErrors('scorePeople')}" th:errors="*{scorePeople}" class="error" id="scorePeople.errors"></span>
 				</div>
 							
@@ -188,13 +194,13 @@
 			
 				<div>
 				<label>店家簡介:</label>
-				<input type="text" th:field="*{storeDesc}" onclick="hideContent('storeDesc.errors');" /><br/>
+				<input type="text" th:field="*{storeDesc}" value="介紹店家" onclick="hideContent('storeDesc.errors');" /><br/>
 				<span  th:if="${#fields.hasErrors('storeDesc')}" th:errors="*{storeDesc}" class="error" id="storeDesc.errors"></span>
 				</div>
 			
 							<div>
-				<label>固定店休日:</label>
-				<input type="text" th:field="*{restDay}" onclick="hideContent('restDay.errors');" /><br/>
+<!-- 				<label>固定店休日:</label> -->
+				<input type="hidden" th:field="*{restDay}" th:value="1111100"  onclick="hideContent('restDay.errors');" /><br/>
 				<span  th:if="${#fields.hasErrors('restDay')}" th:errors="*{restDay}" class="error" id="restDay.errors"></span>
 				</div>
 			

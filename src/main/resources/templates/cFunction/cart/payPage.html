@@ -41,8 +41,10 @@
 			<span>總金額:</span><span th:text="${ordersVO.totalPrice}"></span><br/>
 	</div>
 	<form align="center" id="paidOrder" method="post" th:action="@{/cFunction/cartPage/paidOrder}">
-	<input type="hidden" name="payStatus" value="payseccess">
-	<input type="hidden" name="orderId" th:value="${ordersVO.orderId}">
+	<input type="hidden"  name="payStatus" value="payseccess">
+	<input type="hidden" id="orderId"  name="orderId" th:value="${ordersVO.orderId}">
+	<input type="hidden" id="storeId"  name="storeId" th:value="${ordersVO.storesVO.storeId}">
+	<input type="hidden" id="customerId"  name="customerId" th:value="${customerId}">
 		<button align="center" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >信用卡付款</button>
 	</form>
 	
@@ -68,9 +70,13 @@
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-<script>
+<!-- <script> 
 
 function submitForm() {
+	connect();
+//  	sendOrder();
+	 setTimeout(disconnect, 5 * 60 * 1000); 
+	
     // Get the form element
     var form = document.getElementById("paidOrder");
     // Submit the form
@@ -78,7 +84,56 @@ function submitForm() {
 }
 
 </script>
-	
 
+<script>
+let userName = document.getElementById("customerId"); // 如果 userName 為 null 或 undefined，則設置一個預設值
+	let MyPoint = "/COrderWS/"+userName;
+	let host = window.location.host;
+	let path = window.location.pathname;
+	let webCtx = path.substring(0,path.indexOf("/",1));
+	let endPointURL="ws://"+window.location.host+webCtx+MyPoint;
+
+	let self=userName;
+	let webSocket;
+	
+	function connect(){
+		webSocket = new WebSocket(endPointURL);
+		
+		webSocket.onopen = function(even){
+			console.log("連線成功");
+			console.log("userName="+userName);
+// 			document.getElementById("sendOrder").disabled=false;
+// 			document.getElementById("connect").disabled=true;
+// 			document.getElementById("disconnect").disabled=false;
+			sendOrder();
+		};
+		
+		
+		webSocket.onclose=function(event){
+			console.log("結束連線");
+		}
+	}
+
+	function sendOrder(){
+		let orderId=document.getElementById("orderId");
+		let storeId=document.getElementById("storeId");
+		
+		let jsonObj={
+				"type":"newOrder",
+				"sender" :self ,
+				"receiver" : storeId,
+				"massage":orderId
+		};
+		webSocket.send(JSON.stringify(jsonObj));
+	}
+	
+	function disconnect(){
+		webSocket.close();
+// 		document.getElementByName("sendOrder").disabled=true;
+// 		document.getElementByName("connect").disabled=false;
+// 		document.getElementByName("disconnect").disabled=true;
+	}
+</script>-->
+	
 </body>
 </html>
