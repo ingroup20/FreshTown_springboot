@@ -27,7 +27,7 @@
 <!--                        		<a href='searchPersonalInfo'>個人資料管理</a> -->
                             <form method="post" th:action="searchPersonalInfo">
 
-                                <input class="li_item " type="submit" value="個人資料管理">
+                                <input class="li_item " type="submit" style="background:transparent;border:none"  value="個人資料管理">
                                 <input type="hidden" name="customerId" th:value="${customerVO.customerId}"> 
 
                             </form><br>
@@ -146,7 +146,7 @@
     
     <footer class="footer">
         <div><p class="footer">鮮城 &copy; Your Website 2023</p></div>
-        <p><a th:href="@{/sFunction}">後台入口</a></p>
+
     </footer>
 	<script th:src="@{/js/allBase.js}"></script>
 	<script th:src="@{/js/mealMenu.js}"></script>

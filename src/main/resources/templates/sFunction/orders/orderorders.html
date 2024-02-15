@@ -107,11 +107,34 @@ xmlns:th="http://www.thymeleaf.org">
 	<style>
 		div.step_item{
 			display:inline-flex;
-			width:50px;
+			width:70px;
+			margin:0 5px;
+			font-size:1.2rem;
+			border:1px solid lightblue;
+			border-radius: 10px 10px 0 0;
+			 text-align:center  !important;
+		}
+		
+		div.step_item>a{
+		 text-decoration:none !important;
+		 color:black  !important ;
+		 font-weight:700  !important;
+		width:100%  !important;
+		 text-align:center  !important;
+		}
+		
+		.clicked{
+			background-color: lightblue ;
+		}
+		
+		.note{
+			background-color: red;
 		}
 	
 	</style>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+
 </head>
 <body>
     <!-- Layout wrapper -->
@@ -281,31 +304,34 @@ xmlns:th="http://www.thymeleaf.org">
 <nav>
             	<h4>訂單製作進度:</h4>
             	<div>
-				 <div class="step_item"><a th:href="@{newOrder}">新訂單</a></div>
-				 <div class="step_item"><a th:href="@{making}">製作中</a></div>
-				 <div class="step_item"><a th:href="@{taking}">待取餐</a></div>
-				 <div class="step_item"><a th:href="@{finish}">結單</a></div>
+				 <div class="step_item" th:classappend="${newOrder == true} ? 'clicked'" id="newOrder"><a th:href="@{newOrder}">新訂單</a></div>
+<!-- 				 <div>新訂單+<input id="newCount" value=""></div> -->
+				 <div class="step_item" th:classappend="${making == true} ? 'clicked'" id="making"><a th:href="@{making}">製作中</a></div>
+				 <div class="step_item" th:classappend="${taking == true} ? 'clicked'" id="taking"><a th:href="@{taking}">待取餐</a></div>
+				 <div class="step_item" th:classappend="${finish == true} ? 'clicked'" id="finish"><a th:href="@{finish}">結單</a></div>
 				</div>
             </nav>
-       		    <hr>
-				<br>
-            
-            <!-- main -->
+
 <main>
-				<table id="orderOrders" class="display" style="width: 100%">
-				  <thead >
+	<table id="orderOrders "   class="display"  style="width:100%">
+				   <thead  >
 					<tr style="background-color:#CCCCFF">
 						<th>下一步</th>
 						<th>訂單編號</th>
 						<th>下單時間</th>
 						<th>訂單狀態</th>
+						<th  th:if="${making or taking or finish} ">接單時間</th>
+						<th  th:if="${taking  or finish} ">出餐時間</th>
+						<th  th:if="${finish} ">結單時間</th>
 <!-- 						<th>總份數</th> -->
 						<th>總金額</th>
 						<th style="width:500px">餐點</th>	
 					</tr>
-				  </thead>			
+				  </thead>	
+				  
+				  
 				  <tbody>
-				  <th:block th:each="ordersVO : ${orderDetailList.entrySet()}" th:sort="${ordersVO.key.orderId}">			  			
+				  <th:block th:each="ordersVO : ${orderDetailListST.entrySet()}" th:sort="${ordersVO.key.orderId}">			  			
 							
 							<tr id="step1"  th:if="${newOrder} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState == 1}">
 								<td style="border: 1px solid #dee2e6">  
@@ -315,10 +341,13 @@ xmlns:th="http://www.thymeleaf.org">
 										     <button type="submit">製作</button>
 									</form>	</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單時間</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.payDate}">訂單時間</td>
 								<td style="border: 1px solid #dee2e6" >
 									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
 								</td>
+<!-- 								<td style="border: 1px solid #dee2e6" text="">接單時間</td> -->
+<!-- 								<td style="border: 1px solid #dee2e6" text="">接單時間</td> -->
+<!-- 								<td style="border: 1px solid #dee2e6" text="">接單時間</td> -->
 <!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
@@ -344,10 +373,13 @@ xmlns:th="http://www.thymeleaf.org">
 										     <button type="submit" >出餐</button>
 									</form>	</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單編號</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.payDate}">訂單時間</td>
 								<td style="border: 1px solid #dee2e6" >
 									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
 								</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">接單時間</td>
+<!-- 								<td style="border: 1px solid #dee2e6" text="">接單時間</td> -->
+<!-- 								<td style="border: 1px solid #dee2e6" text="">接單時間</td> -->
 								<!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
@@ -374,10 +406,13 @@ xmlns:th="http://www.thymeleaf.org">
 										     <button type="submit">結單</button>
 									</form>	</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單編號</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.payDate}">訂單時間</td>
 								<td style="border: 1px solid #dee2e6" >
 									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
 								</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">接單時間</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.doneTime}">出餐時間</td>
+<!-- 								<td style="border: 1px solid #dee2e6" text="">接單時間</td> -->
 								<!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
@@ -399,10 +434,13 @@ xmlns:th="http://www.thymeleaf.org">
 							<tr id="step4" th:if="${finish} and ${ordersVO != null and ordersVO.key != null and ordersVO.key.orderState >= 4}">
 								<td style="border: 1px solid #dee2e6">結單</td>
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderId}">訂單編號</td>
-								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">訂單編號</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.payDate}">訂單時間</td>
 								<td style="border: 1px solid #dee2e6" >
 									<span class="orderState" th:text="${ordersVO.key.orderState}"></span><span class="orderStateMean" ></span>
 								</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.orderTime}">接單時間</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.doneTime}">出餐時間</td>
+								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.finishTime}">結單時間</td>
 								<!-- 								<td style="border: 1px solid #dee2e6" class="totalQty">總份數</td> -->
 								<td style="border: 1px solid #dee2e6" th:text="${ordersVO.key.totalPrice}">總金額</td>
 								<td style="border: 1px solid #dee2e6" >
@@ -515,6 +553,7 @@ xmlns:th="http://www.thymeleaf.org">
                 $(this).siblings(".orderStateMean").text(result);
                 console.log("Number: ", number);
                 console.log("Result: ", result);
+                
             });
         });
 
@@ -545,7 +584,14 @@ xmlns:th="http://www.thymeleaf.org">
         
        
     </script>
+    
+    
+    
     <script th:inline="javascript">
+    $(document).ready(function () {
+    	sortTable(1);
+    });
+    
     function sortTable(columnIndex) {
         var table = document.getElementById('orderOrders');
         var rows = Array.from(table.getElementsByTagName('tr'));
@@ -560,7 +606,87 @@ xmlns:th="http://www.thymeleaf.org">
             table.appendChild(row);
         });
     }
-</script>
+</script> 
 
+ 
+<!--  <script>
+ let userName = /*[[ ${storeId} ]]*/ 'idError'; // 如果 userName 為 null 或 undefined，則設置一個預設值
+ let MyPoint = "/COrderWS/"+userName;
+ let host = window.location.host;
+ let path = window.location.pathname;
+ let webCtx = path.substring(0,path.indexOf("/",1));
+ let endPointURL="ws://"+window.location.host+webCtx+MyPoint;
+
+ let self=userName;
+ let webSocket;
+
+ function connect(){
+     webSocket = new WebSocket(endPointURL);
+     
+     webSocket.onopen = function(even){
+         console.log("連線成功");
+     };
+     
+     webSocket.onmessage = function(event) {
+         // 收到訊息時的處理程序
+         let orderId = event.data;
+         updatePage(orderId);
+     };
+     
+     webSocket.onclose=function(event){
+         console.log("結束連線");
+     };
+ }
+
+ 
+//更新網頁及 newCount 數量
+ function updatePage(orderId) {
+     // 更新網頁的相應內容
+     // 這裡假設您已經有更新網頁的相應函式，比如更新訂單狀態等
+
+     // 更新 newCount 的數量
+     let newCountInput = document.getElementById("newCount");
+     let currentCount = parseInt(newCountInput.value);
+     newCountInput.value = currentCount + 1; // 收到一個新訂單，數量加一
+ }
+ 
+ function sendOrder(){
+     let orderId=document.getElementById("orderId").value;
+     let storeId=document.getElementById("storeId").value;
+     
+     let jsonObj={
+         "type":"newOrder",
+         "sender" :self ,
+         "receiver" : storeId,
+         "massage":orderId
+     };
+     webSocket.send(JSON.stringify(jsonObj));
+ }
+
+ function disconnect(){
+     webSocket.close();
+ }
+
+ </script>
+ 
+ 	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	    connect(); // 在頁面載入完成後立即建立 WebSocket 連線
+	});
+	
+	window.addEventListener("beforeunload", function() {
+	    if (webSocket !== undefined && webSocket.readyState === WebSocket.OPEN) {
+	        webSocket.close(); // 如果 WebSocket 已建立且仍然處於開啟狀態，則關閉 WebSocket 連線
+	    }
+	});
+
+	</script>-->
+	<script>
+        // 每过一分钟重新加载页面
+        setTimeout(function(){
+            location.reload();
+        }, 5000); // 60000毫秒等于一分钟
+    </script>
+ 
 </body>
 </html>

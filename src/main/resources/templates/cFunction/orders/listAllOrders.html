@@ -67,48 +67,50 @@ body {
 </nav>
 
 <div th:fragment="listAllOrders-div">
-<table id="example" class="display" style="width: 100%">
+<br>
+
+<table id="example" class="display" style="width: 100% ;font-size:16px;">
   <thead >
 	<tr style="background-color:#CCCCFF">
-		<th>計數</th>
-		<th>店家流水號</th>
-		<th>訂單編號</th>
-		<th>訂餐狀態</th>
-		<th>下單時間</th>
-		<th>線上付款時間</th>
-		<th>付款方式</th>
-		<th>付款狀態</th>
-		<th>完成時間</th>
-		<th>會員流水號</th>
-		<th>總金額</th>
-		<th>匯款狀態</th>	
-		<th>匯款日期</th>		
-		<th>修改</th>
+		<th style="font-size:16px">計數</th>
+		<th  style="font-size:16px">店家</th>
+		<th  style="font-size:16px">訂單編號</th>
+<!-- 		<th style="font-size:16px">訂餐狀態</th> -->
+<!-- 		<th style="font-size:16px">下單時間</th> -->
+		<th style="font-size:16px">線上付款時間</th>
+<!-- 		<th style="font-size:16px">付款方式</th> -->
+<!-- 		<th style="font-size:16px">付款狀態</th> -->
+<!-- 		<th style="font-size:16px">完成時間</th> -->
+<!-- 		<th style="font-size:16px">會員流水號</th> -->
+		<th style="font-size:16px">總金額</th>
+<!-- 		<th style="font-size:16px">匯款狀態</th>	 -->
+<!-- 		<th style="font-size:16px">匯款日期</th>		 -->
+<!-- 		<th style="font-size:16px">修改</th> -->
 	</tr>
   </thead>
 	
   <tbody>
 		<th:block th:each="ordersVO : ${ordersListData}">
 			<tr>
-				<td th:text="${ordersVOStat.count}">計數</td>
-				<td th:text="${ordersVO.storesVO.storeId}+${ordersVO.storesVO.storeName}">店家名稱</td>
-				<td th:text="${ordersVO.orderId}">訂單編號</td>
-				<td th:text="${ordersVO.orderState}">訂餐狀態</td>
-				<td th:text="${ordersVO.orderTime}">下單時間</td>
-				<td th:text="${ordersVO.payDate}">線上付款時間</td>
-				<td th:text="${ordersVO.payMethod}">付款方式</td>
-				<td th:text="${ordersVO.payState}">付款狀態</td>
-				<td th:text="${ordersVO.finishTime}">完成時間</td>
-				<td th:text="${ordersVO.customerVO.customerId}">會員流水號</td>
-				<td th:text="${ordersVO.totalPrice}">總金額</td>
-				<td th:text="${ordersVO.remitState}">匯款狀態</td>
-				<td th:text="${ordersVO.remitDate}">匯款日期</td>
-				<td>
+				<td  style="font-size:16px" th:text="${ordersVOStat.count}">計數</td>
+				<td style="font-size:16px"  th:text="${ordersVO.storesVO.storeId+'-'+ordersVO.storesVO.storeName}">店家名稱</td>
+				<td  style="font-size:16px" th:text="${ordersVO.orderId}">訂單編號</td>
+<!-- 				<td style="font-size:16px"  th:text="${ordersVO.orderState}">訂餐狀態</td> -->
+				<td style="font-size:16px"  th:text="${ordersVO.orderTime}">下單時間</td>
+<!-- 				<td style="font-size:16px" th:text="${ordersVO.payDate}">線上付款時間</td> -->
+<!-- 				<td  style="font-size:16px" th:text="${ordersVO.payMethod}">付款方式</td> -->
+<!-- 				<td  style="font-size:16px" th:text="${ordersVO.payState}">付款狀態</td> -->
+<!-- 				<td style="font-size:16px"  th:text="${ordersVO.finishTime}">完成時間</td> -->
+<!-- 				<td style="font-size:16px"  th:text="${ordersVO.customerVO.customerId}">會員流水號</td> -->
+				<td  style="font-size:16px" th:text="${ordersVO.totalPrice}">總金額</td>
+<!-- 				<td  style="font-size:16px" th:text="${ordersVO.remitState}">匯款狀態</td> -->
+<!-- 				<td  style="font-size:16px" th:text="${ordersVO.remitDate}">匯款日期</td> -->
+<!-- 				<td> -->
 <!-- 				  <form method="post" th:action="@{/orders/getOne_For_Update}" style="margin-bottom: 0px;"> -->
 <!-- 				     <input type="submit" value="修改"> -->
 <!-- 				     <input type="hidden" name="orderId" th:value="${ordersVO.orderId}"> -->
 <!-- 				  </form>			 -->
-				</td>
+<!-- 				</td> -->
 			</tr>
 		</th:block>
   </tbody>

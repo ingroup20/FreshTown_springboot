@@ -3,13 +3,17 @@ package com.cha104g1.freshtown_springboot.orders.controller;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -68,6 +72,25 @@ public class SOrdersController {
 		
         List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
         System.out.println(list.size());
+        model.addAttribute("storeId",storeEmpVO.getStoresVO().getStoreId() );
+        return list;
+	}
+	
+	
+	
+	@ModelAttribute("ordersListDataST") // for select_page.html 第135行用
+	protected List<OrdersVO> getListData_OrdersST(HttpServletRequest req,Model model) {
+		HttpSession session = req.getSession();
+		Object object =session.getAttribute("storeEmpLogin");	
+		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+		
+		List<OrdersVO> list = ordersSvc.getAllTodayByStore(storeEmpVO.getStoresVO().getStoreId());
+		
+		 list = list.stream()
+		            .sorted(Comparator.comparing(OrdersVO::getOrderId))
+		            .collect(Collectors.toList());
+		
+//        System.out.println(list.size());
         return list;
 		 // 检查类型
 //		    if (object instanceof StoreEmpVO) {
@@ -84,6 +107,7 @@ public class SOrdersController {
 //		    }
 		}
 	
+	
 	@ModelAttribute("orderDetailList") // for select_page.html 第135行用
 	protected Map<OrdersVO,List<OrderDetailVO>> getOrderDetailList(HttpServletRequest req,Model model) {
 		HttpSession session = req.getSession();
@@ -93,6 +117,25 @@ public class SOrdersController {
 		Map<OrdersVO,List<OrderDetailVO>> orderDetailList = new HashMap<>();
 
         List<OrdersVO> list = ordersSvc.getAllByStore(storeEmpVO.getStoresVO().getStoreId());
+        for(OrdersVO ordersVO :list) {
+        	List<OrderDetailVO> oDetailVOList = orderDetailSvc.getAllByOrderId(ordersVO.getOrderId());
+        	orderDetailList.put(ordersVO, oDetailVOList);
+
+        }
+        System.out.println(list.size());
+        return orderDetailList;
+	}
+	
+	
+	@ModelAttribute("orderDetailListST") // for select_page.html 第135行用
+	protected Map<OrdersVO,List<OrderDetailVO>> getOrderDetailListST(HttpServletRequest req,Model model) {
+		HttpSession session = req.getSession();
+		Object object =session.getAttribute("storeEmpLogin");	
+		StoreEmpVO storeEmpVO = (StoreEmpVO) object;
+		
+		Map<OrdersVO,List<OrderDetailVO>> orderDetailList = new HashMap<>();
+
+        List<OrdersVO> list = ordersSvc.getAllTodayByStore(storeEmpVO.getStoresVO().getStoreId());
         for(OrdersVO ordersVO :list) {
         	List<OrderDetailVO> oDetailVOList = orderDetailSvc.getAllByOrderId(ordersVO.getOrderId());
         	orderDetailList.put(ordersVO, oDetailVOList);
@@ -136,6 +179,9 @@ public class SOrdersController {
     	model.addAttribute("newOrder",session.getAttribute("newOrder"));
     	if(model.getAttribute("newOrder")==null ){
     		session.setAttribute("newOrder",true);
+    		session.setAttribute("making",false);
+        	session.setAttribute("taking",false);
+        	session.setAttribute("finish",false);
     	}
 	
     		model.addAttribute("newOrder",session.getAttribute("newOrder"));
@@ -217,6 +263,24 @@ public class SOrdersController {
     	System.out.println("進入updateStep");
     	OrdersVO ordersVO=ordersSvc.getOneOrders(Integer.valueOf(orderId));
     	ordersVO.setOrderState(Integer.valueOf(orderState));
+    	
+    	  LocalDateTime now = LocalDateTime.now();	
+          // 將 LocalDateTime 轉換為 Timestamp
+          Timestamp timestamp = Timestamp.valueOf(now);
+    	switch (orderState) {
+	    	case "2":
+	    		ordersVO.setOrderTime(timestamp);
+	    		break;
+	    	case "3":
+	    		ordersVO.setDoneTime(timestamp);
+	    		break;
+	    	case "4":
+	    		ordersVO.setFinishTime(timestamp);
+	    		break;
+	    	case "5":
+	    		ordersVO.setFinishTime(timestamp);
+	    		break;
+    	}
     	ordersSvc.updateOrders(ordersVO);
     	return "redirect: /freshtown_springboot/sFunction/orders/orderorders";
 	}

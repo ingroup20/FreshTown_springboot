@@ -16,12 +16,18 @@ public interface OrdersRepository extends JpaRepository<OrdersVO, Integer> {
     
 		//登入身分篩選
 		@Transactional
-		@Query(value = "from OrdersVO where storeId =?1")
+		@Query(value = "from OrdersVO where storeId =?1 order by storeId asc")
 		List<OrdersVO> findAllByStoreId( Integer storeId);
 		
 		//登入身分篩選
 		@Transactional
-		@Query(value = "from OrdersVO where CustomerId =?1")
+//		@Query(value = "from OrdersVO where storeId =?1 and orderTime >= DATE_SUB(NOW(), INTERVAL 1 DAY) order by storeId asc ")
+		@Query(value = "SELECT * FROM orders WHERE storeId = ?1 AND orderTime >= CURDATE() - INTERVAL 1 DAY ORDER BY orderId ", nativeQuery = true)
+		List<OrdersVO> findAllTodayByStoreId( Integer storeId);
+		
+		//登入身分篩選
+		@Transactional
+		@Query(value = "from OrdersVO where CustomerId =?1 order by storeId asc")
 		List<OrdersVO> findAllByCustomerId( Integer CustomerId);
 }
 

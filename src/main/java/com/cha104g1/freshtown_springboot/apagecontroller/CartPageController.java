@@ -133,6 +133,7 @@ public class CartPageController {
 			cartSvc.deleteAllJedisOrder(customerId);
 	
 		model.addAttribute("ordersVO",ordersSvc.getOneOrders(newOrderId));
+		model.addAttribute("customerId",model.getAttribute("customerId"));
 		return "cFunction/cart/payPage";
 	}
 

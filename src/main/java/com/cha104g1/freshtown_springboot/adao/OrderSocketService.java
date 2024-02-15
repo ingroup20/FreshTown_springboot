@@ -17,9 +17,6 @@ import com.cha104g1.freshtown_springboot.orders.model.dao.ConnSocketThread;
 public class OrderSocketService {
 	
 	
-
-	
-	
 	//待寫放入InetAddress storeAddr = InetAddress.getLocalHost();; 
 	public  InetAddress whoStore() {
 		InetAddress localhost=null;
