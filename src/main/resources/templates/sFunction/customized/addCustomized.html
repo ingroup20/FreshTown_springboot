@@ -218,19 +218,22 @@ xmlns:th="http://www.thymeleaf.org">
       <div class="col-md-12">
         <ul class="nav nav-pills flex-column flex-md-row mb-3">
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/sFunction/meals/select_page}"> 查詢</a>
+            <a class="nav-link"> 查詢</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href='listAllMeals'> 商品列表</a>
+            <a class="nav-link"> 商品列表</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href='addMeals'> 新增商品</a>
+            <a class="nav-link active"> 新增商品</a>
           </li>
         </ul>
+        
+        <div class="card mb-4">
+          <h5 class="card-header">設定可客製選項</h5>
+          <div class="card-body">
+          <form method="post" th:action="@{batchInsert}" th:object="${requestParams}" enctype="multipart/form-data">
         <!-- Striped Rows -->
-        <div class="card">
-            <form method="post" th:action="@{batchInsert}" th:object="${requestParams}" enctype="multipart/form-data">
-            <h5 class="card-header">設定可客製選項</h5>
+        <div class="card">            
             <div class="table-responsive text-nowrap">
               <table class="table table-striped" id="example">
                 <thead>
@@ -257,13 +260,18 @@ xmlns:th="http://www.thymeleaf.org">
                 </tbody>
               </table>
             </div>
+          </div>
+          <!--/ Striped Rows -->
             <div class="mt-2">
                 <button type="submit" class="btn btn-primary me-2">送出</button>
                 <button type="reset" class="btn btn-outline-secondary">重填</button>
             </div>
-            </form>
-          </div>
-          <!--/ Striped Rows -->
+          </form>
+          </div>          
+          </div>          
+          
+          
+          
       </div>
     </div>
   </div>
