@@ -141,7 +141,11 @@ public class MealsController {
 		List<MealsVO> list = mealsSvc.getAllByStoreId(storeEmpVO.getStoresVO().getStoreId());
 		model.addAttribute("mealsListData", list);
 //		return "sFunction/meals/listAllMeals";
-		return "redirect:/sFunction/customized/addCustomized"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
+		Integer mealNo = mealsVO.getMealNo();
+		model.addAttribute("mealNo", mealNo);
+		session.setAttribute("mealNo", mealNo);
+		session.setAttribute("mealsVO", mealsVO);
+		return "redirect:/sFunction/customized/update_customized_input"; // 新增成功後重導至IndexController_inSpringBoot.java的第50行@GetMapping("/emp/listAllEmp")
 
 	}
 	

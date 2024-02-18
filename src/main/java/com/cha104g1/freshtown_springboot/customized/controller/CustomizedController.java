@@ -62,6 +62,24 @@ public class CustomizedController {
 
 		return "sFunction/customized/addCustomized";
 	}
+	@GetMapping("update_customized_input")
+	public String updateCustomizedInput(HttpServletRequest req , HttpSession session, ModelMap model) {
+		CustomizedVO customizedVO = new CustomizedVO();
+		model.addAttribute("customizedVO", customizedVO);		
+		
+		MealsVO mealsVO = (MealsVO) session.getAttribute("mealsVO");
+		model.addAttribute("mealsVO", mealsVO);
+		System.out.println(mealsVO.getMealName());
+		
+		Integer mealNo = (Integer) session.getAttribute("mealNo");
+		System.out.println(mealNo);
+		model.addAttribute("mealNo", mealNo); // 將 mealNo 添加到 ModelMap 中
+		
+		List<CustomizedVO> customizedList = customizedSvc.getAll(mealNo);
+		model.addAttribute("customizedList", customizedList);
+		
+		return "sFunction/customized/update_customized_input";
+	}
 
 	// 在Controller中维护一个状态，表示当前表单的索引
 	private int currentIndex = 0;
@@ -193,6 +211,56 @@ public class CustomizedController {
 		model.addAttribute("customizedVO", customizedVO);
 		return "sFunction/customized/listOneCustomized"; // 修改成功後轉交listOneEmp.html
 	}
+	
+	@PostMapping("batchUpdate")
+	public String batchUpdate(@RequestParam Map<String, String> requestParams, HttpSession session, ModelMap model) throws IOException {
+
+		Integer mealNo = (Integer) session.getAttribute("mealNo");
+		// 日誌輸出
+	    for (Map.Entry<String, String> entry : requestParams.entrySet()) {
+	        System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+	    }
+	    
+	    List<CustomizedVO> customizedVOList = new ArrayList<>();
+
+	    // 根据表单数量循环获取数据
+	    for (Map.Entry<String, String> entry : requestParams.entrySet()) {
+//	    	System.out.println("111");
+	        
+	        if (entry.getKey().startsWith("custedStatus_")) {
+	        	
+	            CustomizedVO customizedVO = new CustomizedVO();
+	            
+	            String custedItemsNo = entry.getKey().replace("custedStatus_", "");
+	            String custedStatus = entry.getValue();
+								
+	            customizedVO.setMealNo(mealNo);
+	            customizedVO.setCustedItemsNo(Integer.parseInt(custedItemsNo));
+	            customizedVO.setCustedStatus(Integer.parseInt(custedStatus));
+
+	            // 添加其他需要设置的属性
+
+	            customizedVOList.add(customizedVO);
+	        }
+	    }
+	    for (CustomizedVO customizedVO : customizedVOList) {
+	        System.out.println("MealNo: " + customizedVO.getMealNo() + ", CustedItemsNo: " + customizedVO.getCustedItemsNo() + ", CustedStatus: " + customizedVO.getCustedStatus());
+	    }
+
+	    // 批量新增
+	    for (CustomizedVO customizedVO : customizedVOList) {
+	        // 执行新增操作，你的新增逻辑
+	        System.out.println(customizedVO.getCustedItemsNo());
+	        customizedSvc.updateCustomizedVO(customizedVO);
+	    }
+
+	    // 重定向到指定页面
+//	    return "redirect:/sFunction/customized/listAllCustomized";
+	    return "redirect:/sFunction/meals/listAllMeals";
+	}
+
+	
+	
 	//複合查詢
 	@PostMapping("listCustomized_ByCompositeQuery")
 	public String listAllCustomized(HttpServletRequest req, Model model) {
